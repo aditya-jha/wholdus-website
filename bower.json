@@ -1,0 +1,32 @@
+{
+  "name": "sellerapp",
+  "authors": [
+    "Aditya Jha <batu.aditya007@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular": "angularjs#^1.5.5",
+    "angular-bootstrap": "^1.3.2",
+    "angular-route": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-resource": "^1.5.5",
+    "angular-loading-bar": "^0.9.0",
+    "angular-local-storage": "^0.2.7",
+    "AngularJS-Toaster": "angularjs-toaster#^2.0.0",
+    "angular-aria": "^1.5.5",
+    "angular-material": "^1.0.7",
+    "ngprogress": "^1.1.3"
+  }
+}

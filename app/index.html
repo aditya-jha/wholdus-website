@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app="SellerApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <title>Probzip | Seller</title>
+
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+    <link href="styles/style.css" rel="stylesheet" />
+</head>
+<body layout="column">
+   <div id="progressBar"></div>
+
+   <div psa-header></div>
+
+   <div ng-view layout="column" flex ng-cloak style="background-color:#ccc"></div>
+
+   <script src="bower_components/angular/angular.min.js"></script>
+   <script src="bower_components/angular-route/angular-route.min.js"></script>
+   <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+   <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+   <script src="bower_components/angular-material/angular-material.min.js"></script>
+   <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+   <script src="bower_components/ngprogress/build/ngprogress.min.js"></script>
+   <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+   <script src="app.js"></script>
+
+   <script src="scripts/services/constantKeyValueService.js"></script>
+   <script src="scripts/services/apiService.js"></script>
+   <script src="scripts/services/toastService.js"></script>
+   <script src="scripts/services/utilService.js"></script>
+   <script src="scripts/services/ngProgressbarService.js"></script>
+   <script src="scripts/services/loginService.js"></script>
+   <script src="scripts/services/orderService.js"></script>
+
+   <script src="scripts/controllers/registrationController.js"></script>
+   <script src="scripts/controllers/profileController.js"></script>
+   <script src="scripts/controllers/orderController.js"></script>
+   <script src="scripts/controllers/productController.js"></script>
+   <script src="scripts/controllers/loginPopupController.js"></script>
+   <script src="scripts/controllers/paymentController.js"></script>
+
+   <script src="scripts/directives/psaHeader.js"></script>
+   <script src="scripts/directives/psaSidenav.js"></script>
+</body>
+</html>
