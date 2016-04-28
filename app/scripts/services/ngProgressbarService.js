@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    sellerapp.factory("ngProgressBarService", [
+    webapp.factory("ngProgressBarService", [
         '$rootScope',
         'ngProgressFactory',
         function($rootScope, ngProgressFactory) {

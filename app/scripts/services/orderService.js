@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    sellerapp.factory('OrderService', [
+    webapp.factory('OrderService', [
         '$rootScope',
         'ConstantKeyValueService',
         'APIService',

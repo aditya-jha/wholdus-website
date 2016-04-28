@@ -1,4 +1,4 @@
-var sellerapp = angular.module('SellerApp', [
+var webapp = angular.module('webapp', [
     'ngRoute',
     'ngMaterial',
     'ngMessages',
@@ -6,7 +6,7 @@ var sellerapp = angular.module('SellerApp', [
     'LocalStorageModule'
 ]);
 
-sellerapp.config([
+webapp.config([
     '$routeProvider',
     '$locationProvider',
     '$mdThemingProvider',
@@ -14,32 +14,15 @@ sellerapp.config([
     'localStorageServiceProvider',
     function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider) {
 
-        $routeProvider.when('/sell', {
-            templateUrl: "views/sellerSignup.html",
-            controller: "RegistrationController"
-        }).when('/my-profile', {
-            templateUrl: 'views/sellerProfile.html',
-            controller: "ProfileController"
-        }).when('/my-orders', {
-            templateUrl: 'views/sellerOrders.html',
-            controller: 'OrderController'
-        }).when('/my-products', {
-            templateUrl: 'views/sellerProducts.html',
-            controller: 'ProductController'
-        }).when('/my-products/:productslug', {
-            templateUrl: 'views/sellerProductDetail.html',
-            controller: 'ProductController',
-            reloadOnSearch: false
-        }).when('/my-payments', {
-            templateUrl: 'views/sellerPayments.html',
-            controller: 'PaymentController'
+        $routeProvider.when('/', {
+            templateUrl: "views/homepage.html",
+            controller: "HomeController"
         });
 
         $locationProvider.html5Mode(true);
-        $mdThemingProvider.theme('docs-dark', 'default').primaryPalette('yellow').dark();
 
         $mdIconProvider.defaultIconSet('./images/icons.svg', 128);
 
-        localStorageServiceProvider.setPrefix('probzip-seller');
+        localStorageServiceProvider.setPrefix('probzip-webapp');
     }
 ]);

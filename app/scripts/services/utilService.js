@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    sellerapp.factory('UtilService', [
+    webapp.factory('UtilService', [
         '$rootScope',
         '$log',
         '$location',

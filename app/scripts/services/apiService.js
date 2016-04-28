@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    sellerapp.factory('APIService', [
+    webapp.factory('APIService', [
         '$http',
         'ConstantKeyValueService',
         '$location',

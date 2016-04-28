@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    sellerapp.factory("ConstantKeyValueService", [
+    webapp.factory("ConstantKeyValueService", [
         function() {
             var factory = {
                 token: '',

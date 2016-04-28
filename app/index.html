@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="SellerApp">
+<html lang="en" ng-app="webapp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +13,7 @@
 <body layout="column">
    <div id="progressBar"></div>
 
-   <div psa-header></div>
+   <div wu-header></div>
 
    <div ng-view layout="column" flex ng-cloak style="background-color:#ccc"></div>
 
@@ -36,14 +36,8 @@
    <script src="scripts/services/loginService.js"></script>
    <script src="scripts/services/orderService.js"></script>
 
-   <script src="scripts/controllers/registrationController.js"></script>
-   <script src="scripts/controllers/profileController.js"></script>
-   <script src="scripts/controllers/orderController.js"></script>
-   <script src="scripts/controllers/productController.js"></script>
-   <script src="scripts/controllers/loginPopupController.js"></script>
-   <script src="scripts/controllers/paymentController.js"></script>
+   <script src="scripts/directives/wuHeader.js"></script>
+   <script src="scripts/controllers/homeController.js"></script>
 
-   <script src="scripts/directives/psaHeader.js"></script>
-   <script src="scripts/directives/psaSidenav.js"></script>
 </body>
 </html>

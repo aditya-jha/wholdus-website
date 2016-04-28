@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    sellerapp.factory('ToastService', [
+    webapp.factory('ToastService', [
         '$rootScope',
         '$mdToast',
         function($rootScope, $mdToast) {
