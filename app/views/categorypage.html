@@ -1,10 +1,8 @@
 <div layout="column" flex>
-    <md-toolbar layout-align="center center">
-        <div class="md-toolbar-tools">
-            <h1 class="md-title">{{category.category_name}}</h1>
-            <span flex></span>
-        </div>
-    </md-toolbar>
+    <div layout="column" layout-align="start center" flex>
+        <h1 id="category-title">{{category.category_name}}</h1>
+    </div>
+
     <div layout="row" class="homepage-content" layout-wrap flex-xs="100">
         <div layout="row" data-ng-repeat="p in products" flex-xs="100" flex-md="50" flex-sm="100" flex-gt-sm="50">
             <!-- <a href="{{p.url}}" layout="row" flex="100"  class="product-card" md-whiteframe="4dp"> -->

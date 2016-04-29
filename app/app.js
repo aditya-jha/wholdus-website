@@ -20,6 +20,9 @@ webapp.config([
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController"
+        }).when('/:category/:product', {
+            templateUrl: "views/productpage.html",
+            controller: "ProductController"
         });
 
         $locationProvider.html5Mode(true);

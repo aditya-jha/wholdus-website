@@ -39,6 +39,13 @@ a:active {
     font-size: 1.2em;
 }
 
+#category-title {
+    font-size: 2em;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0;
+}
+
 .home-card-container md-card{
     margin-right: 0em;
 }
@@ -81,7 +88,7 @@ a:active {
     text-overflow: ellipsis;
 }
 
-.product-card-content .strike {
+.strike {
      text-decoration: line-through;
      padding-bottom: 0em;
 }
