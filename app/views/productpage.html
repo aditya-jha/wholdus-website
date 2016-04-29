@@ -42,12 +42,12 @@
 <div layout="row" layout-wrap>
     <div layout="column" layout-align="start start">
         <span>Product Details</span>
-        <div layout="row">
+        <div layout="row" data-ng-repeat="p in productDetailsKeys">
             <div>
-                Brand
+                {{p.label}}
             </div>
             <div>
-                
+                {{p.value}}
             </div>
         </div>
     </div>

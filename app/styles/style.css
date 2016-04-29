@@ -1,3 +1,4 @@
+
 img {
     width: 100%;
     height: 100%;
@@ -23,13 +24,23 @@ a:active {
     text-decoration: underline;
 }
 
+#md-content{
+    overflow: visible;
+    z-index: 2;
+}
+
 .homepage-content {
 
+}
+
+.homepage-top-container {
+    margin-top: -4em;
 }
 
 #categories-list-container {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    background-color: #fff;
 }
 
 #categories-list-container > span {
