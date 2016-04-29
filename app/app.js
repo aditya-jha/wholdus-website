@@ -17,6 +17,9 @@ webapp.config([
         $routeProvider.when('/', {
             templateUrl: "views/homepage.html",
             controller: "HomeController"
+        }).when('/:category', {
+            templateUrl: "views/categorypage.html",
+            controller: "CategoryController"
         });
 
         $locationProvider.html5Mode(true);

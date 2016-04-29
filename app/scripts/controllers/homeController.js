@@ -6,7 +6,9 @@
         '$log',
         'APIService',
         'ConstantKeyValueService',
-        function($scope, $rootScope, $log, APIService, ConstantKeyValueService) {
+        '$timeout',
+        '$location',
+        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location) {
 
             function categoriesToShow() {
                 return $scope.categories[0].categoryID + ',' + $scope.categories[1].categoryID;
@@ -47,6 +49,13 @@
                         });
             }
             getCategory();
+
+            $scope.goTo = function($event, index) {
+                $event.preventDefault();
+                $timeout(function() {
+                    $location.url($scope.categories[index].url);
+                },250);
+            };
         }
     ]);
 })();

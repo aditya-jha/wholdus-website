@@ -1,39 +1,12 @@
-<div layout="row" layout-wrap>
-    <div layout="column" flex="20" id="categories-list-container" md-whiteframe="4dp" hide-xs hide-sm ng-cloak>
-        <span>Categories</span>
-        <md-list>
-            <md-list-item flex data-ng-repeat="c in categories">
-                <md-button flex data-ng-href="{{c.url}}" data-ng-click="goTo($event, $index)">{{c.display_name}}</md-button>
-            </md-list-item>
-        </md-list>
-    </div>
-    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="55">
-        <md-card flex>
-            <img src="images/thumbnail.png" class="md-card-image" />
-        </md-card>
-    </div>
-    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="25">
-        <md-card flex>
-            <img src="images/thumbnail.png" class="md-card-image" />
-        </md-card>
-        <md-card flex>
-            <img src="images/thumbnail.png" class="md-card-image" />
-        </md-card>
-        <md-card flex>
-            <iframe  frameborder="0" allowfullscreen class="md-card-image"></iframe>
-        </md-card>
-    </div>
-</div>
-
-<div layout="column" flex data-ng-repeat="c in products">
+<div layout="column" flex>
     <md-toolbar layout-align="center center">
         <div class="md-toolbar-tools">
-            <h1 class="md-title">{{c.category.category_name}}</h1>
+            <h1 class="md-title">{{category.category_name}}</h1>
             <span flex></span>
         </div>
     </md-toolbar>
     <div layout="row" class="homepage-content" layout-wrap flex-xs="100">
-        <div layout="row" data-ng-repeat="p in c.products" flex-xs="100" flex-md="50" flex-sm="100" flex-gt-sm="50">
+        <div layout="row" data-ng-repeat="p in products" flex-xs="100" flex-md="50" flex-sm="100" flex-gt-sm="50">
             <!-- <a href="{{p.url}}" layout="row" flex="100"  class="product-card" md-whiteframe="4dp"> -->
                 <div layout="row" flex="100"  class="product-card" md-whiteframe="4dp">
                     <div layout="column" flex="40" layout-align="center center">
