@@ -27,6 +27,9 @@ webapp.config([
 
         $locationProvider.html5Mode(true);
 
+        $mdThemingProvider.theme('default')
+                        .primaryPalette('deep-purple')
+                        .accentPalette('orange');
         $mdIconProvider.defaultIconSet('./images/icons.svg', 128);
 
         localStorageServiceProvider.setPrefix('probzip-webapp');

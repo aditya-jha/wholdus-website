@@ -1,3 +1,7 @@
+<div class="filler-toolbar" layout="row" layout-align="center start">
+    <span><i>&ldquo;</i> wholesale distributon with us<i>&rdquo;</i></span>
+</div>
+
 <div layout="row" layout-wrap class="homepage-top-container">
     <div layout="column" flex="20" id="categories-list-container" md-whiteframe="4dp" hide-xs hide-sm ng-cloak>
         <span>Categories</span>
@@ -7,25 +11,26 @@
             </md-list-item>
         </md-list>
     </div>
-    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="55">
-        <md-card flex>
+    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-align="center center">
+        <div layout="row">
             <img src="images/thumbnail.png" class="md-card-image" />
-        </md-card>
+        </div>
     </div>
-    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="25">
-        <md-card flex>
+    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="30">
+        <div layout="row">
             <img src="images/thumbnail.png" class="md-card-image" />
-        </md-card>
+        </div>
         <!-- <md-card flex>
             <img src="images/thumbnail.png" class="md-card-image" />
         </md-card> -->
-        <md-card flex>
-            <iframe  frameborder="0" allowfullscreen class="md-card-image"></iframe>
-        </md-card>
+        <div layout="row" class="video" flex>
+            <iframe src="https://www.youtube.com/embed/Y9BQhmIShrg" frameborder="0" allowfullscreen class="md-card-image" flex></iframe>
+        </div>
+
     </div>
 </div>
 
-<div layout="column" flex data-ng-repeat="c in products">
+<div layout="column" flex data-ng-repeat="c in products" class="homepage-content-container">
     <md-toolbar layout-align="center center">
         <div class="md-toolbar-tools">
             <h1 class="md-title">{{c.category.category_name}}</h1>
@@ -37,7 +42,7 @@
             <!-- <a href="{{p.url}}" layout="row" flex="100"  class="product-card" md-whiteframe="4dp"> -->
                 <div layout="row" flex="100"  class="product-card" md-whiteframe="4dp">
                     <div layout="column" flex="40" layout-align="center center">
-                        <img src="images/thumbnail.png" class="md-card-image" />
+                        <img src="http://api.probzip.com/media/productimages/29/20160429165223/200x200/bunkar-bunkar-magenta-chanderi-silk-saree-4d721brt_magenta-1.jpg" class="md-card-image" />
                     </div>
                     <md-divider class="vertical"></md-divider>
                     <div layout="column" flex class="product-card-content">

@@ -1,3 +1,11 @@
+.dark-primary-color    { background: #512DA8; }
+.default-primary-color { background: #673AB7; }
+.light-primary-color   { background: #D1C4E9; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #FF5722; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #727272; }
+.divider-color         { border-color: #B6B6B6; }
 
 img {
     width: 100%;
@@ -17,11 +25,36 @@ a:visited {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 a:active {
     text-decoration: underline;
+}
+
+#header-toolbar {
+    font-family: 'Comfortaa';
+    font-size: 1.1em;
+}
+
+#header-toolbar h1 {
+    line-height: 1em;
+}
+
+#header-toolbar md-icon {
+    width: 100%;
+    height: 100%;
+}
+
+#wholdusTitle {
+    font-size: 2em;
+    line-height: 0.5em;
+}
+
+#wholdusTitle a:hover, a:active {
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #md-content{
@@ -29,12 +62,32 @@ a:active {
     z-index: 2;
 }
 
+.homepage-content-container {
+    padding: 1.0em;
+}
 .homepage-content {
-
+    /*background-color: #fff;*/
 }
 
+.filler-toolbar {
+    height: 7em;
+    background-color: #673AB7;
+}
+
+.filler-toolbar > span {
+    font-family: 'Comfortaa';
+    font-size: 1.5em;
+    color: rgba(255,255,255,0.87);
+    padding-top: 0.2em;
+}
+
+.filler-toolbar > span > i {
+    font-size: 1.5em;
+}
 .homepage-top-container {
     margin-top: -4em;
+    padding-right: 1em;
+    padding-left: 1em;
 }
 
 #categories-list-container {
@@ -61,11 +114,20 @@ a:active {
     margin-right: 0em;
 }
 
+.home-card-container div {
+    padding-left: 0.5em;
+}
+
+.home-card-container .video {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+}
 .product-card {
     height: auto;
     width: 100%;
     margin-top: 1em;
     margin-right: 0.5em;
+    background-color: #fff;
 }
 
 
@@ -105,8 +167,25 @@ a:active {
 }
 
 @media screen and (max-width: 959px) {
-    .home-card-container md-card{
-        margin-right: 0.5em;
+    .homepage-top-container {
+        padding-left: 0.2em;
+        padding-right: 0.7em;
+    }
+
+    .home-card-container div {
+        padding-left: 0.5em;
+        /*margin-right: 0.5em;*/
+        padding-top: 0.5em;
+    }
+
+    .home-card-container .video {
+        height: 100%;
+        min-height: 15em;
+    }
+
+    .homepage-content-container {
+        padding-left: 0.7em;
+        padding-right: 0.7em;
     }
 }
 
@@ -114,5 +193,11 @@ a:active {
     .homepage-content {
         max-width: 90%;
         margin: 0px auto;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .filler-toolbar > span{
+        font-size: 1em;
     }
 }
