@@ -15,7 +15,8 @@
                     shipments: 'shipments',
                     payments: 'payments',
                     products: 'products',
-                    sellerLogin: 'users/seller/login'
+                    sellerLogin: 'users/seller/login',
+                    category: 'category'
                 },
                 accessTokenKey: 'randomData',
                 sellerSuccessSignup: "Your application has been sent for approval. You will soon be contacted by our executive",

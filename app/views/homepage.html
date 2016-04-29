@@ -1,1 +1,59 @@
-asdads
+<div layout="row" layout-wrap>
+    <div layout="column" flex="20" id="categories-list-container" md-whiteframe="4dp" hide-xs hide-sm ng-cloak>
+        <span>Categories</span>
+        <md-list>
+            <md-list-item flex data-ng-repeat="c in categories">
+                <md-button flex>{{c.display_name}}</md-button>
+            </md-list-item>
+        </md-list>
+    </div>
+    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="55">
+        <md-card flex>
+            <img src="images/thumbnail.png" class="md-card-image" />
+        </md-card>
+    </div>
+    <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="25">
+        <md-card flex>
+            <img src="images/thumbnail.png" class="md-card-image" />
+        </md-card>
+        <md-card flex>
+            <img src="images/thumbnail.png" class="md-card-image" />
+        </md-card>
+        <md-card flex>
+            <iframe  frameborder="0" allowfullscreen class="md-card-image"></iframe>
+        </md-card>
+    </div>
+</div>
+
+<div layout="column" flex data-ng-repeat="c in products">
+    <md-toolbar layout-align="center center">
+        <div class="md-toolbar-tools">
+            <h1 class="md-title">{{c.category.category_name}}</h1>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <div layout="row" layout-wrap flex-xs="100">
+        <div layout="row" data-ng-repeat="p in c.products" flex-xs="100" flex-md="50" flex-sm="100" flex-gt-sm="50">
+            <div layout="row" flex="100"  class="product-card" md-whiteframe="4dp" >
+                <div layout="column" flex="40" layout-align="center center">
+                    <img src="images/thumbnail.png" class="md-card-image" />
+                </div>
+                <md-divider class="vertical"></md-divider>
+                <div layout="column" flex class="product-card-content">
+                    <span class="product-name">{{p.name}}</span>
+                    <md-divider class="horizontal"></md-divider>
+                    <span>{{(p.price_per_unit-p.min_price_per_unit)*100/p.price_per_unit}} % discount on retail price</span>
+                    <md-divider class="horizontal"></md-divider>
+                    <span class="strike">Rs. {{p.price_per_unit}}</span>
+                    <span>Rs. {{p.min_price_per_unit}}</span>
+                    <md-divider class="horizontal"></md-divider>
+                    <span>Lot Size: {{p.lot_size}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div layout="column" flex style="background-color:red;">
+
+</div>

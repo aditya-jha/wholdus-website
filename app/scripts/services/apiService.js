@@ -22,10 +22,6 @@
                 if(!transformRequest) {
                     data = JSON.stringify(data);
                 }
-                if(!params) {
-                    params = {};
-                }
-                params.access_token = ConstantKeyValueService.token;
 
                 var apiPromise = $http({
                     method: method,
@@ -43,7 +39,7 @@
                         deferred.reject(response.data.body);
                     }
                 }, function(error) {
-                    $location.url('/404');
+                    //$location.url('/404');
                     deferred.reject(error);
                 });
 
