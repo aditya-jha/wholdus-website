@@ -10,9 +10,12 @@
             controller: [
                 '$scope',
                 '$log',
-                function($scope, $log) {
-                    $log.log("directive loaded");
-                    $log.log($scope.product);
+                '$location',
+                function($scope, $log, $location) {
+
+                    $scope.cardClicked = function() {
+                        $location.url($scope.product.url);
+                    };
                 }
             ]
         };

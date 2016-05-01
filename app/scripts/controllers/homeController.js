@@ -9,7 +9,8 @@
         '$timeout',
         '$location',
         'UtilService',
-        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService) {
+        'ngProgressBarService',
+        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService) {
 
             function categoriesToShow() {
                 return $scope.categories[0].categoryID + ',' + $scope.categories[1].categoryID;
@@ -33,11 +34,13 @@
             }
 
             function getCategory(params) {
+                $rootScope.$broadcast('showProgressbar');
                 APIService.apiCall("GET", APIService.getAPIUrl("category"))
                         .then(function(response) {
                             $scope.categories = response.categories;
                             getProducts({categoryID:categoriesToShow()});
                         }, function(error) {
+                            $rootScope.$broadcast('endProgressbar');
                             $scope.categories = [];
                         });
             }
@@ -45,8 +48,10 @@
             function getProducts(params) {
                 APIService.apiCall("GET", APIService.getAPIUrl('products'), null, params)
                         .then(function(response) {
+                            $rootScope.$broadcast('endProgressbar');
                             arrangeProductsByCategory(response.products);
                         }, function(error) {
+                            $rootScope.$broadcast('endProgressbar');
                             $scope.products = [];
                         });
             }

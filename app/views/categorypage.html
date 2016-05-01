@@ -1,30 +1,11 @@
 <div layout="column" flex>
     <div layout="column" layout-align="start center" flex>
-        <h1 id="category-title">{{category.category_name}}</h1>
+        <h1 id="category-title">{{category.display_name}}</h1>
     </div>
 
-    <div layout="row" class="homepage-content" layout-wrap flex-xs="100">
-        <div layout="row" data-ng-repeat="p in products" flex-xs="100" flex-md="50" flex-sm="100" flex-gt-sm="50">
-            <!-- <a href="{{p.url}}" layout="row" flex="100"  class="product-card" md-whiteframe="4dp"> -->
-                <div layout="row" flex="100"  class="product-card" md-whiteframe="4dp">
-                    <div layout="column" flex="40" layout-align="center center">
-                        <img src="http://api.probzip.com/media/productimages/29/20160429165223/200x200/bunkar-bunkar-magenta-chanderi-silk-saree-4d721brt_magenta-1.jpg" class="md-card-image" />
-                    </div>
-                    <md-divider class="vertical"></md-divider>
-                    <div layout="column" flex class="product-card-content">
-                        <span class="product-name">
-                            <a href="{{p.url}}">{{p.name}}</a>
-                        </span>
-                        <md-divider class="horizontal"></md-divider>
-                        <span>{{(p.price_per_unit-p.min_price_per_unit)*100/p.price_per_unit}} % discount on retail price</span>
-                        <md-divider class="horizontal"></md-divider>
-                        <span class="strike">Rs. {{p.price_per_unit}}</span>
-                        <span>Rs. {{p.min_price_per_unit}}</span>
-                        <md-divider class="horizontal"></md-divider>
-                        <span>Lot Size: {{p.lot_size}}</span>
-                    </div>
-                </div>
-            <!-- </a> -->
+    <div layout="row" layout-wrap class="product-card-wrap">
+        <div layout="row" data-ng-repeat="p in products" class="product-card-container">
+            <div layout="row" wu-product product="p" style="width: 100%;max-width: 620px;"></div>
         </div>
     </div>
 </div>
