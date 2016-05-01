@@ -132,9 +132,7 @@ a:active {
 .product-card-container {
     margin-right: 0.7em;
 }
-.product-card-container:last-of-type {
-    margin-right: 0em;
-}
+
 .product-card {
     height: auto;
     width: 100%;
