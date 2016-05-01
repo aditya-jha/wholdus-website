@@ -10,15 +10,17 @@
         '$location',
         'UtilService',
         'ngProgressBarService',
-        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService) {
+        '$q',
+        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q) {
 
-            function categoriesToShow() {
-                return $scope.categories[0].categoryID + ',' + $scope.categories[1].categoryID;
-            }
+            $scope.settings = {
+                isMobile: UtilService.isMobileRequest(),
+                categoriesToShow: [1,3,5]
+            };
 
             function arrangeProductsByCategory(products) {
+                if(!products) return;
                 var index=0;
-                $scope.products = {};
                 angular.forEach(products, function(value, key) {
                     var catID = value.category.categoryID;
                     //value.images = UtilService.getImageUrl(value);
@@ -34,28 +36,54 @@
             }
 
             function getCategory(params) {
-                $rootScope.$broadcast('showProgressbar');
                 APIService.apiCall("GET", APIService.getAPIUrl("category"))
                         .then(function(response) {
                             $scope.categories = response.categories;
-                            getProducts({categoryID:categoriesToShow()});
                         }, function(error) {
-                            $rootScope.$broadcast('endProgressbar');
                             $scope.categories = [];
                         });
             }
 
             function getProducts(params) {
+                var deferred = $q.defer();
+                if(!params) { params = {}; }
+                if($scope.settings.isMobile) {
+                    UtilService.setPaginationParams(params, 1, 4);
+                } else {
+                    UtilService.setPaginationParams(params, 1, 6);
+                }
+
                 APIService.apiCall("GET", APIService.getAPIUrl('products'), null, params)
                         .then(function(response) {
-                            $rootScope.$broadcast('endProgressbar');
-                            arrangeProductsByCategory(response.products);
+                            //arrangeProductsByCategory(response.products);
+                            deferred.resolve(response.products);
                         }, function(error) {
-                            $rootScope.$broadcast('endProgressbar');
-                            $scope.products = [];
+                            deferred.reject(error);
                         });
+                return deferred.promise;
             }
             getCategory();
+
+            function getProductsByCategory() {
+                $rootScope.$broadcast('showProgressbar');
+                var promises = [];
+                angular.forEach($scope.settings.categoriesToShow, function(value, key) {
+                    promises.push(getProducts({categoryID:value}));
+                });
+
+                $q.all(promises).then(function(response) {
+                    $scope.products = {};
+                    var products = [];
+                    angular.forEach(response, function(value, key) {
+                        angular.forEach(value, function(v,k) {
+                            products.push(v);
+                        });
+                    });
+                    arrangeProductsByCategory(products);
+                    $rootScope.$broadcast('endProgressbar');
+                });
+            }
+            getProductsByCategory();
 
             $scope.goTo = function($event, index) {
                 $event.preventDefault();

@@ -6,7 +6,8 @@
         '$log',
         '$location',
         'ConstantKeyValueService',
-        function($rootScope, $log, $location, ConstantKeyValueService) {
+        '$window',
+        function($rootScope, $log, $location, ConstantKeyValueService, $window) {
             var factory = {};
 
             factory.getIDFromSlug = function(slug) {
@@ -18,6 +19,19 @@
                     }
                     return id;
                 }
+            };
+
+            factory.isMobileRequest = function() {
+                var userAgent = $window.navigator.userAgent;
+                if(userAgent.match(/mobile/i)) {
+                    return true;
+                }
+                return false;
+            };
+
+            factory.setPaginationParams = function(obj, page, items) {
+                obj.page_number = page;
+                obj.items_per_page = items;
             };
 
             factory.redirectTo = function(to) {
