@@ -5,7 +5,8 @@
         '$rootScope',
         '$log',
         '$location',
-        function($rootScope, $log, $location) {
+        'ConstantKeyValueService',
+        function($rootScope, $log, $location, ConstantKeyValueService) {
             var factory = {};
 
             factory.getIDFromSlug = function(slug) {
@@ -23,6 +24,13 @@
                 $location.url(to);
             };
 
+            factory.getImageUrl = function(item) {
+                var images = [];
+                var imageNumbers = JSON.parse(item.image_numbers);
+                var imagePath = item.image_path;
+
+                return images;
+            };
             return factory;
         }
     ]);

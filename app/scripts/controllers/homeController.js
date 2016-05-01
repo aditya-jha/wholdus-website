@@ -8,7 +8,8 @@
         'ConstantKeyValueService',
         '$timeout',
         '$location',
-        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location) {
+        'UtilService',
+        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService) {
 
             function categoriesToShow() {
                 return $scope.categories[0].categoryID + ',' + $scope.categories[1].categoryID;
@@ -19,6 +20,7 @@
                 $scope.products = {};
                 angular.forEach(products, function(value, key) {
                     var catID = value.category.categoryID;
+                    //value.images = UtilService.getImageUrl(value);
                     if($scope.products[catID]) {
                         $scope.products[catID].products.push(value);
                     } else {
