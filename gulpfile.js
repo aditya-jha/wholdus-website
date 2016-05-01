@@ -28,14 +28,11 @@ var jsCustom = [
     'app/scripts/services/ngProgressbarService.js',
     'app/scripts/services/loginService.js',
     'app/scripts/services/orderService.js',
-    'app/scripts/directives/psaHeader.js',
-    'app/scripts/directives/psaSidenav.js',
-    'app/scripts/controllers/registrationController.js',
-    'app/scripts/controllers/profileController.js',
-    'app/scripts/controllers/orderController.js',
+    'app/scripts/directives/wuHeader.js',
+    'app/scripts/directives/wuProduct.js',
+    'app/scripts/controllers/homeController.js',
+    'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
-    'app/scripts/controllers/loginPopupController.js',
-    'app/scripts/controllers/paymentController.js'
 ];
 
 var stylesheets = [
