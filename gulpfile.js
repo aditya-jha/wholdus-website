@@ -30,7 +30,7 @@ var jsCustom = [
     'app/scripts/services/orderService.js',
     'app/scripts/directives/wuHeader.js',
     'app/scripts/directives/wuProduct.js',
-    'scripts/directives/wuPagination.js',
+    'app/scripts/directives/wuPagination.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
