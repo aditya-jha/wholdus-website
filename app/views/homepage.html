@@ -17,13 +17,12 @@
         </div>
     </div>
     <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="30">
-        <div layout="row" hide-sm>
+        <div layout="row">
             <img src="images/banner-2.jpg" />
         </div>
         <div layout="row" class="video" style="min-height:300px;" flex>
             <iframe src="https://www.youtube.com/embed/CVGP3k3Rnqw" frameborder="0" allowfullscreen class="md-card-image" flex></iframe>
         </div>
-
     </div>
 </div>
 
@@ -39,5 +38,12 @@
         <div layout="row" data-ng-repeat="p in c.products" class="product-card-container">
             <div layout="row" wu-product product="p" style="width: 100%;max-width: 620px;"></div>
         </div>
+    </div>
+    <div layout="row" layout-align="center center" class="view-more-btn">
+        <a href="{{c.category.url}}">
+            <md-button class="md-raised md-warn">
+                <span>view more</span>
+            </md-button>
+        </a>
     </div>
 </div>

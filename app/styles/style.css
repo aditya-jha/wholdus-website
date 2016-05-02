@@ -64,8 +64,16 @@ a:active {
     z-index: 2;
 }
 
+.view-more-btn {
+    margin-top: 0.5em;
+}
+
+.view-more-btn span{
+    padding: 0em 10em;
+}
+
 .homepage-content-container {
-    padding: 1.0em;
+    padding: 1.0em 1em 0.5em 1em;
 }
 .homepage-content {
     /*background-color: #fff;*/
