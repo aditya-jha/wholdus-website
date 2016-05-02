@@ -19,7 +19,7 @@ webapp.config([
             controller: "HomeController"
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
-            controller: "CategoryController"
+            controller: "CategoryController",
         }).when('/:category/:product', {
             templateUrl: "views/productpage.html",
             controller: "ProductController"

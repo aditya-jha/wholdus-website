@@ -21,6 +21,15 @@
                 }
             };
 
+            factory.getPageNumber = function() {
+                var search = $location.search();
+                if(search.page) {
+                    return search.page;
+                } else {
+                    return 1;
+                }
+            };
+
             factory.isMobileRequest = function() {
                 var userAgent = $window.navigator.userAgent;
                 if(userAgent.match(/mobile/i)) {
