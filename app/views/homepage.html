@@ -13,15 +13,15 @@
     </div>
     <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-align="center center">
         <div layout="row">
-            <img src="images/thumbnail.png" class="md-card-image" />
+            <img src="images/banner-1.jpg" />
         </div>
     </div>
     <div class="home-card-container" layout="column" flex-xs="100" flex-sm="100" flex-gt-sm="30">
-        <div layout="row">
-            <img src="images/thumbnail.png" class="md-card-image" />
+        <div layout="row" hide-sm>
+            <img src="images/banner-2.jpg" />
         </div>
-        <div layout="row" class="video" flex>
-            <iframe src="https://www.youtube.com/embed/Y9BQhmIShrg" frameborder="0" allowfullscreen class="md-card-image" flex></iframe>
+        <div layout="row" class="video" style="min-height:300px;" flex>
+            <iframe src="https://www.youtube.com/embed/CVGP3k3Rnqw" frameborder="0" allowfullscreen class="md-card-image" flex></iframe>
         </div>
 
     </div>
@@ -29,8 +29,9 @@
 
 <div layout="column" flex data-ng-repeat="c in products" class="homepage-content-container">
     <md-toolbar layout-align="center center">
-        <div class="md-toolbar-tools">
-            <h1 class="md-title">{{c.category.display_name}}</h1>
+        <div layout="row" class="md-toolbar-tools">
+            <span flex></span>
+            <h1 class="category-title">{{c.category.display_name}}</h1>
             <span flex></span>
         </div>
     </md-toolbar>

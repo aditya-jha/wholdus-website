@@ -6,9 +6,15 @@
         '$log',
         'APIService',
         'UtilService',
-        function($scope, $routeParams, $log, APIService, UtilService) {
+        'ngProgressBarService',
+        '$rootScope',
+        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope) {
 
             function praseProductDetails(p) {
+                p.images = UtilService.getImages(p);
+                if(p.images.length) {
+                    $scope.image = UtilService.getImageUrl(p.images[0], '400x400');
+                }
                 $scope.productDetailsKeys = [{
                     label: 'Brand',
                     value: p.details.brand
@@ -31,7 +37,7 @@
                     label: 'Length',
                     value: p.details.length
                 }, {
-                    label: 'Work Decor',
+                    label: 'Work/Decor',
                     value: p.details.work_decoration_type
                 }, {
                     label: 'Colors',
@@ -49,14 +55,17 @@
                 var params = {
                     productID: UtilService.getIDFromSlug($routeParams.product)
                 };
+                $rootScope.$broadcast('showProgressbar');
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                 .then(function(response) {
                     if(response.products.length) {
                         $scope.product = response.products[0];
                         praseProductDetails($scope.product);
                     }
+                    $rootScope.$broadcast('endProgressbar');
                 }, function(error) {
                     $scope.product = [];
+                    $rootScope.$broadcast('endProgressbar');
                 });
             }
             getProducts();

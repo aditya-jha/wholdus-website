@@ -76,6 +76,8 @@
                     var products = [];
                     angular.forEach(response, function(value, key) {
                         angular.forEach(value, function(v,k) {
+                            v.images = UtilService.getImages(v);
+                            v.imageUrl = UtilService.getImageUrl(v.images[0], '200x200');
                             products.push(v);
                         });
                     });

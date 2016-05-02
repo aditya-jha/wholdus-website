@@ -1,24 +1,24 @@
 <div layout="row" class="product-card" data-ng-click="cardClicked()" md-whiteframe="4dp">
     <div layout="column" layout-align="center center">
-        <img src="http://api.probzip.com/media/productimages/29/20160429165223/200x200/bunkar-bunkar-magenta-chanderi-silk-saree-4d721brt_magenta-1.jpg" class="md-card-image" />
+        <img src="{{product.imageUrl}}" class="md-card-image" />
     </div>
     <div layout="column" class="product-card-content">
         <span class="product-name">
             <a href="{{product.url}}">{{product.name}}</a>
         </span>
-        <span class="product-price">Rs. {{product.min_price_per_unit}}</span>
+        <span>Rs. <span class="product-price">{{product.min_price_per_unit | currency:'':0}}</span></span>
         <div layout="row" layout-wrap>
             <div layout="column" class="feature-parent">
                 <span class="feature-title">retail price</span>
                 <span>{{product.price_per_unit}}</span>
             </div>
-            <div layout="column" class="feature-parent">
+            <div layout="column" class="feature-parent product-margin">
                 <span class="feature-title">your margin (upto)</span>
-                <span>{{product.price_per_unit - product.min_price_per_unit}}</span>
+                <span>{{(product.price_per_unit - product.min_price_per_unit)*100/product.price_per_unit |  number:0}}%</span>
             </div>
             <div layout="column" class="feature-parent">
                 <span class="feature-title">manufacturer</span>
-                <span>{{product.seller.seller_name}}</span>
+                <span>{{product.seller.company_name}}</span>
             </div>
         </div>
     </div>

@@ -38,13 +38,29 @@
                 $location.url(to);
             };
 
-            factory.getImageUrl = function(item) {
-                var images = [];
-                var imageNumbers = JSON.parse(item.image_numbers);
-                var imagePath = item.image_path;
-
-                return images;
+            factory.getImageUrl = function(image, size) {
+                return image.base + size + '/' + image.end;
             };
+
+            factory.getImages = function(item) {
+                var image = item.image;
+                if(image.image_count) {
+                    var images = [];
+                    var imageNumbers = image.image_numbers;
+                    var imagePath = image.image_path;
+                    if(imagePath.indexOf('static/') === 0) {
+                        imagePath = imagePath.substr(7);
+                    }
+                    angular.forEach(image.image_numbers, function(value, key) {
+                        var base = ConstantKeyValueService.apiBaseUrl + imagePath;
+                        var end = image.image_name + '-' + value + '.jpg';
+                        images.push({base:base, end:end});
+                    });
+                    return images;
+                }
+                return [];
+            };
+
             return factory;
         }
     ]);
