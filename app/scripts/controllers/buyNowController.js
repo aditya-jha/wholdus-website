@@ -32,6 +32,8 @@
                         ToastService.showSimpleToast("Ops! Something went wrong", 2000);
                         $rootScope.$broadcast('endProgressbar');
                     });
+                } else {
+                    ToastService.showSimpleToast("Please fill required fields", 2000);
                 }
             };
         }

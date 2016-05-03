@@ -178,6 +178,7 @@ a:active {
 
 .product-card-content {
     width: 100%;
+    padding-left: 0.5em;
 }
 
 .product-name {
