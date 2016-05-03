@@ -34,6 +34,7 @@ var jsCustom = [
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
+    'app/scripts/controllers/buyNowController.js'
 ];
 
 var stylesheets = [
