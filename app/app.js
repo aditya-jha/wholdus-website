@@ -17,6 +17,9 @@ webapp.config([
         $routeProvider.when('/', {
             templateUrl: "views/homepage.html",
             controller: "HomeController"
+        }).when('/404', {
+            templateUrl: 'views/404.html',
+            controller: "ErrorPageController"
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",

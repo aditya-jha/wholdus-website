@@ -249,6 +249,10 @@ a:active {
 .no-product-container img {
     max-width: 450px;
 }
+
+.404-container img{
+    min-width: 450px;
+}
 /** product page specific css **/
 .product-page-card {
     margin: 1em;
