@@ -22,6 +22,7 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+    outline: 0;
 }
 a:link {
     text-decoration: none;
