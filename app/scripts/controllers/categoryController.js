@@ -9,13 +9,17 @@
         'APIService',
         'ngProgressBarService',
         '$rootScope',
-        function ($scope, $routeParams, $location, $log, UtilService, APIService, ngProgressBarService, $rootScope) {
+        '$mdMedia',
+        '$mdDialog',
+        function ($scope, $routeParams, $location, $log, UtilService, APIService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
 
             $scope.categoryID = UtilService.getIDFromSlug($routeParams.category);
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
                 enablePagination: false,
                 page: UtilService.getPageNumber(),
+                noProduct: false,
+                displayName: UtilService.getNameFromSlug($routeParams.category)
             };
             $scope.settings.itemsPerPage = $scope.settings.isMobile ? 16 : 21;
 
@@ -27,6 +31,7 @@
 
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                 .then(function(response) {
+                    $scope.settings.noProduct = false;
                     $rootScope.$broadcast('endProgressbar');
                     if(response.total_pages > 1) {
                         $scope.settings.enablePagination = true;
@@ -42,13 +47,31 @@
                     $scope.products = response.products;
                     if($scope.products.length) {
                         $scope.category = response.products[0].category;
+                    } else {
+                        $scope.settings.noProduct = true;
                     }
                 }, function(error) {
                     $rootScope.$broadcast('endProgressbar');
                     $scope.products = [];
+                    $scope.settings.noProduct = true;
                 });
             }
             getProducts();
+
+            $scope.joinBuyerNetwork = function(event) {
+                var useFullScreen = $mdMedia('xs');
+                $mdDialog.show({
+                    controller: 'buyNowController',
+                    templateUrl: 'views/partials/buyNow.html',
+                    parent: angular.element(document.body),
+                    targetEvent: event,
+                    clickOutsideToClose:true,
+                    fullscreen: useFullScreen,
+                    locals: {
+                        productID: null
+                    }
+                });
+            };
         }
     ]);
 })();

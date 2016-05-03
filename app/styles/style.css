@@ -240,6 +240,15 @@ a:active {
     text-align: center;
     font-family: 'Confortaa';
 }
+
+.no-product-container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.no-product-container img {
+    max-width: 450px;
+}
 /** product page specific css **/
 .product-page-card {
     margin: 1em;

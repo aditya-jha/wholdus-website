@@ -70,6 +70,13 @@
                 return [];
             };
 
+            factory.getNameFromSlug = function(slug) {
+                slug = slug.split('-');
+                slug.splice(slug.length-1, 1);
+                var name = slug.join(' ');
+                return name;
+            };
+
             return factory;
         }
     ]);
