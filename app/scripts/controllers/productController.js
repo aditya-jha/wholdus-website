@@ -8,7 +8,9 @@
         'UtilService',
         'ngProgressBarService',
         '$rootScope',
-        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope) {
+        '$mdMedia',
+        '$mdDialog',
+        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
 
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
@@ -69,6 +71,21 @@
                 });
             }
             getProducts();
+
+            $scope.buyNow = function() {
+                var useFullScreen = $mdMedia('xs');
+                $mdDialog.show({
+                    controller: 'buyNowController',
+                    templateUrl: 'views/partials/buyNow.html',
+                    parent: angular.element(document.body),
+                    targetEvent: event,
+                    clickOutsideToClose:true,
+                    fullscreen: useFullScreen,
+                    locals: {
+                        productID: $scope.product.productID
+                    }
+                });
+            };
         }
     ]);
 })();

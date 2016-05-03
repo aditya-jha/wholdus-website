@@ -389,4 +389,7 @@ a:active {
     .product-seller-details-container {
         margin-top: 1em;
     }
+    .view-more-btn span {
+        padding: 0em 6em;
+    }
 }
