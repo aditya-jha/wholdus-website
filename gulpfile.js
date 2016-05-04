@@ -48,7 +48,7 @@ gulp.task('copyViews', function() {
                 .pipe(gulp.dest('./build/views'));
 });
 gulp.task('copyImages', function() {
-    return gulp.src('./app/images/**/*.{png,jpg,svg,jpeg}')
+    return gulp.src('./app/images/**/*.{png,jpg,svg,jpeg,ico}')
                 .pipe(gulp.dest('./build/images'));
 });
 
