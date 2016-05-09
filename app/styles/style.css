@@ -254,6 +254,22 @@ a:active {
     min-width: 450px;
 }
 /** product page specific css **/
+.multiple-images {
+    padding: 0em !important;
+    outline: 0;
+    cursor: pointer;
+}
+
+.active-image {
+    background: #FF5722;
+    height: 3px;
+    margin-top: 2px;
+}
+
+.multiple-images img{
+    max-height: 100px;
+    max-width: 95px;
+}
 .product-page-card {
     margin: 1em;
     background-color: #fff;

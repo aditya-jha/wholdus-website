@@ -15,7 +15,15 @@
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
                 if(p.images.length) {
-                    $scope.image = UtilService.getImageUrl(p.images[0], '400x400');
+                    $scope.image = {
+                        url: UtilService.getImageUrl(p.images[0], '400x400'),
+                        index: 0,
+                        showImage: true
+                    };
+                    $scope.allImages = [];
+                    for(var i=0; i<p.images.length && i<4; i++) {
+                        $scope.allImages.push(UtilService.getImageUrl(p.images[i], '200x200'));
+                    }
                 }
                 $scope.productDetailsKeys = [{
                     label: 'Brand',
@@ -85,6 +93,16 @@
                         productID: $scope.product.productID
                     }
                 });
+            };
+
+            $scope.changeDisplayImage = function(index) {
+                if($scope.image.index != index) {
+                    $scope.image.showImage = false;
+                    $scope.image.index = index;
+                    $scope.image.url = UtilService.getImageUrl($scope.product.images[index], '400x400');
+
+                    $scope.image.showImage = true;
+                }
             };
         }
     ]);

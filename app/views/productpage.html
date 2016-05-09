@@ -6,7 +6,15 @@
 <div layout="row" layout-wrap ng-cloak class="product-page-card">
     <div layout="column" flex-xs="100" flex-sm="40" flex-gt-sm="45" class="image-wrap" layout-align="center center" flex>
         <div layout="row" layout-align="center center">
-            <img src="{{image}}" class="md-card-image" />
+            <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image" />
+        </div>
+        <div layout="row" layout-align="center center" data-ng-if="allImages.length>1">
+            <div layout="row" data-ng-repeat="i in allImages">
+                <div layout="column" class="multiple-images" data-ng-click="changeDisplayImage($index)">
+                    <img src="{{i}}" />
+                    <span data-ng-class="{'active-image': $index==image.index}"></span>
+                </div>
+            </div>
         </div>
     </div>
     <div layout="column" flex-xs="100" flex-sm="60" flex-gt-sm="55" flex class="product-page-card-content-container">
