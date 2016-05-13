@@ -19,9 +19,13 @@ webapp.config([
             controller: "HomeController"
         }).when('/404', {
             templateUrl: 'views/404.html',
-            controller: "ErrorPageController"
+            controller: "StaticPagesController"
         }).when('/aboutus', {
-            templateUrl: "views/aboutus.html"
+            templateUrl: "views/aboutus.html",
+            controller: "StaticPagesController"
+        }).when('/contactus', {
+            templateUrl: "views/contactus.html",
+            controller: "StaticPagesController"
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",
