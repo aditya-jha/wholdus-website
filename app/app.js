@@ -20,6 +20,8 @@ webapp.config([
         }).when('/404', {
             templateUrl: 'views/404.html',
             controller: "ErrorPageController"
+        }).when('/aboutus', {
+            templateUrl: "views/aboutus.html"
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",

@@ -15,7 +15,6 @@ img {
 }
 
 body {
-    padding-bottom: 1em;
     background: rgba(238, 238, 238, 1);
     font-family: 'PT Sans';
 }
@@ -42,6 +41,20 @@ a:active {
     text-decoration: underline;
 }
 
+.footer {
+    background: rgb(69,39,160);
+    font-family: 'PT Sans';
+    color: #fff;
+}
+.content-page-title {
+    font-size: 1.5em !important;
+}
+.aboutus-card {
+    background-color: #fff;
+    margin: 8em;
+    margin-top:-3em;
+    padding: 1em;
+}
 #header-toolbar {
     font-family: 'Comfortaa';
     font-size: 1.1em;
@@ -232,7 +245,7 @@ a:active {
     padding-top: 1em;
 }
 
-.pagination-directive md-button, span {
+.pagination-directive md-button span {
     font-family: 'Comfortaa';
 }
 
@@ -328,6 +341,7 @@ a:active {
     padding-top: 1em;
     font-size: 1.2em;
     text-align: center;
+    font-family: 'Comfortaa'
 }
 .product-details-wrap {
     padding-bottom: 1em;
@@ -348,6 +362,10 @@ a:active {
 /** end product page specific css **/
 
 @media screen and (max-width: 959px) {
+    .aboutus-card {
+        margin: 1em;
+        margin-top: -3em;
+    }
     .product-card-wrap {
         margin-left: 1.0em;
     }
