@@ -43,13 +43,42 @@ a:hover {
 a:active {
     text-decoration: underline;
 }
+.social-media img{
+    width: 40px;
+    height: 40px;
+}
+.return-and-refund-heading {
+    font-weight: bold;
+    text-align: center;
+}
+
+.return-and-refund-heading span {
+    padding: 0em 0.5em;
+    border-right: 1px solid black;
+    word-wrap: break-word;
+    border-bottom: 1px solid black;
+}
+.return-and-refund-heading span:last-of-type {
+    border-right: none;
+}
+.return-and-refund-content span {
+    padding: 0em 0.5em;
+    border-right: 1px solid black;
+    word-wrap: break-word;
+    border-bottom: 1px solid black;
+}
+.return-and-refund-content span:last-of-type {
+    border-right: none;
+}
 .faq-container {
     margin-top: -3em;
+}
+.faq-container hr{
+    width: 75%;
 }
 .faq-container .q {
     text-align: center;
     font-weight: bold;
-    /*min-width: 20px;*/
 }
 .faq-content span{
     padding-bottom: 0.5em;

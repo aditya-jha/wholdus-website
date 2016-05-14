@@ -29,6 +29,9 @@ webapp.config([
         }).when('/faq',{
             templateUrl: "views/faq.html",
             controller: "StaticPagesController"
+        }).when('/return-refund-policy', {
+            templateUrl: "views/returnRefund.html",
+            controller: "StaticPagesController"
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",
