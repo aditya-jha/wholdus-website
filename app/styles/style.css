@@ -40,7 +40,21 @@ a:hover {
 a:active {
     text-decoration: underline;
 }
-
+.faq-container {
+    margin-top: -3em;
+}
+.faq-container .q {
+    text-align: center;
+    font-weight: bold;
+    /*min-width: 20px;*/
+}
+.faq-content span{
+    padding-bottom: 0.5em;
+}
+.faq-container div{
+    background-color: #fff;
+    padding: 1em;
+}
 .contactus-container {
     margin-top:-3em;
 }
@@ -297,7 +311,7 @@ a:active {
 
 .multiple-images img{
     max-height: 100px;
-    max-width: 95px;
+    max-width: 60px;
 }
 .product-page-card {
     margin: 1em;

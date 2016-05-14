@@ -26,6 +26,9 @@ webapp.config([
         }).when('/contactus', {
             templateUrl: "views/contactus.html",
             controller: "StaticPagesController"
+        }).when('/faq',{
+            templateUrl: "views/faq.html",
+            controller: "StaticPagesController"
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",

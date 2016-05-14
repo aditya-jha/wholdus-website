@@ -21,7 +21,7 @@
                         showImage: true
                     };
                     $scope.allImages = [];
-                    for(var i=0; i<p.images.length && i<4; i++) {
+                    for(var i=0; i<p.images.length && i<10; i++) {
                         $scope.allImages.push(UtilService.getImageUrl(p.images[i], '200x200'));
                     }
                 }
