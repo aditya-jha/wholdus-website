@@ -89,6 +89,7 @@ a:active {
 }
 .contactus-container {
     margin-top:-3em;
+    margin-bottom: 7em;
 }
 .contactus-container div {
     background-color: #fff;
@@ -117,8 +118,7 @@ a:active {
 }
 .aboutus-card {
     background-color: #fff;
-    margin: 8em;
-    margin-top:-3em;
+    margin: -3em 8em 12em 8em;
     padding: 1em;
 }
 #header-toolbar {
@@ -429,8 +429,7 @@ a:active {
 
 @media screen and (max-width: 959px) {
     .aboutus-card {
-        margin: 1em;
-        margin-top: -3em;
+        margin: -3em 1em 8em 1em;
     }
     .product-card-wrap {
         margin-left: 1.0em;
