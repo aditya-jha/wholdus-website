@@ -87,9 +87,13 @@ a:active {
     background-color: #fff;
     padding: 1em;
 }
+.map-address img{
+    max-width: 400px;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
 .contactus-container {
     margin-top:-3em;
-    margin-bottom: 7em;
 }
 .contactus-container div {
     background-color: #fff;
