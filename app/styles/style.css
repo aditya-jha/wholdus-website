@@ -252,7 +252,7 @@ a:active {
 
 .product-card img {
     width: 200px;
-    height: auto;
+    max-height: 200px;
 }
 .product-card md-divider.horizontal {
     padding: 0.3em 0.5em 0.2em 0.5em;
