@@ -58,7 +58,7 @@
             }
             getProducts();
 
-            $scope.joinBuyerNetwork = function(event) {
+            $scope.buyNow = function(event) {
                 var useFullScreen = $mdMedia('xs');
                 $mdDialog.show({
                     controller: 'buyNowController',
