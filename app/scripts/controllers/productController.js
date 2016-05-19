@@ -8,9 +8,8 @@
         'UtilService',
         'ngProgressBarService',
         '$rootScope',
-        '$mdMedia',
-        '$mdDialog',
-        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
+        'DialogService',
+        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, DialogService) {
 
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
@@ -80,20 +79,9 @@
             }
             getProducts();
 
-            $scope.buyNow = function(event) {
-                var useFullScreen = $mdMedia('xs');
-                $mdDialog.show({
-                    controller: 'buyNowController',
-                    templateUrl: 'views/partials/buyNow.html',
-                    parent: angular.element(document.body),
-                    targetEvent: event,
-                    clickOutsideToClose:true,
-                    fullscreen: useFullScreen,
-                    locals: {
-                        productID: $scope.product.productID
-                    }
-                });
-            };
+            $scope.buyNow = function(event){
+                DialogService.viewDialog(event);
+            }
 
             $scope.changeDisplayImage = function(index) {
                 if($scope.image.index != index) {

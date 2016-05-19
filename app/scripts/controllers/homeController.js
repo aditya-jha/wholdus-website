@@ -11,7 +11,8 @@
         'UtilService',
         'ngProgressBarService',
         '$q',
-        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q) {
+        'DialogService',
+        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q, DialogService) {
 
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
@@ -34,6 +35,8 @@
                     }
                 });
             }
+
+            
 
             function getCategory(params) {
                 APIService.apiCall("GET", APIService.getAPIUrl("category"))
@@ -93,6 +96,10 @@
                     $location.url($scope.categories[index].url);
                 },250);
             };
+
+            $scope.buyNow = function(event){
+                DialogService.viewDialog(event);
+            }
         }
     ]);
 })();
