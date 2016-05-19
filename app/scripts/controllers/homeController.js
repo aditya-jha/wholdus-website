@@ -11,9 +11,8 @@
         'UtilService',
         'ngProgressBarService',
         '$q',
-        '$mdMedia',
-        '$mdDialog',
-        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q, $mdMedia, $mdDialog) {
+        'DialogService',
+        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q, DialogService) {
 
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
@@ -97,21 +96,10 @@
                     $location.url($scope.categories[index].url);
                 },250);
             };
-            
-            $scope.buyNow = function(event) {
-                var useFullScreen = $mdMedia('xs');
-                $mdDialog.show({
-                    controller: 'buyNowController',
-                    templateUrl: 'views/partials/buyNow.html',
-                    parent: angular.element(document.body),
-                    targetEvent: event,
-                    clickOutsideToClose:true,
-                    fullscreen: useFullScreen,
-                    locals: {
-                        productID: null
-                    }
-                });
-            };
+
+            $scope.buyNow = function(event){
+                DialogService.viewDialog(event);
+            }
         }
     ]);
 })();
