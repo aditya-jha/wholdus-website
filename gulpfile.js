@@ -28,6 +28,7 @@ var jsCustom = [
     'app/scripts/services/ngProgressbarService.js',
     'app/scripts/services/loginService.js',
     'app/scripts/services/orderService.js',
+    'app/scripts/services/dialogService.js',
     'app/scripts/directives/wuHeader.js',
     'app/scripts/directives/wuProduct.js',
     'app/scripts/directives/wuPagination.js',
