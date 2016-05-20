@@ -8,7 +8,7 @@
         <div layout="row" layout-align="center center">
             <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image" />
         </div>
-        <div layout="row" layout-align="center center" data-ng-if="allImages.length>1">
+        <div layout="row" layout-align="center center" data-ng-if="allImages.length>1" class="multiple-images-container">
             <div layout="row" data-ng-repeat="i in allImages">
                 <div layout="column" class="multiple-images" data-ng-click="changeDisplayImage($index)">
                     <img src="{{i}}" />
