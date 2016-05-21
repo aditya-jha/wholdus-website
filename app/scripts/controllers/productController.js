@@ -62,13 +62,16 @@
 
             function getProducts() {
                 var params = {
-                    productID: UtilService.getIDFromSlug($routeParams.product)
+                    productID: UtilService.getIDFromSlug($routeParams.product),
+                    categoryID: $scope.categoryID,
                 };
+                var params = {};
                 $rootScope.$broadcast('showProgressbar');
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                 .then(function(response) {
                     if(response.products.length) {
                         $scope.product = response.products[0];
+                        $scope.category = response.products[0].category;
                         praseProductDetails($scope.product);
                     }
                     $rootScope.$broadcast('endProgressbar');
