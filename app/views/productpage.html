@@ -1,6 +1,11 @@
 <div layout="column" layout-align="start center">
     <div layout="row" layout-align="start center">
-    <span class="breadcrumb">Home ></span><span class="breadcrumb"> &nbsp;{{product.category.display_name}} ></span><span class="breadcrumb"> &nbsp;{{ product.display_name }}</span></div>
+        <a href="/"><span class="breadcrumb">Home</span></a>
+        <span>&nbsp;&gt;&nbsp;</span>
+        <span class="breadcrumb" data-ng-click="categorynav()">{{product.category.display_name}}</span>
+        <span>&nbsp;&gt;&nbsp;</span>
+        <span></span>{{ product.display_name }}</span>
+    </div>
     <h1 id="category-title"> {{ product.display_name }}</h1>
 </div>
 
