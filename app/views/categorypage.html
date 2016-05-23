@@ -4,6 +4,7 @@
             <a href="/"><span class="breadcrumb" >Home </span></a>
             <span>&nbsp;&gt;&nbsp;</span>
             <span>{{category.display_name}}</span>
+            <span data-ng-if="settings.noProduct">{{settings.displayName}}</span>
         </div>
         <h1 id="category-title">{{category.display_name}}</h1>
     </div>
@@ -19,6 +20,7 @@
     <div layout="column" data-ng-if="settings.noProduct">
         <div layout="column" layout-align="start center" flex>
             <h1 id="category-title">{{settings.displayName}}</h1>
+
         </div>
         <div layout="row" layout-wrap class="no-product-container">
             <div layout="column" layout-align="center center" layout-padding>
