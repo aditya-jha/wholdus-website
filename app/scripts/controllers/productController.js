@@ -9,8 +9,7 @@
         'ngProgressBarService',
         '$rootScope',
         'DialogService',
-        '$location',
-        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, DialogService, $location) {
+        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, DialogService) {
 
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
@@ -79,10 +78,6 @@
                 });
             }
             getProducts();
-
-            $scope.categorynav = function(){
-                $location.url($scope.product.category.url);
-            }
 
             $scope.buyNow = function(event){
                 DialogService.viewDialog(event);
