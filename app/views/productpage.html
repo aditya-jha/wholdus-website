@@ -1,6 +1,12 @@
 <div layout="column" layout-align="start center">
-    <span></span>
-    <h1 id="category-title">{{ product.display_name }}</h1>
+    <div layout="row" layout-align="start center">
+        <a href="/"><span class="breadcrumb">Home</span></a>
+        <span>&nbsp;&gt;&nbsp;</span>
+        <a data-ng-href="{{product.category.url}}"><span class="breadcrumb">{{product.category.display_name}}</span></a>
+        <span>&nbsp;&gt;&nbsp;</span>
+        <span></span>{{ product.display_name }}</span>
+    </div>
+    <h1 id="category-title"> {{ product.display_name }}</h1>
 </div>
 
 <div layout="row" layout-wrap ng-cloak class="product-page-card">

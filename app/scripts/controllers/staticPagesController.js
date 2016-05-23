@@ -7,7 +7,8 @@
         'ToastService',
         '$rootScope',
         'ngProgressBarService',
-        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService) {
+        'DialogService',
+        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService, DialogService) {
 
             $scope.contactus = {
                 email: "",
@@ -22,6 +23,10 @@
                     mobile_number: "",
                     remarks: ""
                 };
+            }
+
+            $scope.buyNow = function(event){
+                DialogService.viewDialog(event);
             }
 
             $scope.contactUs = function() {

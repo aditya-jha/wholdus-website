@@ -56,7 +56,7 @@
                 });
             }
             getProducts();
-
+            
             $scope.buyNow = function(event){
                 DialogService.viewDialog(event);
             }

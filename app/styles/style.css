@@ -43,7 +43,13 @@ a:active {
 .cursor-pointer{
     cursor: pointer;
 }
-
+.breadcrumb{
+    color: #525050;
+}
+.breadcrumb:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
 .social-media img{
     width: 40px;
     height: 40px;
@@ -117,6 +123,7 @@ a:active {
     background: rgb(69,39,160);
     font-family: 'PT Sans';
     color: #fff;
+    margin-top: 1em;
 }
 .content-page-title {
     font-size: 1.5em !important;
@@ -209,7 +216,7 @@ a:active {
     font-family: 'Comfortaa';
     font-size: 2em;
     font-weight: bold;
-    padding-top: 1em;
+    padding-top: 0.4em;
     margin: 0;
     text-align: center;
 }
