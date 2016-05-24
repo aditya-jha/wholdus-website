@@ -1,6 +1,12 @@
 <div layout="column" layout-align="start center">
-    <span></span>
-    <h1 id="category-title">{{ product.display_name }}</h1>
+    <div layout="row" layout-align="start center">
+        <a href="/"><span class="breadcrumb">Home</span></a>
+        <span>&nbsp;&gt;&nbsp;</span>
+        <a data-ng-href="{{product.category.url}}"><span class="breadcrumb">{{product.category.display_name}}</span></a>
+        <span>&nbsp;&gt;&nbsp;</span>
+        <span></span>{{ product.display_name }}</span>
+    </div>
+    <h1 id="category-title"> {{ product.display_name }}</h1>
 </div>
 
 <div layout="row" layout-wrap ng-cloak class="product-page-card">
@@ -11,7 +17,7 @@
         <div layout="row" layout-align="center center"  class="progress-bar-container">
              <md-progress-linear md-mode="indeterminate" data-ng-if="displayImageLoading"  class="progress-bar md-primary"></md-progress-linear>
         </div>
-        <div layout="row" layout-align="center center" data-ng-if="allImages.length>1">
+        <div layout="row" layout-align="center center" data-ng-if="allImages.length>1" class="multiple-images-container">
             <div layout="row" data-ng-repeat="i in allImages">
                 <div layout="column" class="multiple-images" data-ng-click="changeDisplayImage($index)">
                     <img src="{{i}}" />

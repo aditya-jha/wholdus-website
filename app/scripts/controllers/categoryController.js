@@ -9,9 +9,8 @@
         'APIService',
         'ngProgressBarService',
         '$rootScope',
-        '$mdMedia',
-        '$mdDialog',
-        function ($scope, $routeParams, $location, $log, UtilService, APIService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
+        'DialogService',
+        function ($scope, $routeParams, $location, $log, UtilService, APIService, ngProgressBarService, $rootScope, DialogService) {
 
             $scope.categoryID = UtilService.getIDFromSlug($routeParams.category);
             $scope.settings = {
@@ -57,21 +56,10 @@
                 });
             }
             getProducts();
-
-            $scope.joinBuyerNetwork = function(event) {
-                var useFullScreen = $mdMedia('xs');
-                $mdDialog.show({
-                    controller: 'buyNowController',
-                    templateUrl: 'views/partials/buyNow.html',
-                    parent: angular.element(document.body),
-                    targetEvent: event,
-                    clickOutsideToClose:true,
-                    fullscreen: useFullScreen,
-                    locals: {
-                        productID: null
-                    }
-                });
-            };
+            
+            $scope.buyNow = function(event){
+                DialogService.viewDialog(event);
+            }
         }
     ]);
 })();

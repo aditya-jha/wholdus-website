@@ -1,5 +1,10 @@
 <div layout="column" flex>
     <div layout="column" layout-align="start center" flex>
+       <div layout="row" layout-align="start center">
+            <a href="/"><span class="breadcrumb" >Home </span></a>
+            <span>&nbsp;&gt;&nbsp;</span>
+            <span>{{category.display_name}}</span>
+        </div>
         <h1 id="category-title">{{category.display_name}}</h1>
     </div>
 
@@ -23,7 +28,7 @@
                 <span>oops! our manufacturers are out of stock</span>
                 <span>you are our precious customer! please let us serve you</span>
                 <span>get a call from us within an hour</span>
-                <md-button class="md-raised md-warn" data-ng-click="joinBuyerNetwork($event)">
+                <md-button class="md-raised md-warn" data-ng-click="buyNow($event)">
                     <span>Join Buyer Network</span>
                 </md-button>
             </div>
