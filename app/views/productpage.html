@@ -6,7 +6,10 @@
 <div layout="row" layout-wrap ng-cloak class="product-page-card">
     <div layout="column" flex-xs="100" flex-sm="40" flex-gt-sm="45" class="image-wrap" layout-align="center center" flex>
         <div layout="row" layout-align="center center">
-            <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image" />
+            <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image" image-on-load="imageLoaded()" ng-style="displayImageStyle"/>
+        </div>
+        <div layout="row" layout-align="center center"  class="progress-bar-container">
+             <md-progress-linear md-mode="indeterminate" data-ng-if="displayImageLoading"  class="progress-bar md-primary"></md-progress-linear>
         </div>
         <div layout="row" layout-align="center center" data-ng-if="allImages.length>1">
             <div layout="row" data-ng-repeat="i in allImages">

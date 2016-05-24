@@ -549,3 +549,16 @@ a:active {
     z-index: 99999;
 }
 /** end ngProgress loader css*/
+.progress-bar-container{
+    height: 5px;
+    width:200px;
+    margin-bottom: 10px;
+}
+.progress-bar{
+    height: 5px !important;
+    -webkit-transition: all 0.05s ease-in-out;
+    -moz-transition: all 0.05s ease-in-out;
+    -o-transition: all 0.05s ease-in-out;
+    transition: all 0.05s ease-in-out;
+}    
+}

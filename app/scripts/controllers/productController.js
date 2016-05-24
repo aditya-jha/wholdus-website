@@ -11,7 +11,8 @@
         '$mdMedia',
         '$mdDialog',
         function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
-
+            $scope.displayImageLoading=true;
+            $scope.displayImageStyle={'opacity':'1.0'};
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
                 if(p.images.length) {
@@ -99,11 +100,20 @@
                 if($scope.image.index != index) {
                     $scope.image.showImage = false;
                     $scope.image.index = index;
+                    $scope.displayImageStyle={'opacity':'0.5'};
                     $scope.image.url = UtilService.getImageUrl($scope.product.images[index], '400x400');
-
+                    $scope.displayImage=new Image();
+                    $scope.displayImage.src=$scope.image.url;
                     $scope.image.showImage = true;
+                     $scope.displayImageLoading=true;
                 }
             };
+            $scope.imageLoaded= function(){            
+                $scope.displayImageLoading=false;
+                $scope.displayImageStyle={'opacity':'1.0'};
+            };
+
+            
         }
     ]);
 })();
