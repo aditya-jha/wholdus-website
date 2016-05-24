@@ -571,12 +571,12 @@ a:active {
 }
 /** end ngProgress loader css*/
 .progress-bar-container{
-    height: 5px;
+    
     width:200px;
-    margin-bottom: 10px;
+    margin-bottom: 1.5em;
+
 }
+
 .progress-bar{
-    height: 5px !important;
-   
+    width: 100%;
 }    
-}
