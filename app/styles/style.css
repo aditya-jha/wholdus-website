@@ -376,9 +376,7 @@ a:active {
     text-align: center;
 }
 
-.product-page-card div {
-    padding: 0.5em 0.5em;
-}
+
 
 .product-page-card table {
     width: 60%;
@@ -400,6 +398,9 @@ a:active {
 
 .product-page-card-content-container{
     background: #673AB7;
+}
+.product-page-card-content-container div{
+    padding: 0.5em 0.5em !important;
 }
 .product-page-card-content .feature-title, .product-price {
     font-size: 0.9em;
@@ -569,14 +570,24 @@ a:active {
     right: 0;
     z-index: 99999;
 }
+.image-display{
+    padding: 0.5em 0.5em;
+}
+.image-display div{
+    padding: 0.5em 0.5em;   
+}
 /** end ngProgress loader css*/
 .progress-bar-container{
     
-    width:200px;
-    margin-bottom: 1.5em;
+    width:60%;
+    height: 5px;
+    margin-bottom: 5px;
+
 
 }
 
 .progress-bar{
+    margin: 0px;
     width: 100%;
+   
 }    

@@ -7,10 +7,10 @@
 
                 element.bind('load', function() {
 
-                    scope.$apply(attrs.imageOnLoad)(true);
+                    scope.$apply(attrs.imageOnLoad);
                 });
                 element.bind('error', function(){
-                  scope.$apply(attrs.imageOnLoad)(false);
+                  // scope.$apply(attrs.imageOnLoad)(false);
                 });
             }
         };
