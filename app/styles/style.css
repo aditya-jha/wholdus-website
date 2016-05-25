@@ -376,9 +376,7 @@ a:active {
     text-align: center;
 }
 
-.product-page-card div {
-    padding: 0.5em 0.5em;
-}
+
 
 .product-page-card table {
     width: 60%;
@@ -400,6 +398,9 @@ a:active {
 
 .product-page-card-content-container{
     background: #673AB7;
+}
+.product-page-card-content-container div{
+    padding: 0.5em 0.5em !important;
 }
 .product-page-card-content .feature-title, .product-price {
     font-size: 0.9em;
@@ -569,4 +570,67 @@ a:active {
     right: 0;
     z-index: 99999;
 }
+.image-display{
+    padding: 0.5em 0.5em;
+}
+.image-display div{
+    padding: 0.5em 0.5em;   
+}
 /** end ngProgress loader css*/
+.progress-bar-container{
+    
+    width:60%;
+    height: 3px;
+    margin-bottom: 2px;
+
+
+}
+
+.progress-bar{
+    margin: 0px;
+    width: 100%;
+   
+}    
+
+
+.control_prev, .control_next {
+  z-index: 1000000;
+  width: 1em;
+  height: 2em;
+  background: #2a2a2a;
+  color: #fff;
+  vertical-align: middle;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.control_prev span, .control_next span{
+    margin-top: -0.2em;
+}
+
+.control_prev:hover, .control_next:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+.control_prev {
+    /*margin-left:0px;
+    margin-right:2px;*/ 
+    border-radius: 5px 0 0 5px ;
+}
+
+.control_next {
+  /*margin-right:0px;
+  margin-left: 2px; */
+  border-radius:0 5px 5px 0;
+}
+.slider-images{
+    margin: 3px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
