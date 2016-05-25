@@ -580,8 +580,8 @@ a:active {
 .progress-bar-container{
     
     width:60%;
-    height: 5px;
-    margin-bottom: 5px;
+    height: 3px;
+    margin-bottom: 2px;
 
 
 }
@@ -591,3 +591,46 @@ a:active {
     width: 100%;
    
 }    
+
+
+.control_prev, .control_next {
+  z-index: 1000000;
+  width: 1em;
+  height: 2em;
+  background: #2a2a2a;
+  color: #fff;
+  vertical-align: middle;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.control_prev span, .control_next span{
+    margin-top: -0.2em;
+}
+
+.control_prev:hover, .control_next:hover {
+  opacity: 1;
+  -webkit-transition: all 0.2s ease;
+}
+
+.control_prev {
+    /*margin-left:0px;
+    margin-right:2px;*/ 
+    border-radius: 5px 0 0 5px ;
+}
+
+.control_next {
+  /*margin-right:0px;
+  margin-left: 2px; */
+  border-radius:0 5px 5px 0;
+}
+.slider-images{
+    margin: 3px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}

@@ -113,7 +113,7 @@
             };
 
              $scope.sliderNext= function(){            
-                if($scope.start<$scope.allImages.length-4){
+                if($scope.start<$scope.allImages.length-6){
                 $scope.start+=1;
                 changeDisplayImage($scope.start);        
                 }            
