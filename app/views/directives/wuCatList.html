@@ -1,8 +1,0 @@
-<md-sidenav md-component-id="left" layout="column" flex="20" id="categories-list-container" md-whiteframe="4">
-        <span>Categories</span>
-        <md-list>
-            <md-list-item flex data-ng-repeat="c in categories">
-                <md-button class="menu" flex data-ng-href="{{c.url}}" data-ng-click="goTo($event, $index)" ng-click="close()">{{c.display_name}}</md-button>
-            </md-list-item>
-        </md-list>
-    </md-sidenav>
