@@ -1,8 +1,7 @@
 <div class="filler-toolbar" layout="row" layout-align="center start">
     <span><i>&ldquo;</i> wholesale distribution with us<i>&rdquo;</i></span>
 </div>
-
-<div layout="row" layout-wrap class="homepage-top-container">
+<div layout="row" layout-wrap class="homepage-top-container" layout-align="center start">
     <div layout="column" flex="20" id="categories-list-container" md-whiteframe="4dp" hide-xs hide-sm ng-cloak>
         <span>Categories</span>
         <md-list>
@@ -39,7 +38,7 @@
             <div layout="row" wu-product product="p" style="width: 100%;max-width: 620px;"></div>
         </div>
     </div>
-    <div layout="row" layout-align="center center" class="view-more-btn">
+    <div layout="row" layout-align="center center" class="view-more-btn"  data-ng-if="c.products.length>5">
         <a href="{{c.category.url}}">
             <md-button class="md-raised md-warn">
                 <span>view more</span>

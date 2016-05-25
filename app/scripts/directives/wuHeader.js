@@ -11,6 +11,10 @@
                 '$log',
                 function($scope, $rootScope, $log) {
                     $log.log("wuheader directive loaded");
+
+                    $scope.catSidenav = function() {
+                        $rootScope.$broadcast('catSidenav');
+                    };
                 }
             ]
         };

@@ -1,10 +1,10 @@
 <div layout="column" flex>
     <div layout="column" layout-align="start center" flex>
        <div layout="row" layout-align="start center">
-            <a href="/"><span class="breadcrumb" >Home </span></a>
-            <span>&nbsp;&gt;&nbsp;</span>
-            <span>{{category.display_name}}</span>
-            <span data-ng-if="settings.noProduct">{{settings.displayName}}</span>
+            <a href="/"><span class="breadcrumb-active" >Home </span></a>
+            <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
+            <span class="breadcrumb-inactive">{{category.display_name}}</span>
+            <span class="breadcrumb-inactive" data-ng-if="settings.noProduct">{{settings.displayName}}</span>
         </div>
         <h1 id="category-title">{{category.display_name}}</h1>
     </div>
