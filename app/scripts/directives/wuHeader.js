@@ -3,14 +3,15 @@
         return {
             restrict: 'AE',
             templateUrl: 'views/directives/wuHeader.html',
-            scope: {},
-            link: function(scope, element, attributes) {},
             controller: [
                 '$scope',
                 '$rootScope',
-                '$log',
-                function($scope, $rootScope, $log) {
-                    $log.log("wuheader directive loaded");
+                function($scope, $rootScope) {
+
+                    $scope.toggleSidenav = function() {
+                        $rootScope.$broadcast('toggleSidenav');
+                    };
+
                 }
             ]
         };

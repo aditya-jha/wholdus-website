@@ -1,10 +1,10 @@
 <div layout="column" layout-align="start center">
-    <div layout="row" layout-align="start center">
-        <a href="/"><span class="breadcrumb">Home</span></a>
-        <span>&nbsp;&gt;&nbsp;</span>
-        <a data-ng-href="{{product.category.url}}"><span class="breadcrumb">{{product.category.display_name}}</span></a>
-        <span>&nbsp;&gt;&nbsp;</span>
-        <span></span>{{ product.display_name }}</span>
+    <div layout="row" layout-align="center center" layout-wrap>
+        <a href="/"><span class="breadcrumb-active">Home</span></a>
+        <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
+        <a data-ng-href="{{product.category.url}}"><span class="breadcrumb-active">{{product.category.display_name}}</span></a>
+        <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
+        <span class="breadcrumb-inactive">{{ product.display_name }}</span>
     </div>
     <h1 id="category-title"> {{ product.display_name }}</h1>
 </div>
@@ -16,28 +16,35 @@
         <div layout="row" layout-align="center center" class="image-block">
             <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image" image-on-load="imageLoaded()" ng-style="displayImageStyle"/>
         </div>
-        
+
         <div layout-align="center center"  class="progress-bar-container">
             <md-progress-linear md-mode="indeterminate"  ng-show="displayImageLoading" class="progress-bar md-primary"></md-progress-linear>
         </div>
         <div layout="row" layout-align="center center" data-ng-if="allImages.length>1" class="multiple-images-container">
+
          
          <div layout="row" layout-align="center center"  ng-click="sliderPrevious()" class="control_prev" ng-if="allImages.length>6">     
+         <div layout="row" layout-align="center center"  ng-click="sliderPrevious()" class="control_prev">
+
             <span>&#10092;</span>
-          </div>      
+          </div>
             <div layout="row" data-ng-repeat="i in allImages.slice(start, start+6)">
-                
+
                 <div layout="column" class="multiple-images slider-images" data-ng-click="changeDisplayImage($index+start)">
                     <img src="{{i}}" />
                     <span data-ng-class="{'active-image': $index+start==image.index}"></span>
-                    
+
                 </div>
             </div>
+
              <div layout="row" layout-align="center center"  ng-click="sliderNext()" class="control_next" ng-if="allImages.length>6">     
+
+             <div layout="row" layout-align="center center"  ng-click="sliderNext()" class="control_next">
+
                 <span>&#10093;</span>
-            </div>  
-            
-              
+            </div>
+
+
         </div>
     </div>
     <div layout="column" flex-xs="100" flex-sm="60" flex-gt-sm="55" flex class="product-page-card-content-container">

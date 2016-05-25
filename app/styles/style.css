@@ -43,10 +43,15 @@ a:active {
 .cursor-pointer{
     cursor: pointer;
 }
-.breadcrumb{
-    color: #525050;
+.breadcrumb-inactive{
+    font-size: 80%;
+    padding-top: .2em;
 }
-.breadcrumb:hover{
+.breadcrumb-active{
+    color: #525050;
+    font-size: 0.8em;
+}
+.breadcrumb-active:hover{
     text-decoration: underline;
     cursor: pointer;
 }
@@ -203,6 +208,7 @@ a:active {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     background-color: #fff;
+    min-width: 180px;
 }
 
 #categories-list-container > span {
@@ -574,11 +580,11 @@ a:active {
     padding: 0.5em 0.5em;
 }
 .image-display div{
-    padding: 0.5em 0.5em;   
+    padding: 0.5em 0.5em;
 }
 /** end ngProgress loader css*/
 .progress-bar-container{
-    
+
     width:60%;
     height: 3px;
     margin-bottom: 2px;
@@ -589,8 +595,8 @@ a:active {
 .progress-bar{
     margin: 0px;
     width: 100%;
-   
-}    
+
+}
 
 
 .control_prev, .control_next {
@@ -616,6 +622,7 @@ a:active {
 }
 
 .control_prev {
+
     border-radius: 5px 0 0 5px ;
 }
 

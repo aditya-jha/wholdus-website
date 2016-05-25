@@ -32,6 +32,8 @@ var jsCustom = [
     'app/scripts/directives/wuHeader.js',
     'app/scripts/directives/wuProduct.js',
     'app/scripts/directives/wuPagination.js',
+    'app/scripts/directives/wuSidenav.js',
+    'app/scripts/directives/imageOnLoad.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
