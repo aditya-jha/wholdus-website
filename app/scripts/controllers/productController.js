@@ -8,10 +8,10 @@
         'UtilService',
         'ngProgressBarService',
         '$rootScope',
-        '$mdMedia',
-        '$mdDialog',
-        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
+        'DialogService',
+        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, DialogService) {
             $scope.displayImageLoading=true;
+            $scope.start=0;
             $scope.displayImageStyle={'opacity':'1.0'};
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
@@ -82,18 +82,7 @@
             getProducts();
 
             $scope.buyNow = function(event) {
-                var useFullScreen = $mdMedia('xs');
-                $mdDialog.show({
-                    controller: 'buyNowController',
-                    templateUrl: 'views/partials/buyNow.html',
-                    parent: angular.element(document.body),
-                    targetEvent: event,
-                    clickOutsideToClose:true,
-                    fullscreen: useFullScreen,
-                    locals: {
-                        productID: $scope.product.productID
-                    }
-                });
+                 DialogService.viewDialog(event);
             };
 
             $scope.changeDisplayImage = function(index) {
@@ -111,6 +100,27 @@
             $scope.imageLoaded= function(){            
                     $scope.displayImageLoading=false;
                     $scope.displayImageStyle={'opacity':'1.0'};
+            };
+
+            $scope.sliderPrevious= function(){
+                if($scope.start>0){
+                $scope.start-=1;
+                changeDisplayImage($scope.start);        
+                }            
+                else { 
+                $scope.start=0;
+                }
+            };
+
+             $scope.sliderNext= function(){            
+                if($scope.start<$scope.allImages.length-4){
+                $scope.start+=1;
+                changeDisplayImage($scope.start);        
+                }            
+                else { 
+                // $scope.start= $scope.allImages.length;
+                }
+                    
             };
 
             
