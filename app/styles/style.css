@@ -43,10 +43,15 @@ a:active {
 .cursor-pointer{
     cursor: pointer;
 }
-.breadcrumb{
-    color: #525050;
+.breadcrumb-inactive{
+    font-size: 80%;
+    padding-top: .2em;
 }
-.breadcrumb:hover{
+.breadcrumb-active{
+    color: #525050;
+    font-size: 80%;
+}
+.breadcrumb-active:hover{
     text-decoration: underline;
     cursor: pointer;
 }
@@ -203,6 +208,8 @@ a:active {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     background-color: #fff;
+    min-width: 180px;
+
 }
 
 #categories-list-container > span {

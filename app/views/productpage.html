@@ -1,10 +1,10 @@
 <div layout="column" layout-align="start center">
     <div layout="row" layout-align="start center">
-        <a href="/"><span class="breadcrumb">Home</span></a>
-        <span>&nbsp;&gt;&nbsp;</span>
-        <a data-ng-href="{{product.category.url}}"><span class="breadcrumb">{{product.category.display_name}}</span></a>
-        <span>&nbsp;&gt;&nbsp;</span>
-        <span></span>{{ product.display_name }}</span>
+        <a href="/"><span class="breadcrumb-active">Home</span></a>
+        <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
+        <a data-ng-href="{{product.category.url}}"><span class="breadcrumb-active">{{product.category.display_name}}</span></a>
+        <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
+        <span class="breadcrumb-inactive">{{ product.display_name }}</span>
     </div>
     <h1 id="category-title"> {{ product.display_name }}</h1>
 </div>
