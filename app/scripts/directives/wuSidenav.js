@@ -34,7 +34,7 @@
                         $location.url(url);
                         $timeout(function() {
                             closeSidenav();
-                        }, 300);
+                        }, 500);
                     };
 
                     function toggleSidenav() {
