@@ -10,7 +10,7 @@
                     scope.$apply(attrs.imageOnLoad);
                 });
                 element.bind('error', function(){
-                  // scope.$apply(attrs.imageOnLoad)(false);
+                    
                 });
             }
         };

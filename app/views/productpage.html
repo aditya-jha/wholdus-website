@@ -16,12 +16,9 @@
             <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image" image-on-load="imageLoaded()" ng-style="displayImageStyle"/>
 
         </div>
-       
-
-             
+        
         <div layout-align="center center"  class="progress-bar-container">
-
-             <md-progress-linear md-mode="indeterminate"  ng-show="displayImageLoading" class="progress-bar md-primary"></md-progress-linear>
+            <md-progress-linear md-mode="indeterminate"  ng-show="displayImageLoading" class="progress-bar md-primary"></md-progress-linear>
         </div>
        
         <div layout="row" layout-align="center center" data-ng-if="allImages.length>1" class="multiple-images-container">

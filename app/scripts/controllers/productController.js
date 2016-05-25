@@ -109,8 +109,8 @@
                 }
             };
             $scope.imageLoaded= function(){            
-                $scope.displayImageLoading=false;
-                $scope.displayImageStyle={'opacity':'1.0'};
+                    $scope.displayImageLoading=false;
+                    $scope.displayImageStyle={'opacity':'1.0'};
             };
 
             
