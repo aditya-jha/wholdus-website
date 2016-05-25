@@ -7,6 +7,11 @@
                 '$scope',
                 '$rootScope',
                 function($scope, $rootScope) {
+
+                    $scope.toggleSidenav = function() {
+                        $rootScope.$broadcast('toggleSidenav');
+                    };
+
                 }
             ]
         };

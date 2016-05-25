@@ -13,6 +13,8 @@
                 '$location',
                 function($scope, $rootScope, $log, APIService, $mdSidenav, $timeout, $location) {
 
+                    var listeners = [];
+
                     function getCategory(params) {
                         APIService.apiCall("GET", APIService.getAPIUrl("category"))
                             .then(function(response) {
@@ -35,10 +37,21 @@
                         }, 300);
                     };
 
-                    $scope.toggleSidenav = function() {
+                    function toggleSidenav() {
                         closeSidenav();
                         $mdSidenav('left').toggle();
-                    };
+                    }
+
+                    var toggleSidenavListener = $rootScope.$on('toggleSidenav', function(event, data) {
+                        toggleSidenav();
+                    });
+                    listeners.push(toggleSidenavListener);
+
+                    $scope.$on("$destroy", function() {
+                        angular.forEach(listeners, function(value, key) {
+                            if(value) value();
+                        });
+                    });
                 }
             ]
         };
