@@ -2,7 +2,7 @@
         <span>Categories</span>
         <md-list>
             <md-list-item flex data-ng-repeat="c in categories">
-                <md-button class="menu" flex data-ng-href="{{c.url}}" data-ng-click="(goTo($event, $index)">{{c.display_name}}</md-button>
+                <md-button class="menu" flex data-ng-href="{{c.url}}" data-ng-click="(goTo($event, $index)" ng-click="close()">{{c.display_name}}</md-button>
             </md-list-item>
         </md-list>
     </md-sidenav>

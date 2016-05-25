@@ -24,7 +24,9 @@
             }
             getCategory();
 
-      
+            $scope.close = function () {
+                $mdSidenav('left').close()
+                };
 
              $rootScope.$on('catSidenav', function() {
 
