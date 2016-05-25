@@ -10,7 +10,9 @@
         '$rootScope',
         'DialogService',
         function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, DialogService) {
-
+            $scope.displayImageLoading=true;
+            $scope.start=0;
+            $scope.displayImageStyle={'opacity':'1.0'};
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
                 if(p.images.length) {
@@ -79,19 +81,49 @@
             }
             getProducts();
 
-            $scope.buyNow = function(event){
-                DialogService.viewDialog(event);
-            }
+            $scope.buyNow = function(event) {
+                 DialogService.viewDialog(event);
+            };
 
             $scope.changeDisplayImage = function(index) {
                 if($scope.image.index != index) {
                     $scope.image.showImage = false;
                     $scope.image.index = index;
+                    $scope.displayImageStyle={'opacity':'0.5'};
                     $scope.image.url = UtilService.getImageUrl($scope.product.images[index], '400x400');
-
+                    $scope.displayImage=new Image();
+                    $scope.displayImage.src=$scope.image.url;
                     $scope.image.showImage = true;
+                     $scope.displayImageLoading=true;
                 }
             };
+            $scope.imageLoaded= function(){            
+                    $scope.displayImageLoading=false;
+                    $scope.displayImageStyle={'opacity':'1.0'};
+            };
+
+            $scope.sliderPrevious= function(){
+                if($scope.start>0){
+                $scope.start-=1;
+                changeDisplayImage($scope.start);        
+                }            
+                else { 
+                $scope.start=0;
+                }
+            };
+
+             $scope.sliderNext= function(){            
+                if($scope.start<$scope.allImages.length-6){
+                $scope.start+=1;
+                changeDisplayImage($scope.start);        
+                }            
+                else { 
+                // $scope.start= $scope.allImages.length;
+                }
+                    
+            };
+
+            
         }
     ]);
 })();
