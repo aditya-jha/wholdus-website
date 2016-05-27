@@ -163,10 +163,10 @@
 
 <div data-ng-include="'views/footer.html'" flex></div>
  <div data-ng-if="largeImageDisplay" class="large-image-display-panel">
-        <div class="backround-shadow">
+        <div class="background-shadow">
         </div>
           <div layout-align="center center"  class="loading-progress-container" ng-if="largeImageLoading">
-            <md-progress-linear md-mode="indeterminate"  class="progress-bar md-warn md-hue-5"></md-progress-linear>  
+            <md-progress-linear md-mode="indeterminate"  class="loading-progress-bar md-warn md-hue-5" md-whiteframe="24"></md-progress-linear>  
         </div>
         <div layout="row" layout-align="center" class="large-display-image-container" ng-show="!largeImageLoading">
         <img data-ng-if="image.showImage" data-ng-src="{{image.urlLarge}}" class="md-card-image large-display-image md-whiteframe-24dp" image-on-load="largeImageLoaded()" ng-style="displayImageStyle" aria-lebel="close"/>
