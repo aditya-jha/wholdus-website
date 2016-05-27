@@ -14,9 +14,9 @@
 
     <div layout="column" flex-xs="100" flex-sm="40" flex-gt-sm="45" class="image-wrap" layout-padding layout-align="center center" flex>
         <div layout="row" layout-align="center center" class="image-block">
-            <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image" image-on-load="imageLoaded()" ng-style="displayImageStyle"/>
+            <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image display-image" image-on-load="imageLoaded()" ng-style="displayImageStyle" ng-click="displayLargeImage()"  />
         </div>
-
+       
         <div layout-align="center center"  class="progress-bar-container">
             <md-progress-linear md-mode="indeterminate"  ng-show="displayImageLoading" class="progress-bar md-primary"></md-progress-linear>
         </div>
@@ -162,3 +162,20 @@
 </div>
 
 <div data-ng-include="'views/footer.html'" flex></div>
+ <div data-ng-if="largeImageDisplay" class="large-image-display-panel">
+        <div class="backround-shadow">
+        </div>
+          <div layout-align="center center"  class="loading-progress-container" ng-if="largeImageLoading">
+            <md-progress-linear md-mode="indeterminate"  class="progress-bar md-warn md-hue-5"></md-progress-linear>  
+        </div>
+        <div layout="row" layout-align="center" class="large-display-image-container" ng-show="!largeImageLoading">
+        <img data-ng-if="image.showImage" data-ng-src="{{image.urlLarge}}" class="md-card-image large-display-image md-whiteframe-24dp" image-on-load="largeImageLoaded()" ng-style="displayImageStyle" aria-lebel="close"/>
+        <md-button ng-click="displayLargeImage()" class="md-fab md-mini  md-warn  close-button">
+            <svg fill="#fff" height="36" viewBox="0 0 24 24" width="30" >
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                <path d="M0 0h24v24H0z" fill="none"/>
+            </svg> 
+        </md-button> 
+        </div>
+
+</div>
