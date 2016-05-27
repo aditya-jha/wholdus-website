@@ -590,7 +590,7 @@ a:active {
 }
 .image-display{
     padding: 0.5em 0.5em;
-}
+}00
 .image-display div{
     padding: 0.5em 0.5em;
 }
@@ -647,6 +647,13 @@ a:active {
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
+.zoom-btn{
+    position: relative;
+    padding: 5px;
+    margin-top:0px; 
+    margin-left:10px;
+    margin-right:5px; 
+}
 .display-image{
     cursor: pointer;
 }
@@ -685,8 +692,8 @@ a:active {
 
 .close-button{
     position: relative;
-    margin-left:10px;
-    margin-top:20px; 
+    margin-left:5px;
+    margin-top:25px; 
     z-index:10000;
     padding:2px; 
     display: block; 

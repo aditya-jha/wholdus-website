@@ -18,6 +18,11 @@
             $scope.displayImageStyle={'opacity':'1.0'};
             $scope.largeImageDisplay=false;
             $scope.largeImageLoading=false;
+            $scope.mobileDisplay=false;
+            if($window.innerWidth<=760)
+            {
+                 $scope.mobileDisplay=true;
+            }
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
                 if(p.images.length) {
@@ -142,15 +147,8 @@
             };
             
             $scope.closeLargeImage=function(){
-                if($window.innerWidth>760){
-                    $scope.largeImageDisplay=false;
-                    }
-                else{
-                    $window.location.href=$scope.image.urlLarge;
-                }      
+                  $scope.largeImageDisplay=false;
             };
-
-            
-        }
+         }
     ]);
 })();
