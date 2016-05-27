@@ -1,0 +1,193 @@
+<a href="https://angel.co/wholdus-com?follow=1&type=Startup&id=1139138"></a>
+<script type="text/javascript-lazy" wu-script>
+    (function(doc, win, defaults) {
+    var addButton = function(anchor, mode) {
+        var url = defaults.https,
+            separator = "?",
+            b, a = 0, i;
+
+        var query_vars = {},
+            iframe = doc.createElement("IFRAME"),
+            show_count = anchor.getAttribute(defaults.att.count) || true,
+            layout = anchor.getAttribute(defaults.att.layout) || "horizontal",
+            preview = anchor.getAttribute(defaults.att.preview) || false;
+
+        if (mode == "syndicate_lead") {
+            url = defaults.syndicate
+            layout = 'syndicate'
+        }
+
+
+        var query = anchor.href.split("?")[1].split("#")[0].split("&");
+
+        for(i = query.length; a < i; a += 1) {
+            b = query[a].split("=");
+            query_vars[b[0]] = b[1];
+        }
+
+        a = 0;
+
+        for(i = defaults.vars.req.length; a < i; a += 1) {
+            b = defaults.vars.req[a];
+            if(query_vars[b]) {
+                url = url + separator + b + "=" + query_vars[b];
+                separator = "&";
+            } else {
+                anchor.parentNode.removeChild(anchor);
+                return;
+            }
+        }
+
+        if (mode == "syndicate_lead")
+            url = url + "&slug=" + anchor.getAttribute('data-slug')
+
+        url = url + "&layout=" + layout;
+        url = url + "&ref=" + encodeURIComponent(doc.URL);
+        if(mode)
+            url = url + "&mode=" + mode;
+        if(preview)
+            url = url + "&preview=1";
+
+        if(show_count !== false)
+            url += "&count=1";
+
+        iframe.setAttribute("src", url);
+        iframe.setAttribute("scrolling", "no");
+        iframe.allowTransparency = true;
+        iframe.frameBorder = 0;
+        iframe.style.border = "none";
+        iframe.style.width = (mode ? defaults.mode_width[mode] : defaults.layout[layout].width) + "px";
+        iframe.style.height = defaults.layout[layout].height + "px";
+
+        if (mode == "syndicate_lead") {
+            iframe.style.width = "100%"
+            iframe.style.minWidth = "250px"
+            iframe.className = iframe.className + " SyndicateLeadIFrame"
+        }
+        if (mode == "apply" || mode == "apply_with_description") {
+            iframe.className = iframe.className + " ApplyButtonIFrame"
+        }
+        if (mode == "apply_card") {
+            iframe.style.display = "none";
+            iframe.style.width = "100%"
+            iframe.style.height = "100%"
+            iframe.style.position = "fixed"
+            iframe.width = "100%"
+            iframe.height = "100%"
+            iframe.style.left = 0
+            iframe.style.top = 0
+            iframe.style.zIndex = 10000;
+            iframe.className = iframe.className + " ModalCardIFrame"
+            if (doc.getElementsByClassName("ModalCardIFrame").length == 0)
+                doc.getElementsByTagName("html")[0].appendChild(iframe);
+        }
+        else
+            anchor.parentNode.replaceChild(iframe, anchor);
+    }, links = doc.getElementsByTagName("A"), e = 0, l, to_add = [];
+
+    for(l = links.length; e < l; e += 1) {
+        if(links[e].href && (!!links[e].href.match(defaults.button) || links[e].getAttribute('data-mode') == 'syndicate_lead')) {
+            to_add.push(links[e])
+        }
+    }
+
+    e = 0;
+    for(l = to_add.length; e < l; e+= 1) {
+        mode = to_add[e].getAttribute(defaults.att.mode) || false;
+        addButton(to_add[e], mode)
+
+        if (mode == "apply" || "apply_with_description")
+            addButton(to_add[e], 'apply_card')
+    }
+
+})(document, window, {
+    att: {
+        layout: "data-layout",
+        count: "data-show-count",
+        mode: "data-mode",
+        preview: "data-preview"
+    },
+    https: "https://angel.co/embed/button.html",
+    button: /angel.co\/.*\?follow=1/,
+    syndicate: "https://angel.co/embed/syndicate.html",
+    vars: {
+        req: ["type", "id"]
+    },
+    layout: {
+        horizontal: {
+            width: 110,
+            height: 40
+        },
+        vertical: {
+            width: 250,
+            height: 400
+        },
+        syndicate: {
+            width: '100%',
+            height: 344
+        }
+    },
+    mode_width: {
+        follow: 110,
+        invest: 115,
+        view: 170,
+        no_text: 40,
+        apply: 150,
+        apply_with_description: 250,
+        syndicate_lead: '100%'
+    }
+});
+
+function resizeIframe(height, iframeClass) {
+    if (height != 0) {
+        document.getElementsByClassName(iframeClass)[0].height = parseInt(height) + 20
+        document.getElementsByClassName(iframeClass)[0].style.height = (parseInt(height) + 20) + "px"
+    }
+}
+
+function openIFrame() {
+    document.getElementsByClassName('ModalCardIFrame')[0].style.display = ""
+
+    var iframe = document.getElementsByClassName('ModalCardIFrame')[0]
+    iframe.contentWindow.postMessage('openDialog', '*');
+    document.getElementsByTagName("html")[0].style.overflow = "hidden"
+}
+
+function acceptApply() {
+    var iframe = document.getElementsByClassName('ApplyButtonIFrame')[0]
+    iframe.contentWindow.postMessage('apply_accepted', '*');
+}
+
+function cancelApply() {
+    var iframe = document.getElementsByClassName('ApplyButtonIFrame')[0]
+    iframe.contentWindow.postMessage('apply_canceled', '*');
+}
+
+function closeIFrame(){
+    document.getElementsByTagName("html")[0].style.overflow = ""
+    document.getElementsByClassName('ModalCardIFrame')[0].style.display = "none"
+}
+
+function handleIncomingMessage(event) {
+    if(event.data == 'apply_canceled')
+        cancelApply()
+
+    if(event.data == 'apply_accepted')
+        acceptApply()
+
+    if(event.data == 'close_iframe')
+        closeIFrame()
+
+    if(event.data == 'open_iframe')
+        openIFrame()
+
+    if(event.data.lastIndexOf('resize_iframe', 0) === 0)
+        resizeIframe(event.data.split(':')[1], 'ApplyButtonIFrame')
+
+    if(event.data.lastIndexOf('resize_syndicate_iframe', 0) === 0)
+        resizeIframe(event.data.split(':')[1], 'SyndicateLeadIFrame')
+
+}
+
+window.addEventListener('message', handleIncomingMessage, false)
+</script>

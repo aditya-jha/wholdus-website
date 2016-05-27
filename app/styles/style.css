@@ -467,6 +467,17 @@ a:active {
 
 /** end product page specific css **/
 
+.social-container {
+    font-family: 'Comfortaa', cursive;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.social-follow-buttons span{
+    max-height: 40px;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 959px) {
     .aboutus-card {
         margin: -3em 1em 8em 1em;

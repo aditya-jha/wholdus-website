@@ -32,6 +32,9 @@ webapp.config([
         }).when('/return-refund-policy', {
             templateUrl: "views/returnRefund.html",
             controller: "StaticPagesController"
+        }).when('/we-are-social', {
+            templateUrl: "views/we-are-social.html",
+            controller: "StaticPagesController",
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",
