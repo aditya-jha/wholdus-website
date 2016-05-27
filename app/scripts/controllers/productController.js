@@ -13,11 +13,14 @@
             $scope.displayImageLoading=true;
             $scope.start=0;
             $scope.displayImageStyle={'opacity':'1.0'};
+            $scope.largeImageDisplay=false;
+            $scope.largeImageLoading=false;
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
                 if(p.images.length) {
                     $scope.image = {
                         url: UtilService.getImageUrl(p.images[0], '400x400'),
+                        urlLarge:UtilService.getImageUrl(p.images[0], '700x700'),
                         index: 0,
                         showImage: true
                     };
@@ -91,6 +94,7 @@
                     $scope.image.index = index;
                     $scope.displayImageStyle={'opacity':'0.5'};
                     $scope.image.url = UtilService.getImageUrl($scope.product.images[index], '400x400');
+                    $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[index], '700x700');
                     $scope.displayImage=new Image();
                     $scope.displayImage.src=$scope.image.url;
                     $scope.image.showImage = true;
@@ -101,7 +105,9 @@
                     $scope.displayImageLoading=false;
                     $scope.displayImageStyle={'opacity':'1.0'};
             };
-
+            $scope.largeImageLoaded= function(){            
+                   $scope.largeImageLoading=false;
+            };
             $scope.sliderPrevious= function(){
                 if($scope.start>0){
                 $scope.start-=1;
@@ -120,7 +126,11 @@
                 else { 
                 // $scope.start= $scope.allImages.length;
                 }
-                    
+            };
+
+            $scope.displayLargeImage=function(){
+            $scope.largeImageLoading=true;    
+            $scope.largeImageDisplay=!$scope.largeImageDisplay;  
             };
 
             
