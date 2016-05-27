@@ -629,8 +629,7 @@ a:active {
 .control_prev[disabled],.control_next[disabled] {
 
   cursor: default;
-/*  background-color: #BDBDBD;*/
-opacity: 0.3;
+  opacity: 0.3;
 }
 
 .control_prev {
@@ -694,15 +693,7 @@ opacity: 0.3;
     padding:2px; 
     display: block; 
 }
-/*.loading-progress-container{
-    opacity: 1.0;
-    position: fixed;
-    top:0px;
-    left:0px;
-    right: 0px;
-    height: 100%;    
-    z-index:1000;
-}*/
+
 .loading-progress-container{
     opacity: 1.0;
     position: fixed;
