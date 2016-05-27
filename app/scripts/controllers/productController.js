@@ -4,12 +4,15 @@
         '$scope',
         '$routeParams',
         '$log',
+        '$window',
+        '$location',
         'APIService',
         'UtilService',
         'ngProgressBarService',
         '$rootScope',
         'DialogService',
-        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, DialogService) {
+        function($scope, $routeParams, $log, $window,$location,APIService, 
+            UtilService, ngProgressBarService, $rootScope, DialogService) {
             $scope.displayImageLoading=true;
             $scope.start=0;
             $scope.displayImageStyle={'opacity':'1.0'};
@@ -129,8 +132,22 @@
             };
 
             $scope.displayLargeImage=function(){
-            $scope.largeImageLoading=true;    
-            $scope.largeImageDisplay=!$scope.largeImageDisplay;  
+                if($window.innerWidth>760){
+                    $scope.largeImageLoading=true;    
+                    $scope.largeImageDisplay=true;
+                    }
+                else{
+                    $window.location.href=$scope.image.urlLarge;
+                }      
+            };
+            
+            $scope.closeLargeImage=function(){
+                if($window.innerWidth>760){
+                    $scope.largeImageDisplay=false;
+                    }
+                else{
+                    $window.location.href=$scope.image.urlLarge;
+                }      
             };
 
             
