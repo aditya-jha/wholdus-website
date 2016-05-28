@@ -13,13 +13,13 @@
 <div layout="row" layout-wrap ng-cloak class="product-page-card">
 
     <div layout="column" flex-xs="100" flex-sm="40" flex-gt-sm="45" class="image-wrap" layout-padding layout-align="center center" flex>
-    <div layout="row" layout-align="center centre">
+    <div layout-gt-xs="row" layout="column" layout-align="center centre">
         <div layout="row" layout-align="center center" class="image-block">
                 
-            <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image display-image" image-on-load="imageLoaded()" ng-style="displayImageStyle" ng-click="displayLargeImage()"  />
+            <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image display-image" image-on-load="imageLoaded()" ng-style="displayImageStyle" />
                 
         </div>
-             <div layout-align="center">
+             <div layout-align="center" data-ng-if="image.showImage">
              <md-button  class="md-fab md-mini md-warn zoom-btn" ng-click="displayLargeImage()">
                 <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
@@ -29,7 +29,7 @@
             </md-button>
             </div>
     </div>
-        <div layout-align="center center"  class="progress-bar-container">
+        <div layout-align="center centre" layout="row" class="progress-bar-container">
             <md-progress-linear md-mode="indeterminate"  ng-show="displayImageLoading" class="progress-bar md-warn md-hue-5"></md-progress-linear>
         </div>
         <div layout="row" layout-align="center center" data-ng-if="allImages.length>1" class="multiple-images-container">
@@ -63,7 +63,7 @@
     </div>
     <div layout="column" flex-xs="100" flex-sm="60" flex-gt-sm="55" flex class="product-page-card-content-container">
         <div layout="column" class="product-page-card-content">
-            <div class="product-price" style="margin-top:2.5em;">
+            <div class="product-price" style="margin-top:2.5vw;">
                 <span class="feature-title">Minimum Price:</span> <span>Rs. {{product.min_price_per_unit}}</span>
             </div>
             <md-divider></md-divider>

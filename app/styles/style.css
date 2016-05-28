@@ -596,9 +596,10 @@ a:active {
 }
 /** end ngProgress loader css*/
 .progress-bar-container{
-
+    padding: 0px auto;
     width:60%;
-    height: 3px;
+    height: 2px;
+    margin:2px auto; 
     margin-bottom: 2px;
 
 
@@ -650,12 +651,13 @@ a:active {
 .zoom-btn{
     position: relative;
     padding: 5px;
-    margin-top:0px; 
+    margin-top:5px; 
+    margin-bottom: 0px;
     margin-left:10px;
     margin-right:5px; 
 }
 .display-image{
-    cursor: pointer;
+
 }
 @media screen and (max-width:760px){
     .large-image-display-panel{
