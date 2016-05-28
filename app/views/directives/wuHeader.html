@@ -1,28 +1,26 @@
 <md-toolbar class="md-medium md-hue-2" id="header-toolbar">
-    <div layout="row" layout-fill>
-          <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" aria-label="Menu" layout-align="center center">
-              <svg style="width:30px;outline:none;height:20px" class="cursor-pointer" viewBox="0 0 20 20" data-ng-click="toggleSidenav()">
-                  <path fill="#fff" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
-              </svg>
-          </md-button>
-          <div data-ng-href="/"  aria-label="Settings" class="logo-container" layout-align="center center" flex-xs="20" flex-gt-xs="5" flex-md="5" flex-gt-md="5" flex-sm="10">
-            <a data-ng-href="/">
+    <div layout="row" class="md-toolbar-tools" layout-fill>
+        <md-button class="md-icon-button" aria-label="Menu" layout-align="center center" data-ng-click="toggleSidenav()">
+            <svg style="width:30px;outline:none;height:20px" class="cursor-pointer" viewBox="0 0 20 20">
+                <path fill="#fff" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+            </svg>
+        </md-button>
+        <div aria-label="Settings" class="logo-container" layout-align="center center" flex-xs="20" flex-gt-xs="5" flex-md="5" flex-gt-md="5" flex-sm="10">
+          <a data-ng-href="/">
               <md-icon md-svg-icon="images/wholdus-logo.svg" class="logo"></md-icon>
-            </a>  
-          </div>
-          <h1 hide-xs show-gt-xs style="margin-left:5px;">
-              <a href="/">Wholdus</a>
-          </h1>
-          </div>
-         <!--  <span flex></span> -->
-          <div layout="row" layout-align="center center" style="max-height=50px">
-              <md-button class="md-raised md-warn" data-ng-href="http://seller.wholdus.com/distribute-on-wholdus" target="_blank" aria-label="distribute-on-wholdus">
-                  <span>Distribute</span>
-              </md-button>
-              <md-button hide-xs show-gt-xs aria-label="customer_support">
-                  <span>+91-7895161705</span>
-              </md-button>
-          </div>
+          </a>
+        </div>
+        <h1 hide-xs show-gt-xs style="margin-left:5px;">
+            <a href="/">Wholdus</a>
+        </h1>
+        <span flex></span>
+        <div layout="row" layout-align="center center" style="max-height=50px">
+            <md-button class="md-raised md-warn" data-ng-href="http://seller.wholdus.com/distribute-on-wholdus" target="_blank" aria-label="distribute-on-wholdus">
+                <span>Distribute</span>
+            </md-button>
+            <md-button hide-xs show-gt-xs aria-label="customer_support">
+                <span>+91-7895161705</span>
+            </md-button>
+        </div>
     </div>
 </md-toolbar>
