@@ -156,6 +156,7 @@ a:active {
 }
 
 #header-toolbar h1 {
+    font-size:1.5em;
     line-height: 1em;
 }
 
@@ -713,5 +714,4 @@ a:active {
     margin:0 auto;
     width: 50%;
 }
-
 
