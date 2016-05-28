@@ -59,7 +59,7 @@ a:active {
     font-size: 80%;
     padding-top: .2em;
     white-space: nowrap; 
-    max-width: 60vw; 
+    max-width: 45vw; 
     overflow: hidden;
     text-overflow: ellipsis;
 }
