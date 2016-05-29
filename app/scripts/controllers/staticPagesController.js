@@ -27,7 +27,7 @@
 
             $scope.buyNow = function(event){
                 DialogService.viewDialog(event);
-            }
+            };
 
             $scope.contactUs = function() {
                 if($scope.contactus.apiCall) {

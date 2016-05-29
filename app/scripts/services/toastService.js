@@ -15,14 +15,17 @@
                 );
             };
 
-            factory.showActionToast = function(content, delay) {
-               var toast = $mdToast.simple()
+            factory.showActionToast = function(content, delay, action) {
+                if(!action) {
+                    action = "ok";
+                }
+                var toast = $mdToast.simple()
                                     .textContent(content)
-                                    .action('OK')
+                                    .action(action)
                                     .hideDelay(delay)
                                     .highlightAction(true)
                                     .position('bottom left');
-               $mdToast.show(toast);
+                return $mdToast.show(toast);
             };
 
             return factory;
