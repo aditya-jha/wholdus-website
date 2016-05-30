@@ -70,6 +70,12 @@
                 }, {
                     label: 'Features',
                     value: p.details.special_feature
+                },{
+                    label: 'Colours',
+                    value: p.details.colours
+                },{
+                    label: 'Lot Description',
+                    value: p.details.lot_description.length>0?p.details.lot_description:'None'
                 }];
             }
 

@@ -610,6 +610,11 @@ a:active {
     right: 0;
     z-index: 99999;
 }
+.logo-container{
+    height: 50px;
+    width:50px;
+}
+
 .image-display{
     padding: 0.5em 0.5em;
 }
@@ -709,7 +714,7 @@ a:active {
    
 }
 .large-display-image{
-    
+    border:10px solid white;
     margin-top:4em; 
     z-index:1000;
 }
