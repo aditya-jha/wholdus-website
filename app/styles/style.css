@@ -703,7 +703,7 @@ a:active {
    
 }
 .large-display-image{
-    
+    border:10px solid white;
     margin-top:4em; 
     z-index:1000;
 }
