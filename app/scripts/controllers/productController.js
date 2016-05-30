@@ -75,7 +75,7 @@
                     value: p.details.colours
                 },{
                     label: 'Lot Description',
-                    value: p.details.lot_description.lenght>0?p.details.lot_description:'None'
+                    value: p.details.lot_description.length>0?p.details.lot_description:'None'
                 }];
             }
 
