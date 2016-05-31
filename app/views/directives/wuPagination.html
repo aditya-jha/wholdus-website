@@ -1,10 +1,30 @@
 <div layout="row" flex class="pagination-directive">
-    <div layout="row" flex="50" layout-align="center center">
+    <div layout="row" flex="33" layout-align="center center">
         <a data-ng-href="" data-ng-click="btnClicked($event, -1)">
             <md-button data-ng-disabled="page.current <= 1" data-ng-disabled="$scope.page.current<=0" class="md-raised md-warn">back</md-button>
         </a>
     </div>
-    <div layout="row" flex="50" layout-align="center center">
+
+    <div layout-align="start center" layout="column" flex="33" class="page-nav">
+        <span>Pages</span>
+        <div layout="row">
+            <md-button class="md-fab md-tiny " ng-disabled="page.previous <= 1" data-ng-click="pagePrevious()">&lt;</md-button>
+
+            <md-button hide-xs class="md-fab md-tiny" ng-disabled="page.previous <= 1" data-ng-click="btnClicked($event, page.previous-page.current-1)">{{page.previous-1}}</md-button>
+
+            <md-button class="md-fab md-tiny" ng-disabled="page.previous <= 0" data-ng-click="btnClicked($event, page.previous-page.current)">{{page.previous}}</md-button>
+
+            <md-button class="md-fab md-small md-warn">{{page.current}}</md-button>
+
+            <md-button class="md-fab md-tiny" ng-disabled="page.next >= page.total+1" data-ng-click="btnClicked($event, page.next-page.current)">{{page.next}}</md-button>
+
+            <md-button hide-xs class="md-fab md-tiny " ng-disabled="page.next >= page.total" data-ng-click="btnClicked($event, page.next-page.current+1)">{{page.next+1}}</md-button>
+
+            <md-button class="md-fab md-tiny " ng-disabled="page.next >= page.total" data-ng-click="pageNext()">&gt;</md-button>
+        </div>
+    </div>
+
+    <div layout="row" flex="33" layout-align="center center">
         <a data-ng-href="" data-ng-click="btnClicked($event, 1)">
             <md-button data-ng-disabled="page.current >= page.total" class="md-raised md-warn">next</md-button>
         </a>
