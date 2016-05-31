@@ -11,12 +11,16 @@
                 function($scope, $location, $rootScope) {
                     var listeners = [];
                     $scope.page = {
+                        next:0,
+                        previous:0,
                         current: 0,
                         total: 0
                     };
 
                     var setPage = $rootScope.$on('setPage', function(event, data) {
                         $scope.page.current = parseInt(data.page);
+                        $scope.page.next = $scope.page.current + 1;
+                        $scope.page.previous = $scope.page.current - 1;
                         $scope.page.total = data.totalPages;
                     });
                     listeners.push(setPage);
@@ -26,13 +30,19 @@
                         if(($scope.page.current === 1 && step == -1) || ($scope.page.current === $scope.page.total && step == 1)) {
                             return;
                         }
-                        if(step > 0) {
-                            $scope.page.current += 1;
-                        } else {
-                            $scope.page.current -= 1;
-                        }
+                        
+                            $scope.page.current += step;
+
                         $location.search('page', $scope.page.current);
                     };
+
+                    $scope.pageNext = function(){
+                        $scope.page.next +=1;
+                    }
+
+                    $scope.pagePrevious = function(){
+                        $scope.page.previous -=1;
+                    }
 
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value, key) {

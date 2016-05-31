@@ -71,6 +71,25 @@ a:active {
     text-decoration: underline;
     cursor: pointer;
 }
+.page-nav button{
+    margin-left: 0.45vw;
+    margin-right: 0.45vw;
+}
+.md-button.md-small{
+    width: 25px;
+  height: 25px;
+  padding: 1px;
+  line-height: 1em;
+  min-height: 5px;
+}
+.md-button.md-tiny{
+    width: 18px;
+  height: 18px;
+  padding: 1px;
+  line-height: 1px;
+  min-height: 5px;
+  font-size: 9px;
+}
 .social-media img{
     width: 40px;
     height: 40px;
