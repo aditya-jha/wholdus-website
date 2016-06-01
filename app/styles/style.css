@@ -89,6 +89,7 @@ a:active {
   line-height: 1px;
   min-height: 5px;
   font-size: 9px;
+  font-weight: 600;
 }
 .social-media img{
     width: 40px;
