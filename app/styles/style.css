@@ -379,7 +379,7 @@ a:active {
 
 .popup-title {
     text-align: center;
-    font-family: 'Confortaa';
+    font-family: 'Comfortaa';
 }
 
 .no-product-container {
@@ -772,4 +772,8 @@ a:active {
 }
 .large-img-prev{
     margin-right: -8px;
+}
+.formError{
+    /*padding-top: 10px;*/
+    margin-bottom: 10px;
 }
