@@ -741,10 +741,11 @@ a:active {
 .close-button{
     position: relative;
     margin-left:5px;
-    margin-top:25px;
-    z-index:10000;
-    padding:2px;
-    display: block;
+    margin-top:25px; 
+    z-index:2000;
+    padding:2px; 
+    display: block; 
+
 }
 
 .loading-progress-container{
@@ -758,4 +759,16 @@ a:active {
 .loading-progress-bar{
     margin:0 auto;
     width: 50%;
+}
+
+.large-img-next,.large-img-prev{
+    margin:auto 0px; 
+    z-index:2000;
+
+}
+.large-img-next{
+    margin-left: -8px;
+}
+.large-img-prev{
+    margin-right: -8px;
 }

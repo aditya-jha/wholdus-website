@@ -114,6 +114,7 @@
                     $scope.image.showImage = true;
                      $scope.displayImageLoading=true;
                 }
+
             };
             $scope.imageLoaded= function(){            
                     $scope.displayImageLoading=false;
@@ -141,6 +142,26 @@
                 // $scope.start= $scope.allImages.length;
                 }
             };
+                 $scope.largeSliderPrevious= function(){
+                if($scope.image.index>0){
+                $scope.image.index-=1;
+                $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');$scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700'); 
+               displayLargeImage();         
+                }            
+                else { 
+                }
+            };
+
+             $scope.largeSliderNext= function(){            
+                if($scope.image.index<$scope.allImages.length-1){
+                $scope.image.index+=1;
+               $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700'); 
+               displayLargeImage();      
+                }            
+                else { 
+                }
+            };
+
 
             $scope.displayLargeImage=function(){
                 if($window.innerWidth>760){
