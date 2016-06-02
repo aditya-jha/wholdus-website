@@ -42,12 +42,12 @@
         </a>
     </div>
     <div layout = "row">
-    <div layout="row" hide-gt-xs flex="50">
+    <div layout="row" hide-gt-xs>
         <a data-ng-href="" data-ng-click="btnClicked($event, 1-page.current)">
             <md-button data-ng-disabled="page.current == 1" class="md-raised tiny">first page</md-button>
         </a>
     </div>
-    <div layout="row" flex="50">
+    <div layout="row">
         <a data-ng-href="" data-ng-click="btnClicked($event, page.total-page.current)">
             <md-button data-ng-disabled="page.current == page.total" class="md-raised tiny">Last page</md-button>
         </a>
