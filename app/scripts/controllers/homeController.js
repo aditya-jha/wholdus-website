@@ -57,7 +57,6 @@
 
                 APIService.apiCall("GET", APIService.getAPIUrl('products'), null, params)
                         .then(function(response) {
-                            $scope.total = response.total_products;
                             //arrangeProductsByCategory(response.products);
                             deferred.resolve(response.products);
                         }, function(error) {
