@@ -16,9 +16,8 @@
 
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
-                categoriesToShow: [1,3,5]
+                categoriesToShow: [1,7,8]
             };
-
             function arrangeProductsByCategory(products) {
                 if(!products) return;
                 var index=0;

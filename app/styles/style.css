@@ -71,25 +71,19 @@ a:active {
     text-decoration: underline;
     cursor: pointer;
 }
-.page-nav button{
-    margin-left: 0.45vw;
-    margin-right: 0.45vw;
-}
-.md-button.md-small{
-    width: 25px;
-  height: 25px;
+.md-button.small{
+    min-width: 35px;
   padding: 1px;
+  height:32px;
   line-height: 1em;
-  min-height: 5px;
+  min-height: 25px;
 }
-.md-button.md-tiny{
-    width: 18px;
-  height: 18px;
-  padding: 1px;
-  line-height: 1px;
-  min-height: 5px;
-  font-size: 9px;
-  font-weight: 600;
+.md-button.tiny{
+  line-height: 0;
+  min-height: 20px;
+  height: 25px;
+  min-width: 25px;
+  font-size: 12px;
 }
 .social-media img{
     width: 40px;
@@ -204,7 +198,13 @@ a:active {
     text-decoration: none;
     cursor: pointer;
 }
-
+.md-button.distribute{
+     min-width: 75px;
+     padding-top: 1.25em;
+  font-size: 12px;
+  line-height: 0;
+  min-height: 30px;
+}
 #md-content{
     overflow: visible;
     z-index: 2;
