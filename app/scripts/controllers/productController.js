@@ -81,8 +81,11 @@
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                 .then(function(response) {
                     if(response.products.length) {
-                        $scope.product = response.products[0];
+                       $scope.product = response.products[0];
                         praseProductDetails($scope.product);
+                     }
+                    else{
+                        $location.url('/404');
                     }
                     $rootScope.$broadcast('endProgressbar');
                 }, function(error) {

@@ -16,9 +16,8 @@
 
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
-                categoriesToShow: [1,3,5]
+                categoriesToShow: [1,7,8]
             };
-
             function arrangeProductsByCategory(products) {
                 if(!products) return;
                 var index=0;
@@ -58,6 +57,7 @@
 
                 APIService.apiCall("GET", APIService.getAPIUrl('products'), null, params)
                         .then(function(response) {
+                            $scope.total = response.total_products;
                             //arrangeProductsByCategory(response.products);
                             deferred.resolve(response.products);
                         }, function(error) {

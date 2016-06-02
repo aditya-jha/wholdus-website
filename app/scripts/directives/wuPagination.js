@@ -16,7 +16,7 @@
                         current: 0,
                         total: 0
                     };
-
+                    $scope.count = 0;
                     var setPage = $rootScope.$on('setPage', function(event, data) {
                         $scope.page.current = parseInt(data.page);
                         $scope.page.next = $scope.page.current + 1;
@@ -36,12 +36,12 @@
                         $location.search('page', $scope.page.current);
                     };
 
-                    $scope.pageNext = function(){
-                        $scope.page.next +=1;
-                    }
-
-                    $scope.pagePrevious = function(){
-                        $scope.page.previous -=1;
+                    $scope.pageDirect = function(val){
+                        $scope.count +=val;
+                        if((($scope.count > 2 && val > 0) || ($scope.count > 1 && val < 0)) || (($scope.count < -2 && val < 0) || ($scope.count < -1 && val > 0))){
+                        $scope.page.next +=val;
+                        $scope.page.previous +=val;
+                        }
                     }
 
                     $scope.$on('$destroy', function() {
