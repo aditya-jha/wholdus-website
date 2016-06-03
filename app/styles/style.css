@@ -576,9 +576,9 @@ a:active {
     .product-card-wrap {
         margin-left: 0.5em;
     }
-    .product-card img {
-        width: 200px;
-    }
+    /*.product-card img {
+        max-width: 100px;
+    }*/
     .product-page-card table {
         width: 100%;
     }
@@ -743,10 +743,10 @@ a:active {
 .close-button{
     position: relative;
     margin-left:5px;
-    margin-top:25px; 
+    margin-top:25px;
     z-index:2000;
-    padding:2px; 
-    display: block; 
+    padding:2px;
+    display: block;
 
 }
 
@@ -764,7 +764,7 @@ a:active {
 }
 
 .large-img-next,.large-img-prev{
-    margin:auto 0px; 
+    margin:auto 0px;
     z-index:2000;
 
 }
