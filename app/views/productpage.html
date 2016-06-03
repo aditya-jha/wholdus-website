@@ -27,7 +27,7 @@
                 </md-button>
                 </div>
         </div>
-   
+
         <div layout-align="center centre" layout="row" class="progress-bar-container">
             <md-progress-linear md-mode="indeterminate"  ng-show="displayImageLoading" class="progress-bar md-warn md-hue-5"></md-progress-linear>
         </div>
@@ -68,6 +68,9 @@
             <md-divider></md-divider>
             <div>
                 <span class="feature-title">Manufactured By:</span> {{product.seller.company_name}}
+            </div>
+            <div>
+                <span class="feature-title">Catalog Number:</span> {{product.details.seller_catalog_number}}
             </div>
             <div>
                 <span class="feature-title">Lot Size:</span> {{product.lot_size}}
