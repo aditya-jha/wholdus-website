@@ -61,10 +61,12 @@
                 });
             }
             getProducts();
-            
-            $scope.buyNow = function(event){
-                DialogService.viewDialog(event);
-            }
+
+            $scope.buyNow = function(event, categoryID){
+                DialogService.viewDialog(event, {
+                    categoryID: categoryID
+                });
+            };
         }
     ]);
 })();

@@ -109,7 +109,9 @@
             getProducts();
 
             $scope.buyNow = function(event, productID) {
-                 DialogService.viewDialog(event, productID);
+                 DialogService.viewDialog(event, {
+                     productID: productID
+                 });
             };
 
             $scope.changeDisplayImage = function(index) {

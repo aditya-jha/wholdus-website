@@ -9,7 +9,8 @@
         '$rootScope',
         'productID',
         'FormValidationService',
-        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, productID,FormValidationService) {
+        'categoryID',
+        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, productID,FormValidationService, categoryID) {
             $scope.formValidation=FormValidationService;
             $scope.cancel = function() {
                 $mdDialog.cancel();
@@ -22,7 +23,8 @@
                         email: $scope.email,
                         mobile_number: $scope.mobile_number,
                         name: $scope.name,
-                        productID: productID
+                        productID: productID,
+                        categoryID: categoryID
                     };
                     APIService.apiCall("POST", APIService.getAPIUrl('buyerLeads'), data)
                     .then(function(response) {
