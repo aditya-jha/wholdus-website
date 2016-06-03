@@ -41,7 +41,12 @@
                     }
                     angular.forEach(response.products, function(value, key) {
                         value.images = UtilService.getImages(value);
+                        if(value.images.length){
                         value.imageUrl = UtilService.getImageUrl(value.images[0], '200x200');
+                        }
+                        else{
+                            value.imageUrl = 'images/200.png';
+                        }
                     });
                     $scope.products = response.products;
                     if($scope.products.length) {
