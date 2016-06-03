@@ -7,7 +7,7 @@
         function($mdMedia, $mdDialog) {
         	var factory = {};
 
-            factory.viewDialog = function(event) {
+            factory.viewDialog = function(event, productID) {
                 var useFullScreen = $mdMedia('xs');
                 $mdDialog.show({
                     controller: 'buyNowController',
@@ -17,7 +17,7 @@
                     clickOutsideToClose:true,
                     fullscreen: useFullScreen,
                     locals: {
-                        productID: null
+                        productID: productID
                     }
                 });
             };

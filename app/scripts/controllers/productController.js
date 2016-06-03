@@ -11,7 +11,7 @@
         'ngProgressBarService',
         '$rootScope',
         'DialogService',
-        function($scope, $routeParams, $log, $window,$location,APIService, 
+        function($scope, $routeParams, $log, $window,$location,APIService,
             UtilService, ngProgressBarService, $rootScope, DialogService) {
             $scope.displayImageLoading=true;
             $scope.start=0;
@@ -19,10 +19,12 @@
             $scope.largeImageDisplay=false;
             $scope.largeImageLoading=false;
             $scope.mobileDisplay=false;
+
             if($window.innerWidth<=760)
             {
                  $scope.mobileDisplay=true;
             }
+
             function praseProductDetails(p) {
                 p.images = UtilService.getImages(p);
                 if(p.images.length) {
@@ -36,13 +38,12 @@
                     for(var i=0; i<p.images.length && i<10; i++) {
                         $scope.allImages.push(UtilService.getImageUrl(p.images[i], '200x200'));
                     }
+                } else {
+                    $scope.image = {
+                        url: 'images/400.png',
+                        showImage: true,
+                    };
                 }
-                else{
-                        $scope.image = {
-                            url: 'images/400.png',
-                            showImage: true,
-                        }
-                    }
                 $scope.productDetailsKeys = [{
                     label: 'Brand',
                     value: p.details.brand
@@ -107,8 +108,8 @@
             }
             getProducts();
 
-            $scope.buyNow = function(event) {
-                 DialogService.viewDialog(event);
+            $scope.buyNow = function(event, productID) {
+                 DialogService.viewDialog(event, productID);
             };
 
             $scope.changeDisplayImage = function(index) {
@@ -121,67 +122,58 @@
                     $scope.displayImage=new Image();
                     $scope.displayImage.src=$scope.image.url;
                     $scope.image.showImage = true;
-                     $scope.displayImageLoading=true;
+                    $scope.displayImageLoading=true;
                 }
 
             };
-            $scope.imageLoaded= function(){            
+            $scope.imageLoaded= function(){
                     $scope.displayImageLoading=false;
                     $scope.displayImageStyle={'opacity':'1.0'};
             };
-            $scope.largeImageLoaded= function(){            
+            $scope.largeImageLoaded= function(){
                    $scope.largeImageLoading=false;
             };
             $scope.sliderPrevious= function(){
                 if($scope.start>0){
-                $scope.start-=1;
-                changeDisplayImage($scope.start);        
-                }            
-                else { 
-                $scope.start=0;
+                    $scope.start-=1;
+                    changeDisplayImage($scope.start);
+                } else {
+                    $scope.start=0;
                 }
             };
 
-             $scope.sliderNext= function(){            
+            $scope.sliderNext= function(){
                 if($scope.start<$scope.allImages.length-6){
-                $scope.start+=1;
-                changeDisplayImage($scope.start);        
-                }            
-                else { 
-                // $scope.start= $scope.allImages.length;
+                    $scope.start+=1;
+                    changeDisplayImage($scope.start);
                 }
             };
-                 $scope.largeSliderPrevious= function(){
+
+            $scope.largeSliderPrevious= function(){
                 if($scope.image.index>0){
-                $scope.image.index-=1;
-                $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');$scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700'); 
-               displayLargeImage();         
-                }            
-                else { 
+                    $scope.image.index-=1;
+                    $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');$scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');
+                    displayLargeImage();
                 }
             };
 
-             $scope.largeSliderNext= function(){            
+            $scope.largeSliderNext= function(){
                 if($scope.image.index<$scope.allImages.length-1){
-                $scope.image.index+=1;
-               $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700'); 
-               displayLargeImage();      
-                }            
-                else { 
+                    $scope.image.index+=1;
+                    $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');
+                    displayLargeImage();
                 }
             };
-
 
             $scope.displayLargeImage=function(){
                 if($window.innerWidth>760){
-                    $scope.largeImageLoading=true;    
+                    $scope.largeImageLoading=true;
                     $scope.largeImageDisplay=true;
-                    }
-                else{
+                } else{
                     $window.location.href=$scope.image.urlLarge;
-                }      
+                }
             };
-            
+
             $scope.closeLargeImage=function(){
                   $scope.largeImageDisplay=false;
             };
