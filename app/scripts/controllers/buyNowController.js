@@ -8,7 +8,9 @@
         'ngProgressBarService',
         '$rootScope',
         'productID',
-        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, productID) {
+        'FormValidationService',
+        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, productID,FormValidationService) {
+            $scope.formValidation=FormValidationService;
             $scope.cancel = function() {
                 $mdDialog.cancel();
             };

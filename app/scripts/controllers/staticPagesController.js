@@ -8,8 +8,11 @@
         '$rootScope',
         'ngProgressBarService',
         'DialogService',
-        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService, DialogService) {
+        'FormValidationService',
+        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService, 
+            DialogService,FormValidationService) {
 
+            $scope.formValidation=FormValidationService;
             $scope.contactus = {
                 email: "",
                 mobile_number: "",
@@ -27,7 +30,7 @@
 
             $scope.buyNow = function(event){
                 DialogService.viewDialog(event);
-            }
+            };
 
             $scope.contactUs = function() {
                 if($scope.contactus.apiCall) {
