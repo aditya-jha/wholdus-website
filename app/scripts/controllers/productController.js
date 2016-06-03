@@ -37,6 +37,12 @@
                         $scope.allImages.push(UtilService.getImageUrl(p.images[i], '200x200'));
                     }
                 }
+                else{
+                        $scope.image = {
+                            url: 'images/400.png',
+                            showImage: true,
+                        }
+                    }
                 $scope.productDetailsKeys = [{
                     label: 'Brand',
                     value: p.details.brand
