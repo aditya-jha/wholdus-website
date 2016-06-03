@@ -20,7 +20,6 @@
     <div layout="column" data-ng-if="settings.noProduct">
         <div layout="column" layout-align="start center" flex>
             <h1 id="category-title">{{settings.displayName}}</h1>
-
         </div>
         <div layout="row" layout-wrap class="no-product-container">
             <div layout="column" layout-align="center center" layout-padding>
@@ -30,7 +29,7 @@
                 <span>oops! our manufacturers are out of stock</span>
                 <span>you are our precious customer! please let us serve you</span>
                 <span>get a call from us within an hour</span>
-                <md-button class="md-raised md-warn" data-ng-click="buyNow($event)">
+                <md-button class="md-raised md-warn" data-ng-click="buyNow($event)" style="padding: 0px 8px;">
                     <span>Join Buyer Network</span>
                 </md-button>
             </div>
