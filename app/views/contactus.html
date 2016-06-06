@@ -5,7 +5,7 @@
 
 <div layout="row" layout-xs="column" class="contactus-container" layout-padding layout-margin layout-align="center start">
     <div flex="25" flex-sm="45" flex-xs="100" layout="row" layout-wrap layout-padding md-whiteframe="4dp">
-        <form name="contactusForm" novalidate>
+        <form name="contactusForm" novalidate flex="100" layout="row" layout-wrap>
         <md-input-container flex="100">
             <label>Email</label>
             <input type="email" name="email" data-ng-model="contactus.email" data-ng-required="true" ng-pattern="formValidation.emailValidation" />
@@ -14,7 +14,7 @@
                 <div ng-message="pattern" class="formError">
                     {{formValidation.emailErrorMessage}}
                 </div>
-            </div>    
+            </div>
         </md-input-container>
         <md-input-container flex="100">
             <label>Contact Number</label>
