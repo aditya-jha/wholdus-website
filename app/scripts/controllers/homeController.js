@@ -36,8 +36,6 @@
                 });
             }
 
-            
-
             function getCategory(params) {
                 APIService.apiCall("GET", APIService.getAPIUrl("category"))
                         .then(function(response) {
@@ -106,7 +104,7 @@
 
             $scope.buyNow = function(event){
                 DialogService.viewDialog(event);
-            }
+            };
         }
     ]);
 })();
