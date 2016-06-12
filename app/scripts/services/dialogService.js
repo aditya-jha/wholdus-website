@@ -17,8 +17,8 @@
                     clickOutsideToClose:true,
                     fullscreen: useFullScreen,
                     locals: {
-                        productID: data.productID,
-                        categoryID: data.categoryID
+                        productID: data && data.productID? data.productID : null,
+                        categoryID: data && data.categoryID ? data.categoryID : null
                     }
                 });
             };
