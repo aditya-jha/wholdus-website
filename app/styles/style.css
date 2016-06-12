@@ -55,6 +55,13 @@ a:active {
 .cursor-pointer{
     cursor: pointer;
 }
+
+.tagline {
+    margin-bottom: -0.6em;
+    font-size: 0.8em;
+    text-align: center;
+}
+
 .breadcrumb-inactive{
     font-size: 80%;
     padding-top: .2em;
@@ -89,6 +96,14 @@ a:active {
     width: 40px;
     height: 40px;
 }
+.social-media-top {
+    padding-right: 1em;
+}
+.social-media-top a{
+    min-width: 0px;
+    margin: 0px 0px;
+}
+
 .return-and-refund-heading {
     font-weight: bold;
     text-align: center;
@@ -179,7 +194,7 @@ a:active {
     line-height: 1em;
 }
 
-#header-toolbar md-icon {
+#header-toolbar .logo {
     width: 100%;
     height: 100%;
     min-width: 50px;
@@ -187,6 +202,13 @@ a:active {
     max-width: 60px;
     max-height: 60px;
 
+}
+
+#header-toolbar .phone {
+    min-width: 0px;
+    min-height: 0px;
+    max-width: 25px;
+    max-height: 19px;
 }
 
 #wholdusTitle {
@@ -198,14 +220,25 @@ a:active {
     text-decoration: none;
     cursor: pointer;
 }
-.md-button.distribute{
-    min-width: 75px;
-    letter-spacing: 0.1em;
-    padding-top: 1.25em;
-    font-size: 12px;
-    line-height: 0;
-    min-height: 30px;
+
+.distribute {
+    padding-left: 1em;
+    padding-top: 0.25em;
 }
+.distribute a{
+    margin: 0;
+    min-width: 0px;
+    line-height: 30px;
+}
+.distribute-text {
+    color: #FFF;
+    text-transform: capitalize;
+    font-family: 'Comfortaa';
+}
+.distribute-text:hover {
+    /*color: #FF5722;*/
+}
+
 #md-content{
     overflow: visible;
     z-index: 2;
@@ -227,7 +260,7 @@ a:active {
 }
 
 .filler-toolbar {
-    height: 7em;
+    /*height: 3em;*/
     background-color: #673AB7;
 }
 
@@ -242,7 +275,7 @@ a:active {
     font-size: 1.5em;
 }
 .homepage-top-container {
-    margin-top: -4em;
+    /*margin-top: -4em;*/
     padding-right: 1em;
     padding-left: 1em;
     padding-top: 0.5em;

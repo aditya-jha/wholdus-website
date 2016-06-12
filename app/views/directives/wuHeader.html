@@ -1,6 +1,6 @@
 <md-toolbar class="md-medium md-hue-2" id="header-toolbar" layout-align="center center">
     <div layout="row"  class="md-toolbar-tools" layout-fill>
-        <md-button class="md-icon-button" aria-label="Menu" layout-align="center center" data-ng-click="toggleSidenav()">
+        <md-button class="md-icon-button" aria-label="Menu" layout-align="center center" data-ng-click="toggleSidenav()" class="logo">
             <svg style="width:30px;outline:none;height:20px" class="cursor-pointer" viewBox="0 0 20 20">
                 <path fill="#fff" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
             </svg>
@@ -11,18 +11,23 @@
               <md-icon md-svg-icon="images/wholdus-logo.svg" class="logo"></md-icon>
           </a>
         </div>
-        </div>  
+        </div>
         <h1 hide-xs show-gt-xs style="margin-left:5px;">
             <a href="/">Wholdus</a>
         </h1>
-        <span flex></span>
-        <div layout="row" layout-align="center center">
-            <md-button class="md-raised md-warn distribute" md-ripple-size="partial" data-ng-href="http://seller.wholdus.com/distribute-on-wholdus" target="_blank" aria-label="distribute-on-wholdus">
-                Distribute
-            </md-button>
-            
-                <span style="font-size:15px" hide-xs show-gt-xs aria-label="customer_support">+91-7895161705</span>
-            
+        <span class="tagline" hide-xs show-gt-xs flex><i>&ldquo;</i> wholesale distribution with us<i>&rdquo;</i></span>
+        <span flex show-xs hide-gt-xs></span>
+        <div layout="row" layout-align="start center">
+            <md-icon class="phone">
+                <svg fill="#FFFFFF" height="20" viewBox="0 0 20 20" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+            </md-icon>
+            <!-- <md-button md-no-ink md-ripple-size="partial" md-no-focus-style>
+
+            </md-button> -->
+            <span style="font-size:15px" hide-xs show-gt-xs aria-label="customer_support">+91-7895161705</span>
         </div>
     </div>
 </md-toolbar>
