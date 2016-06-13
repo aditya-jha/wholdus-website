@@ -274,11 +274,10 @@ a:active {
 .filler-toolbar > span > i {
     font-size: 1.5em;
 }
+
 .homepage-top-container {
-    /*margin-top: -4em;*/
     padding-right: 1em;
     padding-left: 1em;
-    padding-top: 0.5em;
 }
 
 #categories-list-container {
@@ -554,8 +553,6 @@ a:active {
 
     .home-card-container div {
         padding-left: 0.5em;
-        /*margin-right: 0.5em;*/
-        padding-top: 0.5em;
     }
 
     .home-card-container .video {
