@@ -12,6 +12,9 @@
                         $rootScope.$broadcast('toggleSidenav');
                     };
 
+                    $scope.login = function() {
+                        
+                    };
                 }
             ]
         };

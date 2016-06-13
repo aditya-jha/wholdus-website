@@ -24,7 +24,7 @@
                 var index=0;
                 angular.forEach(products, function(value, key) {
                     var catID = value.category.categoryID;
-                    //value.images = UtilService.getImageUrl(value);
+                    
                     if($scope.products[catID]) {
                         $scope.products[catID].products.push(value);
                     } else {
