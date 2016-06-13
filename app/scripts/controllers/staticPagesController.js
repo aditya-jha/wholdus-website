@@ -9,7 +9,7 @@
         'ngProgressBarService',
         'DialogService',
         'FormValidationService',
-        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService, 
+        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService,
             DialogService,FormValidationService) {
 
             $scope.formValidation=FormValidationService;
@@ -29,7 +29,10 @@
             }
 
             $scope.buyNow = function(event){
-                DialogService.viewDialog(event);
+                DialogService.viewDialog(event, {
+                    controller: 'buyNowController',
+                    view: 'views/partials/buyNow.html'
+                });
             };
 
             $scope.contactUs = function() {

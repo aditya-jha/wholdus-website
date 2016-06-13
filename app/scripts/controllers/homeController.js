@@ -24,7 +24,7 @@
                 var index=0;
                 angular.forEach(products, function(value, key) {
                     var catID = value.category.categoryID;
-                    
+
                     if($scope.products[catID]) {
                         $scope.products[catID].products.push(value);
                     } else {
@@ -101,7 +101,10 @@
             };
 
             $scope.buyNow = function(event){
-                DialogService.viewDialog(event);
+                DialogService.viewDialog(event, {
+                    controller: 'buyNowController',
+                    view: 'views/partials/buyNow.html'
+                });
             };
         }
     ]);

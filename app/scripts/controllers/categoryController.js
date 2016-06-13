@@ -64,7 +64,9 @@
 
             $scope.buyNow = function(event, categoryID){
                 DialogService.viewDialog(event, {
-                    categoryID: categoryID
+                    controller: 'buyNowController',
+                    categoryID: categoryID,
+                    view: 'views/partials/buyNow.html'
                 });
             };
         }
