@@ -586,6 +586,9 @@ a:active {
     .filler-toolbar > span{
         font-size: 1em;
     }
+    #header-toolbar h1 {
+        font-size: 1.2em;
+    }
 }
 
 @media screen and (max-width:640px) {
