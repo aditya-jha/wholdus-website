@@ -1,0 +1,4 @@
+options +FollowSymLinks
+RewriteEngine On
+
+RewriteRule ^myaccount myaccount.html
