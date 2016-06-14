@@ -551,6 +551,9 @@ a:active {
 }
 
 @media screen and (max-width: 959px) {
+    .footer span {
+        margin-bottom: 0.3em;
+    }
     .aboutus-card {
         margin: -3em 1em 8em 1em;
     }
