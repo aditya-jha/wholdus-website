@@ -56,6 +56,16 @@ a:active {
     cursor: pointer;
 }
 
+.hover-underline:hover {
+    text-decoration: underline;
+}
+
+.primary-text {
+    color: #512DA8;
+}
+.accent-text {
+    color: #FF5722;
+}
 .tagline {
     margin-bottom: -0.6em;
     font-size: 0.8em;

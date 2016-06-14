@@ -11,14 +11,14 @@
                 var locals = {};
                 locals.categoryID = data ? data.categoryID : null;
                 locals.productID = data ? data.productID : null;
-                
+
                 return locals;
             }
 
             factory.viewDialog = function(event, data) {
                 var useFullScreen = $mdMedia('xs');
                 $mdDialog.show({
-                    controller: data.controller,
+                    controller: data.controller ? data.controller : 'PopupController',
                     templateUrl: data.view,
                     parent: angular.element(document.body),
                     targetEvent: event,

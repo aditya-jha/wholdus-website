@@ -16,17 +16,9 @@
         <span class="tagline" hide-xs show-gt-xs flex><i>&ldquo;</i> wholesale distribution with us<i>&rdquo;</i></span>
         <span flex show-xs hide-gt-xs></span>
 
-        <div layout="row" class="cursor-pointer" data-ng-click="login()">
-            <md-icon class="phone">
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="#FFFFFF" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
-                </svg>
-            </md-icon>
-            <span style="font-size:0.8em" flex>login</span>
-        </div>
 
-        <div layout="row" layout-align="end center" style="margin-left:1em;" hide-xs hide-gt-xs show-gt-sm>
-            <md-icon class="phone">
+        <div layout="row" layout-align="end center" style="margin-right:1em;" hide-xs hide-gt-xs show-gt-sm>
+            <md-icon>
                 <svg fill="#FFFFFF" height="20" viewBox="0 0 20 20" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 0h24v24H0z" fill="none"/>
                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
@@ -34,5 +26,33 @@
             </md-icon>
             <span style="font-size:15px">+91-7895161705</span>
         </div>
+
+        <div layout="row" class="cursor-pointer" data-ng-click="login($event)" layout-align="end center" data-ng-if="!loginStatus">
+            <span style="font-size:0.8em">login</span>
+            <md-icon>
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="#FFFFFF" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                </svg>
+            </md-icon>
+         </div>
+
+        <div layout="row" class="cursor-pointer" data-ng-if="loginStatus">
+            <md-menu md-offset="0 40">
+                <div layout="row" ng-click="$mdOpenMenu($event)">
+                    <span style="font-size:0.8em">account</span>
+                    <md-icon md-menu-origin>
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="#FFFFFF" d="M7,10L12,15L17,10H7Z" />
+                        </svg>
+                    </md-icon>
+                </div>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ng-click="login()">logout</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+           </md-menu>
+        </div>
+
     </div>
 </md-toolbar>
