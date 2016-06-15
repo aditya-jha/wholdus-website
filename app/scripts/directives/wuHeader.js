@@ -23,6 +23,7 @@
                             LoginService.logout();
                             $scope.loginStatus = false;
                             ToastService.showSimpleToast("We hope you will be back soon!", 2000);
+                            logoutRedirect();
                         } else {
                             DialogService.viewDialog(event, {
                                 view: 'views/partials/loginPopup.html',
@@ -30,11 +31,18 @@
                         }
                     };
 
+                    function logoutRedirect() {
+                        if($location.url().indexOf('account') > -1) {
+                            $location.url('/');
+                        }
+                    }
+
                     function loginState() {
                         if(LoginService.checkLoggedIn()) {
                             $scope.loginStatus = true;
                         } else {
                             $scope.loginStatus = false;
+                            logoutRedirect();
                         }
                     }
                     loginState();

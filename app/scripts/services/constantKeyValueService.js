@@ -24,10 +24,6 @@
                 sellerSite: 'http://seller.wholdus.com'
             };
 
-            factory.getSellerSignupFormItems = function() {
-                return angular.copy(factory.sellerSignup);
-            };
-
             return factory;
         }
     ]);

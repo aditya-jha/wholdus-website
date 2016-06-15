@@ -23,6 +23,10 @@
                     data = JSON.stringify(data);
                 }
 
+                if(!params) {
+                    params = {};
+                }
+                params.access_token = ConstantKeyValueService.token;
                 var apiPromise = $http({
                     method: method,
                     params: params,
