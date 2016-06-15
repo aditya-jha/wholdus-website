@@ -9,10 +9,16 @@
         'ngProgressBarService',
         'DialogService',
         'FormValidationService',
+        'UtilService',
         function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService,
-            DialogService,FormValidationService) {
+            DialogService,FormValidationService, UtilService) {
 
             $scope.formValidation=FormValidationService;
+
+            $scope.settings = {
+                isMobile: UtilService.isMobileRequest()
+            };
+
             $scope.contactus = {
                 email: "",
                 mobile_number: "",
