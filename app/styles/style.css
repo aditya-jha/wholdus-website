@@ -825,18 +825,23 @@ a:active {
     margin-right: -8px;
 }
 .formError{
-    /*padding-top: 10px;*/
     margin-bottom: 10px;
 }
 
-.order-card {
+.white-card {
     background: #fff;
 }
 
 .small-font {
     font-size: 0.9em;
 }
+.large-font {
+    font-size: 1.2em;
+}
 
+.text-center {
+    text-align: center;
+}
 .bold {
     font-weight: bold;
 }
