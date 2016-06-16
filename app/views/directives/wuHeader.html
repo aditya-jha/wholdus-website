@@ -50,17 +50,37 @@
                             <path fill="#FFFFFF" d="M7,10L12,15L17,10H7Z" />
                         </svg>
                     </md-icon>
-                    <md-tooltip>Go to your panel</md-tooltip>
                 </div>
                 <md-menu-content width="4">
                     <md-menu-item>
-                        <md-button data-ng-href="account/orders">orders</md-button>
+                        <md-button data-ng-href="account/orders" class="md-button-icon">
+                            <md-icon>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="#FF5722" d="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8H17V4H3C1.89,4 1,4.89 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8Z" />
+                                </svg>
+                            </md-icon>
+                            orders
+                        </md-button>
                     </md-menu-item>
                     <md-menu-item>
-                        <md-button data-ng-href="account/profile">My Profile</md-button>
+                        <md-button data-ng-href="account/profile" class="md-button-icon">
+                            <md-icon>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="#FF5722" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                                </svg>
+                            </md-icon>
+                            My Profile
+                        </md-button>
                     </md-menu-item>
                     <md-menu-item>
-                        <md-button ng-click="login()">logout</md-button>
+                        <md-button ng-click="login()" class="md-button-icon">
+                            <md-icon>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="#FF5722" d="M17,17.25V14H10V10H17V6.75L22.25,12L17,17.25M13,2A2,2 0 0,1 15,4V8H13V4H4V20H13V16H15V20A2,2 0 0,1 13,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2H13Z" />
+                                </svg>
+                            </md-icon>
+                            logout
+                        </md-button>
                     </md-menu-item>
                 </md-menu-content>
            </md-menu>

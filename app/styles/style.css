@@ -254,6 +254,12 @@ a:active {
     margin-top: 65px;
 }
 
+.account-sidenav span {
+    font-size: 1.1em;
+}
+.account-sidenav a {
+    text-align: left;
+}
 .account-content {
     margin-left: 250px;
 }
@@ -836,7 +842,7 @@ a:active {
     font-size: 0.9em;
 }
 .large-font {
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 .text-center {
