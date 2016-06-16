@@ -36,10 +36,10 @@
                 localStorageService.remove(ConstantKeyValueService.accessTokenKey);
             };
 
-            factory.login = function(email, password) {
+            factory.login = function(mobile, password) {
                 var deferred = $q.defer();
                 var data = {
-                    email: email,
+                    mobile_number: mobile,
                     password: password
                 };
                 var apicall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLogin'), data, null, true, false, true);

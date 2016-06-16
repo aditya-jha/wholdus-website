@@ -16,11 +16,11 @@
             <div class="md-dialog-content">
                 <md-input-container layout-fill>
                     <label>Mobile Number</label>
-                    <input type="email" data-ng-model="email" name="email"  ng-pattern="formValidation.emailValidation" required />
-                    <div ng-messages="loginForm.email.$error" role="alert" data-ng-if="loginForm.email.$dirty || loginForm.$submitted">
+                    <input type="number" data-ng-model="mobile_number" name="mobile_number"  ng-pattern="formValidation.mobileNumValidation" required />
+                    <div ng-messages="loginForm.mobile_number.$error" role="alert" data-ng-if="loginForm.mobile_number.$dirty || loginForm.$submitted">
                         <div ng-message="required" class="formError">This is required.</div>
                         <div ng-message="pattern" class="formError">
-                            {{formValidation.emailErrorMessage}}
+                            {{formValidation.mobileErrorMessage}}
                         </div>
                     </div>
                 </md-input-container>

@@ -1,7 +1,7 @@
 <div flex>
     <div layout="row" layout-fill wu-account-sidenav></div>
-    <div layout="row" flex class="account-content" layout-padding layout-wrap>
-        <div layout="row" layout-wrap flex="100" md-whiteframe="4" class="order-card" layout-margin data-ng-repeat="o in orders">
+    <div layout="row" flex="100" class="account-content" layout-padding layout-wrap>
+        <div layout="row" layout-wrap flex="100" md-whiteframe="4" class="order-card" layout-margin data-ng-repeat="o in orders" layout-wrap>
             <div layout="row" flex="100" layout-wrap>
                 <div layout="row" flex-xs="100">
                     <span class="small-font secondary-text-color space">Order No:</span>
@@ -14,16 +14,56 @@
                 </div>
             </div>
             <hr flex="100" />
-            <div layout="row" flex="100">
+            <div layout="row" flex="100" md-whiteframe="4" layout-padding layout-wrap>
                 <div layout="row" flex="100" data-ng-repeat="so in o.sub_orders" layout-wrap>
-                    <div layout="row" flex-xs="100">
-                        <span class="small-font secondary-text-color space">Seller Name</span>
-                        <span class="bold">{{so.seller.company_name}}</span>
+                    <div layout="row" layout-wrap flex="100">
+                        <div layout="row" flex-xs="100">
+                            <span class="small-font secondary-text-color space">Seller Name</span>
+                            <span class="bold">{{so.seller.company_name}}</span>
+                        </div>
+                        <div flex hide-xs></div>
+                        <div layout="row" flex-xs="100">
+                            <span class="small-font secondary-text-color space">Sub Order No:</span>
+                            <span class="bold">{{so.display_number}}</span>
+                        </div>
                     </div>
-                    <div flex hide-xs></div>
-                    <div layout="row" flex-xs="100">
-                        <span class="small-font secondary-text-color space">Sub Order No:</span>
-                        <span class="bold">11111111111111</span>
+                    <hr flex="100" />
+                    <div layout="row" flex="100" data-ng-repeat="oi in so.order_items" md-whiteframe="2" layout-margin layout-wrap>
+                        <span flex="100" class="bold">{{oi.product.display_name}}</span>
+                        <div layout="row" flex="100" layout-wrap>
+                            <div layout="row" flex="40" flex-xs="100" style="margin:0 auto;">
+                                <img data-ng-src="{{oi.product.imageUrl}}" width="100" height="100" />
+                            </div>
+                            <div flex="60" flex-xs="100" layout-wrap layout="row">
+                                <div layout="row" flex="100">
+                                    <span class="small-font secondary-text-color space">Pieces</span>
+                                    <span class="bold">{{oi.pieces}}</span>
+                                </div>
+                                <div layout="row" flex="100">
+                                    <span class="small-font secondary-text-color space">Total Price</span>
+                                    <span class="bold">{{oi.final_price}}</span>
+                                </div>
+                                <div layout="row" flex="100">
+                                    <span class="small-font secondary-text-color space">Retail Price / pcs</span>
+                                    <span class="bold">{{oi.retail_price_per_piece}}</span>
+                                </div>
+                                <div layout="row" flex="100">
+                                    <span class="small-font secondary-text-color space">Your Margin</span>
+                                    <span class="bold">{{((oi.retail_price_per_piece - oi.edited_price_per_piece)*100)/oi.retail_price_per_piece | number:2}} %</span>
+                                </div>
+                            </div>
+                            <hr flex="100" />
+                            <div layout="row" flex="100" layout-wrap>
+                                <div flex-xs="100">
+                                    <span class="small-font secondary-text-color space">Status</span>
+                                    <span class="bold">{{oi.status.display_value}}</span>
+                                </div>
+                                <div flex></div>
+                                <div flex-xs="100" layout="row" data-ng-if="oi.tracking_url && oi.tracking_url.length>0">
+                                    <md-button class="md-raised md-primary" data-ng-href="{{oi.tracking_url}}" target="_blank">track</md-button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

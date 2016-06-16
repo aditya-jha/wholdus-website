@@ -49,8 +49,8 @@
             };
 
             $scope.login = function() {
-                if($scope.email && $scope.password && !apiCall) {
-                    apiCall = LoginService.login($scope.email, $scope.password);
+                if($scope.mobile_number && $scope.password && !apiCall) {
+                    apiCall = LoginService.login($scope.mobile_number, $scope.password);
                     apiCall.then(function(response) {
                         apiCall = null;
                         $mdDialog.hide();

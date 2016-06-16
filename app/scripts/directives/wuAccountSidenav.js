@@ -7,7 +7,7 @@
                 '$scope',
                 '$log',
                 function($scope, $log) {
-                    $log.log("account sidenav directive");
+                    
                 }
             ]
         };
