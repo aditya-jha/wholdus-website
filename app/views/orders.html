@@ -14,7 +14,25 @@
                 </div>
             </div>
             <hr flex="100" />
-            <div layout="row" flex="100" md-whiteframe="4" layout-padding layout-wrap>
+            <div flex="100" layout="row" layout-wrap>
+                <div layout="row" flex="25" flex-xs="100" layout-wrap>
+                    <span class="small-font secondary-text-color space" flex="100" flex-xs="40">Order Value</span>
+                    <span class="bold">Rs. {{ o.edited_price }}</span>
+                </div>
+                <div layout="row" flex="25" flex-xs="100" layout-wrap>
+                    <span class="small-font secondary-text-color space" flex="100" flex-xs="40">COD Charge</span>
+                    <span class="bold">{{o.cod_charge != '0.00' ? 'Rs.' + o.cod_charge : 'To be determined'}}</span>
+                </div>
+                <div layout="row" flex="25" flex-xs="100" layout-wrap>
+                    <span class="small-font secondary-text-color space" flex="100" flex-xs="40">Shipping Charge</span>
+                    <span class="bold">{{o.shipping_charge != '0.00' ? 'Rs. ' + o.shipping_charge : 'To be determined'}}</span>
+                </div>
+                <div layout="row" flex="25" flex-xs="100" layout-wrap>
+                    <span class="small-font secondary-text-color space" flex="100" flex-xs="40">Total Amount</span>
+                    <span class="bold">{{o.final_price != '0.00' ? 'Rs. ' + o.final_price : 'To be determined'}}</span>
+                </div>
+            </div>
+            <div layout="row" flex="100" layout-padding layout-wrap>
                 <div layout="row" flex="100" data-ng-repeat="so in o.sub_orders" layout-wrap>
                     <div layout="row" layout-wrap flex="100">
                         <div layout="row" flex-xs="100">
@@ -29,12 +47,12 @@
                     </div>
                     <hr flex="100" />
                     <div layout="row" flex="100" data-ng-repeat="oi in so.order_items" md-whiteframe="2" layout-margin layout-wrap>
-                        <span flex="100" class="bold">{{oi.product.display_name}}</span>
                         <div layout="row" flex="100" layout-wrap>
-                            <div layout="row" flex="40" flex-xs="100" style="margin:0 auto;">
+                            <div layout="row" flex="30" flex-xs="100" style="margin:0 auto;">
                                 <img data-ng-src="{{oi.product.imageUrl}}" width="100" height="100" />
                             </div>
-                            <div flex="60" flex-xs="100" layout-wrap layout="row">
+                            <div flex="70" flex-xs="100" layout-wrap layout="row">
+                                <span flex="100" class="bold">{{oi.product.display_name}}</span>
                                 <div layout="row" flex="100">
                                     <span class="small-font secondary-text-color space">Pieces</span>
                                     <span class="bold">{{oi.pieces}}</span>
