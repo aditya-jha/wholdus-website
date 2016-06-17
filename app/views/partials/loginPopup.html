@@ -42,7 +42,16 @@
                 <div layout="row" layout-align="center center" style="margin-top:1em">
                     <a class="primary-text cursor-pointer hover-underline" data-ng-href="{{sellerSite}}" target="_blank">Are you a Manufacturer?</a>
                 </div>
+
+                <div layout="row" layout-margin data-ng-show="errorMessage">
+                    <span class="small-font text-danger">Invalid Credentials! Please contact @ 7895161705</span>
+                </div>
+                <div layout="column" layout-align="center center" flex layout-margin data-ng-if="loading.show">
+                    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+                    <span class="small-font secondary-text-color">{{loading.message}}</span>
+                </div>
             </div>
+
         </md-dialog-content>
     </form>
 </md-dialog>

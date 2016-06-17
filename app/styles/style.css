@@ -855,3 +855,7 @@ a:active {
 .space {
     margin-right: 5px;
 }
+
+.text-danger {
+    color: red;
+}

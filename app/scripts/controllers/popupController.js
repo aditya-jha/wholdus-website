@@ -14,7 +14,12 @@
         'categoryID',
         function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, FormValidationService, ConstantKeyValueService, LoginService, productID, categoryID) {
 
-            var apiCall;
+            $scope.apiCall = null;
+            $scope.loading = {
+                show: false,
+                message: 'verifying credentials...'
+            };
+            $scope.errorMessage = false;
 
             $scope.formValidation = FormValidationService;
             $scope.sellerSite = ConstantKeyValueService.sellerSite;
@@ -24,7 +29,7 @@
             };
 
             $scope.buyNow = function() {
-                if($scope.name && $scope.mobile_number && !apiCall) {
+                if($scope.name && $scope.mobile_number && !$scope.apiCall) {
                     $rootScope.$broadcast('showProgressbar');
                     var data = {
                         email: $scope.email,
@@ -33,14 +38,14 @@
                         productID: productID,
                         categoryID: categoryID
                     };
-                    apiCall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLeads'), data);
-                    apiCall.then(function(response) {
-                        apiCall = null;
+                    $scope.apiCall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLeads'), data);
+                    $scope.apiCall.then(function(response) {
+                        $scope.apiCall = null;
                         $rootScope.$broadcast('endProgressbar');
                         ToastService.showSimpleToast("You will soon recieve a call from our representatives!", 3000);
                         $mdDialog.hide();
                     }, function(error) {
-                        apiCall = null;
+                        $scope.apiCall = null;
                         $mdDialog.hide();
                         ToastService.showSimpleToast("Ops! Something went wrong", 2000);
                         $rootScope.$broadcast('endProgressbar');
@@ -49,17 +54,20 @@
             };
 
             $scope.login = function() {
-                if($scope.mobile_number && $scope.password && !apiCall) {
-                    apiCall = LoginService.login($scope.mobile_number, $scope.password);
-                    apiCall.then(function(response) {
-                        apiCall = null;
+                if($scope.mobile_number && $scope.password && !$scope.apiCall) {
+                    $scope.errorMessage = false;
+                    $scope.loading.show = true;
+                    $scope.apiCall = LoginService.login($scope.mobile_number, $scope.password);
+                    $scope.apiCall.then(function(response) {
+                        $scope.loading.show = false;
+                        $scope.apiCall = null;
                         $mdDialog.hide();
                         ToastService.showSimpleToast("Welcome", 2000);
                         $rootScope.$broadcast('loggedIn');
                     }, function(error) {
-                        $mdDialog.hide();
-                        apiCall = null;
-                        ToastService.showSimpleToast("Ops! Something went wrong", 2000);
+                        $scope.loading.show = false;
+                        $scope.apiCall = null;
+                        $scope.errorMessage = true;
                     });
                 }
             };
