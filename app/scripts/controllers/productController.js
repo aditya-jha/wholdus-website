@@ -110,7 +110,8 @@
 
             $scope.buyNow = function(event, productID) {
                  DialogService.viewDialog(event, {
-                     productID: productID
+                     productID: productID,
+                     view: 'views/partials/buyNow.html'
                  });
             };
 

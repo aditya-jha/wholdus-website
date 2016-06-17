@@ -35,7 +35,9 @@
             }
 
             $scope.buyNow = function(event){
-                DialogService.viewDialog(event);
+                DialogService.viewDialog(event, {
+                    view: 'views/partials/buyNow.html'
+                });
             };
 
             $scope.contactUs = function() {

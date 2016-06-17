@@ -1,0 +1,48 @@
+<md-dialog aria-label="login" ng-cloak>
+    <form name="loginForm" novalidate flex="100">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 flex class="popup-title">Login</h2>
+
+                <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel-button">
+                    <svg fill="#fff" height="36" viewBox="0 0 24 24" width="30" >
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                    </svg>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container layout-fill>
+                    <label>Mobile Number</label>
+                    <input type="number" data-ng-model="mobile_number" name="mobile_number"  ng-pattern="formValidation.mobileNumValidation" required />
+                    <div ng-messages="loginForm.mobile_number.$error" role="alert" data-ng-if="loginForm.mobile_number.$dirty || loginForm.$submitted">
+                        <div ng-message="required" class="formError">This is required.</div>
+                        <div ng-message="pattern" class="formError">
+                            {{formValidation.mobileErrorMessage}}
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container layout-fill>
+                        <label>Password</label>
+                        <input type="password" data-ng-model="password" name="password" required />
+                        <div data-ng-messages="loginForm.password.$error" role="alert" data-ng-if="loginForm.password.$dirty || loginForm.$submitted">
+                            <div ng-message="required" class="formError">This is required.</div>
+                        </div>
+                </md-input-container>
+
+                <div layout="row" flex="100" layout-align="center center">
+                    <md-button type="submit" class="md-raised md-warn" ng-click="login($event)" aria-label="login-button" style="margin:0px 0px; width:200px" data-ng-disabled="apiCall">
+                        Login
+                    </md-button>
+                </div>
+
+                <div layout="row" layout-align="center center" style="margin-top:1em">
+                    <a class="primary-text cursor-pointer hover-underline" data-ng-href="{{sellerSite}}" target="_blank">Are you a Manufacturer?</a>
+                </div>
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>
