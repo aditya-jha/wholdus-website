@@ -15,7 +15,6 @@
             function loginSuccess(response) {
                 factory.loginStatus = true;
                 ConstantKeyValueService.token = response.token;
-
                 localStorageService.set(ConstantKeyValueService.accessTokenKey, response.token);
             }
 
