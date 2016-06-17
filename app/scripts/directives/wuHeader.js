@@ -10,7 +10,11 @@
                 'LoginService',
                 '$location',
                 'ToastService',
-                function($scope, $rootScope, DialogService, LoginService, $location, ToastService) {
+                '$window',
+                function($scope, $rootScope, DialogService, LoginService, $location, ToastService, $window) {
+
+                    $window.scrollTo(0, 1);
+
                     var listeners = [];
                     $scope.loginStatus = false;
 
