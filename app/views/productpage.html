@@ -18,7 +18,7 @@
                 <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image display-image" image-on-load="imageLoaded()" ng-style="displayImageStyle" />
             </div>
                  <div layout-align="center" data-ng-if="image.showImage && product.images.length >= 1">
-                 <md-button  class="md-fab md-mini md-warn zoom-btn" data-ng-click="displayLargeImage()" data-ng-disabled="displayImageLoading" aria-label="image-zoom">
+                 <md-button  class="md-fab md-mini md-warn zoom-btn" data-ng-click="zoomImage()" data-ng-disabled="displayImageLoading" aria-label="image-zoom">
                     <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                     <path d="M0 0h24v24H0V0z" fill="none"/>
@@ -117,7 +117,7 @@
             <div layout="row">
                 <span flex></span>
                 <md-button class="md-raised md-warn" data-ng-click="buyNow($event, product.productID)">
-                    <span style="padding: 0.5em;">Buy Now (Join Buyer Network)</span>
+                    <span style="padding: 0.5em;" aria-label="buy-now">Buy Now (Join Buyer Network)</span>
                 </md-button>
                 <span flex></span>
             </div>
@@ -176,7 +176,7 @@
            </div>
         <div layout="row" layout-align="center" class="large-display-image-container" ng-show="!largeImageLoading">
 
-             <md-button layout="row" layout-align="center center"  data-ng-click="largeSliderPrevious()" class="md-fab md-mini md-warn large-img-prev" data-ng-if="allImages.length>1"  data-ng-disabled="image.index==0" style=" z-index:2000;">
+             <md-button layout="row" layout-align="center center"  data-ng-click="largeSliderPrevious()" class="md-fab md-mini md-warn large-img-prev" data-ng-if="allImages.length>1"  data-ng-disabled="largeImageIndex==0" style=" z-index:2000;" aria-label="next">
                  <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#fff"/>
                      <path d="M0 0h24v24H0z" fill="none"/>
@@ -185,14 +185,14 @@
 
         <img data-ng-if="image.showImage" data-ng-src="{{image.urlLarge}}" class="md-card-image large-display-image md-whiteframe-24dp" image-on-load="largeImageLoaded()" ng-style="displayImageStyle" aria-lebel="close"/>
 
-            <md-button layout="row" layout-align="center center"  ng-click="largeSliderNext()" class="md-fab md-mini md-warn large-img-next" ng-if="allImages.length>1" ng-disabled="image.index==allImages.length-1" style=" z-index:2000;">
+            <md-button layout="row" layout-align="center center"  ng-click="largeSliderNext()" class="md-fab md-mini md-warn large-img-next" ng-if="allImages.length>1" ng-disabled="largeImageIndex==allImages.length-1" style=" z-index:2000;" aria-label="previous">
                 <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#fff"/>
                     <path d="M0 0h24v24H0z" fill="none"/>
                 </svg>
             </md-button>
 
-        <md-button ng-click="closeLargeImage()" class="md-fab md-mini  md-warn  close-button" style=" z-index:2000;">
+        <md-button ng-click="closeLargeImage()" class="md-fab md-mini  md-warn  close-button" style=" z-index:2000;" aria-label="close">
             <svg fill="#fff" height="36" viewBox="0 0 24 24" width="30" >
                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                 <path d="M0 0h24v24H0z" fill="none"/>
