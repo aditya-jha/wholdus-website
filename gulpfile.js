@@ -7,6 +7,7 @@ var uglifycss = require('gulp-uglifycss');
 var RevAll = require('gulp-rev-all');
 var revReplace = require('gulp-rev-replace');
 var gulpsync = require('gulp-sync')(gulp);
+var inject = require('gulp-inject');
 
 var jsVendors =  [
     'app/bower_components/angular/angular.min.js',
@@ -107,8 +108,15 @@ gulp.task('buildCustomScripts', function() {
                 .pipe(gulp.dest('build/js'));
 });
 
+gulp.task('index', function () {
+
+    gulp.src('./build/index.html')
+  .pipe(inject(gulp.src(['./build/js/vendor/*.js','./build/js/*.js', './build/css/*.css'], {read: false}), {relative: true}))
+  .pipe(gulp.dest('./build'));
+});
+
 // Default Task
 gulp.task('default', ['vendorScripts', 'styles']);
 
 // production build
-gulp.task('build', ['buildVendorScripts', 'styles', 'buildCustomScripts', 'copyViews', 'copyImages']);
+gulp.task('build', ['buildVendorScripts', 'styles', 'buildCustomScripts', 'copyViews', 'copyImages','index']);
