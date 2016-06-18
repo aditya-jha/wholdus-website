@@ -7,6 +7,7 @@ var uglifycss = require('gulp-uglifycss');
 var RevAll = require('gulp-rev-all');
 var revReplace = require('gulp-rev-replace');
 var gulpsync = require('gulp-sync')(gulp);
+var inject = require('gulp-inject');
 
 var jsVendors =  [
     'app/bower_components/angular/angular.min.js',
@@ -28,14 +29,22 @@ var jsCustom = [
     'app/scripts/services/ngProgressbarService.js',
     'app/scripts/services/loginService.js',
     'app/scripts/services/orderService.js',
+    'app/scripts/services/dialogService.js',
+    'app/scripts/services/formValidationService.js',
     'app/scripts/directives/wuHeader.js',
     'app/scripts/directives/wuProduct.js',
     'app/scripts/directives/wuPagination.js',
+    'app/scripts/directives/wuSidenav.js',
+    'app/scripts/directives/imageOnLoad.js',
+    'app/scripts/directives/wuScript.js',
+    'app/scripts/directives/wuAccountSidenav.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
-    'app/scripts/controllers/buyNowController.js',
-    'app/scripts/controllers/errorPageController.js'
+    'app/scripts/controllers/popupController.js',
+    'app/scripts/controllers/staticPagesController.js',
+    'app/scripts/controllers/ordersController.js',
+    'app/scripts/controllers/profileController.js'
 ];
 
 var stylesheets = [
@@ -99,8 +108,15 @@ gulp.task('buildCustomScripts', function() {
                 .pipe(gulp.dest('build/js'));
 });
 
+gulp.task('index', function () {
+
+    gulp.src('./build/index.html')
+  .pipe(inject(gulp.src(['./build/js/vendor/*.js','./build/js/*.js', './build/css/*.css'], {read: false}), {relative: true}))
+  .pipe(gulp.dest('./build'));
+});
+
 // Default Task
 gulp.task('default', ['vendorScripts', 'styles']);
 
 // production build
-gulp.task('build', ['buildVendorScripts', 'styles', 'buildCustomScripts', 'copyViews', 'copyImages']);
+gulp.task('build', ['buildVendorScripts', 'styles', 'buildCustomScripts', 'copyViews', 'copyImages','index']);

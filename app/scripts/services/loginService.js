@@ -10,16 +10,12 @@
             var factory = {};
 
             factory.loginStatus = false;
-            factory.seller = {};
+            factory.buyer = {};
 
             function loginSuccess(response) {
                 factory.loginStatus = true;
-                factory.seller = response.seller;
                 ConstantKeyValueService.token = response.token;
-
                 localStorageService.set(ConstantKeyValueService.accessTokenKey, response.token);
-                //remove this
-                localStorageService.set('seller', factory.seller);
             }
 
             factory.checkLoggedIn = function() {
@@ -27,7 +23,6 @@
                 if(token) {
                     factory.loginStatus = true;
                     ConstantKeyValueService.token = token;
-                    factory.seller = localStorageService.get('seller');
                 } else {
                     factory.loginStatus = false;
                 }
@@ -37,18 +32,16 @@
             factory.logout = function() {
                 factory.loginStatus = false;
                 ConstantKeyValueService.token = null;
-                factory.seller = {};
-
                 localStorageService.remove(ConstantKeyValueService.accessTokenKey);
             };
 
-            factory.login = function(email, password) {
+            factory.login = function(mobile, password) {
                 var deferred = $q.defer();
                 var data = {
-                    email: email,
+                    mobile_number: mobile,
                     password: password
                 };
-                var apicall = APIService.apiCall("POST", APIService.getAPIUrl('sellerLogin'), data, null, true, false, true);
+                var apicall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLogin'), data, null, true, false, true);
                 apicall.then(function(response) {
                     loginSuccess(response);
                     deferred.resolve(response);

@@ -9,9 +9,8 @@
         'APIService',
         'ngProgressBarService',
         '$rootScope',
-        '$mdMedia',
-        '$mdDialog',
-        function ($scope, $routeParams, $location, $log, UtilService, APIService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
+        'DialogService',
+        function ($scope, $routeParams, $location, $log, UtilService, APIService, ngProgressBarService, $rootScope, DialogService) {
 
             $scope.categoryID = UtilService.getIDFromSlug($routeParams.category);
             $scope.settings = {
@@ -42,7 +41,12 @@
                     }
                     angular.forEach(response.products, function(value, key) {
                         value.images = UtilService.getImages(value);
+                        if(value.images.length){
                         value.imageUrl = UtilService.getImageUrl(value.images[0], '200x200');
+                        }
+                        else{
+                            value.imageUrl = 'images/200.png';
+                        }
                     });
                     $scope.products = response.products;
                     if($scope.products.length) {
@@ -58,18 +62,10 @@
             }
             getProducts();
 
-            $scope.joinBuyerNetwork = function(event) {
-                var useFullScreen = $mdMedia('xs');
-                $mdDialog.show({
-                    controller: 'buyNowController',
-                    templateUrl: 'views/partials/buyNow.html',
-                    parent: angular.element(document.body),
-                    targetEvent: event,
-                    clickOutsideToClose:true,
-                    fullscreen: useFullScreen,
-                    locals: {
-                        productID: null
-                    }
+            $scope.buyNow = function(event, categoryID){
+                DialogService.viewDialog(event, {
+                    categoryID: categoryID,
+                    view: 'views/partials/buyNow.html'
                 });
             };
         }
