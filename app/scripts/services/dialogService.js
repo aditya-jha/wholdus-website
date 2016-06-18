@@ -7,19 +7,24 @@
         function($mdMedia, $mdDialog) {
         	var factory = {};
 
+            function getLocals(data) {
+                var locals = {};
+                locals.categoryID = data ? data.categoryID : null;
+                locals.productID = data ? data.productID : null;
+
+                return locals;
+            }
+
             factory.viewDialog = function(event, data) {
                 var useFullScreen = $mdMedia('xs');
                 $mdDialog.show({
-                    controller: 'buyNowController',
-                    templateUrl: 'views/partials/buyNow.html',
+                    controller: data.controller ? data.controller : 'PopupController',
+                    templateUrl: data.view,
                     parent: angular.element(document.body),
                     targetEvent: event,
-                    clickOutsideToClose:true,
+                    clickOutsideToClose: true,
                     fullscreen: useFullScreen,
-                    locals: {
-                        productID: data && data.productID? data.productID : null,
-                        categoryID: data && data.categoryID ? data.categoryID : null
-                    }
+                    locals: getLocals(data)
                 });
             };
 

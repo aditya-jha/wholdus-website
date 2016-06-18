@@ -9,10 +9,16 @@
         'ngProgressBarService',
         'DialogService',
         'FormValidationService',
-        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService, 
-            DialogService,FormValidationService) {
+        'UtilService',
+        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService,
+            DialogService,FormValidationService, UtilService) {
 
             $scope.formValidation=FormValidationService;
+
+            $scope.settings = {
+                isMobile: UtilService.isMobileRequest()
+            };
+
             $scope.contactus = {
                 email: "",
                 mobile_number: "",
@@ -29,7 +35,9 @@
             }
 
             $scope.buyNow = function(event){
-                DialogService.viewDialog(event);
+                DialogService.viewDialog(event, {
+                    view: 'views/partials/buyNow.html'
+                });
             };
 
             $scope.contactUs = function() {

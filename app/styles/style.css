@@ -22,6 +22,11 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+.site-width {
+    max-width: 1368px;
+    margin: 0 auto;
+}
+
 body {
     background: rgba(238, 238, 238, 1);
     font-family: 'PT Sans';
@@ -56,6 +61,16 @@ a:active {
     cursor: pointer;
 }
 
+.hover-underline:hover {
+    text-decoration: underline;
+}
+
+.primary-text {
+    color: #512DA8;
+}
+.accent-text {
+    color: #FF5722;
+}
 .tagline {
     margin-bottom: -0.6em;
     font-size: 0.8em;
@@ -235,8 +250,23 @@ a:active {
     text-transform: capitalize;
     font-family: 'Comfortaa';
 }
-.distribute-text:hover {
-    /*color: #FF5722;*/
+
+.account-sidenav {
+    max-width: 250px;
+    position: fixed !important;
+    z-index: 59;
+    height: 100vh;
+    margin-top: 65px;
+}
+
+.account-sidenav span {
+    font-size: 1.1em;
+}
+.account-sidenav a {
+    text-align: left;
+}
+.account-content {
+    margin-left: 250px;
 }
 
 #md-content{
@@ -254,9 +284,6 @@ a:active {
 
 .homepage-content-container {
     padding: 1.0em 1em 0.5em 1em;
-}
-.homepage-content {
-    /*background-color: #fff;*/
 }
 
 .filler-toolbar {
@@ -383,7 +410,6 @@ a:active {
 }
 
 .product-card-content .feature-title {
-    font-size: 0.9em;
     font-size: 0.8em;
     margin: 0px;
     padding: 0px;
@@ -541,6 +567,13 @@ a:active {
 }
 
 @media screen and (max-width: 959px) {
+    .account-content {
+      margin-left: 0px;
+    }
+
+    .footer span {
+        margin-bottom: 0.3em;
+    }
     .aboutus-card {
         margin: -3em 1em 8em 1em;
     }
@@ -803,6 +836,31 @@ a:active {
     margin-right: -8px;
 }
 .formError{
-    /*padding-top: 10px;*/
     margin-bottom: 10px;
+}
+
+.white-card {
+    background: #fff;
+}
+
+.small-font {
+    font-size: 0.9em;
+}
+.large-font {
+    font-size: 1.3em;
+}
+
+.text-center {
+    text-align: center;
+}
+.bold {
+    font-weight: bold;
+}
+
+.space {
+    margin-right: 5px;
+}
+
+.text-danger {
+    color: red;
 }
