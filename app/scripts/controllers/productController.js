@@ -19,6 +19,7 @@
             $scope.largeImageDisplay=false;
             $scope.largeImageLoading=false;
             $scope.mobileDisplay=false;
+            $scope.largeImageIndex=0;
 
             if($window.innerWidth<=760)
             {
@@ -153,22 +154,27 @@
             };
 
             $scope.largeSliderPrevious= function(){
-                if($scope.image.index>0){
-                    $scope.image.index-=1;
-                    $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');$scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');
-                    displayLargeImage();
+                if($scope.largeImageIndex>0){
+                    $scope.largeImageIndex-=1;
+                   displayLargeImage();
+
                 }
             };
 
             $scope.largeSliderNext= function(){
-                if($scope.image.index<$scope.allImages.length-1){
-                    $scope.image.index+=1;
-                    $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.image.index], '700x700');
+                if($scope.largeImageIndex<($scope.allImages.length-1)){
+                    $scope.largeImageIndex+=1;
                     displayLargeImage();
                 }
             };
 
-            $scope.displayLargeImage=function(){
+            $scope.zoomImage=function(){
+                $scope.largeImageIndex=$scope.image.index;
+                displayLargeImage();
+            };
+
+            function displayLargeImage(){
+                $scope.image.urlLarge = UtilService.getImageUrl($scope.product.images[$scope.largeImageIndex], '700x700');
                 if($window.innerWidth>760){
                     $scope.largeImageLoading=true;
                     $scope.largeImageDisplay=true;
@@ -179,6 +185,7 @@
 
             $scope.closeLargeImage=function(){
                   $scope.largeImageDisplay=false;
+                  $scope.largeImageIndex=0;
             };
          }
     ]);
