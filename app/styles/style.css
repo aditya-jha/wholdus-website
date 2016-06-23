@@ -6,6 +6,7 @@
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #727272; }
 .divider-color         { border-color: #B6B6B6; }
+
 .background-page {
     background-color: rgba(238, 238, 238, 1);
 }
@@ -863,4 +864,8 @@ a:active {
 
 .text-danger {
     color: red;
+}
+
+.text-success {
+    color: #2D882D;
 }
