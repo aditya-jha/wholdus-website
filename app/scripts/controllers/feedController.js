@@ -11,8 +11,12 @@
             var listeners = [];
 
             $scope.settings = {
-                filter: ''
+                filter: '',
             };
+
+            function toggleFooter(status) {
+                $rootScope.$broadcast('toggleFooter', true);
+            }
 
             function parseSearchParams() {
                 var search = $location.search();
@@ -23,7 +27,7 @@
 
             function fetchProducts() {
                 $rootScope.$broadcast('showProgressbar');
-                APIService.apiCall("GET", APIService.getAPIUrl('products'), null, {
+                APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, {
                     page_number: 1,
                     items_per_page: 20
                 })

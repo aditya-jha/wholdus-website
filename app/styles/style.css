@@ -869,3 +869,10 @@ a:active {
 .text-success {
     color: #2D882D;
 }
+
+.feed-details {
+    bottom: 0;
+    position:absolute;
+    width:100%;
+    color: #FFFFFF;
+}

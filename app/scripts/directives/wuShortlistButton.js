@@ -36,14 +36,6 @@
                         setPage();
                     });
 
-                    // $scope.favsUrl = function(type) {
-                    //     if(type) {
-                    //         broadcastChange('favorite');
-                    //     } else {
-                    //         broadcastChange('dislikes');
-                    //     }
-                    // };
-
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value) {
                             if(value) value();
