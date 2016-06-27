@@ -1,3 +1,124 @@
-<div data-ng-if="showFooter">
-    this is the footer
+<div data-ng-if="showFooter" flex="100" flex-offset-gt-sm="20" layout-wrap layout="row" data-ng-show="showDetailsButton">
+    <div flex="100" layout-padding>
+        <span>{{product.name}}</span>
+    </div>
+    <hr flex="100"/>
+    <div flex="100" layout="row" layout-align="space-around center" class="">
+        <div layout="row">
+            <span class="space small-font">price upto:</span>
+            <span>Rs. {{product.min_price_per_unit}}</span>
+        </div>
+        <div layout="row">
+            <span class="space small-font">margin upto:</span>
+            <span>{{(product.price_per_unit - product.min_price_per_unit)*100/product.price_per_unit |  number:0}} %</span>
+        </div>
+    </div>
+    <div class="text-center feed-details-icon" flex="100">
+        <md-button class="md-icon-button md-raised md-warn" aria-label="feed-detail" data-ng-click="showDetails(1)">
+            <md-icon>
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="#FFFFFF" d="M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z" />
+                </svg>
+            </md-icon>
+        </md-button>
+    </div>
+</div>
+<div data-ng-if="showFooter" flex="100" flex-offset-gt-sm="20" layout="row" data-ng-show="!showDetailsButton" class="feed-footer-details">
+    <div layout="row" flex="100" layout-wrap>
+        <div layout="row" class="product-page-card-content" style="background:#512DA8" flex="100" layout-wrap>
+            <div layout="row" layout-align="center center" flex="100" style="margin-top:-1em; margin-bottom:0.5em">
+                <md-button class="md-raised md-icon-button" data-ng-click="showDetails(0)">
+                    <md-icon>
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="#000000" d="M7.41,18.41L6,17L12,11L18,17L16.59,18.41L12,13.83L7.41,18.41M7.41,12.41L6,11L12,5L18,11L16.59,12.41L12,7.83L7.41,12.41Z" />
+                        </svg>
+                    </md-icon>
+                </md-button>
+            </div>
+            <div class="product-price" flex="100">
+                <span class="feature-title">Minimum Price:</span> <span>Rs. {{product.min_price_per_unit}}</span>
+            </div>
+            <hr flex />
+            <div flex="100">
+                <span class="feature-title">Retail Price:</span> Rs. {{product.price_per_unit}}
+            </div>
+            <div flex="100">
+                <span class="feature-title">Margin upto: </span>{{(product.price_per_unit - product.min_price_per_unit)*100/product.price_per_unit |  number:0}}%
+            </div>
+            <hr flex />
+            <div flex="100">
+                <span class="feature-title">Manufactured By:</span> {{product.seller.company_name}}
+            </div>
+            <div flex="100">
+                <span class="feature-title">Catalog Number:</span> {{product.details.seller_catalog_number}}
+            </div>
+            <div flex="100">
+                <span class="feature-title">Lot Size:</span> {{product.lot_size}}
+            </div>
+            <hr flex />
+            <div flex="100">
+                Wholesale Pricing
+            </div>
+            <div layout="row" layout-align="center center" flex="100">
+                <table>
+                    <thead class="lot-pricing-head">
+                        <td>
+                            no. of lots
+                        </td>
+                        <td>
+                            price/unit
+                        </td>
+                        <td>
+                            your margin(upto)
+                        </td>
+                        <td>
+                            lot price
+                        </td>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="pl in product.product_lot">
+                            <td>
+                                {{pl.lot_size_from}}+
+                            </td>
+                            <td>
+                                {{pl.price_per_unit | number:0}}
+                            </td>
+                            <td>
+                                {{(product.price_per_unit-pl.price_per_unit)*100/product.price_per_unit | number:0}}%
+                            </td>
+                            <td>
+                                {{pl.price_per_unit*product.lot_size | number:0}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div layout="row" flex="100" style="padding:0">
+                <div layout="row" flex style="padding:0">
+                    <md-button data-ng-href="{{product.url}}" target="_blank" flex class="md-raised md-warn">
+                        <md-icon class="space">
+                            <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M-74 29h48v48h-48V29z" fill="none"/>
+                                <path d="M22 9V7h-2V5c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-2h2v-2h-2v-2h2v-2h-2V9h2zm-4 10H4V5h14v14zM6 13h5v4H6zm6-6h4v3h-4zM6 7h5v5H6zm6 4h4v6h-4z"/>
+                                <path d="M0 0h24v24H0zm0 0h24v24H0z" fill="none"/>
+                            </svg>
+                        </md-icon>
+                        <span>view details</span>
+                    </md-button>
+                </div>
+                <div layout="row" flex style="padding:0">
+                    <md-button data-ng-click="favButton()" target="_blank" flex class="md-raised md-warn">
+                        <md-icon class="space">
+                            <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </md-icon>
+                        <span>Favorites</span>
+                    </md-button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
