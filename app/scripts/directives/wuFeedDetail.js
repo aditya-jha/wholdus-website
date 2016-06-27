@@ -12,30 +12,18 @@
                 function($scope, $location, $log, $rootScope, $element) {
                     var listeners = [];
 
-                    $scope.product = null;
                     $scope.showDetailsButton = true;
 
                     function init() {
-                        $scope.showFooter = false;
-                        setFooterStatus();
+                        $scope.product = null;
                     }
-
-                    function setFooterStatus() {
-                        var url = $location.url();
-                        if(url.indexOf('hand-picked') >= 0) {
-                            $scope.showFooter = true;
-                        } else {
-                            $scope.showFooter = false;
-                        }
-                    }
-
-                    var locationChangeListener = $rootScope.$on('$locationChangeSuccess', function(event, data) {
-                        setFooterStatus();
-                    });
-                    listeners.push(locationChangeListener);
 
                     var productToShowListener = $rootScope.$on('productToShow', function(event, data) {
-                        $scope.product = data;
+                        if(data) {
+                            $scope.product = data;
+                        } else {
+                            $scope.product = null;
+                        }
                     });
                     listeners.push(productToShowListener);
 
@@ -52,7 +40,6 @@
                     };
 
                     init();
-
 
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value) {

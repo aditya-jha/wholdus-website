@@ -51,6 +51,9 @@
                     if(response.buyer_products.length) {
                         $scope.products = response.buyer_products;
                         setProductToShow($scope.pageSettings.productIndex);
+                    } else {
+                        $scope.noProducts = true;
+                        $rootScope.$broadcast('productToShow');
                     }
                 });
             }
@@ -72,7 +75,7 @@
             };
 
             $scope.favButton = function(type) {
-                if($scope.pageSettings.productIndex < $scope.products.length-1) {
+                if($scope.pageSettings.productIndex < $scope.products.length) {
                     APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
                         buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
                         shortlisted: type === 1 ? 1 : null,
@@ -83,9 +86,15 @@
                         $log.log(error);
                     });
                     $scope.pageSettings.productIndex += 1;
-                    setProductToShow($scope.pageSettings.productIndex);
+                    if($scope.pageSettings.productIndex < $scope.products.length) {
+                        setProductToShow($scope.pageSettings.productIndex);
+                    } else {
+                        $scope.noProducts = true;
+                        $rootScope.$broadcast('productToShow');
+                    }
                 } else {
                     $scope.noProducts = true;
+                    $rootScope.$broadcast('productToShow');
                 }
             };
 

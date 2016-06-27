@@ -1,4 +1,4 @@
-<div data-ng-if="showFooter" flex="100" flex-offset-gt-sm="20" layout-wrap layout="row" data-ng-show="showDetailsButton">
+<div data-ng-if="product" flex="100" flex-offset-gt-sm="20" layout-wrap layout="row" data-ng-show="showDetailsButton">
     <div flex="100" layout-padding>
         <span>{{product.name}}</span>
     </div>
@@ -23,11 +23,11 @@
         </md-button>
     </div>
 </div>
-<div data-ng-if="showFooter" flex="100" flex-offset-gt-sm="20" layout="row" data-ng-show="!showDetailsButton" class="feed-footer-details">
+<div data-ng-if="product" flex="100" flex-offset-gt-sm="20" layout="row" data-ng-show="!showDetailsButton" class="feed-footer-details">
     <div layout="row" flex="100" layout-wrap>
         <div layout="row" class="product-page-card-content" style="background:#512DA8" flex="100" layout-wrap>
             <div layout="row" layout-align="center center" flex="100" style="margin-top:-1em; margin-bottom:0.5em">
-                <md-button class="md-raised md-icon-button" data-ng-click="showDetails(0)">
+                <md-button class="md-raised md-icon-button" data-ng-click="showDetails(0)" aria-label="close-section">
                     <md-icon>
                         <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                             <path fill="#000000" d="M7.41,18.41L6,17L12,11L18,17L16.59,18.41L12,13.83L7.41,18.41M7.41,12.41L6,11L12,5L18,11L16.59,12.41L12,7.83L7.41,12.41Z" />
