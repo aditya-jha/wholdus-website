@@ -15,7 +15,10 @@
                     $scope.showDetailsButton = true;
 
                     function init() {
-                        $scope.product = null;
+                        var url = $location.url();
+                        if(url.indexOf('hand-picked') == -1) {
+                            $scope.product = null;
+                        }
                     }
 
                     var productToShowListener = $rootScope.$on('productToShow', function(event, data) {
@@ -26,6 +29,11 @@
                         }
                     });
                     listeners.push(productToShowListener);
+
+                    var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
+                        init();
+                    });
+                    listeners.push(locationChangeListener);
 
                     $scope.showDetails = function(type) {
                         if(type==1) {
