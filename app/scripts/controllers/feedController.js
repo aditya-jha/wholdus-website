@@ -22,12 +22,23 @@
             $scope.productToShow = null;
 
             function parseSearchParams() {
+                $scope.noProducts = false;
                 var search = $location.search();
                 if(search.filter) {
                     $scope.pageSettings.filter = search.filter;
-                    if(search.filter == 'favorite') $scope.pageSettings.responded = 1;
-                    else if(search.filter == 'dislikes') $scope.pageSettings.responded = 2;
-                    else $scope.pageSettings.responded = 0;
+                    if(search.filter == 'favorite') {
+                        $rootScope.$broadcast('productToShow');
+                        $scope.pageSettings.responded = 1;
+                    }
+                    else if(search.filter == 'dislikes') {
+                        $rootScope.$broadcast('productToShow');
+                        $scope.pageSettings.responded = 2;
+                    }
+                    else {
+                        $location.url('/account/hand-picked-products');
+                    }
+                } else {
+                    $scope.pageSettings.responded = 0;
                 }
             }
 
@@ -42,11 +53,20 @@
                 }
             }
 
+            function parseImages(obj) {
+                angular.forEach(obj, function(value, key) {
+                    value.product.images = UtilService.getImages(value.product);
+                    if(value.product.images.length) {
+                        value.product.imageUrl = UtilService.getImageUrl(value.product.images[0], '200x200');
+                    }
+                });
+            }
+
             function fetchProducts() {
                 $rootScope.$broadcast('showProgressbar');
                 APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, {
                     page_number: $scope.pageSettings.currentPage,
-                    items_per_page: 1,
+                    items_per_page: 20,
                     is_active: 1,
                     responded: $scope.pageSettings.responded
                 })
@@ -54,9 +74,16 @@
                     $rootScope.$broadcast('endProgressbar');
                     $log.log(response);
                     $scope.pageSettings.totalPages = response.total_pages;
+
                     if(response.buyer_products.length) {
-                        $scope.products = response.buyer_products;
-                        setProductToShow($scope.pageSettings.productIndex);
+                        $scope.noProducts = false;
+                        if($scope.pageSettings.responded === 0) {
+                            $scope.products = response.buyer_products;
+                            setProductToShow($scope.pageSettings.productIndex);
+                        } else {
+                            parseImages(response.buyer_products);
+                            $scope.products = response.buyer_products;
+                        }
                     } else {
                         $scope.noProducts = true;
                         $rootScope.$broadcast('productToShow');
@@ -74,6 +101,11 @@
                 init();
             });
             listeners.push(favUrlListener);
+
+            var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
+                init();
+            });
+            listeners.push(locationChangeListener);
 
             $scope.showFilledStatus = function(index) {
                 if(index) $scope.showFilled = true;
