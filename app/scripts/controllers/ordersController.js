@@ -27,12 +27,10 @@
                 $rootScope.$broadcast('showProgressbar');
                 APIService.apiCall("GET", APIService.getAPIUrl('orders'))
                 .then(function(response) {
-                    $log.log(response);
                     parseOrders(response.orders);
                     $scope.orders = response.orders;
                     $rootScope.$broadcast('endProgressbar');
                 }, function(error) {
-                    $log.log(error);
                     $rootScope.$broadcast('endProgressbar');
                 });
             }
