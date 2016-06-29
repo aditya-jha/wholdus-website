@@ -36,11 +36,15 @@ webapp.config([
             templateUrl: "views/we-are-social.html",
             controller: "StaticPagesController",
         }).when('/account/orders', {
-            templateUrl: 'views/orders.html',
+            templateUrl: 'views/account/orders.html',
             controller: 'OrdersController'
         }).when('/account/profile', {
-            templateUrl: 'views/profile.html',
+            templateUrl: 'views/account/profile.html',
             controller: 'ProfileController'
+        }).when('/account/hand-picked-products', {
+            templateUrl: 'views/account/feed.html',
+            controller: 'FeedController',
+            reloadOnSearch: false
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",
@@ -53,8 +57,7 @@ webapp.config([
 
         $mdThemingProvider.theme('default')
                         .primaryPalette('deep-purple')
-                        .accentPalette('orange');
-        $mdIconProvider.defaultIconSet('./images/icons.svg', 128);
+                        .accentPalette('deep-orange');
 
         localStorageServiceProvider.setPrefix('probzip-webapp');
     }

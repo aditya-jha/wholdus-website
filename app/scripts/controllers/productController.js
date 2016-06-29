@@ -181,7 +181,7 @@
                 } else{
                     $window.location.href=$scope.image.urlLarge;
                 }
-            };
+            }
 
             $scope.closeLargeImage=function(){
                   $scope.largeImageDisplay=false;

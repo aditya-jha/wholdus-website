@@ -18,7 +18,8 @@
                     buyerLogin: 'users/buyer/login',
                     category: 'category',
                     buyerLeads: 'leads/buyer',
-                    contactus: 'leads/contactus'
+                    contactus: 'leads/contactus',
+                    buyerProducts: 'users/buyer/buyerproducts'
                 },
                 accessTokenKey: 'randomData',
                 sellerSite: 'http://seller.wholdus.com'

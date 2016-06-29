@@ -6,6 +6,7 @@
 .primary-text-color    { color: #212121; }
 .secondary-text-color  { color: #727272; }
 .divider-color         { border-color: #B6B6B6; }
+
 .background-page {
     background-color: rgba(238, 238, 238, 1);
 }
@@ -626,6 +627,12 @@ a:active {
     }
 }
 
+@media screen and (min-width:600px) {
+  .feed-details-icon {
+      margin-top: -1em;
+  }
+}
+
 @media screen and (max-width:640px) {
     .product-name {
         font-size: 1.05em !important;
@@ -863,4 +870,44 @@ a:active {
 
 .text-danger {
     color: red;
+}
+
+.text-success {
+    color: #2D882D;
+}
+
+.feed-details {
+    bottom: 0;
+    position:absolute;
+    width:100%;
+    color: #FFFFFF;
+}
+
+@keyframes bounce {
+      0% {
+          transform:translateY(0em);
+      }
+      25% {
+          transform:translateY(-0.5em);
+      }
+      75% {
+          transform:translateY(0.5em);
+      }
+}
+
+.feed-details-icon {
+    animation-name: bounce;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}
+
+@media screen and (min-width:1260px) {
+    .feed-details {
+        padding-right: 0.5em;
+    }
+}
+
+.feed-footer-details {
+    max-height: 70vh;
+    overflow-y: scroll;
 }

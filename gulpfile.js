@@ -37,13 +37,15 @@ var jsCustom = [
     'app/scripts/directives/imageOnLoad.js',
     'app/scripts/directives/wuScript.js',
     'app/scripts/directives/wuAccountSidenav.js',
+    'app/scripts/directives/wuFeedDetail.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
     'app/scripts/controllers/popupController.js',
     'app/scripts/controllers/staticPagesController.js',
     'app/scripts/controllers/ordersController.js',
-    'app/scripts/controllers/profileController.js'
+    'app/scripts/controllers/profileController.js',
+    'app/scripts/controllers/feedController.js'
 ];
 
 var stylesheets = [
