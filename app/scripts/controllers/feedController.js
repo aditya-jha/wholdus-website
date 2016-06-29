@@ -102,8 +102,10 @@
             });
             listeners.push(favUrlListener);
 
-            var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
-                init();
+            var locationChangeListener = $scope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl) {
+                if(newUrl.indexOf('hand-picked') > -1) {
+                    init();
+                }
             });
             listeners.push(locationChangeListener);
 
