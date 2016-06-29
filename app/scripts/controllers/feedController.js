@@ -20,6 +20,8 @@
             };
             $scope.products = [];
             $scope.productToShow = null;
+            $scope.displayImageLoading=true;
+            $scope.displayImageStyle={'opacity':'1.0'};
 
             function parseSearchParams() {
                 $scope.noProducts = false;
@@ -126,6 +128,8 @@
                     });
                     $scope.pageSettings.productIndex += 1;
                     if($scope.pageSettings.productIndex < $scope.products.length) {
+                        $scope.displayImageLoading=true;
+                          $scope.displayImageStyle={'opacity':'0.5'};
                         setProductToShow($scope.pageSettings.productIndex);
                     } else {
                         if($scope.pageSettings.currentPage < $scope.pageSettings.totalPages) {
@@ -143,11 +147,16 @@
                 }
             };
 
+             $scope.imageLoaded= function(){
+                    $scope.displayImageLoading=false;
+                    $scope.displayImageStyle={'opacity':'1.0'};
+            };
+
             $scope.$on('$destroy', function() {
                 angular.forEach(listeners, function(value) {
                     if(value) value();
                 });
             });
         }
-    ]);
+        ]);
 })();
