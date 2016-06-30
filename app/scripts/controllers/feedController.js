@@ -90,6 +90,8 @@
                         $scope.noProducts = true;
                         $rootScope.$broadcast('productToShow');
                     }
+                }, function(error) {
+                    $location.url('/');
                 });
             }
 
@@ -107,6 +109,8 @@
             var locationChangeListener = $scope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl) {
                 if(newUrl.indexOf('hand-picked') > -1) {
                     init();
+                } else {
+                    $rootScope.$broadcast('productToShow');
                 }
             });
             listeners.push(locationChangeListener);
