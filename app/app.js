@@ -12,7 +12,7 @@ webapp.config([
     '$mdThemingProvider',
     '$mdIconProvider',
     'localStorageServiceProvider',
-    function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider) {
+    function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $location) {
 
         $routeProvider.when('/', {
             templateUrl: "views/homepage.html",
@@ -45,6 +45,17 @@ webapp.config([
             templateUrl: 'views/account/feed.html',
             controller: 'FeedController',
             reloadOnSearch: false
+        }).when('/blog', {
+            template: '<div></div>',
+            controller: [
+                '$location',
+                function($location) {
+                    $location.url('blog/home');
+                }
+            ]
+        }).when('/blog/:article', {
+            templateUrl: 'views/blog/blogPage.html',
+            controller: 'BlogController'
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",
