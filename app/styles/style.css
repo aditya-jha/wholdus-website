@@ -267,7 +267,7 @@ a:active {
     text-align: left;
 }
 .account-content {
-    margin-left: 250px;
+    margin-left: 260px;
 }
 
 #md-content{
@@ -851,7 +851,7 @@ a:active {
 }
 
 .small-font {
-    font-size: 0.9em;
+    font-size: 0.9em !important;
 }
 .large-font {
     font-size: 1.3em;
@@ -876,6 +876,10 @@ a:active {
     color: #2D882D;
 }
 
+.wrap-word {
+    word-wrap: normal;
+}
+
 .feed-details {
     bottom: 0;
     position:absolute;
@@ -883,6 +887,32 @@ a:active {
     color: #FFFFFF;
 }
 
+.blog-page {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.blog-list {
+    padding: 10px 0px !important;
+}
+
+.blog-list span {
+    font-size: 1em !important;
+}
+
+.blog-content {
+    width: 100%;
+    max-width: 700px;
+    background: #fff;
+    margin: 0 auto;
+}
+
+.padding-1em {
+    padding: 1em;
+}
+
+.padding-left-1em {
+    padding-left: 1em;
+}
 @keyframes bounce {
       0% {
           transform:translateY(0em);
