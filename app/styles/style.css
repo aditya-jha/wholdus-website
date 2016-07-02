@@ -77,6 +77,9 @@ a:active {
     font-size: 0.8em;
     text-align: center;
 }
+.breadcrumbs{
+    margin-top: 10px;
+}
 
 .breadcrumb-inactive{
     font-size: 80%;
@@ -910,4 +913,123 @@ a:active {
 .feed-footer-details {
     max-height: 70vh;
     overflow-y: scroll;
+}
+.desktop-filter{
+    margin-top:30px;
+    border-top:2px solid grey;
+    border-bottom:2px solid grey;
+    width:80%;
+    margin:auto;
+}
+.desktop-filter-panel{
+  position: absolute;
+  z-index: 10;
+  /*background: #fff;*/
+  padding: auto;
+  width: 100%;
+}
+.desktop-filter-panel>div{
+
+  background: #fff;
+  padding:20px;
+  border:1px solid rgba(0,0,0,0.2);
+}
+
+.mobile-filter{
+  width:100%;
+  background-color: #fff;
+  font-size:1.2em;
+  margin:0;
+  padding:10px;
+  color: #4F4F4F;
+   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
+   position: fixed;
+   cursor: pointer;
+}
+.mobile-filter-footer{
+  position:fixed;
+  bottom:0; 
+  width:100%; 
+  background:#fff;
+  z-index: 10;
+  /*border-top:1px solid rgba(255,255,255,0.2);*/
+}
+
+#primary_nav_wrap
+{
+  
+}
+
+#primary_nav_wrap ul
+{
+    list-style:none;
+    position:relative;
+    float:left;
+    margin:0;
+    padding:0
+}
+
+#primary_nav_wrap ul a
+{
+    display:block;
+    color:#333;
+    text-decoration:none;
+    cursor: pointer;
+    color: rgba(0,0,0,.6);
+    font-weight:700;
+    font-size:12px;
+    line-height:32px;
+    padding:0 15px;
+    font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif
+}
+
+#primary_nav_wrap ul li
+{
+    position:relative;
+    float:left;
+    margin:0;
+    padding:0
+}
+
+
+#primary_nav_wrap ul li:hover
+{
+    background:#f6f6f6
+}
+
+#primary_nav_wrap ul li:hover a > img
+{
+     -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
+}
+
+.small-label {
+    -ms-transform: scale(0.8, 0.8); 
+    -webkit-transform: scale(0.8, 0.8);
+    transform: scale(0.8, 0.8);
+
+
+
+}
+
+/* Mobile filter Dialog Properties*/
+
+.filter-property-container{
+   background-color:#F0F0F0;
+   border-right: 1px solid #F0F0F0; 
+    /*color:#fff;*/
+    /*padding:5px;*/
+}
+
+.filter-property{
+    /*background-color:#C8C8C8 ;*/
+  line-height: 40px;
+  text-transform: uppercase;
+  padding-right: 10px;
+  font-size:0.9em;
+  text-align: center;
+  /*border-left: 3px solid #d19b3d;*/
+  border-bottom: 1px solid #C8C8C8;
+  
 }

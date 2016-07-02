@@ -76,6 +76,20 @@
                 var name = slug.join(' ');
                 return name;
             };
+             factory.sellerString='';
+             factory.maxPrice=5000;
+             factory.minPrice=0;
+             
+            factory.setFilterParams = function(sellerString,minPrice,maxPrice) {
+                 factory.minPrice=minPrice;
+                factory.maxPrice=maxPrice;
+                factory.sellerString=sellerString;
+            };
+            factory.currentCategoryID=null;
+             factory.setCategory = function(categoryID) {
+                factory.currentCategoryID=categoryID;
+            };
+       
 
             return factory;
         }
