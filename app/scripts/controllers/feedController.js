@@ -90,6 +90,8 @@
                         $scope.noProducts = true;
                         $rootScope.$broadcast('productToShow');
                     }
+                }, function(error) {
+                    $location.url('/');
                 });
             }
 
@@ -104,8 +106,12 @@
             });
             listeners.push(favUrlListener);
 
-            var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
-                init();
+            var locationChangeListener = $scope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl) {
+                if(newUrl.indexOf('hand-picked') > -1) {
+                    init();
+                } else {
+                    $rootScope.$broadcast('productToShow');
+                }
             });
             listeners.push(locationChangeListener);
 
