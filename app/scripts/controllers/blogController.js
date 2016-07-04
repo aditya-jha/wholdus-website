@@ -8,10 +8,9 @@
         'APIService',
         'UtilService',
         '$location',
-        '$sce',
         '$rootScope',
         'ngProgressBarService',
-        function($scope, $log, $routeParams, $sce, $compile, APIService, UtilService, $location, $sce, $rootScope, ngProgressBarService) {
+        function($scope, $log, $routeParams, $sce, $compile, APIService, UtilService, $location, $rootScope, ngProgressBarService) {
 
             // function init() {
             //     if($routeParams.article && $routeParams.article == 'home') {
@@ -26,8 +25,6 @@
 
             $scope.home = false;
 
-            $scope.articleContent = $sce.trustAsHtml('<b>this is content</b>');
-
             $scope.getBlogs = function(params){
                         $rootScope.$broadcast('showProgressbar');
                         APIService.apiCall('GET', APIService.getAPIUrl('blogarticle'),null, params).
@@ -38,6 +35,7 @@
                             }
                             else if ($scope.home == false){
                                 $scope.data.article = response.articles[0];
+                                $scope.articleContent = $sce.trustAsHtml($scope.data.article.content);
                             }
                             $scope.data.article.cover_image_link= 'https://media.licdn.com/mpr/mpr/jc/AAEAAQAAAAAAAAdZAAAAJDE1YmU1NDRkLWI2ZGMtNGU4MC1hN2EyLWNhNDM4MTg2YzA0OA.jpg';
                         },function(error){
@@ -61,6 +59,7 @@
                if($routeParams.article && $routeParams.article!='home'){
                 $scope.getBlogs({
                     articleID:UtilService.getIDFromSlug($routeParams.article),
+                    article_details:1,
                 });
                }
                else{
