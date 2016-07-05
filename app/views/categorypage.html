@@ -9,7 +9,7 @@
 <div hide-gt-xs style="height:40px;"></div>
 
 <div layout="column" layout-align="start center" flex class="breadcrumbs">
-   <div layout="row" layout-align="start center">
+ <div layout="row" layout-align="start center">
     <a href="/"><span class="breadcrumb-active" >Home </span></a>
     <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
     <span class="breadcrumb-inactive">{{category.display_name}}</span>
@@ -18,66 +18,99 @@
 <h1 id="category-title">{{category.display_name}} </h1>
 </div>
 
-<div ng-mouseleave="desktopFilterID=null">
-<div layout="row" layout-align="center start" flex="90" hide-xs class="desktop-filter" scroll >
-    <div id="primary_nav_wrap">
-        <ul>
-            <li ng-mouseover="desktopFilterID=1">
-              <a href="#" >MANUFACTURER &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
-            </li>
-            <li ng-mouseover="desktopFilterID=2">
-            <a href="#">PRICE &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
-            </li>  
-        </ul>
+<div ng-mouseleave="desktopFilterID=null" scroll>
+    <div layout="row" layout-align="center start" flex="90" hide-xs class="desktop-filter">
+        <div id="primary_nav_wrap">
+            <ul>
+              <li ng-mouseover="desktopFilterID=1">
+                  <a href="#" >MANUFACTURER &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>
+              <li ng-mouseover="desktopFilterID=2">
+                <a href="#">PRICE &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>
+              <li ng-mouseover="desktopFilterID=3">
+                <a href="#">COLOUR &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>
+              <li ng-mouseover="desktopFilterID=4">
+                <a href="#">FABRIC &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>  
+            </ul>
+        </div>
     </div>
-</div>
-
-
 <div layout="row" flex="100"  class="desktop-filter-panel" layout-align="center">
-        
-        <div md-whiteframe="2" layout="row" layout-wrap layout-align="center" ng-show="desktopFilterID==1" ng-mouseleave="filterChanged()" flex="75"  style="max-height:400px; overflow-y: auto;">
 
-              <div flex="25" flex-sm="50" data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" style="padding:2px;" class="small-label" >
-                  <!-- <input type="checkbox" id="{{seller.name}}" class="css-checkbox" ng-model="seller.isShow"/>
-                  <label for="{{seller.name}}" class="css-label" 
-                  style="color: rgba(0,0,0,.6); text-transform:capitalize">
-                  {{seller.company_name| lowercase  }}</label> -->
+    <div md-whiteframe="2" layout="row" layout-wrap  ng-show="desktopFilterID==1" ng-mouseleave="applyFilters('desktop')" flex="75"  style="max-height:400px; overflow-y: auto;">
+
+        <div flex="25" flex-sm="50" data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" style="padding:2px;" class="small-label" >
                   <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string"
                   style="margin:0px;">
-                    <label style="color: rgba(0,0,0,.6); text-transform:capitalize; cursor:pointer; margin:0px;">{{seller.company_name| lowercase  }}</label>
-                </md-checkbox>
-            </div>        
+                  <label style="color: rgba(0,0,0,.6); text-transform:capitalize; cursor:pointer; margin:0px;">{{seller.company_name| lowercase  }}</label>
+                  </md-checkbox>
+        </div>        
+      </div>
+
+        <div  layout="column" md-whiteframe="2" ng-show="desktopFilterID==2"  ng-mouseleave="applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50" style="padding:10px">
+        
+            <div layout="row" layout-wrap>
+             <div flex="50" flex-sm="50" data-ng-repeat="p in priceRanges" layout-align="start start" 
+             style="padding:5px;" class="small-label" >
+                  <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string"
+                  style="margin:0px;" ng-click="updateSelection($index)">
+                  <label style="color: rgba(0,0,0,.6); cursor:pointer; margin:0px;">
+                     Rs. {{p.min_value}} 
+                     <span ng-if="!$last">to Rs.{{p.max_value}}</span>
+                     <span ng-if="$last">+</span>
+                  </label>
+                  </md-checkbox>
+               
+            </div>
+            </div> 
+
+            <div layout="row" layout-align="space-around center" layout-margin>
+                <div layout="column" flex="30" ng-cloak>
+                    <span class="custum-input-label">Min Price</span>
+                    <div style="margin-top:-5px;"> Rs.
+                    <md-input-container style="width:80px; margin:0px">    
+                    <input type="number" data-ng-model="minPrice" aria-label="minPrice" />
+                    </md-input-container>
+                    </div> 
+                </div>
+                <div layout="column" flex="30" ng-cloak>
+                        <span class="custum-input-label">Max Price</span>
+                    <div style="margin-top:-5px;"> Rs.
+                    <md-input-container style="width:80px; margin:0px">
+                        <input type="number" data-ng-model="maxPrice" aria-label="maxPrice"/>
+                    </md-input-container>
+                    </div> 
+                </div>
+            </div>
+     
+       </div>
+
+       <div md-whiteframe="2" layout="row" layout-align="center" ng-show="desktopFilterID==3" ng-mouseleave="applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
+        <div layout="row" flex layout-wrap layout-align="start center">
+        <div data-ng-repeat="c in colours" flex="25"  layout-align="start start" ng-click="updateColour($index)">
+         <div class="color-box-container" layout="row">
+         <div style="background:{{c.colourCode}}" class="color-box" ng-class={'color-box-selected':c.active}>          
+         </div> 
+          <span style="font-size:0.9em; color:grey">&nbsp;{{c.name}}</span>
+        </div>
+        </div>     
+        </div>      
         </div>
 
-        <div  layout="row" md-whiteframe="2" ng-show="desktopFilterID==2"  layout-align="center" ng-mouseleave="filterChanged()" flex="35" flex-sm="60" style="padding:0">
-            <div layout="column" flex>
-                    <div layout="row" flex="100" layout-align="center center" ng-cloak>
-                    <div flex="20" layout layout-align="center center">
-                        <span>Min Price</span>
-                    </div>
-                    <md-slider flex md-discrete data-ng-model="minPrice" step="100" min="0" max="{{maxPrice}}" aria-label="minPrice" class="md-warn">
-                    </md-slider>&nbsp;
-                    <div flex="20" layout layout-align="center center">
-                        <md-input-container>
-                           &#x20a8;<input type="number" data-ng-model="minPrice" aria-label="minPrice"/>
-                       </md-input-container>
-                   </div>
-               </div>
-               <div layout="row" flex="100" layout-align="center center" style="margin-top:-50px" ng-cloak>
-                <div flex="20" layout layout-align="center center">
-                    <span>Max Price</span>
-                </div>
-                <md-slider flex md-discrete data-ng-model="maxPrice" step="100" min="{{minPrice+100}}" max="5000" aria-label="maxPrice" class="md-warn">
-                </md-slider>&nbsp;
-                <div flex="20" layout layout-align="center center">
-                    <md-input-container>
-                       &#x20a8;<input type="number" data-ng-model="maxPrice" aria-label="maxPrice"/>
-                   </md-input-container>
-               </div>
-                </div>
-            </div>   
-        </div>
-</div>
+         <div md-whiteframe="2" layout="row" layout-wrap layout-align="start" ng-show="desktopFilterID==4" ng-mouseleave="applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
+
+            <div flex="25"  data-ng-repeat="f in fabrics" layout-align="start start" 
+                style="padding:2px;" class="small-label" >
+                  <md-checkbox  class="md-primary" name="string" ng-model="f.active"  aria-label="string"
+                  style="margin:0px;">
+                  <label style="color:grey; cursor:pointer">{{f.name }}</label>
+                  </md-checkbox>
+            </div>        
+      </div>
+    
+    </div>
 
 </div>
 

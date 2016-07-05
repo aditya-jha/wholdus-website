@@ -9,7 +9,47 @@
         '$window',
         function($rootScope, $log, $location, ConstantKeyValueService, $window) {
             var factory = {};
+            function initiliseFilters(){
+            factory.priceRanges=[
+            {id:1,min_value:1, max_value:199, active:false},
+            {id:2,min_value:200, max_value:499, active:false},
+            {id:3,min_value:500, max_value:799, active:false},
+            {id:4,min_value:800, max_value:999, active:false},
+            {id:5,min_value:1000, max_value:1499, active:false},
+            {id:6,min_value:1500, max_value:1999, active:false},
+            {id:7,min_value:2000, max_value:2499, active:false},
+            {id:8,min_value:2500, max_value:2999, active:false},
+            {id:9,min_value:3000, max_value:10000, active:false},
+            ];
 
+             factory.colours=[
+             {id:1, name:'Red',colourCode:'#ff0000',active:false},
+             {id:2, name:'Blue',colourCode:'#0000ff',active:false},
+             {id:3, name:'Green',colourCode:'#00ff00',active:false},
+             {id:4, name:'Yellow',colourCode:'#ffff00',active:false},
+             {id:5, name:'Black',colourCode:'#000000',active:false},
+             {id:6, name:'White',colourCode:'#ffffff',active:false},
+             {id:7, name:'Pink',colourCode:'#FF1493',active:false},
+             {id:8, name:'Beige',colourCode:'#F5F5DC',active:false},
+             ];
+
+             factory.fabrics=[
+             {id:1, name:'Cotton',active:false},
+             {id:2, name:'Silk',active:false},
+             {id:3, name:'Rayon',active:false},
+             {id:4, name:'Georgette',active:false},
+             {id:5, name:'Velvet',active:false},
+             {id:6, name:'Net',active:false},
+             {id:6, name:'Brasso',active:false},
+             ];
+
+             factory.selectedColours='';
+             factory.selectedFabrics='';
+            }
+
+
+            initiliseFilters();
+            
             factory.getIDFromSlug = function(slug) {
                 slug = slug.split('-');
                 if(slug.length > 0) {
@@ -77,14 +117,24 @@
                 return name;
             };
              factory.sellerString='';
-             factory.maxPrice=5000;
-             factory.minPrice=0;
+             // factory.maxPrice=5000;
+             // factory.minPrice=0;
              
-            factory.setFilterParams = function(sellerString,minPrice,maxPrice) {
-                 factory.minPrice=minPrice;
-                factory.maxPrice=maxPrice;
+            factory.setFilterParams = function(sellerString,priceRangeIndex,minPrice,maxPrice) {
+                 factory.priceRangeIndex=priceRangeIndex;
                 factory.sellerString=sellerString;
+                factory.maxPrice=maxPrice;
+                factory.minPrice=minPrice;   
             };
+            factory.setActiveFilterParams=function(colours,fabrics,selectedColours,selectedFabrics){
+                factory.colours=colours;
+                factory.fabrics=fabrics;
+                factory.selectedColours=selectedColours;
+                factory.selectedFabrics=selectedFabrics;
+            }
+            factory.resetFilterParams=function(){
+                initiliseFilters();    
+            }
             factory.currentCategoryID=null;
              factory.setCategory = function(categoryID) {
                 factory.currentCategoryID=categoryID;

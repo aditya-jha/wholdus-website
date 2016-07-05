@@ -916,11 +916,12 @@ a:active {
 }
 .desktop-filter{
     margin-top:30px;
-    border-top:2px solid grey;
-    border-bottom:2px solid grey;
+    border-top:2px solid #CCCCCC;
+    border-bottom:2px solid #CCCCCC;
     width:80%;
     margin:auto;
 }
+
 .desktop-filter-panel{
   position: absolute;
   z-index: 10;
@@ -933,6 +934,7 @@ a:active {
   background: #fff;
   padding:20px;
   border:1px solid rgba(0,0,0,0.2);
+
 }
 
 .mobile-filter{
@@ -945,6 +947,11 @@ a:active {
    font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
    position: fixed;
    cursor: pointer;
+}
+
+.mobile-filter-panel{
+  max-height:90%; 
+  overflow:auto;
 }
 .mobile-filter-footer{
   position:fixed;
@@ -1017,11 +1024,42 @@ a:active {
 
 .filter-property-container{
    background-color:#F0F0F0;
-   border-right: 1px solid #F0F0F0; 
+  
     /*color:#fff;*/
     /*padding:5px;*/
 }
+.custum-input-label{
+    color: grey;
+    font-size: 0.8em;
+}
+.color-box-container{
+  cursor:pointer;
+  padding:5px;
+}
+.color-box{
+   height:16px;
+   width:16px;
 
+   border:1px solid grey;
+   border-radius: 2px;
+   cursor:pointer;
+}
+
+.color-box:hover{
+  
+}
+.color-box-selected{
+  border:2px solid #FFAA00; 
+  height:18px;
+   width:18px;
+}
+.color-box-container:hover>div{
+  border:2px solid #FFD700;
+     -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
 .filter-property{
     /*background-color:#C8C8C8 ;*/
   line-height: 40px;
@@ -1029,7 +1067,9 @@ a:active {
   padding-right: 10px;
   font-size:0.9em;
   text-align: center;
+   /*border-right: 1px solid #C8C8C8; */
   /*border-left: 3px solid #d19b3d;*/
   border-bottom: 1px solid #C8C8C8;
   
 }
+

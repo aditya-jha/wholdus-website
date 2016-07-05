@@ -30,6 +30,7 @@
             $scope.isShow=[];
             $scope.sellerString=null;
             $scope.filterID=1;
+            $scope.selectedcolours='';
             $scope.activeFilterStyle={
 
                 '-webkit-transition': 'all 0.4s ease',
@@ -37,33 +38,56 @@
                 '-o-transition': 'all 0.4s ease',
                 '-ms-transition': 'all 0.4s ease',
                 'transition': 'all 0.4s ease',
-                'background-color': '#D8D8D8',
-                // 'color':'#fff'
+                'background-colour': '#D8D8D8',
+                // 'colour':'#fff'
             };
 
 
             function getProducts() {
                 if(UtilService.currentCategoryID!=null){
                     if(UtilService.currentCategoryID!=$scope.categoryID){
-                        UtilService.setFilterParams(null,0,5000);
+                        UtilService.setFilterParams(null);
+                        UtilService.resetFilterParams();
                     }
                 }
-                UtilService.setCategory($scope.categoryID); 
-                $rootScope.$broadcast('showProgressbar');
-                $scope.minPrice= UtilService.minPrice;
-                $scope.maxPrice= UtilService.maxPrice;
+                UtilService.setCategory($scope.categoryID);
+                $scope.colours=UtilService.colours;
+                $scope.fabrics=UtilService.fabrics;
+                $scope.priceRanges=UtilService.priceRanges; 
+                $scope.selectedColours=UtilService.selectedColours; 
+                $scope.selectedFabrics=UtilService.selectedFabrics; 
+                // $scope.priceRangeIndex=UtilService.priceRangeIndex;
 
+                $rootScope.$broadcast('showProgressbar');
                 $scope.sellerString=UtilService.sellerString;
                 var params = {categoryID: $scope.categoryID, 
                     sellerID:$scope.sellerString,
-                    min_price_per_unit:$scope.minPrice,
-                    max_price_per_unit:$scope.maxPrice,};
+                    min_price_per_unit:UtilService.minPrice,
+                    max_price_per_unit:UtilService.maxPrice,
+                    colour:$scope.selectedColours,
+                    fabric:$scope.selectedFabrics};
 
                     UtilService.setPaginationParams(params, $scope.settings.page, $scope.settings.itemsPerPage);
 
                     APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                     .then(function(response) {
                         $scope.settings.noProduct = false;
+                      
+
+                        if(UtilService.priceRangeIndex){
+                            var pos=UtilService.priceRangeIndex;
+                            if($scope.priceRanges[pos].min_value==UtilService.minPrice && 
+                                $scope.priceRanges[pos].max_value==UtilService.maxPrice){
+                                $scope.priceRanges[pos].active=true;
+                            }
+                            else{
+                                $scope.priceRanges[pos].active=false;
+
+                            }
+                            $scope.minPrice=UtilService.minPrice;
+                            $scope.maxPrice=UtilService.maxPrice;
+                        }
+
                         $rootScope.$broadcast('endProgressbar');
                         if(response.total_pages > 1) {
                             $scope.settings.enablePagination = true;
@@ -73,30 +97,32 @@
                             });
                         }
                         else{
-                             $scope.settings.noProduct = false;
-                        }
-                        angular.forEach(response.products, function(value, key) {
-                            value.images = UtilService.getImages(value);
-                            if(value.images.length){
-                                value.imageUrl = UtilService.getImageUrl(value.images[0], '200x200');
-                            }
-                            else{
-                                value.imageUrl = 'images/200.png';
-                            }
-                        });
-                        $scope.products = response.products;
-
-                        if($scope.products.length) {
-                            $scope.category = response.products[0].category;
-                        } else {
-                            $scope.settings.noProduct = true;
+                           $scope.settings.noProduct = false;
                             $scope.settings.enablePagination = false;
+                       }
+                       angular.forEach(response.products, function(value, key) {
+                        value.images = UtilService.getImages(value);
+                        if(value.images.length){
+                            value.imageUrl = UtilService.getImageUrl(value.images[0], '200x200');
                         }
-                    }, function(error) {
-                        $rootScope.$broadcast('endProgressbar');
-                        $scope.products = [];
+                        else{
+                            value.imageUrl = 'images/200.png';
+                        }
+                        });
+                       $scope.products = response.products;
+
+                       if($scope.products.length) {
+                        $scope.category = response.products[0].category;
+                        } 
+                        else {
                         $scope.settings.noProduct = true;
-                    });
+                        $scope.settings.enablePagination = false;
+                        }
+                }, function(error) {
+                    $rootScope.$broadcast('endProgressbar');
+                    $scope.products = [];
+                    $scope.settings.noProduct = true;
+                });
                 }
 
                 function getSellers() {
@@ -124,73 +150,125 @@
 
 
                 function init(){
-                   getSellers();
-                   getProducts();
+                 getSellers();
+                 getProducts();
 
-               }
-               init();
+             }
+             init();
 
-               $scope.filterChanged=function(){
-                $scope.selectedSellers=[];
-                angular.forEach($scope.sellers, function(value, key) {
-                    if(value.isShow){
-                        $scope.selectedSellers.push(value.sellerID);
-                    }
-                    $scope.desktopFilterID=null;
-
+        $scope.updateSelection = function(position) {
+              angular.forEach($scope.priceRanges, function(p, index) {
+                if (position != index) 
+                    p.active = false;
                 });
-                $location.search('page', '1');
-                UtilService.setFilterParams($scope.selectedSellers.toString(),$scope.minPrice,$scope.maxPrice);
+              $scope.priceRangeIndex=position;
+              $scope.minPrice=$scope.priceRanges[position].min_value;
+              $scope.maxPrice=$scope.priceRanges[position].max_value;  
+              
+              // alert($scope.minPrice);  
+          } 
+        $scope.updateColour=function(position){
+            if(!$scope.colours[position].active){
+                $scope.colours[position].active=true;
+            }
+            else{
+                $scope.colours[position].active=false;   
+            }
+        } 
+        $scope.updateFabric=function(position){
+            if(!$scope.fabrics[position].active){
+                $scope.fabrics[position].active=true;
+            }
+            else{
+                $scope.fabrics[position].active=false;   
+            }
+        }  
+
+        $scope.applyFilters=function(type){
+            $scope.selectedSellers=[];
+            
+            var colours=[];
+            var fabrics=[];
+            angular.forEach($scope.colours, function(value, index) {
+                if(value.active){
+                    colours.push(value.name);
+                }
+            });
+            angular.forEach($scope.fabrics, function(value, index) {
+                if(value.active){
+                    fabrics.push(value.name);
+                }
+            });
+            $scope.selectedFabrics=fabrics.toString(); 
+            $scope.selectedColours=colours.toString();
+            angular.forEach($scope.sellers, function(value, key) {
+                if(value.isShow){
+                    $scope.selectedSellers.push(value.sellerID);
+                }
+                
+
+            });
+            $scope.desktopFilterID=null;
+            $location.search('page', '1');
+            UtilService.setFilterParams($scope.selectedSellers.toString(),
+                $scope.priceRangeIndex,$scope.minPrice,$scope.maxPrice);
+            UtilService.setActiveFilterParams($scope.colours, $scope.fabrics,$scope.selectedColours,$scope.selectedFabrics);
+            if(type=='desktop'){
                 getSellers();
                 getProducts();
-
             }
+            else if(type=='mobile'){
 
-            $scope.applyFilters=function(){
-                $scope.selectedSellers=[];
-                angular.forEach($scope.sellers, function(value, key) {
-                    if(value.isShow){
-                        $scope.selectedSellers.push(value.sellerID);
-                    }
-                });
-                 $location.search('page', '1');
-                UtilService.setFilterParams($scope.selectedSellers.toString(),$scope.minPrice,$scope.maxPrice);
-
-
-                $route.reload();
-                $mdDialog.cancel();
-
-            }
-
-            $scope.showFilterDialog=function(){
-               DialogService.viewDialog(event, {
-                view: 'views/partials/filterDialog.html',
-                controller:'CategoryController'
-            });
-           }
-
-           $scope.cancel = function() {
+            $route.reload();
             $mdDialog.cancel();
-        };
+            }    
 
-        $scope.clear=function(){
-            UtilService.setFilterParams(null,0,5000);
-            angular.forEach($scope.sellers, function(value, key) {
-                value.isShow=false;
+        }
 
-            });
-            $scope.maxPrice=5000;
-            $scope.minPrice=0;
-        }   
+        // $scope.applyFilters=function(){
+        //     $scope.selectedSellers=[];
+        //     angular.forEach($scope.sellers, function(value, key) {
+        //         if(value.isShow){
+        //             $scope.selectedSellers.push(value.sellerID);
+        //         }
+        //     });
+        //     $location.search('page', '1');
+        //     UtilService.setFilterParams($scope.selectedSellers.toString(),
+        //         $scope.priceRangeIndex, $scope.minPrice,$scope.maxPrice);
 
 
-        $scope.buyNow = function(event, categoryID){
-            DialogService.viewDialog(event, {
-                categoryID: categoryID,
-                view: 'views/partials/buyNow.html'
-            });
-        };
-    }
-    ]);
+
+        // }
+
+        $scope.showFilterDialog=function(){
+         DialogService.viewDialog(event, {
+            view: 'views/partials/filterDialog.html',
+            controller:'CategoryController'
+        });
+     }
+
+     $scope.cancel = function() {
+        $mdDialog.cancel();
+    };
+
+    $scope.clear=function(){
+        UtilService.setFilterParams(null,null);
+        angular.forEach($scope.sellers, function(value, key) {
+            value.isShow=false;
+
+        });
+        $scope.maxPrice=5000;
+        $scope.minPrice=0;
+    }   
+
+
+    $scope.buyNow = function(event, categoryID){
+        DialogService.viewDialog(event, {
+            categoryID: categoryID,
+            view: 'views/partials/buyNow.html'
+        });
+    };
+}
+]);
 })();
 
