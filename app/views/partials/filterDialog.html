@@ -33,22 +33,23 @@
      
         <div  ng-show="filterID==1" layout="column" ng-cloak class="mobile-filter-panel">
 
-          <div data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start center" style="padding-left:5px;" class="small-label" >
+          <div data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start center" 
+          style="padding-left:5px;" class="small-label" >
           <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string">
-              <label style="color: rgba(0,0,0,.6); text-transform:capitalize; cursor:pointer; padding:0px;">{{seller.company_name| lowercase  }}</label>
+              <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
           </md-checkbox>
            
              
           </div>        
       </div> 
 
-         <div  ng-show="filterID==2" layout="column"   ng-cloak class="mobile-filter-panel" > 
+         <div  ng-show="filterID==2" layout="column"   ng-cloak class="mobile-filter-panel" style="margin:5px"> 
          <div layout="column" >
              <div  data-ng-repeat="p in priceRanges" layout-align="start start" 
              style="padding:5px;" class="small-label" >
                   <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string"
                   style="margin:0px;" ng-click="updateSelection($index)">
-                  <label style="color: rgba(0,0,0,.6); cursor:pointer; margin:0px;">
+                  <label class="grey-label">
                      Rs. {{p.min_value}} 
                      <span ng-if="!$last">to Rs.{{p.max_value}}</span>
                      <span ng-if="$last">+</span>
@@ -58,18 +59,14 @@
             </div> 
             <div layout-margin>
             <div layout="row" flex="100"  ng-cloak layout-align="space-between" >
-                    <span flex="50" class="custum-input-label">Min Price</span>
-                    
-                      Rs.&nbsp;
-                     <div flex="45">
+                    <span class="custum-input-label">Min Price</span>
+                    <div flex></div>Rs.&nbsp;<div flex="45">
                     <input type="number" data-ng-model="minPrice" aria-label="minPrice" style="width:80px"/>
                      </div>              
             </div>
             <div layout="row" flex="100"  ng-cloak layout-align="space-between">
-                    <span flex="50" class="custum-input-label">Max Price</span>
-                    
-                     Rs.&nbsp;
-                     <div flex="45">
+                    <span class="custum-input-label">Max Price</span>
+                    <div flex></div>Rs.&nbsp;<div flex="45">
                     <input type="number" data-ng-model="maxPrice" aria-label="maxPrice" style="width:80px"/>
                     </div>
             </div>
@@ -77,24 +74,22 @@
             </div>        
         </div>
 
-         <div  ng-show="filterID==3" layout="column" ng-cloak class="mobile-filter-panel" style="margin:5px">
+         <div  ng-show="filterID==3" layout="row" layout-wrap class="mobile-filter-panel" layout-align="space-between start">
 
-          <div data-ng-repeat="c in colours" layout-align="start start" ng-click="updateColour($index)">
-         <div class="color-box-container" layout="row">
-         <div style="background:{{c.colourCode}}" class="color-box" ng-class={'color-box-selected':c.active}>          
-         </div> 
-          <span style="font-size:0.9em; color:grey">&nbsp;{{c.name}}</span>
-        </div>
+          <div data-ng-repeat="c in colours" flex="45" layout-align="start start" ng-click="updateColour($index)">
+             <div class="color-box-container" layout="row">
+             <div style="background:{{c.colourCode}}" class="color-box" ng-class={'color-box-selected':c.active}>        </div> 
+              <span style="font-size:0.9em; color:grey">&nbsp;{{c.name}}</span>
+            </div>
         </div>           
       </div> 
 
-       <div  ng-show="filterID==4" layout="column" ng-cloak class="mobile-filter-panel" style="margin:5px">
-
-          <div  data-ng-repeat="f in fabrics" layout-align="start start" 
+       <div  ng-show="filterID==4" layout="row" layout-wrap class="mobile-filter-panel" layout-align="space-between start">
+            <div  data-ng-repeat="f in fabrics" flex="45" layout-align="start start" 
                 style="padding:2px;" class="small-label" >
                   <md-checkbox  class="md-primary" name="string" ng-model="f.active"  aria-label="string"
                   style="margin:0px;">
-                  <label style="color: rgba(0,0,0,.6); text-transform:capitalize; cursor:pointer; margin:0px;">{{f.name }}</label>
+                  <label class="grey-label">{{f.name }}</label>
                   </md-checkbox>
             </div>    
       </div> 

@@ -32,18 +32,16 @@
             $scope.filterID=1;
             $scope.selectedcolours='';
             $scope.activeFilterStyle={
-
                 '-webkit-transition': 'all 0.4s ease',
                 '-moz-transition': 'all 0.4s ease',
                 '-o-transition': 'all 0.4s ease',
                 '-ms-transition': 'all 0.4s ease',
                 'transition': 'all 0.4s ease',
-                'background-colour': '#D8D8D8',
-                // 'colour':'#fff'
+                'background-color': '#D8D8D8',
             };
 
 
-            function getProducts() {
+        function getProducts() {
                 if(UtilService.currentCategoryID!=null){
                     if(UtilService.currentCategoryID!=$scope.categoryID){
                         UtilService.setFilterParams(null);
@@ -51,15 +49,16 @@
                     }
                 }
                 UtilService.setCategory($scope.categoryID);
+                $scope.sellerString=UtilService.sellerString;
                 $scope.colours=UtilService.colours;
                 $scope.fabrics=UtilService.fabrics;
                 $scope.priceRanges=UtilService.priceRanges; 
                 $scope.selectedColours=UtilService.selectedColours; 
                 $scope.selectedFabrics=UtilService.selectedFabrics; 
-                // $scope.priceRangeIndex=UtilService.priceRangeIndex;
+        
 
                 $rootScope.$broadcast('showProgressbar');
-                $scope.sellerString=UtilService.sellerString;
+            
                 var params = {categoryID: $scope.categoryID, 
                     sellerID:$scope.sellerString,
                     min_price_per_unit:UtilService.minPrice,
@@ -67,13 +66,10 @@
                     colour:$scope.selectedColours,
                     fabric:$scope.selectedFabrics};
 
-                    UtilService.setPaginationParams(params, $scope.settings.page, $scope.settings.itemsPerPage);
-
-                    APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
+                UtilService.setPaginationParams(params, $scope.settings.page, $scope.settings.itemsPerPage);
+                APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                     .then(function(response) {
                         $scope.settings.noProduct = false;
-                      
-
                         if(UtilService.priceRangeIndex){
                             var pos=UtilService.priceRangeIndex;
                             if($scope.priceRanges[pos].min_value==UtilService.minPrice && 
@@ -84,10 +80,10 @@
                                 $scope.priceRanges[pos].active=false;
 
                             }
-                            $scope.minPrice=UtilService.minPrice;
-                            $scope.maxPrice=UtilService.maxPrice;
+                            
                         }
-
+                        $scope.minPrice=UtilService.minPrice;
+                        $scope.maxPrice=UtilService.maxPrice;
                         $rootScope.$broadcast('endProgressbar');
                         if(response.total_pages > 1) {
                             $scope.settings.enablePagination = true;
@@ -96,10 +92,12 @@
                                 totalPages: Math.ceil(response.total_products/$scope.settings.itemsPerPage)
                             });
                         }
+                        
                         else{
                            $scope.settings.noProduct = false;
                             $scope.settings.enablePagination = false;
                        }
+
                        angular.forEach(response.products, function(value, key) {
                         value.images = UtilService.getImages(value);
                         if(value.images.length){
@@ -109,25 +107,25 @@
                             value.imageUrl = 'images/200.png';
                         }
                         });
-                       $scope.products = response.products;
 
-                       if($scope.products.length) {
-                        $scope.category = response.products[0].category;
+                       $scope.products = response.products;
+                        if($scope.products.length) {
+                            $scope.category = response.products[0].category;
                         } 
                         else {
+                            $scope.settings.noProduct = true;
+                            $scope.settings.enablePagination = false;
+                        }
+                    }, function(error) {
+                        $rootScope.$broadcast('endProgressbar');
+                        $scope.products = [];
                         $scope.settings.noProduct = true;
                         $scope.settings.enablePagination = false;
-                        }
-                }, function(error) {
-                    $rootScope.$broadcast('endProgressbar');
-                    $scope.products = [];
-                    $scope.settings.noProduct = true;
-                });
+                    });
                 }
 
-                function getSellers() {
-
-                    $http.get('http://api.wholdus.com/users/seller/?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaW50ZXJuYWx1c2VyIiwiaW50ZXJuYWx1c2VySUQiOjR9.3BOmXTwSrXJ_kT998Id5AC81OxrY1Aay79Orpxsw5L8')
+        function getSellers() {
+                $http.get('http://api.wholdus.com/users/seller/?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaW50ZXJuYWx1c2VyIiwiaW50ZXJuYWx1c2VySUQiOjR9.3BOmXTwSrXJ_kT998Id5AC81OxrY1Aay79Orpxsw5L8')
                     .then(function (response) {
                         $scope.sellers = response.data.body.sellers;
                         var selectedSellers='';
@@ -137,24 +135,21 @@
 
                         angular.forEach($scope.sellers, function(value, key) {
                             if(selectedSellers.indexOf(value.sellerID.toString())>=0){
-                                value.isShow=true;
-
-
-                            }
+                                value.isShow=true;}
 
                         });
 
                     });
+         }
 
-                }
 
+        function init(){
+            getSellers();
+            getProducts();
 
-                function init(){
-                 getSellers();
-                 getProducts();
+        }
 
-             }
-             init();
+        init();
 
         $scope.updateSelection = function(position) {
               angular.forEach($scope.priceRanges, function(p, index) {
@@ -163,10 +158,9 @@
                 });
               $scope.priceRangeIndex=position;
               $scope.minPrice=$scope.priceRanges[position].min_value;
-              $scope.maxPrice=$scope.priceRanges[position].max_value;  
-              
-              // alert($scope.minPrice);  
+              $scope.maxPrice=$scope.priceRanges[position].max_value;    
           } 
+
         $scope.updateColour=function(position){
             if(!$scope.colours[position].active){
                 $scope.colours[position].active=true;
@@ -175,6 +169,7 @@
                 $scope.colours[position].active=false;   
             }
         } 
+
         $scope.updateFabric=function(position){
             if(!$scope.fabrics[position].active){
                 $scope.fabrics[position].active=true;
@@ -208,6 +203,7 @@
                 
 
             });
+
             $scope.desktopFilterID=null;
             $location.search('page', '1');
             UtilService.setFilterParams($scope.selectedSellers.toString(),
@@ -225,29 +221,14 @@
 
         }
 
-        // $scope.applyFilters=function(){
-        //     $scope.selectedSellers=[];
-        //     angular.forEach($scope.sellers, function(value, key) {
-        //         if(value.isShow){
-        //             $scope.selectedSellers.push(value.sellerID);
-        //         }
-        //     });
-        //     $location.search('page', '1');
-        //     UtilService.setFilterParams($scope.selectedSellers.toString(),
-        //         $scope.priceRangeIndex, $scope.minPrice,$scope.maxPrice);
-
-
-
-        // }
-
-        $scope.showFilterDialog=function(){
+    $scope.showFilterDialog=function(){
          DialogService.viewDialog(event, {
             view: 'views/partials/filterDialog.html',
             controller:'CategoryController'
         });
      }
 
-     $scope.cancel = function() {
+    $scope.cancel = function() {
         $mdDialog.cancel();
     };
 
@@ -257,8 +238,16 @@
             value.isShow=false;
 
         });
-        $scope.maxPrice=5000;
-        $scope.minPrice=0;
+        UtilService.setFilterParams(null);
+        UtilService.resetFilterParams();
+         $scope.sellerString=UtilService.sellerString;
+        $scope.colours=UtilService.colours;
+        $scope.fabrics=UtilService.fabrics;
+        $scope.priceRanges=UtilService.priceRanges; 
+        $scope.selectedColours=UtilService.selectedColours; 
+        $scope.selectedFabrics=UtilService.selectedFabrics; 
+        $scope.minPrice=UtilService.minPrice;
+        $scope.maxPrice=UtilService.maxPrice
     }   
 
 
