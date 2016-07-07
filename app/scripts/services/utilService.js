@@ -6,34 +6,52 @@
         '$log',
         '$location',
         'ConstantKeyValueService',
+        'APIService',
         '$window',
-        function($rootScope, $log, $location, ConstantKeyValueService, $window) {
+        function($rootScope, $log, $location, ConstantKeyValueService,APIService, $window) {
             var factory = {};
             function initiliseFilters(){
             factory.priceRanges=[
-            {id:1,min_value:1, max_value:199, active:false},
-            {id:2,min_value:200, max_value:499, active:false},
-            {id:3,min_value:500, max_value:799, active:false},
-            {id:4,min_value:800, max_value:999, active:false},
-            {id:5,min_value:1000, max_value:1499, active:false},
-            {id:6,min_value:1500, max_value:1999, active:false},
-            {id:7,min_value:2000, max_value:2499, active:false},
-            {id:8,min_value:2500, max_value:2999, active:false},
-            {id:9,min_value:3000, max_value:10000, active:false},
+            {min_value:1, max_value:199, active:false},
+            {min_value:200, max_value:499, active:false},
+            {min_value:500, max_value:799, active:false},
+            {min_value:800, max_value:999, active:false},
+            {min_value:1000, max_value:1499, active:false},
+            {min_value:1500, max_value:1999, active:false},
+            {min_value:2000, max_value:2499, active:false},
+            {min_value:2500, max_value:2999, active:false},
+            {min_value:3000, max_value:10000, active:false},
             ];
-
+            //  APIService.apiCall("GET", APIService.getAPIUrl('colour_type'))
+            //             .then(function(response) {
+            //                 factory.colours=response.product_colour_types;
+            //             }, function(error) {
+                            
+            //             }); 
+            // APIService.apiCall("GET", APIService.getAPIUrl('fabric_type'))
+            //             .then(function(response) {
+            //                 factory.fabrics=response.product_fabric_types;
+            //             }, function(error) {
+                            
+            //             });
+            //    angular.forEach(factory.colours, function(value, key) {
+            //                 value.active=false;
+            //             });
+            //    angular.forEach(factory.fabrics, function(value, key) {
+            //                 value.active=false;
+            //             });           
              factory.colours=[
              {name:'Red',colourCode:'#ff0000',active:false},
-             {name:'Blue',colourCode:'#0000ff',active:false},
-             {name:'Parrot',colourCode:'#00ff00',active:false},
-             {name:'Green',colourCode:'#008000',active:false},
+             {name:'Blue',colourCode:'#5882FA',active:false},
+             {name:'Green',colourCode:'#3ADF00',active:false},
              {name:'Yellow',colourCode:'#ffff00',active:false},
-             {name:'Black',colourCode:'#000000',active:false},
+             {name:'Black',colourCode:'#6E6E6E',active:false},
              {name:'White',colourCode:'#ffffff',active:false},
-             {name:'Pink',colourCode:'#FF1493',active:false},
+             {name:'Pink',colourCode:'#FF0080',active:false},
              {name:'Beige',colourCode:'#F5F5DC',active:false},
-             {name:'Purple',colourCode:'#800080',active:false},
-             {name:'Orange',colourCode:'#FFA500',active:false},
+             {name:'Purple',colourCode:'#D358F7',active:false},
+             {name:'Orange',colourCode:'#FF8000',active:false},
+             {name:'Multi',colourCode:'linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet);',active:false}
              ];
 
              factory.fabrics=[
@@ -41,6 +59,7 @@
              {name:'Silk',active:false},
              {name:'Rayon',active:false},
              {name:'Georgette',active:false},
+             {name:'Lycra',active:false},
              {name:'Velvet',active:false},
              {name:'Net',active:false},
              {name:'Brasso',active:false},

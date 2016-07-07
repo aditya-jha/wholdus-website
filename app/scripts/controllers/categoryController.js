@@ -52,7 +52,7 @@
                 $scope.sellerString=UtilService.sellerString;
                 $scope.colours=UtilService.colours;
                 $scope.fabrics=UtilService.fabrics;
-                $scope.priceRanges=UtilService.priceRanges; 
+                
                 $scope.selectedColours=UtilService.selectedColours; 
                 $scope.selectedFabrics=UtilService.selectedFabrics; 
         
@@ -70,17 +70,16 @@
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                     .then(function(response) {
                         $scope.settings.noProduct = false;
-                        if(UtilService.priceRangeIndex){
+                        $scope.priceRanges=UtilService.priceRanges; 
+                        if(UtilService.priceRangeIndex!=null){
                             var pos=UtilService.priceRangeIndex;
-                            if($scope.priceRanges[pos].min_value==UtilService.minPrice && 
-                                $scope.priceRanges[pos].max_value==UtilService.maxPrice){
+                            if($scope.priceRanges[pos].min_value == UtilService.minPrice && 
+                                $scope.priceRanges[pos].max_value == UtilService.maxPrice){
                                 $scope.priceRanges[pos].active=true;
-                            }
+                            } 
                             else{
                                 $scope.priceRanges[pos].active=false;
-
                             }
-                            
                         }
                         $scope.minPrice=UtilService.minPrice;
                         $scope.maxPrice=UtilService.maxPrice;
@@ -95,7 +94,7 @@
                         
                         else{
                            $scope.settings.noProduct = false;
-                            $scope.settings.enablePagination = false;
+                           $scope.settings.enablePagination = false;
                        }
 
                        angular.forEach(response.products, function(value, key) {
@@ -128,17 +127,7 @@
                 $http.get('http://api.wholdus.com/users/seller/?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaW50ZXJuYWx1c2VyIiwiaW50ZXJuYWx1c2VySUQiOjR9.3BOmXTwSrXJ_kT998Id5AC81OxrY1Aay79Orpxsw5L8')
                     .then(function (response) {
                         $scope.sellers = response.data.body.sellers;
-                        var selectedSellers='';
-                        if(UtilService.sellerString!=null){
-                            selectedSellers=UtilService.sellerString.split(',');
-                        }
-
-                        angular.forEach($scope.sellers, function(value, key) {
-                            if(selectedSellers.indexOf(value.sellerID.toString())>=0){
-                                value.isShow=true;}
-
-                        });
-
+                        checkSelectedSellers();
                     });
          }
 
@@ -150,6 +139,24 @@
         }
 
         init();
+
+        function checkSelectedSellers(){
+            var selectedSellers='';
+                        if(UtilService.sellerString!=null){
+                            selectedSellers=UtilService.sellerString.split(',');
+                        }
+
+                        angular.forEach($scope.sellers, function(value, key) {
+                            if(selectedSellers.indexOf(value.sellerID.toString())>=0){
+                                value.isShow=true;
+                            }
+                            else{
+                                value.isShow=false;   
+                            }
+
+                        });
+
+        }
 
         $scope.updateSelection = function(position) {
               angular.forEach($scope.priceRanges, function(p, index) {
@@ -202,16 +209,17 @@
                 }
                 
 
-            });
+            });    
 
-            $scope.desktopFilterID=null;
             $location.search('page', '1');
+            $scope.settings.page=UtilService.getPageNumber();
             UtilService.setFilterParams($scope.selectedSellers.toString(),
                 $scope.priceRangeIndex,$scope.minPrice,$scope.maxPrice);
             UtilService.setActiveFilterParams($scope.colours, $scope.fabrics,$scope.selectedColours,$scope.selectedFabrics);
             if(type=='desktop'){
-                getSellers();
-                getProducts();
+                  $scope.desktopFilterID=null;
+                 checkSelectedSellers();
+                    getProducts();
             }
             else if(type=='mobile'){
 
@@ -257,6 +265,7 @@
             view: 'views/partials/buyNow.html'
         });
     };
+
 }
 ]);
 })();
