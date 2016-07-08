@@ -81,6 +81,9 @@ a:active {
     margin-top: 5px;
 }
 
+#breadcrumb{
+    margin-top: 5px;
+}
 .breadcrumb-inactive{
     font-size: 0.9em;
     padding-top: .2em;

@@ -1,15 +1,14 @@
+ <div layout="column" layout-align="start center" flex>
+       <div layout="row" id="breadcrumb" layout-align="start center">
+            <a href="/"><span layout="row" layout-align="start center" class="breadcrumb-active" ><svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                <path fill="#525050" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+            </svg>Home </span></a>
+            <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
+            <span class="breadcrumb-inactive">{{category.display_name}}</span>
+            <span class="breadcrumb-inactive" data-ng-if="settings.noProduct">{{settings.displayName}}</span>
 
-
-
-<div layout="column" layout-align="start center" flex class="breadcrumbs">
- <div layout="row" layout-align="start center">
-    <a href="/"><span class="breadcrumb-active" >Home </span></a>
-    <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
-    <span class="breadcrumb-inactive">{{category.display_name}}</span>
-    <span class="breadcrumb-inactive" data-ng-if="settings.noProduct">{{settings.displayName}}</span>
- </div>
-
-</div>
+        </div>
+    </div>
 <div layout="row" flex layout-align="center" data-ng-if="!settings.noProduct">
     <h1 id="category-title" class="line-around"  ng-cloak flex="50" flex-sm="80" flex-xs="90"><span>{{category.display_name}}</span> </h1>
 </div>
@@ -32,7 +31,8 @@
               </li>  
             </ul>
         </div>
-    </div>
+    </div>        
+   
 <div layout="row" flex="100"  class="desktop-filter-panel" layout-align="center">
 
     <div md-whiteframe="2" layout="row" layout-wrap  ng-show="desktopFilterID==1" ng-mouseleave="filterChange &&applyFilters('desktop')" flex="75"  style="max-height:400px; overflow-y: auto;">
