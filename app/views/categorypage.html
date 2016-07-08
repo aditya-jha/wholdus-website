@@ -37,7 +37,7 @@
 
     <div md-whiteframe="2" layout="row" layout-wrap  ng-show="desktopFilterID==1" ng-mouseleave="filterChange &&applyFilters('desktop')" flex="75"  style="max-height:400px; overflow-y: auto;">
 
-        <div flex="25" flex-sm="50" data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" style="padding:2px;" class="small-label" ng-click="filterChange=true">
+        <div flex="25" flex-sm="50" flex-md="33" data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" style="padding:2px;" class="small-label" ng-click="filterChange=true">
                   <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string"
                   style="margin:0px;" ng-change="filterChanged()">
                   <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
