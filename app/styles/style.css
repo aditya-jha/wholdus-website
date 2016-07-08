@@ -78,6 +78,9 @@ a:active {
     text-align: center;
 }
 
+#breadcrumb{
+    margin-top: 5px;
+}
 .breadcrumb-inactive{
     font-size: 80%;
     padding-top: .2em;
