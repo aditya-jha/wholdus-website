@@ -1,39 +1,154 @@
-<div layout="column" flex>
+
+<md-card layout="row" flex="100" hide-gt-xs class="mobile-filter"  layout-align="center center" data-ng-click="showFilterDialog()">
+    <svg style="width:24px;height:24px" viewBox="0 0 485.008 485.008">
+        <path fill="#4F4F4F" d="M171.501,464.698v-237.9l-166.3-192.6c-8.9-10.9-7.9-33.3,15.1-33.3h443.6c21.6,0,26.6,19.8,15.1,33.3l-162.3,187.5v147.2    c0,6-2,11.1-7.1,15.1l-103.8,95.8C193.801,488.698,171.501,483.898,171.501,464.698z M64.701,41.298l142.2,164.3c3,4,5,8.1,5,13.1    v200.6l64.5-58.5v-146.1c0-5,2-9.1,5-13.1l138.1-160.3L64.701,41.298L64.701,41.298z" />
+    </svg>
+    <span>&nbsp;&nbsp;FILTER</span>
+</md-card>
+<div hide-gt-xs style="height:40px;"></div>
+
+<div layout="column" layout-align="start center" flex class="breadcrumbs">
+ <div layout="row" layout-align="start center">
+    <a href="/"><span class="breadcrumb-active" >Home </span></a>
+    <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
+    <span class="breadcrumb-inactive">{{category.display_name}}</span>
+    <span class="breadcrumb-inactive" data-ng-if="settings.noProduct">{{settings.displayName}}</span>
+ </div>
+<h1 id="category-title">{{category.display_name}} </h1>
+</div>
+
+
+  
+<div ng-mouseleave="desktopFilterID=null" style="margin-top:10px;">
+    <div layout="row" layout-align="center start" flex="90" hide-xs class="desktop-filter">
+        <div id="primary_nav_wrap">
+            <ul>
+              <li ng-mouseover="desktopFilterID=1">
+                  <a href="#" >MANUFACTURER &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>
+              <li ng-mouseover="desktopFilterID=2">
+                <a href="#">PRICE &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>
+              <li ng-mouseover="desktopFilterID=3">
+                <a href="#">COLOR &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>
+              <li ng-mouseover="desktopFilterID=4">
+                <a href="#">FABRIC &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
+              </li>  
+            </ul>
+        </div>
+    </div>
+<div layout="row" flex="100"  class="desktop-filter-panel" layout-align="center">
+
+    <div md-whiteframe="2" layout="row" layout-wrap  ng-show="desktopFilterID==1" ng-mouseleave="applyFilters('desktop')" flex="75"  style="max-height:400px; overflow-y: auto;">
+
+        <div flex="25" flex-sm="50" data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" style="padding:2px;" class="small-label" >
+                  <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string"
+                  style="margin:0px;">
+                  <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
+                  </md-checkbox>
+        </div>        
+      </div>
+
+        <div  layout="column" md-whiteframe="2" ng-show="desktopFilterID==2"  ng-mouseleave="applyFilters('desktop')" flex="35" flex-sm="70" flex-md="50" style="padding:10px">
+        
+            <div layout="row" layout-wrap layout-align="space-between center">
+             <div flex="45"  data-ng-repeat="p in priceRanges" layout-align="start start" 
+             style="padding:5px;" class="small-label" >
+                  <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string"
+                  style="margin:0px;" ng-click="updateSelection($index)" >
+                    <label class="grey-label">
+                    <span ng-if="$first">Below Rs.{{p.max_value}}</span>
+                    <span ng-if="$last">Above Rs.{{p.min_value}}</span>
+                    <span ng-if="!$last && !$first">Rs. {{p.min_value}} to Rs.{{p.max_value}}</span>
+                     
+                  </label>
+                  </md-checkbox>
+               
+            </div>
+            </div> 
+
+            <div layout="row" flex layout-align="space-around center" style="margin-top:10px">
+                <div layout="row" flex="30">
+                <div layout="column" ng-cloak>
+                    <span class="custum-input-label">Min Price</span>
+                    <div > Rs.
+                    <md-input-container class="price-input">    
+                    <input type="number" data-ng-model="minPrice" aria-label="minPrice" />
+                    </md-input-container>
+                    </div> 
+                </div>
+                </div>
+                <div layout="row" flex="30">
+                <div layout="column" ng-cloak>
+                        <span class="custum-input-label">Max Price</span>
+                    <div> Rs.
+                    <md-input-container class="price-input">
+                        <input type="number" data-ng-model="maxPrice" aria-label="maxPrice"/>
+                    </md-input-container>
+                    </div> 
+                </div>
+                </div>
+            </div>
+     
+       </div>
+
+       <div md-whiteframe="2" layout="row" layout-align="center" ng-show="desktopFilterID==3" ng-mouseleave="applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
+        <div layout="row" flex layout-wrap layout-align="start center">
+        <div data-ng-repeat="c in colours" flex="25"  layout-align="start start" ng-click="updateColour($index)">
+         <div class="color-box-container" layout="row">
+         <div style="background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.1)), {{c.colourCode}}" 
+         class="color-box" ng-class={'color-box-selected':c.active}
+         layout="row" layout-align="center center">
+            <span></span>          
+         </div> 
+          <span style="font-size:0.9em; color:grey">&nbsp;{{c.name}}</span>
+        </div>
+        </div>     
+        </div>      
+        </div>
+
+         <div md-whiteframe="2" layout="row" layout-wrap layout-align="start" ng-show="desktopFilterID==4" ng-mouseleave="applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
+
+            <div flex="25"  data-ng-repeat="f in fabrics" layout-align="start start" 
+                style="padding:2px;" class="small-label" >
+                  <md-checkbox  class="md-primary" name="string" ng-model="f.active"  aria-label="string"
+                  style="margin:0px;">
+                  <label style="color:grey; cursor:pointer">{{f.name }}</label>
+                  </md-checkbox>
+            </div>        
+      </div>
+    
+    </div>
+
+</div>
+
+<div layout="row" layout-wrap class="product-card-wrap">
+    <div layout="row" data-ng-repeat="p in products" class="product-card-container">
+        <div layout="row" wu-product product="p" style="width: 100%;max-width: 620px;"></div>
+    </div>
+</div>
+
+<div layout="row" data-ng-show="settings.enablePagination" wu-pagination></div>
+
+<div layout="column" data-ng-if="settings.noProduct">
     <div layout="column" layout-align="start center" flex>
-       <div layout="row" layout-align="start center">
-            <a href="/"><span class="breadcrumb-active" >Home </span></a>
-            <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
-            <span class="breadcrumb-inactive">{{category.display_name}}</span>
-            <span class="breadcrumb-inactive" data-ng-if="settings.noProduct">{{settings.displayName}}</span>
-        </div>
-        <h1 id="category-title">{{category.display_name}}</h1>
+        <h1 id="category-title">{{settings.displayName}}</h1>
     </div>
-
-    <div layout="row" layout-wrap class="product-card-wrap">
-        <div layout="row" data-ng-repeat="p in products" class="product-card-container">
-            <div layout="row" wu-product product="p" style="width: 100%;max-width: 620px;"></div>
+    <div layout="row" layout-wrap class="no-product-container">
+        <div layout="column" layout-align="center center" layout-padding>
+            <img src="images/no-product-1.png" />
         </div>
-    </div>
-
-    <div layout="row" data-ng-show="settings.enablePagination" wu-pagination></div>
-
-    <div layout="column" data-ng-if="settings.noProduct">
-        <div layout="column" layout-align="start center" flex>
-            <h1 id="category-title">{{settings.displayName}}</h1>
-        </div>
-        <div layout="row" layout-wrap class="no-product-container">
-            <div layout="column" layout-align="center center" layout-padding>
-                <img src="images/no-product-1.png" />
-            </div>
-            <div layout="column" layout-align="center center" layout-padding>
-                <span>oops! our manufacturers are out of stock</span>
-                <span>you are our precious customer! please let us serve you</span>
-                <span>get a call from us within an hour</span>
-                <md-button class="md-raised md-warn" data-ng-click="buyNow($event, categoryID)" style="padding: 0px 8px;">
-                    <span>Join Buyer Network</span>
-                </md-button>
-            </div>
+        <div layout="column" layout-align="center center" layout-padding>
+            <span>oops! our manufacturers are out of stock</span>
+            <span>you are our precious customer! please let us serve you</span>
+            <span>get a call from us within an hour</span>
+            <md-button class="md-raised md-warn" data-ng-click="buyNow($event, categoryID)" style="padding: 0px 8px;">
+                <span>Join Buyer Network</span>
+            </md-button>
         </div>
     </div>
 </div>
+
 <div data-ng-include="'views/footer.html'" flex></div>
+

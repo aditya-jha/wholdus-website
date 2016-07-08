@@ -19,7 +19,10 @@
                     category: 'category',
                     buyerLeads: 'leads/buyer',
                     contactus: 'leads/contactus',
-                    buyerProducts: 'users/buyer/buyerproducts'
+                    buyerProducts: 'users/buyer/buyerproducts',
+                    colour_type:'products/colour_type',
+                    fabric_type:'products/fabric_type',
+
                 },
                 accessTokenKey: 'randomData',
                 sellerSite: 'http://seller.wholdus.com'
