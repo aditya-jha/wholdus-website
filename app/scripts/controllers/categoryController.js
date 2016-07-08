@@ -52,7 +52,7 @@
                 $scope.sellerString=UtilService.sellerString;
                 $scope.colours=UtilService.colours;
                 $scope.fabrics=UtilService.fabrics;
-                
+                $scope.priceRanges=UtilService.priceRanges;
                 $scope.selectedColours=UtilService.selectedColours; 
                 $scope.selectedFabrics=UtilService.selectedFabrics; 
         
@@ -70,7 +70,7 @@
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                     .then(function(response) {
                         $scope.settings.noProduct = false;
-                        $scope.priceRanges=UtilService.priceRanges; 
+                        
                         if(UtilService.priceRangeIndex!=null){
                             var pos=UtilService.priceRangeIndex;
                             if($scope.priceRanges[pos].min_value == UtilService.minPrice && 
