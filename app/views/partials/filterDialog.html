@@ -35,7 +35,7 @@
 
           <div data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" 
           style="padding-left:2px;" class="small-label">
-          <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string" style="margin:2px">
+          <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string" style="margin:2px" ng-click="filterChanged=true" >
               <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
           </md-checkbox>
            
@@ -48,7 +48,7 @@
              <div  data-ng-repeat="p in priceRanges" layout-align="start start" 
              style="padding:5px;" class="small-label" >
                   <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string"
-                  style="margin:0px;" ng-click="updateSelection($index)">
+                  style="margin:0px;" ng-click="updatePrice($index)">
                    <label class="grey-label">
                     <span ng-if="$first">Below Rs.{{p.max_value}}</span>
                     <span ng-if="$last">Above Rs.{{p.min_value}}</span>
@@ -58,7 +58,7 @@
                   </md-checkbox>
                
             </div> 
-            <div layout-margin>
+           <!--  <div layout-margin>
             <div layout="row" flex="100"  ng-cloak layout-align="space-between">
                     <span class="custum-input-label" flex="55">Min Price</span>
                    Rs.&nbsp;&nbsp;<div flex="35">
@@ -71,7 +71,7 @@
                     <input type="number" data-ng-model="maxPrice" aria-label="maxPrice" style="width:60px"/>
                     </div>
             </div>
-           </div>
+           </div> -->
             </div>        
         </div>
 

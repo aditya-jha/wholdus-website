@@ -78,7 +78,7 @@ a:active {
     text-align: center;
 }
 .breadcrumbs{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .breadcrumb-inactive{
@@ -98,7 +98,7 @@ a:active {
 .breadcrumb-active:hover{
     text-decoration: underline;
     cursor: pointer;
-    color:#0066ff;
+    color:#673AB7;
 }
 
 
@@ -334,13 +334,25 @@ a:active {
 
 #category-title {
     font-family: 'Comfortaa';
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: bold;
     padding-top: 0.4em;
-    margin: 0;
+    /*margin: 0;*/
     text-align: center;
+   
 }
 
+.line-around{
+   /*width: 60%; */
+    /*text-transform: uppercase;*/
+   border-bottom: 2px solid #666666; 
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+}
+.line-around>span {
+  padding:0 15px; 
+  background-color: rgba(238, 238, 238, 1);
+}
 .home-card-container {
     margin-top: 0.5em;
 }
@@ -919,11 +931,11 @@ a:active {
     max-height: 70vh;
     overflow-y: scroll;
 }
-<<<<<<< HEAD
+
 .desktop-filter{
     margin-top:30px;
-    border-top:2px solid #CCCCCC;
-    border-bottom:2px solid #CCCCCC;
+    border-top:2px solid #B0B0B0;
+    border-bottom:2px solid #B0B0B0;
     width:80%;
     margin:auto;
 }
@@ -945,11 +957,14 @@ a:active {
 
 .mobile-filter{
   width:100%;
-  background-color: #fff;
+  background-color: #FF5722;
+  font-family:'Comfortaa';
   font-size:1.2em;
   margin:0;
+  bottom:0px;
+  height:40px;
   padding:10px;
-  color: #4F4F4F;
+  color: #fff;
    font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
    position: fixed;
    cursor: pointer;
@@ -1090,7 +1105,7 @@ a:active {
    /*border-right: 1px solid #C8C8C8; */
   /*border-left: 3px solid #d19b3d;*/
   border-bottom: 1px solid #C8C8C8;
-  
+  }
 
 .shake-animation{
     

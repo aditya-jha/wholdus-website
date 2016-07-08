@@ -31,6 +31,7 @@
             $scope.sellerString=null;
             $scope.filterID=1;
             $scope.selectedcolours='';
+            $scope.filterChange=false;
             $scope.activeFilterStyle={
                 '-webkit-transition': 'all 0.4s ease',
                 '-moz-transition': 'all 0.4s ease',
@@ -42,6 +43,7 @@
 
 
         function getProducts() {
+                $scope.filterChange=false;
                 if(UtilService.currentCategoryID!=null){
                     if(UtilService.currentCategoryID!=$scope.categoryID){
                         UtilService.setFilterParams(null);
@@ -158,7 +160,7 @@
 
         }
 
-        $scope.updateSelection = function(position) {
+        $scope.updatePrice = function(position) {
               angular.forEach($scope.priceRanges, function(p, index) {
                 if (position != index) 
                     p.active = false;
@@ -169,6 +171,7 @@
           } 
 
         $scope.updateColour=function(position){
+               $scope.filterChange=true;
             if(!$scope.colours[position].active){
                 $scope.colours[position].active=true;
             }
@@ -185,6 +188,9 @@
                 $scope.fabrics[position].active=false;   
             }
         }  
+        $scope.filterChanged=function(){
+            $scope.filterChange=true;
+        }
 
         $scope.applyFilters=function(type){
             $scope.selectedSellers=[];
