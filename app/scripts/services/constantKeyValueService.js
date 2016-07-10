@@ -19,7 +19,8 @@
                     category: 'category',
                     buyerLeads: 'leads/buyer',
                     contactus: 'leads/contactus',
-                    buyerProducts: 'users/buyer/buyerproducts'
+                    buyerProducts: 'users/buyer/buyerproducts',
+                    blogarticle: 'blog/articles'
                 },
                 accessTokenKey: 'randomData',
                 sellerSite: 'http://seller.wholdus.com'

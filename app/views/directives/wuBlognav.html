@@ -1,10 +1,10 @@
-<div layout="row" class="white-card">
-    <md-list flex>
+<div layout="row" flex="95" class="white-card">
+    <md-list flex="100">
         <md-list-item data-ng-repeat="art in articles">
-            <a data-ng-href="{{art.url}}" class="blog-list" layout="column">
+            <div flex="100" class="blog-list cursor-pointer" data-ng-click= "openArticle(art.slug,art.articleID)" layout="column" layout-padding>
                 <span class="bold">{{art.title}}</span>
-                <span class="small-font">{{art.author}}</span>
-            </a>
+                <span class="small-font">{{art.author.name}}</span>
+            </div>
             <md-divider></md-divider>
         </md-list-item>
     </md-list>

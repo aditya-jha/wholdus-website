@@ -4,21 +4,70 @@
         '$log',
         '$routeParams',
         '$sce',
-        function($scope, $log, $routeParams, $sce) {
+        '$compile',
+        'APIService',
+        'UtilService',
+        '$location',
+        '$rootScope',
+        'ngProgressBarService',
+        function($scope, $log, $routeParams, $sce, $compile, APIService, UtilService, $location, $rootScope, ngProgressBarService) {
 
-            function init() {
-                if($routeParams.article && $routeParams.article == 'home') {
+            // function init() {
+            //     if($routeParams.article && $routeParams.article == 'home') {
                     
-                }
+            //     }
+            // }
+
+            $scope.data = {
+                article: {},
+                articles : [],
             }
-            $scope.article = {
-                title: 'Blog post 1 Blog post 1 Blog post 1 Blog post 1 Blog post 1 Blog post 1 Blog post 1',
-                author: 'Aditya Jha',
-                url: '/blog/new',
-                converImage: 'https://media.licdn.com/mpr/mpr/jc/AAEAAQAAAAAAAAdZAAAAJDE1YmU1NDRkLWI2ZGMtNGU4MC1hN2EyLWNhNDM4MTg2YzA0OA.jpg',
-                content: $sce.trustAsHtml('<b>this is content</b>'),
-                created_at: '1467387369461'
+
+            $scope.home = false;
+
+            $scope.getBlogs = function(params){
+                        $rootScope.$broadcast('showProgressbar');
+                        APIService.apiCall('GET', APIService.getAPIUrl('blogarticle'),null, params).
+                        then(function(response){
+                            $rootScope.$broadcast('endProgressbar');
+                            if($scope.home == true){
+                                $scope.data.articles = response.articles;
+                            }
+                            else if ($scope.home == false){
+                                $scope.data.article = response.articles[0];
+                                $scope.articleContent = $sce.trustAsHtml($scope.data.article.content);
+                            }
+                            $scope.data.article.cover_image_link= 'https://media.licdn.com/mpr/mpr/jc/AAEAAQAAAAAAAAdZAAAAJDE1YmU1NDRkLWI2ZGMtNGU4MC1hN2EyLWNhNDM4MTg2YzA0OA.jpg';
+                        },function(error){
+                            $rootScope.$broadcast('endProgressbar');
+                            ToastService.showSimpleToast('unable to load blog content', 3000);
+                        });
+                    }
+
+            $scope.selectBlog = function(slug, id, title){
+                $scope.articletitle = title;
+                $location.url('/blog/'+slug+'-'+id);
+            }
+
+            // function showArticle(ID){
+
+            //     var el = $compile("<div layout='row' flex='100' wu-blog-content md-whiteframe='2dp' id="+ID+" layout-wrap></div>")($scope);
+            //     angular.element(document.querySelector("#blog-content")).append(el);
+            // }
+
+            function viewBlog(){
+               if($routeParams.article && $routeParams.article!='home'){
+                $scope.getBlogs({
+                    articleID:UtilService.getIDFromSlug($routeParams.article),
+                    article_details:1,
+                });
+               }
+               else{
+                        $scope.home = true;
+                     $scope.getBlogs();
+               }
             };
+            viewBlog();
         }
     ]);
 })();
