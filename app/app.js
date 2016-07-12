@@ -47,15 +47,19 @@ webapp.config([
             reloadOnSearch: false
         }).when('/blog', {
             template: '<div></div>',
-            controller: [
-                '$location',
-                function($location) {
-                    $location.url('blog/home');
-                }
-            ]
+            controller: 'RedirectController'
         }).when('/blog/:article', {
             templateUrl: 'views/blog/blogPage.html',
             controller: 'BlogController'
+        }).when('/bp', {
+            template: '<div></div>',
+            controller: 'RedirectController'
+        }).when('/bp/:uniqueUrl', {
+            template: '<div></div>',
+            controller: 'RedirectController'
+        }).when('/bp/:uniqueUrl/:buyerProductID', {
+            template: '<div></div>',
+            controller: 'RedirectController'
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",

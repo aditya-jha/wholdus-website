@@ -18,6 +18,10 @@
                 localStorageService.set(ConstantKeyValueService.accessTokenKey, response.token);
             }
 
+            factory.setAccessToken = function(response) {
+                loginSuccess(response);
+            };
+
             factory.checkLoggedIn = function() {
                 var token = localStorageService.get(ConstantKeyValueService.accessTokenKey);
                 if(token) {

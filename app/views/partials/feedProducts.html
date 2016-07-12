@@ -26,18 +26,17 @@
                 </svg>
             </div>
         </div>
-        <div flex layout-align="center center" layout="column">
-         <div flex layout-align="center center" layout="row" >
-            <img data-ng-src="{{productToShow.imageUrl}}" ng-style="displayImageStyle" image-on-load="imageLoaded()"/>
-         </div>   
-            <div layout-align="center centre" layout="row" class="progress-bar-container" style="margin-top:20px;">
-            <md-progress-linear md-mode="indeterminate"   ng-show="displayImageLoading" class="progress-bar md-warn md-hue-5"></md-progress-linear>
+        <div flex layout-align="center center" layout="row" layout-wrap>
+            <div flex="100" layout-align="center center" layout="row">
+                <img data-ng-src="{{productToShow.imageUrl}}" ng-style="displayImageStyle" image-on-load="imageLoaded()" md-whiteframe="10"/>
             </div>
-            
+            <div layout-align="center center" layout="row" class="progress-bar-container" style="margin-top:10px;">
+                <md-progress-linear md-mode="indeterminate"   ng-show="displayImageLoading" class="progress-bar md-warn md-hue-5"></md-progress-linear>
+            </div>
         </div>
 
-            
-        
+
+
         <div flex="15" layout="column" layout-align="center center" hide-xs show-gt-xs layout-align="end center">
             <div data-ng-click="favButton(1)" class="cursor-pointer">
                 <svg fill="#FF5722" height="50" viewBox="0 0 24 24" width="50" xmlns="http://www.w3.org/2000/svg">

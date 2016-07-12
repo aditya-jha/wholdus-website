@@ -20,7 +20,8 @@
                     buyerLeads: 'leads/buyer',
                     contactus: 'leads/contactus',
                     buyerProducts: 'users/buyer/buyerproducts',
-                    blogarticle: 'blog/articles'
+                    blogarticle: 'blog/articles',
+                    uniqueAccessToken: 'users/buyer/accesstoken'
                 },
                 accessTokenKey: 'randomData',
                 sellerSite: 'http://seller.wholdus.com'

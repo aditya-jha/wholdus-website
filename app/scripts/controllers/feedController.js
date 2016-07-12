@@ -42,6 +42,11 @@
                 } else {
                     $scope.pageSettings.responded = 0;
                 }
+                if(search.buyerproductID) {
+                    $scope.buyerproductID = search.buyerproductID;
+                } else {
+                    $scope.buyerproductID = null;
+                }
             }
 
             function setProductToShow(index) {
@@ -66,15 +71,18 @@
 
             function fetchProducts() {
                 $rootScope.$broadcast('showProgressbar');
-                APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, {
+                var params = {
                     page_number: $scope.pageSettings.currentPage,
                     items_per_page: 20,
                     is_active: 1,
-                    responded: $scope.pageSettings.responded
-                })
+                    responded: $scope.pageSettings.responded,
+                };
+                if($scope.buyerproductID) {
+                    params.buyerproductID = $scope.buyerproductID;
+                }
+                APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
                 .then(function(response) {
                     $rootScope.$broadcast('endProgressbar');
-                    $log.log(response);
                     $scope.pageSettings.totalPages = response.total_pages;
 
                     if(response.buyer_products.length) {
@@ -121,6 +129,7 @@
             };
 
             $scope.favButton = function(type) {
+
                 if($scope.pageSettings.productIndex < $scope.products.length) {
                     APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
                         buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
@@ -131,9 +140,10 @@
                         $log.log(error);
                     });
                     $scope.pageSettings.productIndex += 1;
+
                     if($scope.pageSettings.productIndex < $scope.products.length) {
                         $scope.displayImageLoading=true;
-                          $scope.displayImageStyle={'opacity':'0.5'};
+                        $scope.displayImageStyle={'opacity':'0.5'};
                         setProductToShow($scope.pageSettings.productIndex);
                     } else {
                         if($scope.pageSettings.currentPage < $scope.pageSettings.totalPages) {
@@ -141,8 +151,15 @@
                             $scope.pageSettings.productIndex = 0;
                             fetchProducts();
                         } else {
-                            $scope.noProducts = true;
-                            $rootScope.$broadcast('productToShow');
+                            if($scope.buyerproductID) {
+                                $scope.buyerproductID = null;
+                                $location.search('buyerproductID', null);
+                                init();
+                            } else {
+                                $location.search('buyerproductID', null);
+                                $scope.noProducts = true;
+                                $rootScope.$broadcast('productToShow');
+                            }
                         }
                     }
                 } else {
