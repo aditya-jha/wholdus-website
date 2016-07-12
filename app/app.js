@@ -12,7 +12,7 @@ webapp.config([
     '$mdThemingProvider',
     '$mdIconProvider',
     'localStorageServiceProvider',
-    function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $location) {
+     function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $location) {
 
         $routeProvider.when('/', {
             templateUrl: "views/homepage.html",
@@ -46,6 +46,7 @@ webapp.config([
             controller: 'FeedController',
             reloadOnSearch: false
         }).when('/blog', {
+<<<<<<< HEAD
             template: '<div></div>',
             controller: 'RedirectController'
         }).when('/blog/:article', {
@@ -60,6 +61,18 @@ webapp.config([
         }).when('/bp/:uniqueUrl/:buyerProductID', {
             template: '<div></div>',
             controller: 'RedirectController'
+=======
+          template: '<div></div>',
+           controller: [
+               '$location',
+              function($location) {
+                  $location.url('blog/home');
+              }
+           ]
+       }).when('/blog/:article', {
+           templateUrl: 'views/blog/blogPage.html',
+           controller: 'BlogController'    
+>>>>>>> cf6d9498575d99b31bd2cfed7d738a8a6f9f2745
         }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",

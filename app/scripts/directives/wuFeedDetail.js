@@ -28,6 +28,7 @@
                             $scope.product = null;
                         }
                     });
+                    
                     listeners.push(productToShowListener);
 
                     var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
