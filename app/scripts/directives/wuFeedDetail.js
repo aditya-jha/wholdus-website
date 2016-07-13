@@ -12,41 +12,32 @@
                 function($scope, $location, $log, $rootScope, $element) {
                     var listeners = [];
 
-                    $scope.showDetailsButton = true;
+                    $scope.showFeedActionButton = false;
 
                     function init() {
                         var url = $location.url();
                         if(url.indexOf('hand-picked') == -1) {
-                            $scope.product = null;
+                            $scope.showFeedActionButton = false;
                         }
                     }
 
-                    var productToShowListener = $rootScope.$on('productToShow', function(event, data) {
+                    $scope.feedActionButton = function(type) {
+                        $scope.$broadcast('feedActionButtonClicked', type);
+                    };
+
+                    var productToShowListener = $rootScope.$on('showFeedActionButton', function(event, data) {
                         if(data) {
-                            $scope.product = data;
+                            $scope.showFeedActionButton = true;
                         } else {
-                            $scope.product = null;
+                            $scope.showFeedActionButton = false;
                         }
                     });
-                    
                     listeners.push(productToShowListener);
 
                     var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
                         init();
                     });
                     listeners.push(locationChangeListener);
-
-                    $scope.showDetails = function(type) {
-                        if(type==1) {
-                            $scope.showDetailsButton = false;
-                        } else {
-                            $scope.showDetailsButton = true;
-                        }
-                    };
-
-                    $scope.favButton = function() {
-                        $rootScope.$broadcast('addToFav', $scope.product);
-                    };
 
                     init();
 

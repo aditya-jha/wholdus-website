@@ -342,18 +342,18 @@ a:active {
     padding-top: 0.4em;
     /*margin: 0;*/
     text-align: center;
-   
+
 }
 
 .line-around{
    /*width: 60%; */
     /*text-transform: uppercase;*/
-   border-bottom: 2px solid #666666; 
+   border-bottom: 2px solid #666666;
    line-height: 0.1em;
    margin: 10px 0 20px;
 }
 .line-around>span {
-  padding:0 15px; 
+  padding:0 15px;
   background-color: rgba(238, 238, 238, 1);
 }
 .home-card-container {
@@ -908,6 +908,7 @@ a:active {
     position:absolute;
     width:100%;
     color: #FFFFFF;
+    background: #FFF;
 }
 
 .blog-page {
@@ -1004,14 +1005,14 @@ a:active {
 }
 
 .mobile-filter-panel{
-  max-height:90%; 
+  max-height:90%;
   overflow:auto;
   margin:10px;
 }
 .mobile-filter-footer{
   position:fixed;
-  bottom:0; 
-  width:100%; 
+  bottom:0;
+  width:100%;
   background:#fff;
   z-index: 10;
   /*border-top:1px solid rgba(255,255,255,0.2);*/
@@ -1019,7 +1020,7 @@ a:active {
 
 #primary_nav_wrap
 {
-  
+
 }
 
 #primary_nav_wrap ul
@@ -1067,7 +1068,7 @@ a:active {
 }
 
 .small-label {
-    -ms-transform: scale(0.8, 0.8); 
+    -ms-transform: scale(0.8, 0.8);
     -webkit-transform: scale(0.8, 0.8);
     transform: scale(0.8, 0.8);
 
@@ -1079,7 +1080,7 @@ a:active {
 
 .filter-property-container{
    background-color:#F0F0F0;
-  
+
     /*color:#fff;*/
     /*padding:5px;*/
 }
@@ -1093,7 +1094,7 @@ a:active {
     font-size: 0.9em;
 }
 .price-input{
-  width:6em; 
+  width:6em;
   margin:0px
 }
 .color-box-container{
@@ -1111,7 +1112,7 @@ a:active {
 
 
 .color-box-selected{
-  border:2px solid #FFAA00; 
+  border:2px solid #FFAA00;
   height:20px;
    width:20px;
 
@@ -1141,20 +1142,20 @@ a:active {
   }
 
 .shake-animation{
-    
+
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
   -webkit-animation-delay: 1s; /* Safari */
     animation-delay: 1s;
   /*perspective: 1000px;*/
-  
+
 }
 
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
+
   20%, 80% {
     transform: translate3d(2px, 0, 0);
   }
