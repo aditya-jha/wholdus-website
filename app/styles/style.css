@@ -212,10 +212,12 @@ a:active {
 }
 #header-toolbar {
     font-family: 'Comfortaa';
-    padding: 4px;
     font-size: 1.1em;
 }
 
+#header-toolbar .md-toolbar-tools {
+    padding: 0 8px;
+}
 #header-toolbar h1 {
     font-size:1.5em;
     line-height: 1em;
@@ -228,7 +230,6 @@ a:active {
     min-height: 50px;
     max-width: 60px;
     max-height: 60px;
-
 }
 
 #header-toolbar .phone {
@@ -1126,12 +1127,11 @@ animation-iteration-count: infinite;
     width:20px;
 }
 .color-box-selected>span:before{
-  content:'\2713';
-  /*border:2px solid black;*/
+    content:'\2713';
 }
 .color-box-container:hover>div{
-  border:2px solid #FFAA00;
-     -webkit-transition: all 0.2s linear;
+    border:2px solid #FFAA00;
+    -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
     transition: all 0.2s linear;
