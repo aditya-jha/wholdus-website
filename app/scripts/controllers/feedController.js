@@ -53,10 +53,10 @@
                 if(index <= $scope.products.length) {
                     $scope.products[index].product.images = UtilService.getImages($scope.products[index].product);
                     if($scope.products[index].product.images.length) {
-                        $scope.products[index].product.imageUrl = UtilService.getImageUrl($scope.products[index].product.images[0], '400x400');
+                        $scope.products[index].product.imageUrl = UtilService.getImageUrl($scope.products[index].product.images[0], '700x700');
                     }
                     $scope.productToShow = $scope.products[index].product;
-                    $rootScope.$broadcast('showFeedActionButton', true);
+                    $rootScope.$broadcast('showFeedActionButton', $scope.productToShow);
                 }
             }
 
@@ -149,7 +149,7 @@
 
                     if($scope.pageSettings.productIndex < $scope.products.length) {
                         $scope.displayImageLoading=true;
-                        $scope.displayImageStyle={'opacity':'0.5'};
+                        $scope.displayImageStyle={'opacity':'0.3'};
                         setProductToShow($scope.pageSettings.productIndex);
                     } else {
                         if($scope.pageSettings.currentPage < $scope.pageSettings.totalPages) {

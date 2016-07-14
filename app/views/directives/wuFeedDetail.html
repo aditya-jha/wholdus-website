@@ -1,21 +1,138 @@
 <div data-ng-if="showFeedActionButton" flex="100" flex-offset-gt-sm="20" layout-wrap layout="row">
-    <div flex layout-align="center center">
-        <md-button class="md-fab" aria-label="Dislike Product" data-ng-click="feedActionButton(-1)">
-            <md-icon>
-                <svg style="width:24;height:24" viewBox="0 0 24 24">
-                    <path fill="#FFF" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-                </svg>
-            </md-icon>
-        </md-button>
+    <div flex="100" layout="row" data-ng-show="!showDetailsCard" layout-wrap>
+        <div layout="row" layout-wrap flex="100" class="{{getDetailDivClass()}}" style="padding-bottom:5px;">
+            <div flex-xs="50" flex-gt-xs="33" layout="row" layout-align="center center" style="margin-top:5px">
+                <span class="space small-font">Min Price:</span>
+                <span class="bold">Rs. {{product.min_price_per_unit}}</span>
+            </div>
+            <div flex-xs="50" flex-gt-xs="33" layout="row" layout-align="center center" style="margin-top:5px">
+                <span class="space small-font">Margin:</span>
+                <span class="bold">{{ product.margin }}%</span>
+            </div>
+            <div flex-xs="100" flex-gt-xs="33" layout="row" layout-align="center center" style="margin-top:5px">
+                <span class="space small-font">Fabric:</span>
+                <span class="bold">{{product.details.fabric_gsm}}</span>
+            </div>
+        </div>
+        <div layout="row" flex="100" style="border-top:1px solid #FFF"></div>
+        <div flex="100" layout-align="center center" layout="row">
+            <div flex layout-align="center center">
+                <md-button data-ng-if="smallScreen" class="md-fab md-mini md-raised" aria-label="Dislike Product" data-ng-click="feedActionButton(-1)" style="background-color:#fff">
+                    <svg style="width: 100%;height: 100%;" viewBox="1 0 22 23">
+                        <path fill="#000" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                    </svg>
+                </md-button>
+                <md-button data-ng-if="!smallScreen" class="md-fab md-raised" aria-label="Dislike Product" data-ng-click="feedActionButton(-1)" style="background-color:#fff">
+                    <svg style="width: 85%;height: 100%;" viewBox="1 0 22 23">
+                        <path fill="#000" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                    </svg>
+                </md-button>
+            </div>
+            <div data-ng-click="showDetails(1)">
+                <md-icon data-ng-if="smallScreen">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#fff" d="M7.41,18.41L6,17L12,11L18,17L16.59,18.41L12,13.83L7.41,18.41M7.41,12.41L6,11L12,5L18,11L16.59,12.41L12,7.83L7.41,12.41Z" />
+                    </svg>
+                </md-icon>
+                <md-icon data-ng-if="!smallScreen">
+                    <svg style="width:30px;height:30px" viewBox="0 0 24 24">
+                        <path fill="#fff" d="M7.41,18.41L6,17L12,11L18,17L16.59,18.41L12,13.83L7.41,18.41M7.41,12.41L6,11L12,5L18,11L16.59,12.41L12,7.83L7.41,12.41Z" />
+                    </svg>
+                </md-icon>
+            </div>
+            <div flex layout-align="center center">
+                <md-button data-ng-if="smallScreen" class="md-fab md-mini md-raised" aria-label="Add to favorite" data-ng-click="feedActionButton(1)" style="background-color:#fff">
+                    <svg style="width: 100%;height: 100%;" fill="#ff1a1a" viewBox="1 -1 22 23" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </md-button>
+                <md-button data-ng-if="!smallScreen" class="md-fab md-raised" aria-label="Add to favorite" data-ng-click="feedActionButton(1)" style="background-color:#fff">
+                    <svg style="width: 80%;height: 100%;" fill="#ff1a1a" viewBox="1 -1 22 23" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </md-button>
+            </div>
+        </div>
     </div>
-    <div flex layout-align="center center">
-        <md-button class="md-fab md-primary" aria-label="Add to favorite" data-ng-click="feedActionButton(1)">
+    <!--- details section -->
+    <div flex="100" layout="row" layout-wrap data-ng-show="showDetailsCard" class="feed-footer-details">
+        <div flex="100" data-ng-click="showDetails()">
             <md-icon>
-                <svg fill="#FFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="#FFF" d="M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z" />
                 </svg>
             </md-icon>
-        </md-button>
+        </div>
+        <div flex="100" layout-wrap layout="row">
+            <div flex="100" layout="row" layout-align="center center" class="product-price">
+                <span class="space small-font">Minimum Price:</span>
+                <span>Rs. {{product.min_price_per_unit}}</span>
+            </div>
+            <div flex="100" layout="row" class="ruler-divider"></div>
+            <div flex="100" layout="row" layout-align="center center">
+                <span class="space small-font">Retail Price:</span>
+                <span>Rs. {{product.price_per_unit}}</span>
+            </div>
+            <div flex="100" layout="row" layout-align="center center">
+                <span class="space small-font">Margin Upto:</span>
+                <span>{{ (product.price_per_unit - product.min_price_per_unit)*100/product.price_per_unit | number:0 }}%</span>
+            </div>
+            <div flex="100" layout="row" class="ruler-divider"></div>
+            <div flex="100" layout="row" layout-align="center center">
+                <span class="space small-font">Manufactured By:</span>
+                <span>{{ product.seller.company_name }}</span>
+            </div>
+            <div flex="100" layout="row" layout-align="center center">
+                <span class="space small-font">Catalog Number:</span>
+                <span>{{product.details.seller_catalog_number}}</span>
+            </div>
+            <div flex="100" layout="row" layout-align="center center">
+                <span class="space small-font">Lot Size:</span>
+                <span>{{product.lot_size}}</span>
+            </div>
+            <div flex="100" layout="row" class="ruler-divider"></div>
+            <div flex="100" layout="row" layout-wrap>
+                <span class="text-center" flex="100">Wholesale Pricing</span>
+                <div flex="100" layout="row" layout-align="center center">
+                    <table>
+                        <thead class="lot-pricing-head">
+                            <td>
+                                no. of lots
+                            </td>
+                            <td>
+                                price/unit
+                            </td>
+                            <td>
+                                your margin(upto)
+                            </td>
+                            <td>
+                                lot price
+                            </td>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="pl in product.product_lot">
+                                <td>
+                                    {{pl.lot_size_from}}+
+                                </td>
+                                <td>
+                                    {{pl.price_per_unit | number:0}}
+                                </td>
+                                <td>
+                                    {{(product.price_per_unit-pl.price_per_unit)*100/product.price_per_unit | number:0}}%
+                                </td>
+                                <td>
+                                    {{pl.price_per_unit*product.lot_size | number:0}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div flex="100" layout="row">
+                <md-button flex class="md-raised md-warn" data-ng-href="{{product.url}}" target="_blank">view details</md-button>
+            </div>
+        </div>
     </div>
 </div>
