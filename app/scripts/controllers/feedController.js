@@ -53,7 +53,7 @@
                 if(index <= $scope.products.length) {
                     $scope.products[index].product.images = UtilService.getImages($scope.products[index].product);
                     if($scope.products[index].product.images.length) {
-                        $scope.products[index].product.imageUrl = UtilService.getImageUrl($scope.products[index].product.images[0], '700x700');
+                        $scope.products[index].product.imageUrl = UtilService.getImageUrl($scope.products[index].product.images[0], '400x400');
                     }
                     $scope.productToShow = $scope.products[index].product;
                     $rootScope.$broadcast('showFeedActionButton', $scope.productToShow);
