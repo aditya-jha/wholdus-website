@@ -1,14 +1,14 @@
 
 <div layout="row" layout-fill wu-account-sidenav></div>
-<div layout="column" flex class="account-content" data-ng-if="!noProducts">
-    <div flex layout="column" layout-align="center center">
+<div layout="row" flex="100" class="account-content" data-ng-if="!noProducts" layout-wrap>
+    <div flex="100" layout="column" layout-align="center center">
         <div flex layout-align="center center" layout="column" style="padding-top:0.3em">
             <div style="height:64vh; width:90vw" layout="column" layout-align="center center">
                 <img data-ng-src="{{productToShow.imageUrl}}" ng-style="displayImageStyle" image-on-load="imageLoaded()" style="max-width:100%; max-height:100%; border:5px solid white; border-radius: 3px;" class="md-whiteframe-12dp" />
             </div>
         </div>
     </div>
-    <!-- <div style="height:80px;" flex="100" show-xs hide-gt-xs></div> -->
+    <div style="height:80px;" flex="100" show-xs hide-gt-xs></div>
 </div>
 <div layout="column" flex class="account-content" data-ng-if="noProducts" layout-align="center center">
     <h1>No more products</h1>
