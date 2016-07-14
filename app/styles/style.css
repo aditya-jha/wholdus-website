@@ -1152,6 +1152,57 @@ animation-iteration-count: infinite;
     animation-delay: 1s;
 }
 
+.feed-product-image {
+    max-width:100%;
+    max-height:100%;
+    border:5px solid #fff;
+    border-radius: 3px;
+}
+
+.feed-product-image.ng-hide-add, .feed-product-image.ng-hide-remove {
+    transition: all linear 1s;
+    display: block !important;
+}
+
+.feed-product-image.ng-hide-add.ng-hide-add-active, .feed-product-image.ng-hide-remove {
+    opacity: 0;
+}
+
+.feed-product-image.ng-hide-add, .feed-product-image.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+}
+
+.like-dislike-card {
+    z-index:10;
+    position: fixed;
+    top: 140px;
+    opacity: 1;
+}
+
+.like-dislike-card.ng-hide {
+    transition:1s linear all;
+    opacity:0;
+}
+
+.like-dislike-card.ng-show {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+
+.like-dislike-card div {
+    background:#fff;
+    opacity:0.8;
+    border:4px solid #fff;
+    max-width:50%;
+    border-radius: 4px;
+    padding-bottom: 2px;
+}
+
+.like-dislike-card span{
+    margin: 4px 0px 0px 5px;
+    text-transform: capitalize;
+}
+
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
