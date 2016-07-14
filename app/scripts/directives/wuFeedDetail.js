@@ -17,7 +17,7 @@
                     $scope.smallScreen = null;
                     $scope.showDetailsCard = false;
                     $scope.product = null;
-                    
+
                     function init() {
                         var url = $location.url();
                         if(url.indexOf('hand-picked') == -1) {
@@ -26,7 +26,7 @@
                     }
 
                     function isSmallScreen() {
-                        if($window.screen.height <= 520) {
+                        if($window.screen.height <= 570) {
                             $scope.smallScreen = true;
                         }
                     }
