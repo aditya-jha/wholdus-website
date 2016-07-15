@@ -18,9 +18,7 @@
                 currentPage: 1,
                 responded: 0
             };
-            $scope.products = [];
-            $scope.productToShow = null;
-            $scope.productLikeStatus = 0;
+
             // $scope.displayImageStyle={'opacity':'1.0'};
 
             function parseSearchParams() {
@@ -104,6 +102,9 @@
             }
 
             function init() {
+                $scope.products = [];
+                $scope.productToShow = null;
+                $scope.productLikeStatus = 0;
                 parseSearchParams();
                 fetchProducts();
             }
@@ -131,7 +132,7 @@
             $scope.showFilledStatus = function(index) {
                 if(index) $scope.showFilled = true;
                 else $scope.showFilled = false;
-            };            
+            };
 
             $scope.favButton = function(type) {
 
