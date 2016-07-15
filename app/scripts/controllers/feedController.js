@@ -131,7 +131,7 @@
             $scope.showFilledStatus = function(index) {
                 if(index) $scope.showFilled = true;
                 else $scope.showFilled = false;
-            };
+            };            
 
             $scope.favButton = function(type) {
 
