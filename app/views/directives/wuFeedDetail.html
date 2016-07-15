@@ -1,5 +1,5 @@
 <div data-ng-if="showFeedActionButton" flex="100" flex-offset-gt-sm="20" layout-wrap layout="row">
-    <div flex="100" layout="row" data-ng-show="!showDetailsCard" layout-wrap>
+    <div flex="100" layout="row" data-ng-show="!showDetailsCard" layout-wrap md-swipe-up="showDetails(1)">
         <div layout="row" layout-wrap flex="100" class="{{getDetailDivClass()}}" style="padding-bottom:5px;">
             <div flex-xs="50" flex-gt-xs="33" layout="row" layout-align="center center" style="margin-top:5px">
                 <span class="space small-font">Min Price:</span>
@@ -57,7 +57,7 @@
         </div>
     </div>
     <!--- details section -->
-    <div flex="100" layout="row" layout-wrap data-ng-show="showDetailsCard" class="feed-footer-details">
+    <div flex="100" layout="row" layout-wrap data-ng-show="showDetailsCard" class="feed-footer-details" md-swipe-down="showDetails()">
         <div flex="100" data-ng-click="showDetails()">
             <md-icon>
                 <svg style="width:24px;height:24px" viewBox="0 0 24 24">
