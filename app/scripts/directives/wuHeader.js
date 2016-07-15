@@ -12,8 +12,6 @@
                 'ToastService',
                 function($scope, $rootScope, DialogService, LoginService, $location, ToastService) {
 
-                    window.scrollTo(0,1);
-                    
                     var listeners = [];
                     $scope.loginStatus = false;
 
