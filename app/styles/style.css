@@ -966,7 +966,7 @@ animation-iteration-count: infinite;
 }
 
 .feed-footer-details {
-    max-height: 70vh;
+    max-height: 70vh !important;
     overflow-y: scroll;
     font-family: 'PT Sans';
 }
