@@ -57,10 +57,7 @@ webapp.config([
         }).when('/bp/:uniqueUrl', {
             template: '<div></div>',
             controller: 'RedirectController'
-        }).when('/bp/:uniqueUrl/:buyerProductID', {
-            template: '<div></div>',
-            controller: 'RedirectController'
-       }).when('/:category', {
+        }).when('/:category', {
             templateUrl: "views/categorypage.html",
             controller: "CategoryController",
         }).when('/:category/:product', {
@@ -68,6 +65,7 @@ webapp.config([
             controller: "ProductController"
         });
 
+        $routeProvider.otherwise('/');
         $locationProvider.html5Mode(true);
 
         $mdThemingProvider.theme('default')
