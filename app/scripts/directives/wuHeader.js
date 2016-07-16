@@ -10,10 +10,12 @@
                 'LoginService',
                 '$location',
                 'ToastService',
-                function($scope, $rootScope, DialogService, LoginService, $location, ToastService) {
+                'UtilService',
+                function($scope, $rootScope, DialogService, LoginService, $location, ToastService, UtilService) {
 
                     var listeners = [];
                     $scope.loginStatus = false;
+                    $scope.buyerName = null;
 
                     $scope.toggleSidenav = function() {
                         $rootScope.$broadcast('toggleSidenav');
@@ -38,11 +40,22 @@
                         }
                     }
 
+                    function setBuyerName() {
+                        var name = LoginService.getBuyerName();
+                        if(name && (UtilService.isMobileRequest() || name.length > 12)) {
+                            name = name.split(' ');
+                            name = name[0];
+                        }
+                        $scope.buyerName = name;
+                    }
+
                     function loginState() {
                         if(LoginService.checkLoggedIn()) {
                             $scope.loginStatus = true;
+                            setBuyerName();
                         } else {
                             $scope.loginStatus = false;
+                            $scope.buyerName = null;
                             logoutRedirect();
                         }
                     }
@@ -55,6 +68,8 @@
 
                     var loggedInListener = $rootScope.$on('loggedIn', function(event) {
                         $scope.loginStatus = true;
+                        setBuyerName();
+                        $location.url('/account/hand-picked-products');
                     });
                     listeners.push(loggedInListener);
 

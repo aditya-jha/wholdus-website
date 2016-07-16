@@ -26,6 +26,7 @@
                     fabric_type:'products/fabric_type',
                 },
                 accessTokenKey: 'randomData',
+                userNameKey: 'userName',
                 sellerSite: 'http://seller.wholdus.com'
             };
 

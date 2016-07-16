@@ -62,7 +62,7 @@
                         $scope.loading.show = false;
                         $scope.apiCall = null;
                         $mdDialog.hide();
-                        ToastService.showSimpleToast("Welcome", 2000);
+                        ToastService.showSimpleToast("Welcome " + response.buyer.name, 2000);
                         $rootScope.$broadcast('loggedIn');
                     }, function(error) {
                         $scope.loading.show = false;

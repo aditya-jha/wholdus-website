@@ -16,7 +16,13 @@
                 factory.loginStatus = true;
                 ConstantKeyValueService.token = response.token;
                 localStorageService.set(ConstantKeyValueService.accessTokenKey, response.token);
+                localStorageService.set(ConstantKeyValueService.userNameKey, response.buyer.name);
             }
+
+            factory.getBuyerName = function() {
+                var name = localStorageService.get(ConstantKeyValueService.userNameKey);
+                return name;
+            };
 
             factory.setAccessToken = function(response) {
                 loginSuccess(response);
@@ -37,6 +43,7 @@
                 factory.loginStatus = false;
                 ConstantKeyValueService.token = null;
                 localStorageService.remove(ConstantKeyValueService.accessTokenKey);
+                localStorageService.remove(ConstantKeyValueService.userNameKey);
             };
 
             factory.login = function(mobile, password) {
