@@ -77,7 +77,9 @@
                 };
                 if($scope.buyerproductID) {
                     params.buyerproductID = $scope.buyerproductID;
+                    params.landing = 1;
                 }
+
                 APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
                 .then(function(response) {
                     $rootScope.$broadcast('endProgressbar');
@@ -134,12 +136,12 @@
                 else $scope.showFilled = false;
             };
 
-            $scope.favButton = function(type) {
-
+            $scope.favButton = function(type, swiped) {
                 if($scope.pageSettings.productIndex < $scope.products.length) {
                     APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
                         buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
                         responded: type === 1 ? 1 : 2,
+                        has_swiped: swiped
                     }).then(function(response) {
                         $log.log(response);
                     }, function(error) {

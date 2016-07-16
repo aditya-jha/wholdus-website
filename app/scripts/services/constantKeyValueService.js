@@ -20,6 +20,7 @@
                     buyerLeads: 'leads/buyer',
                     contactus: 'leads/contactus',
                     buyerProducts: 'users/buyer/buyerproducts',
+                    buyerProductsLanding: 'users/buyer/buyerproducts/landing',
                     blogarticle: 'blog/articles',
                     uniqueAccessToken: 'users/buyer/accesstoken',
                     colour_type:'products/colour_type',
@@ -27,7 +28,7 @@
                 },
                 accessTokenKey: 'randomData',
                 userNameKey: 'userName',
-                sellerSite: 'http://seller.wholdus.com'
+                sellerSite: 'http://seller.wholdus.com',
             };
 
             return factory;

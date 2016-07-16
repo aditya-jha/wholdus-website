@@ -20,6 +20,12 @@
                 }, function(error) {
                     $log.log(error);
                 });
+                APIService.apiCall('POST', APIService.getAPIUrl('buyerProductsLanding'), {"buyerproductID":buyerproductID})
+                .then(function(response) {
+                    $log.log(response);
+                }, function(error) {
+                    $log.log(error);
+                });
             }
 
             if($routeParams.uniqueUrl) {

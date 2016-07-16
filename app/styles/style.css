@@ -1188,7 +1188,7 @@ animation-iteration-count: infinite;
 
 .like-dislike-card div {
     background:#fff;
-    opacity:0.8;
+    /*opacity:0.8;*/
     border:4px solid #fff;
     max-width:50%;
     border-radius: 4px;
