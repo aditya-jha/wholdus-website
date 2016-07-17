@@ -46,7 +46,8 @@ var jsCustom = [
     'app/scripts/controllers/ordersController.js',
     'app/scripts/controllers/profileController.js',
     'app/scripts/controllers/feedController.js',
-    'app/scripts/controllers/blogController.js'
+    'app/scripts/controllers/blogController.js',
+    'app/scripts/controllers/redirectController.js'
 ];
 
 var stylesheets = [
