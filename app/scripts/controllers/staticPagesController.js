@@ -16,7 +16,8 @@
             $scope.formValidation=FormValidationService;
 
             $scope.settings = {
-                isMobile: UtilService.isMobileRequest()
+                isMobile: UtilService.isMobileRequest(),
+                showLoading: false
             };
 
             $scope.contactus = {
@@ -45,17 +46,17 @@
                     return;
                 }
                 if($scope.contactus.email && $scope.contactus.mobile_number) {
-                    $rootScope.$broadcast('showProgressbar');
+                    $scope.settings.showLoading = true;
                     $scope.contactus.apiCall = APIService.apiCall("POST", APIService.getAPIUrl('contactus'), $scope.contactus);
                     $scope.contactus.apiCall.then(function(response) {
                         ToastService.showActionToast("Thank you for reaching out to us. We will get back to you soon!", 0);
                         resetContactUs();
-                        $rootScope.$broadcast('endProgressbar');
+                        $scope.settings.showLoading = false;
                         $scope.contactus.apiCall = null;
                     }, function(error) {
                         ToastService.showActionToast("We are experiencing heavy traffic! Please try later", 0);
                         $rootScope.$broadcast('endProgressbar');
-                        $scope.contactus.apiCall = null;
+                        $scope.settings.showLoading = false;
                     });
                 } else {
                     ToastService.showActionToast("Please fill required details", 0);
