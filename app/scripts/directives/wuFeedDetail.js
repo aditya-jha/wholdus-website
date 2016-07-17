@@ -10,7 +10,8 @@
                 '$rootScope',
                 '$element',
                 '$window',
-                function($scope, $location, $log, $rootScope, $element, $window) {
+                'DialogService',
+                function($scope, $location, $log, $rootScope, $element, $window, DialogService) {
                     var listeners = [];
 
                     $scope.showFeedActionButton = false;
@@ -40,9 +41,13 @@
                         }
                     };
 
-                    $scope.showDetails = function(type) {
-                        if(type) $scope.showDetailsCard = true;
-                        else $scope.showDetailsCard = false;
+                    $scope.showDetails = function(event, type) {
+                        DialogService.viewDialog(event, {
+                            view: 'views/partials/favButtonFeeback.html',
+                        }, true).finally(function() {
+                            if(type) $scope.showDetailsCard = true;
+                            else $scope.showDetailsCard = false;
+                        });
                     };
 
                     $scope.feedActionButton = function(type) {

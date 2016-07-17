@@ -1,0 +1,36 @@
+<md-dialog aria-label="Fav Button Feedback" ng-cloak>
+    <md-dialog-content class="background-page text-center" style="font-family: 'Comfortaa'">
+        <div flex="100" layout="row" layout-padding layout-wrap data-ng-if="favButtonFeeback == 1">
+            <span flex="100">You have <span class="bold text-danger">LIKED</span> this product</span>
+            <span flex="100">You can view your favorite products on favorites page and place order easily</span>
+        </div>
+        <div flex="100" layout="row" layout-padding layout-wrap data-ng-if="favButtonFeeback == -1">
+            <span flex="100">You have <span class="bold">DISLIKED</span> this product</span>
+            <span flex="100">You can review your dislikes on the dislikes page and add them to favorites from there</span>
+        </div>
+        <div flex="100" layout="row" layout-padding layout-wrap data-ng-if="favButtonFeeback != 1 || favButtonFeeback != -1">
+            <span flex="100">Here you will find more detail about product</span>
+            <span flex="100">
+                Swipe Up or click on
+                <md-icon>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#000" d="M7.41,18.41L6,17L12,11L18,17L16.59,18.41L12,13.83L7.41,18.41M7.41,12.41L6,11L12,5L18,11L16.59,12.41L12,7.83L7.41,12.41Z" />
+                    </svg>
+                </md-icon>
+                to open this section
+            </span>
+            <span flex="100">
+                Swipe Down or click on
+                <md-icon>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#000" d="M16.59,5.59L18,7L12,13L6,7L7.41,5.59L12,10.17L16.59,5.59M16.59,11.59L18,13L12,19L6,13L7.41,11.59L12,16.17L16.59,11.59Z" />
+                    </svg>
+                </md-icon>
+                to close this section
+            </span>
+        </div>
+        <div flex="100" layout="row" layout-align="center center">
+            <md-button class="md-raised md-warn" ng-click="cancel()">OK</md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

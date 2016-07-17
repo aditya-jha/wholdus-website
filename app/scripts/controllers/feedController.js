@@ -135,7 +135,7 @@
             listeners.push(locationChangeListener);
 
             var feedActionButtonClickedListener = $scope.$on('feedActionButtonClicked', function(event, data) {
-                $scope.favButton(data);
+                $scope.favButton(event, data);
             });
             listeners.push(feedActionButtonClickedListener);
 
@@ -144,44 +144,53 @@
                 else $scope.showFilled = false;
             };
 
-            $scope.favButton = function(type, swiped) {
-                if($scope.pageSettings.productIndex < $scope.products.length) {
-                    APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
-                        buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
-                        responded: type === 1 ? 1 : 2,
-                        has_swiped: swiped
-                    }).then(function(response) {
-                        $log.log(response);
-                    }, function(error) {
-                        $log.log(error);
-                    });
-                    $scope.pageSettings.productIndex += 1;
+            function favButtonHelper(type, swiped) {
+                APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
+                    buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
+                    responded: type === 1 ? 1 : 2,
+                    has_swiped: swiped
+                }).then(function(response) {
+                    $log.log(response);
+                }, function(error) {
+                    $log.log(error);
+                });
+                $scope.pageSettings.productIndex += 1;
 
-                    if($scope.pageSettings.productIndex < $scope.products.length) {
-                        if(type == 1) {
-                            $scope.productLikeStatus = 2;
-                        } else {
-                            $scope.productLikeStatus = 1;
-                        }
-                        // $scope.displayImageStyle={'opacity':'0.3'};
-                        setProductToShow($scope.pageSettings.productIndex);
+                if($scope.pageSettings.productIndex < $scope.products.length) {
+                    if(type == 1) {
+                        $scope.productLikeStatus = 2;
                     } else {
-                        if($scope.pageSettings.currentPage < $scope.pageSettings.totalPages) {
-                            $scope.pageSettings.currentPage += 1;
-                            $scope.pageSettings.productIndex = 0;
-                            fetchProducts();
+                        $scope.productLikeStatus = 1;
+                    }
+                    // $scope.displayImageStyle={'opacity':'0.3'};
+                    setProductToShow($scope.pageSettings.productIndex);
+                } else {
+                    if($scope.pageSettings.currentPage < $scope.pageSettings.totalPages) {
+                        $scope.pageSettings.currentPage += 1;
+                        $scope.pageSettings.productIndex = 0;
+                        fetchProducts();
+                    } else {
+                        if($scope.buyerproductID) {
+                            $scope.buyerproductID = null;
+                            $location.search('buyerproductID', null);
+                            init();
                         } else {
-                            if($scope.buyerproductID) {
-                                $scope.buyerproductID = null;
-                                $location.search('buyerproductID', null);
-                                init();
-                            } else {
-                                $location.search('buyerproductID', null);
-                                $scope.noProducts = true;
-                                $rootScope.$broadcast('showFeedActionButton', false);
-                            }
+                            $location.search('buyerproductID', null);
+                            $scope.noProducts = true;
+                            $rootScope.$broadcast('showFeedActionButton', false);
                         }
                     }
+                }
+            }
+
+            $scope.favButton = function(event, type, swiped) {
+                if($scope.pageSettings.productIndex < $scope.products.length) {
+                    DialogService.viewDialog(event, {
+                        type: type,
+                        view: 'views/partials/favButtonFeeback.html'
+                    }, true).finally(function() {
+                        favButtonHelper(type, swiped);
+                    });
                 } else {
                     $scope.noProducts = true;
                     $rootScope.$broadcast('showFeedActionButton', false);

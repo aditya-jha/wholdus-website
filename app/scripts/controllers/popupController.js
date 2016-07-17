@@ -10,9 +10,11 @@
         'FormValidationService',
         'ConstantKeyValueService',
         'LoginService',
+        '$log',
         'productID',
         'categoryID',
-        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, FormValidationService, ConstantKeyValueService, LoginService, productID, categoryID) {
+        'likeDislikeStatus',
+        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, FormValidationService, ConstantKeyValueService, LoginService, $log, productID, categoryID, likeDislikeStatus) {
 
             $scope.apiCall = null;
             $scope.loading = {
@@ -24,7 +26,7 @@
                 selectedIndex: 0,
                 buyer: LoginService.getBuyerInfo()
             };
-
+            $scope.favButtonFeeback = likeDislikeStatus;
             $scope.errorMessage = false;
 
             $scope.formValidation = FormValidationService;
