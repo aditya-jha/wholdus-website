@@ -28,6 +28,7 @@
             <div layout="row" wu-product product="p.product" style="width: 100%;max-width: 620px;"></div>
         </div>
     </div>
+    <div layout="row" data-ng-show="pageSettings.enablePagination" wu-pagination></div>
 </div>
 <div layout="column" flex class="account-content" data-ng-if="noProducts" layout-align="center center">
     <h1>No more products</h1>

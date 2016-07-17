@@ -44,7 +44,7 @@
 
         function getProducts() {
                 $scope.filterChange=false;
-                if(UtilService.currentCategoryID!=null){
+                if(UtilService.currentCategoryID){
                     if(UtilService.currentCategoryID!=$scope.categoryID){
                         UtilService.setFilterParams(null);
                         UtilService.resetFilterParams();
@@ -55,13 +55,13 @@
                 $scope.colours=UtilService.colours;
                 $scope.fabrics=UtilService.fabrics;
                 $scope.priceRanges=UtilService.priceRanges;
-                $scope.selectedColours=UtilService.selectedColours; 
-                $scope.selectedFabrics=UtilService.selectedFabrics; 
-        
+                $scope.selectedColours=UtilService.selectedColours;
+                $scope.selectedFabrics=UtilService.selectedFabrics;
+
 
                 $rootScope.$broadcast('showProgressbar');
-            
-                var params = {categoryID: $scope.categoryID, 
+
+                var params = {categoryID: $scope.categoryID,
                     sellerID:$scope.sellerString,
                     min_price_per_unit:UtilService.minPrice,
                     max_price_per_unit:UtilService.maxPrice,
@@ -72,13 +72,13 @@
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
                     .then(function(response) {
                         $scope.settings.noProduct = false;
-                        
-                        if(UtilService.priceRangeIndex!=null){
+
+                        if(UtilService.priceRangeIndex){
                             var pos=UtilService.priceRangeIndex;
-                            if($scope.priceRanges[pos].min_value == UtilService.minPrice && 
+                            if($scope.priceRanges[pos].min_value == UtilService.minPrice &&
                                 $scope.priceRanges[pos].max_value == UtilService.maxPrice){
                                 $scope.priceRanges[pos].active=true;
-                            } 
+                            }
                             else{
                                 $scope.priceRanges[pos].active=false;
                             }
@@ -93,7 +93,7 @@
                                 totalPages: Math.ceil(response.total_products/$scope.settings.itemsPerPage)
                             });
                         }
-                        
+
                         else{
                            $scope.settings.noProduct = false;
                            $scope.settings.enablePagination = false;
@@ -112,7 +112,7 @@
                        $scope.products = response.products;
                         if($scope.products.length) {
                             $scope.category = response.products[0].category;
-                        } 
+                        }
                         else {
                             $scope.settings.noProduct = true;
                             $scope.settings.enablePagination = false;
@@ -153,7 +153,7 @@
                                 value.isShow=true;
                             }
                             else{
-                                value.isShow=false;   
+                                value.isShow=false;
                             }
 
                         });
@@ -162,13 +162,13 @@
 
         $scope.updatePrice = function(position) {
               angular.forEach($scope.priceRanges, function(p, index) {
-                if (position != index) 
+                if (position != index)
                     p.active = false;
                 });
               $scope.priceRangeIndex=position;
               $scope.minPrice=$scope.priceRanges[position].min_value;
-              $scope.maxPrice=$scope.priceRanges[position].max_value;    
-          } 
+              $scope.maxPrice=$scope.priceRanges[position].max_value;
+          }
 
         $scope.updateColour=function(position){
                $scope.filterChange=true;
@@ -176,25 +176,25 @@
                 $scope.colours[position].active=true;
             }
             else{
-                $scope.colours[position].active=false;   
+                $scope.colours[position].active=false;
             }
-        } 
+        }
 
         $scope.updateFabric=function(position){
             if(!$scope.fabrics[position].active){
                 $scope.fabrics[position].active=true;
             }
             else{
-                $scope.fabrics[position].active=false;   
+                $scope.fabrics[position].active=false;
             }
-        }  
+        }
         $scope.filterChanged=function(){
             $scope.filterChange=true;
         }
 
         $scope.applyFilters=function(type){
             $scope.selectedSellers=[];
-            
+
             var colours=[];
             var fabrics=[];
             angular.forEach($scope.colours, function(value, index) {
@@ -207,15 +207,15 @@
                     fabrics.push(value.name);
                 }
             });
-            $scope.selectedFabrics=fabrics.toString(); 
+            $scope.selectedFabrics=fabrics.toString();
             $scope.selectedColours=colours.toString();
             angular.forEach($scope.sellers, function(value, key) {
                 if(value.isShow){
                     $scope.selectedSellers.push(value.sellerID);
                 }
-                
 
-            });    
+
+            });
 
             $location.search('page', '1');
             $scope.settings.page=UtilService.getPageNumber();
@@ -231,7 +231,7 @@
 
             $route.reload();
             $mdDialog.cancel();
-            }    
+            }
 
         }
 
@@ -257,12 +257,12 @@
          $scope.sellerString=UtilService.sellerString;
         $scope.colours=UtilService.colours;
         $scope.fabrics=UtilService.fabrics;
-        $scope.priceRanges=UtilService.priceRanges; 
-        $scope.selectedColours=UtilService.selectedColours; 
-        $scope.selectedFabrics=UtilService.selectedFabrics; 
+        $scope.priceRanges=UtilService.priceRanges;
+        $scope.selectedColours=UtilService.selectedColours;
+        $scope.selectedFabrics=UtilService.selectedFabrics;
         $scope.minPrice=UtilService.minPrice;
         $scope.maxPrice=UtilService.maxPrice
-    }   
+    }
 
 
     $scope.buyNow = function(event, categoryID){
@@ -275,4 +275,3 @@
 }
 ]);
 })();
-

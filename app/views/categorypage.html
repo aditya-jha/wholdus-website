@@ -12,7 +12,7 @@
 <div layout="row" flex layout-align="center" data-ng-if="!settings.noProduct">
     <h1 id="category-title" class="line-around"  ng-cloak flex="50" flex-sm="80" flex-xs="90"><span>{{category.display_name}}</span> </h1>
 </div>
-  
+
 <div ng-mouseleave="desktopFilterID=null" style="margin-top:10px;" hide-xs>
     <div layout="row" layout-align="center start" flex="90" class="desktop-filter">
         <div id="primary_nav_wrap">
@@ -28,11 +28,11 @@
               </li>
               <li ng-mouseover="desktopFilterID=4">
                 <a href="#">FABRIC &nbsp; &nbsp;<img src="./images/head-downarrow.png" height="5" width="9"></a>
-              </li>  
+              </li>
             </ul>
         </div>
-    </div>        
-   
+    </div>
+
 <div layout="row" flex="100"  class="desktop-filter-panel" layout-align="center">
 
     <div md-whiteframe="2" layout="row" layout-wrap  ng-show="desktopFilterID==1" ng-mouseleave="filterChange &&applyFilters('desktop')" flex="75"  style="max-height:400px; overflow-y: auto;">
@@ -42,13 +42,13 @@
                   style="margin:0px;" ng-change="filterChanged()">
                   <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
                   </md-checkbox>
-        </div>        
+        </div>
       </div>
 
         <div  layout="column" md-whiteframe="2" ng-show="desktopFilterID==2"  ng-mouseleave="filterChange && applyFilters('desktop')" flex="35" flex-sm="70" flex-md="50" style="padding:10px">
-        
+
             <div layout="row" layout-wrap layout-align="space-between center">
-             <div flex="45"  data-ng-repeat="p in priceRanges" layout-align="start start" 
+             <div flex="45"  data-ng-repeat="p in priceRanges" layout-align="start start"
              style="padding:5px;" class="small-label" >
                   <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string"
                   style="margin:0px;" ng-click="updatePrice($index)" ng-change="filterChanged()">
@@ -56,22 +56,22 @@
                     <span ng-if="$first">Below Rs.{{p.max_value}}</span>
                     <span ng-if="$last">Above Rs.{{p.min_value}}</span>
                     <span ng-if="!$last && !$first">Rs. {{p.min_value}} to Rs.{{p.max_value}}</span>
-                     
+
                   </label>
                   </md-checkbox>
-               
+
             </div>
-            </div> 
+            </div>
 
         <!--     <div layout="row" flex layout-align="space-around center" style="margin-top:10px">
                 <div layout="row" flex="30">
                 <div layout="column" ng-cloak>
                     <span class="custum-input-label">Min Price</span>
                     <div > Rs.
-                    <md-input-container class="price-input">    
+                    <md-input-container class="price-input">
                     <input type="number" data-ng-model="minPrice" aria-label="minPrice" ng-change="filterChanged()"/>
                     </md-input-container>
-                    </div> 
+                    </div>
                 </div>
                 </div>
                 <div layout="row" flex="30">
@@ -81,39 +81,39 @@
                     <md-input-container class="price-input">
                         <input type="number" data-ng-model="maxPrice" aria-label="maxPrice" ng-change="filterChanged()"/>
                     </md-input-container>
-                    </div> 
+                    </div>
                 </div>
                 </div>
             </div> -->
-     
+
        </div>
 
        <div md-whiteframe="2" layout="row" layout-align="center" ng-show="desktopFilterID==3" ng-mouseleave="filterChange && applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
         <div layout="row" flex layout-wrap layout-align="start center">
         <div data-ng-repeat="c in colours" flex="25"  layout-align="start start" ng-click="updateColour($index)">
          <div class="color-box-container" layout="row">
-         <div style="background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.1)), {{c.colourCode}}" 
+         <div style="background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.1)), {{c.colourCode}}"
          class="color-box" ng-class={'color-box-selected':c.active}
          layout="row" layout-align="center center">
-            <span></span>          
-         </div> 
+            <span></span>
+         </div>
           <span style="font-size:0.9em; color:grey">&nbsp;{{c.name}}</span>
         </div>
-        </div>     
-        </div>      
+        </div>
+        </div>
         </div>
 
          <div md-whiteframe="2" layout="row" layout-wrap layout-align="start" ng-show="desktopFilterID==4" ng-mouseleave="filterChange && applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
 
-            <div flex="25"  data-ng-repeat="f in fabrics" layout-align="start start" 
+            <div flex="25"  data-ng-repeat="f in fabrics" layout-align="start start"
                 style="padding:2px;" class="small-label" >
                   <md-checkbox  class="md-primary" name="string" ng-model="f.active"  aria-label="string"
                   style="margin:0px;" ng-change="filterChanged()">
                   <label style="color:grey; cursor:pointer">{{f.name }}</label>
                   </md-checkbox>
-            </div>        
+            </div>
       </div>
-    
+
     </div>
 
 </div>
