@@ -8,7 +8,8 @@
         'ngProgressBarService',
         '$rootScope',
         'UtilService',
-        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService) {
+        'DialogService',
+        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService) {
             var listeners = [];
 
             $scope.pageSettings = {
@@ -20,6 +21,13 @@
             };
 
             // $scope.displayImageStyle={'opacity':'1.0'};
+
+            function openInstructionsPopup() {
+                DialogService.viewDialog(null, {
+                    view: 'views/partials/bpInstructions.html'
+                }, true);
+            }
+            openInstructionsPopup();
 
             function parseSearchParams() {
                 $scope.noProducts = false;

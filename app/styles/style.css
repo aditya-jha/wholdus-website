@@ -1200,6 +1200,28 @@ animation-iteration-count: infinite;
     text-transform: capitalize;
 }
 
+.bp-instructions-popup md-tabs-canvas {
+    display: none;
+}
+
+.swipe-gesture-div-right div{
+    animation: swipeRight 1s ease 1s infinite forwards;
+}
+
+.swipe-gesture-div-left div{
+    animation: swipeLeft 1s ease 1s infinite;
+}
+
+@keyframes swipeRight {
+    from { width: 10%; }
+    to { width: 90%; }
+}
+
+@keyframes swipeLeft {
+    from { width: 90%; }
+    to { width: 10%; }
+}
+
 @keyframes shake {
   10%, 90% {
     transform: translate3d(-1px, 0, 0);

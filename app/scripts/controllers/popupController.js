@@ -19,6 +19,12 @@
                 show: false,
                 message: 'verifying credentials...'
             };
+            $scope.bpInstructions = {
+                total: 4,
+                selectedIndex: 0,
+                buyer: LoginService.getBuyerInfo()
+            };
+
             $scope.errorMessage = false;
 
             $scope.formValidation = FormValidationService;
@@ -69,6 +75,20 @@
                         $scope.apiCall = null;
                         $scope.errorMessage = true;
                     });
+                }
+            };
+
+            $scope.nextInstruction = function(direction) {
+                if(direction>0) {
+                    if($scope.bpInstructions.selectedIndex + 1 >= $scope.bpInstructions.total) {
+                        return;
+                    }
+                    $scope.bpInstructions.selectedIndex += 1;
+                } else {
+                    if($scope.bpInstructions.selectedIndex <= 0) {
+                        return;
+                    }
+                    $scope.bpInstructions.selectedIndex -= 1;
                 }
             };
         }

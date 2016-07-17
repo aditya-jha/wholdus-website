@@ -28,6 +28,7 @@
                 },
                 accessTokenKey: 'randomData',
                 userNameKey: 'userName',
+                mobileNumberKey: 'mobile',
                 sellerSite: 'http://seller.wholdus.com',
             };
 

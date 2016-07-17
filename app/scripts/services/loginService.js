@@ -17,11 +17,14 @@
                 ConstantKeyValueService.token = response.token;
                 localStorageService.set(ConstantKeyValueService.accessTokenKey, response.token);
                 localStorageService.set(ConstantKeyValueService.userNameKey, response.buyer.name);
+                localStorageService.set(ConstantKeyValueService.mobileNumberKey, response.buyer.mobile_number);
             }
 
-            factory.getBuyerName = function() {
-                var name = localStorageService.get(ConstantKeyValueService.userNameKey);
-                return name;
+            factory.getBuyerInfo = function() {
+                return {
+                    name: localStorageService.get(ConstantKeyValueService.userNameKey),
+                    mobile: localStorageService.get(ConstantKeyValueService.mobileNumberKey)
+                };
             };
 
             factory.setAccessToken = function(response) {

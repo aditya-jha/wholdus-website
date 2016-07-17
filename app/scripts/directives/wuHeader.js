@@ -41,7 +41,7 @@
                     }
 
                     function setBuyerName() {
-                        var name = LoginService.getBuyerName();
+                        var name = LoginService.getBuyerInfo().name;
                         if(name && (UtilService.isMobileRequest() || name.length > 12)) {
                             name = name.split(' ');
                             name = name[0];

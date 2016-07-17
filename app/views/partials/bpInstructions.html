@@ -1,0 +1,99 @@
+<md-dialog aria-label="Buyer Panel Instructions Popup" ng-cloak class="bp-instructions-popup">
+    <md-dialog-content class="background-page" style="font-family: 'Comfortaa'">
+        <div layout="row" layout-align="end center">
+            <div class="cursor-pointer">
+                <svg fill="#000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" ng-click="cancel()">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+            </div>
+        </div>
+        <md-tabs md-selected="bpInstructions.selectedIndex" md-dynamic-height ng-cloak>
+            <md-tab>
+                <md-tab-body>
+                    <div layout="row" flex="100" layout-wrap class="text-center" layout-padding>
+                        <span flex="100">Welcome to <span class="bold">Wholdus</span></span>
+                        <span flex="100" class="bold">You will recieve the best and latest products to your liking</span>
+                        <span flex="100">We will provide them to you directly from manufacturers at manufacturing price</span>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-body>
+                    <div layout="row" flex="100" layout-wrap class="text-center" layout-padding>
+                        <span flex="100">You have been logged into your account with mobile number <span class="bold">{{bpInstructions.buyer.mobile}}</span></span>
+                        <span flex="100">You password is <span class="bold">{{bpInstructions.buyer.mobile}}</span></span>
+                        <span flex="100">You can change your password from My Profile</span>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-body>
+                    <div layout="row" flex="100" layout-wrap class="text-center" layout-padding>
+                        <div layout="row" flex="100" class="swipe-gesture-div-right">
+                            <div layout="row" layout-align="end center">
+                                <svg fill="#000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span flex="100">Swipe right</span>
+                        <span flex="100">OR</span>
+                        <span flex="100">Click on
+                            <md-icon>
+                                <svg style="width: 24px;height: 24px" fill="#ff1a1a" viewBox="1 -1 22 23" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </md-icon>
+                            to <span class="bold" style="color:#ff1a1a">LIKE</span> the product
+                        </span>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+            <md-tab>
+                <md-tab-body>
+                    <div layout="row" flex="100" layout-wrap class="text-center" layout-padding>
+                        <div layout="row" flex="100" class="swipe-gesture-div-left">
+                            <div layout="row" layout-align="end center">
+                                <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span flex="100">Swipe left</span>
+                        <span flex="100">OR</span>
+                        <span flex="100">Click on
+                            <md-icon>
+                                <svg style="width: 24px;height: 24px;" viewBox="1 0 22 23">
+                                    <path fill="#000" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                                </svg>
+                            </md-icon>
+                            to <span class="bold" style="color:#000">DISLIKE</span> the product
+                        </span>
+                    </div>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+
+        <div layout="row" flex="100" layout-align="center center">
+            <md-button class="md-raised md-warn small" ng-click="nextInstruction(-1)" aria-label="previous instruction" data-ng-show="bpInstructions.selectedIndex > 0">
+                <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"/>
+                    <path d="M0-.5h24v24H0z" fill="none"/>
+                </svg>
+            </md-button>
+            <md-button class="md-raised md-warn small" ng-click="nextInstruction(1)" aria-label="next instruction" data-ng-show="bpInstructions.selectedIndex+1 < bpInstructions.total">
+                <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"/>
+                    <path d="M0-.25h24v24H0z" fill="none"/>
+                </svg>
+            </md-button>
+            <md-button class="md-raised md-warn small" ng-click="cancel()" aria-label="show products" ng-show="bpInstructions.selectedIndex+1 >= bpInstructions.total">
+                OK
+            </md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -15,8 +15,8 @@
                 return locals;
             }
 
-            factory.viewDialog = function(event, data) {
-                var useFullScreen = $mdMedia('xs');
+            factory.viewDialog = function(event, data, noFullScreen) {
+                var useFullScreen = noFullScreen ? null : $mdMedia('xs');
                 $mdDialog.show({
                     controller: data.controller ? data.controller : 'PopupController',
                     templateUrl: data.view,
