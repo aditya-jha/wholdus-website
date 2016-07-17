@@ -11,7 +11,9 @@
                 '$location',
                 'ToastService',
                 'UtilService',
-                function($scope, $rootScope, DialogService, LoginService, $location, ToastService, UtilService) {
+                '$window',
+                '$element',
+                function($scope, $rootScope, DialogService, LoginService, $location, ToastService, UtilService, $window, $element) {
 
                     var listeners = [];
                     $scope.loginStatus = false;
@@ -33,6 +35,13 @@
                             });
                         }
                     };
+
+                    function detectBrowser() {
+                        if(!UtilService.validBrowsers()) {
+                            DialogService.alert($element, 'Unsupported Browser', 'Please open in latest Chrome or Firefox for best view', 'OK');
+                        }
+                    }
+                    detectBrowser();
 
                     function logoutRedirect() {
                         if($location.url().indexOf('account') > -1) {

@@ -22,24 +22,7 @@
             {min_value:2500, max_value:2999, active:false},
             {min_value:3000, max_value:10000, active:false},
             ];
-            //  APIService.apiCall("GET", APIService.getAPIUrl('colour_type'))
-            //             .then(function(response) {
-            //                 factory.colours=response.product_colour_types;
-            //             }, function(error) {
-                            
-            //             }); 
-            // APIService.apiCall("GET", APIService.getAPIUrl('fabric_type'))
-            //             .then(function(response) {
-            //                 factory.fabrics=response.product_fabric_types;
-            //             }, function(error) {
-                            
-            //             });
-            //    angular.forEach(factory.colours, function(value, key) {
-            //                 value.active=false;
-            //             });
-            //    angular.forEach(factory.fabrics, function(value, key) {
-            //                 value.active=false;
-            //             });           
+
              factory.colours=[
              {name:'Red',colourCode:'#ff0000',active:false},
              {name:'Blue',colourCode:'#5882FA',active:false},
@@ -75,7 +58,7 @@
 
 
             initiliseFilters();
-            
+
             factory.getIDFromSlug = function(slug) {
                 slug = slug.split('-');
                 if(slug.length > 0) {
@@ -94,6 +77,15 @@
                 } else {
                     return 1;
                 }
+            };
+
+            factory.validBrowsers = function() {
+                var isChrome = !!window.chrome && !!window.chrome.webstore;
+                var isFirefox = typeof InstallTrigger !== 'undefined';
+                if(isChrome || isFirefox) {
+                    return true;
+                }
+                return false;
             };
 
             factory.isMobileRequest = function() {
@@ -145,27 +137,29 @@
              factory.sellerString='';
              // factory.maxPrice=5000;
              // factory.minPrice=0;
-             
+
             factory.setFilterParams = function(sellerString,priceRangeIndex,minPrice,maxPrice) {
                  factory.priceRangeIndex=priceRangeIndex;
                 factory.sellerString=sellerString;
                 factory.maxPrice=maxPrice;
-                factory.minPrice=minPrice;   
+                factory.minPrice=minPrice;
             };
             factory.setActiveFilterParams=function(colours,fabrics,selectedColours,selectedFabrics){
                 factory.colours=colours;
                 factory.fabrics=fabrics;
                 factory.selectedColours=selectedColours;
                 factory.selectedFabrics=selectedFabrics;
-            }
+            };
+
             factory.resetFilterParams=function(){
-                initiliseFilters();    
-            }
+                initiliseFilters();
+            };
+
             factory.currentCategoryID=null;
              factory.setCategory = function(categoryID) {
                 factory.currentCategoryID=categoryID;
             };
-       
+
 
             return factory;
         }
