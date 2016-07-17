@@ -44,10 +44,9 @@
                     $scope.showDetails = function(event, type) {
                         DialogService.viewDialog(event, {
                             view: 'views/partials/favButtonFeeback.html',
-                        }, true).finally(function() {
-                            if(type) $scope.showDetailsCard = true;
-                            else $scope.showDetailsCard = false;
-                        });
+                        }, true);
+                        if(type) $scope.showDetailsCard = true;
+                        else $scope.showDetailsCard = false;
                     };
 
                     $scope.feedActionButton = function(type) {
