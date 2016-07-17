@@ -11,6 +11,7 @@
         'DialogService',
         function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService) {
             var listeners = [];
+            var bpStatusApi = null;
 
             $scope.pageSettings = {
                 filter: '',
@@ -19,8 +20,6 @@
                 currentPage: 1,
                 responded: 0
             };
-
-            // $scope.displayImageStyle={'opacity':'1.0'};
 
             function openInstructionsPopup() {
                 DialogService.viewDialog(null, {
@@ -145,14 +144,17 @@
             };
 
             function favButtonHelper(type, swiped) {
-                APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
+                bpStatusApi = APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
                     buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
                     responded: type === 1 ? 1 : 2,
                     has_swiped: swiped
-                }).then(function(response) {
+                });
+                bpStatusApi.then(function(response) {
                     $log.log(response);
+                    bpStatusApi = null;
                 }, function(error) {
                     $log.log(error);
+                    bpStatusApi = null;
                 });
                 $scope.pageSettings.productIndex += 1;
 
@@ -162,7 +164,6 @@
                     } else {
                         $scope.productLikeStatus = 1;
                     }
-                    // $scope.displayImageStyle={'opacity':'0.3'};
                     setProductToShow($scope.pageSettings.productIndex);
                 } else {
                     if($scope.pageSettings.currentPage < $scope.pageSettings.totalPages) {
@@ -185,12 +186,14 @@
 
             $scope.favButton = function(event, type, swiped) {
                 if($scope.pageSettings.productIndex < $scope.products.length) {
-                    DialogService.viewDialog(event, {
-                        type: type,
-                        view: 'views/partials/favButtonFeeback.html'
-                    }, true).finally(function() {
-                        favButtonHelper(type, swiped);
-                    });
+                    if(!bpStatusApi) {
+                        DialogService.viewDialog(event, {
+                            type: type,
+                            view: 'views/partials/favButtonFeeback.html'
+                        }, true).finally(function() {
+                            favButtonHelper(type, swiped);
+                        });
+                    }
                 } else {
                     $scope.noProducts = true;
                     $rootScope.$broadcast('showFeedActionButton', false);
