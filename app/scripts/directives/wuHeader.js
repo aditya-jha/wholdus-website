@@ -36,13 +36,6 @@
                         }
                     };
 
-                    function detectBrowser() {
-                        if(!UtilService.validBrowsers()) {
-                            DialogService.alert($element, 'Unsupported Browser', 'Please open in latest Chrome or Firefox for best view', 'OK');
-                        }
-                    }
-                    detectBrowser();
-
                     function logoutRedirect() {
                         if($location.url().indexOf('account') > -1) {
                             $location.url('/');

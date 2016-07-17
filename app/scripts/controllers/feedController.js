@@ -202,7 +202,6 @@
 
              $scope.imageLoaded= function(){
                     $scope.productLikeStatus = 0;
-                    //$scope.displayImageStyle={'opacity':'1.0'};
             };
 
             $scope.$on('$destroy', function() {
