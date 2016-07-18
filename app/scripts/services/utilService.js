@@ -79,15 +79,6 @@
                 }
             };
 
-            factory.validBrowsers = function() {
-                var isChrome = !!window.chrome && !!window.chrome.webstore;
-                var isFirefox = typeof InstallTrigger !== 'undefined';
-                if(isChrome || isFirefox) {
-                    return true;
-                }
-                return false;
-            };
-
             factory.isMobileRequest = function() {
                 var userAgent = $window.navigator.userAgent;
                 if(userAgent.match(/mobile/i)) {
