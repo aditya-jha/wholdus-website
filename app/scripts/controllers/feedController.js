@@ -26,6 +26,16 @@
                 buyer: LoginService.getBuyerInfo()
             };
 
+            function togglePullRefresh(disable) {
+                var ref = angular.element(document.querySelector('body'));
+                if(disable) {
+                    ref.css('overflow-y', 'hidden');
+                } else {
+                    ref.css('overflow-y', '');
+                }
+            }
+            togglePullRefresh(1);
+
             function getInstructionsPopup() {
                 instructionsPopup = localStorageService.get($scope.pageSettings.buyer.id) || {};
             }
@@ -240,6 +250,13 @@
                 angular.forEach(listeners, function(value) {
                     if(value) value();
                 });
+            });
+
+            $scope.$on('$destroy', function(event) {
+                angular.forEach(listeners, function(v,k) {
+                    if(v) v();
+                });
+                togglePullRefresh();
             });
         }
     ]);
