@@ -42,9 +42,6 @@
                     };
 
                     $scope.showDetails = function(event, type) {
-                        DialogService.viewDialog(event, {
-                            view: 'views/partials/favButtonFeeback.html',
-                        }, true);
                         if(type) $scope.showDetailsCard = true;
                         else $scope.showDetailsCard = false;
                     };

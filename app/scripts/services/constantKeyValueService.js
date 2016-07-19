@@ -27,8 +27,9 @@
                     fabric_type:'products/fabric_type',
                 },
                 accessTokenKey: 'randomData',
-                userNameKey: 'userName',
-                mobileNumberKey: 'mobile',
+                buyerDetailKey: 'buyerDetails',
+                bpInstructionsPopup: 'bpInstructionsPopup',
+                favInstruct: 'favInstruct',
                 sellerSite: 'http://seller.wholdus.com',
             };
 

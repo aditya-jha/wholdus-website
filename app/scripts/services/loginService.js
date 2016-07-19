@@ -16,15 +16,17 @@
                 factory.loginStatus = true;
                 ConstantKeyValueService.token = response.token;
                 localStorageService.set(ConstantKeyValueService.accessTokenKey, response.token);
-                localStorageService.set(ConstantKeyValueService.userNameKey, response.buyer.name);
-                localStorageService.set(ConstantKeyValueService.mobileNumberKey, response.buyer.mobile_number);
+                var buyerData = {
+                    mobile: response.buyer.mobile_number,
+                    name: response.buyer.name,
+                    id: response.buyer.buyerID
+                };
+                localStorageService.set(ConstantKeyValueService.buyerDetailKey, buyerData);
             }
 
             factory.getBuyerInfo = function() {
-                return {
-                    name: localStorageService.get(ConstantKeyValueService.userNameKey),
-                    mobile: localStorageService.get(ConstantKeyValueService.mobileNumberKey)
-                };
+                var buyerData = localStorageService.get(ConstantKeyValueService.buyerDetailKey) || {};
+                return buyerData;
             };
 
             factory.setAccessToken = function(response) {
@@ -46,7 +48,7 @@
                 factory.loginStatus = false;
                 ConstantKeyValueService.token = null;
                 localStorageService.remove(ConstantKeyValueService.accessTokenKey);
-                localStorageService.remove(ConstantKeyValueService.userNameKey);
+                localStorageService.remove(ConstantKeyValueService.buyerDetailKey);
             };
 
             factory.login = function(mobile, password) {

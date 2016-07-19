@@ -9,22 +9,40 @@
         '$rootScope',
         'UtilService',
         'DialogService',
-        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService) {
+        'localStorageService',
+        'ConstantKeyValueService',
+        'LoginService',
+        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService, localStorageService, ConstantKeyValueService, LoginService) {
             var listeners = [];
             var bpStatusApi = null;
+            var instructionsPopup = {};
 
             $scope.pageSettings = {
                 filter: '',
                 productIndex: 0,
                 totalPages: 0,
                 currentPage: 1,
-                responded: 0
+                responded: 0,
+                buyer: LoginService.getBuyerInfo()
             };
 
+            function getInstructionsPopup() {
+                instructionsPopup = localStorageService.get($scope.pageSettings.buyer.id) || {};
+            }
+            getInstructionsPopup();
+
+            function setInstructionsPopup() {
+                localStorageService.set($scope.pageSettings.buyer.id, instructionsPopup);
+            }
+
             function openInstructionsPopup() {
-                DialogService.viewDialog(null, {
-                    view: 'views/partials/bpInstructions.html'
-                }, true);
+                if(!instructionsPopup.instructions) {
+                    DialogService.viewDialog(null, {
+                        view: 'views/partials/bpInstructions.html'
+                    }, true);
+                    instructionsPopup.instructions = true;
+                    setInstructionsPopup();
+                }
             }
             openInstructionsPopup();
 
@@ -184,15 +202,29 @@
                 }
             }
 
+            function favButtonPopup(event, type, swiped) {
+                DialogService.viewDialog(event, {
+                    type: type,
+                    view: 'views/partials/favButtonFeeback.html'
+                }, true).finally(function() {
+                    favButtonHelper(type, swiped);
+                });
+            }
+
             $scope.favButton = function(event, type, swiped) {
                 if($scope.pageSettings.productIndex < $scope.products.length) {
                     if(!bpStatusApi) {
-                        DialogService.viewDialog(event, {
-                            type: type,
-                            view: 'views/partials/favButtonFeeback.html'
-                        }, true).finally(function() {
+                        if(type == 1 && !instructionsPopup.fav) {
+                            favButtonPopup(event, type, swiped);
+                            instructionsPopup.fav = true;
+                            setInstructionsPopup();
+                        } else if(type == -1 && !instructionsPopup.dislike) {
+                            favButtonPopup(event, type, swiped);
+                            instructionsPopup.dislike = true;
+                            setInstructionsPopup();
+                        } else {
                             favButtonHelper(type, swiped);
-                        });
+                        }
                     }
                 } else {
                     $scope.noProducts = true;
