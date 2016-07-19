@@ -42,6 +42,7 @@
                     };
 
                     $scope.showDetails = function(event, type) {
+                        event.preventDefault();
                         if(type) $scope.showDetailsCard = true;
                         else $scope.showDetailsCard = false;
                     };
