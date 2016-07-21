@@ -86,5 +86,14 @@
                 </div>
             </div>
         </div>
+        <div flex="100" layout-padding class="white-card" md-whiteframe='4' ng-if="orders.length == 0" layout-wrap>
+            <p>
+                You have not placed any order with us
+            </p>
+            <p>
+                Discover latest hand picked products for you at factory prices
+            </p>
+            <md-button class="md-raised md-warn"  href="/account/hand-picked-products">Show Products</md-button>
+        </div>
     </div>
 </div>
