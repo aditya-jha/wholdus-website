@@ -9,6 +9,7 @@
         function($scope, $log, APIService, UtilService, ngProgressBarService, $rootScope) {
 
             $scope.orders = [];
+            $scope.noOrders = false;
 
             function parseOrders(orders) {
                 angular.forEach(orders, function(order, orderKey) {
@@ -29,6 +30,9 @@
                 .then(function(response) {
                     parseOrders(response.orders);
                     $scope.orders = response.orders;
+                    if($scope.orders.length === 0) {
+                        $scope.noOrders = true;
+                    }
                     $rootScope.$broadcast('endProgressbar');
                 }, function(error) {
                     $rootScope.$broadcast('endProgressbar');
