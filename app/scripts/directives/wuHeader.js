@@ -68,14 +68,6 @@
                     });
                     listeners.push(locationChangeListener);
 
-                    var locationChangeStartListener = $rootScope.$on('$locationChangeStart', function(event, newUrl) {
-                        if(newUrl.indexOf('/bp/') > -1) {
-                            event.preventDefault();
-                            $window.open('/', '_self');
-                        }
-                    });
-                    listeners.push(locationChangeStartListener);
-
                     var loggedInListener = $rootScope.$on('loggedIn', function(event) {
                         $scope.loginStatus = true;
                         setBuyerName();
