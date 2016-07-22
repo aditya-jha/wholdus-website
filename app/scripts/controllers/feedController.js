@@ -168,6 +168,13 @@
             });
             listeners.push(locationChangeListener);
 
+            var locationChangeStartListener = $scope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
+                if(newUrl.indexOf('bp/') > -1) {
+                    $location.url('/');
+                }
+            });
+            listeners.push(locationChangeStartListener);
+
             var feedActionButtonClickedListener = $scope.$on('feedActionButtonClicked', function(event, data) {
                 $scope.favButton(event, data);
             });
