@@ -24,7 +24,8 @@
             $scope.bpInstructions = {
                 total: 4,
                 selectedIndex: 0,
-                buyer: LoginService.getBuyerInfo()
+                buyer: LoginService.getBuyerInfo(),
+                instructNavPattern: 0
             };
             $scope.favButtonFeeback = likeDislikeStatus;
             $scope.errorMessage = false;
@@ -92,6 +93,8 @@
                     }
                     $scope.bpInstructions.selectedIndex -= 1;
                 }
+                // $scope.bpInstructions.instructNavPattern += (', ' + $scope.bpInstructions.selectedIndex);
+                $rootScope.$broadcast('instructNavPattern', $scope.bpInstructions.selectedIndex);
             };
         }
     ]);

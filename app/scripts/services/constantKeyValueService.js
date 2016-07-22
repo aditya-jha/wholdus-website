@@ -25,6 +25,7 @@
                     uniqueAccessToken: 'users/buyer/accesstoken',
                     colour_type:'products/colour_type',
                     fabric_type:'products/fabric_type',
+                    instructTrack: 'users/buyer/buyerpanel/instructionstracking',
                 },
                 accessTokenKey: 'randomData',
                 buyerDetailKey: 'buyerDetails',

@@ -25,6 +25,7 @@
                 responded: 0,
                 buyer: LoginService.getBuyerInfo()
             };
+            $scope.instructNavPattern = 0;
 
             function togglePullRefresh(disable) {
                 var ref = angular.element(document.querySelector('body'));
@@ -49,7 +50,13 @@
                 if(!instructionsPopup.instructions) {
                     DialogService.viewDialog(null, {
                         view: 'views/partials/bpInstructions.html'
-                    }, true);
+                    }, true).finally(function() {
+                        var data = {
+                            buyerID: $scope.pageSettings.buyer.id,
+                            page_closed: $scope.instructNavPattern
+                        };
+                        APIService.apiCall("POST", APIService.getAPIUrl('instructTrack'), data);
+                    });
                     instructionsPopup.instructions = true;
                     setInstructionsPopup();
                 }
@@ -165,6 +172,11 @@
                 $scope.favButton(event, data);
             });
             listeners.push(feedActionButtonClickedListener);
+
+            var instructNavPatternListener = $rootScope.$on('instructNavPattern', function(event, data) {
+                $scope.instructNavPattern += (',' + data);
+            });
+            listeners.push(instructNavPatternListener);
 
             $scope.showFilledStatus = function(index) {
                 if(index) $scope.showFilled = true;
