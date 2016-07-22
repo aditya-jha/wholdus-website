@@ -19,13 +19,9 @@
                     $location.url(url);
                 }, function(error) {
                     $log.log(error);
+                    $location.url('/');
                 });
-                APIService.apiCall('POST', APIService.getAPIUrl('buyerProductsLanding'), {"buyerproductID":buyerproductID})
-                .then(function(response) {
-                    $log.log(response);
-                }, function(error) {
-                    $log.log(error);
-                });
+                APIService.apiCall('POST', APIService.getAPIUrl('buyerProductsLanding'), {"buyerproductID":buyerproductID});
             }
 
             if($routeParams.uniqueUrl) {
