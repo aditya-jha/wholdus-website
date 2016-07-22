@@ -70,6 +70,7 @@
 
                     var locationChangeStartListener = $rootScope.$on('$locationChangeStart', function(event, newUrl) {
                         if(newUrl.indexOf('/bp/') > -1) {
+                            event.preventDefault();
                             $window.open('/', '_self');
                         }
                     });
