@@ -21,7 +21,6 @@
                     $log.log(error);
                     $location.url('/');
                 });
-                APIService.apiCall('POST', APIService.getAPIUrl('buyerProductsLanding'), {"buyerproductID":buyerproductID});
             }
 
             function init() {
@@ -30,6 +29,7 @@
                     if(uniqueUrl.length == 3) {
                         buyerproductID = uniqueUrl[2];
                         buyer_panel_url = uniqueUrl[0] + '-' + uniqueUrl[1];
+                        APIService.apiCall('POST', APIService.getAPIUrl('buyerProductsLanding'), {"buyerproductID":buyerproductID});
                         setCorrectPage(buyer_panel_url, buyerproductID);
                     } else {
                         $location.url('/account/hand-picked-products');
