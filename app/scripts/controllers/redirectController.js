@@ -15,8 +15,8 @@
                 APIService.apiCall('GET', APIService.getAPIUrl('uniqueAccessToken'), null, params)
                 .then(function(response) {
                     LoginService.setAccessToken(response);
-                    var url = '/account/hand-picked-products?buyerproductID=' + buyerProductID;
-                    $location.url(url);
+                    //var url = '/account/hand-picked-products?buyerproductID=' + buyerProductID;
+                    $location.path('/account/hand-picked-products').search('buyerproductID', buyerProductID).replace();
                 }, function(error) {
                     $log.log(error);
                     $location.url('/');
