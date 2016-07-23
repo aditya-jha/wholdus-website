@@ -39,7 +39,6 @@
 
             $scope.buyNow = function() {
                 if($scope.name && $scope.mobile_number && !$scope.apiCall) {
-                    $rootScope.$broadcast('showProgressbar');
                     var data = {
                         email: $scope.email,
                         mobile_number: $scope.mobile_number,
@@ -50,14 +49,12 @@
                     $scope.apiCall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLeads'), data);
                     $scope.apiCall.then(function(response) {
                         $scope.apiCall = null;
-                        $rootScope.$broadcast('endProgressbar');
                         ToastService.showSimpleToast("You will soon recieve a call from our representatives!", 3000);
                         $mdDialog.hide();
                     }, function(error) {
                         $scope.apiCall = null;
                         $mdDialog.hide();
                         ToastService.showSimpleToast("Ops! Something went wrong", 2000);
-                        $rootScope.$broadcast('endProgressbar');
                     });
                 }
             };
