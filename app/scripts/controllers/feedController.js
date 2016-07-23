@@ -21,9 +21,10 @@
                 filter: '',
                 productIndex: 0,
                 totalPages: 0,
-                currentPage: 1,
+                currentPage: UtilService.getPageNumber(),
                 responded: 0,
-                buyer: LoginService.getBuyerInfo()
+                buyer: LoginService.getBuyerInfo(),
+                enablePagination: false
             };
             $scope.instructNavPattern = 0;
 
@@ -133,10 +134,18 @@
                             $scope.products = response.buyer_products;
                             setProductToShow($scope.pageSettings.productIndex);
                         } else {
+                            if(response.total_pages > 1) {
+                                $scope.pageSettings.enablePagination = true;
+                                $rootScope.$broadcast('setPage', {
+                                    page: $scope.pageSettings.currentPage,
+                                    totalPages: response.total_pages//Math.ceil(response.total_products/$scope.settings.itemsPerPage)
+                                });
+                            }
                             parseImages(response.buyer_products);
                             $scope.products = response.buyer_products;
                         }
                     } else {
+                        $scope.pageSettings.enablePagination = false;
                         $scope.noProducts = true;
                         $rootScope.$broadcast('showFeedActionButton', false);
                     }
@@ -149,6 +158,7 @@
                 $scope.products = [];
                 $scope.productToShow = null;
                 $scope.productLikeStatus = 0;
+                $scope.pageSettings.currentPage = UtilService.getPageNumber();
                 parseSearchParams();
                 fetchProducts();
             }
