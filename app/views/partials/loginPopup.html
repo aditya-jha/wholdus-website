@@ -16,7 +16,7 @@
             <div class="md-dialog-content">
                 <md-input-container layout-fill>
                     <label>Mobile Number</label>
-                    <input type="number" data-ng-model="mobile_number" name="mobile_number"  ng-pattern="formValidation.mobileNumValidation" autocomplete="off" required />
+                    <input type="text" data-ng-model="mobile_number" name="mobile_number"  ng-pattern="formValidation.mobileNumValidation" autocomplete="off" required />
                     <div ng-messages="loginForm.mobile_number.$error" role="alert" data-ng-if="loginForm.mobile_number.$dirty || loginForm.$submitted">
                         <div ng-message="required" class="formError">This is required.</div>
                         <div ng-message="pattern" class="formError">
