@@ -27,10 +27,12 @@
                 buyer: LoginService.getBuyerInfo(),
                 instructNavPattern: 0
             };
+            $scope.mobile_number = '';
+            $scope.password = '';
             $scope.favButtonFeeback = likeDislikeStatus;
             $scope.errorMessage = false;
             $scope.buyNowForm = 'buyNowForm';
-            
+
             $scope.formValidation = FormValidationService;
             $scope.sellerSite = ConstantKeyValueService.sellerSite;
 
