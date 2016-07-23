@@ -1,5 +1,5 @@
 <md-dialog aria-label="Buy Now" ng-cloak>
-    <form name="buyNowForm" novalidate>
+    <form name="buyNowForm" novalidate data-ng-submit="buyNowForm.$valid && buyNow($event)">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2 flex class="popup-title">come! join our network of buyers!</h2>
@@ -53,7 +53,7 @@
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">
-            <md-button type="submit" class="md-raised md-warn" ng-click="buyNow($event)" style="margin-right:20px;" ng-disabled="apiCall">
+            <md-button type="submit" class="md-raised md-warn" style="margin-right:20px;" ng-disabled="apiCall">
                 Get Callback
             </md-button>
         </md-dialog-actions>

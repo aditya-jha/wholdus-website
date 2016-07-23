@@ -29,7 +29,8 @@
             };
             $scope.favButtonFeeback = likeDislikeStatus;
             $scope.errorMessage = false;
-
+            $scope.buyNowForm = 'buyNowForm';
+            
             $scope.formValidation = FormValidationService;
             $scope.sellerSite = ConstantKeyValueService.sellerSite;
 
