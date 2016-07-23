@@ -114,7 +114,7 @@
                 $rootScope.$broadcast('showProgressbar');
                 var params = {
                     page_number: $scope.pageSettings.currentPage,
-                    items_per_page: 20,
+                    items_per_page: 18,
                     is_active: 1,
                     responded: $scope.pageSettings.responded,
                 };
