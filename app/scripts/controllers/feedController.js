@@ -12,7 +12,8 @@
         'localStorageService',
         'ConstantKeyValueService',
         'LoginService',
-        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService, localStorageService, ConstantKeyValueService, LoginService) {
+        '$timeout',
+        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService, localStorageService, ConstantKeyValueService, LoginService, $timeout) {
             var listeners = [];
             var bpStatusApi = null;
             var instructionsPopup = {};
@@ -109,6 +110,14 @@
                     }
                 });
             }
+
+            $scope.imageClick = function(event) {
+                event.stopPropagation();
+                $timeout(function(target) {
+                    angular.element(document.querySelector('.feed-product-image')).triggerHandler('dblclick');
+                }, 100);
+                // angular.element(event.currentTarget).triggerHangler('click');
+            };
 
             function fetchProducts() {
                 $rootScope.$broadcast('showProgressbar');
