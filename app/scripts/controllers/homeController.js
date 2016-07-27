@@ -16,7 +16,7 @@
 
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
-                categoriesToShow: [1,7,8]
+                categoriesToShow: [10,1,7]
             };
             $scope.total = [];
             function arrangeProductsByCategory(products) {
