@@ -141,6 +141,8 @@
                                     page: $scope.pageSettings.currentPage,
                                     totalPages: response.total_pages//Math.ceil(response.total_products/$scope.settings.itemsPerPage)
                                 });
+                            } else {
+                                $scope.pageSettings.enablePagination = false;
                             }
                             parseImages(response.buyer_products);
                             $scope.products = response.buyer_products;
