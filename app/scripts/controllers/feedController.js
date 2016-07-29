@@ -139,7 +139,7 @@
                                 $scope.pageSettings.enablePagination = true;
                                 $rootScope.$broadcast('setPage', {
                                     page: $scope.pageSettings.currentPage,
-                                    totalPages: response.total_pages//Math.ceil(response.total_products/$scope.settings.itemsPerPage)
+                                    totalPages: response.total_pages
                                 });
                             } else {
                                 $scope.pageSettings.enablePagination = false;
@@ -203,10 +203,8 @@
                     has_swiped: swiped
                 });
                 bpStatusApi.then(function(response) {
-                    $log.log(response);
                     bpStatusApi = null;
                 }, function(error) {
-                    $log.log(error);
                     bpStatusApi = null;
                 });
                 $scope.pageSettings.productIndex += 1;

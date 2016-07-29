@@ -1171,9 +1171,11 @@ animation-iteration-count: infinite;
 
 .like-dislike-card {
     z-index:10;
-    position: fixed;
-    top: 140px;
+    position: absolute;;
+    top: 120px;
     opacity: 1;
+    min-width: 250px;
+    margin: 0 auto;
 }
 
 .like-dislike-card.ng-hide {
