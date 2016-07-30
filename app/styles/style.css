@@ -74,14 +74,12 @@ a:active {
     font-size: 0.8em;
     text-align: center;
 }
-.breadcrumbs{
+
+.breadcrumb {
     margin-top: 5px;
 }
 
-#breadcrumb{
-    margin-top: 5px;
-}
-.breadcrumb-inactive{
+.breadcrumb span{
     font-size: 0.9em;
     padding-top: .2em;
     white-space: nowrap;
@@ -90,17 +88,15 @@ a:active {
     text-overflow: ellipsis;
 }
 
-.breadcrumb-active{
+.breadcrumb a {
     color: #525050;
-    font-size: 0.9em;
-     /*font-weight: bold;*/
 }
-.breadcrumb-active:hover{
+
+.breadcrumb a:hover {
     text-decoration: underline;
     cursor: pointer;
     color:#673AB7;
 }
-
 
 .md-button.small{
     min-width: 35px;
@@ -338,9 +334,7 @@ a:active {
     font-size: 1.4em;
     font-weight: bold;
     padding-top: 0.4em;
-    /*margin: 0;*/
     text-align: center;
-
 }
 
 .line-around{
@@ -1091,6 +1085,11 @@ animation-iteration-count: infinite;
     /*color:#fff;*/
     /*padding:5px;*/
 }
+
+.no-bottom-margin {
+    margin-bottom: 0;
+}
+
 .grey-label{
   color: grey;
   margin:0;

@@ -1,15 +1,13 @@
  <div layout="column" layout-align="start center" flex>
-     <div layout="row" id="breadcrumb" layout-align="start center">
-        <a href="/">
-            <span layout="row" layout-align="start center" class="breadcrumb-active" >
-                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
-                    <path fill="#525050" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
-                </svg>Home
-            </span>
+     <div layout="row" class="breadcrumb" layout-align="start center">
+        <a href="/" layout="row" layout-align="start center">
+            <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                <path fill="#525050" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+            </svg>
+            Home
         </a>
-        <span class="breadcrumb-inactive">&nbsp;&gt;&nbsp;</span>
-        <span class="breadcrumb-inactive">{{category.display_name}}</span>
-        <span class="breadcrumb-inactive" data-ng-if="settings.noProduct">{{settings.displayName}}</span>
+        <span>&nbsp;&gt;&nbsp;</span>
+        <span>{{::category.display_name}}</span>
     </div>
 </div>
 
