@@ -11,8 +11,7 @@
         'ngProgressBarService',
         '$rootScope',
         'DialogService',
-        function($scope, $routeParams, $log, $window,$location,APIService,
-            UtilService, ngProgressBarService, $rootScope, DialogService) {
+        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService) {
             $scope.displayImageLoading=true;
             $scope.start=0;
             $scope.displayImageStyle={'opacity':'1.0'};
@@ -21,8 +20,7 @@
             $scope.mobileDisplay=false;
             $scope.largeImageIndex=0;
 
-            if($window.innerWidth<=760)
-            {
+            if($window.innerWidth<=760) {
                  $scope.mobileDisplay=true;
             }
 
