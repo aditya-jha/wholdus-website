@@ -13,10 +13,10 @@ webapp.config([
     '$mdIconProvider',
     'localStorageServiceProvider',
     '$compileProvider',
-     function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $location, $compileProvider) {
+     function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $compileProvider) {
 
          $compileProvider.debugInfoEnabled(false);
-         
+
          $routeProvider.when('/', {
              templateUrl: "views/homepage.html",
              controller: "HomeController"
