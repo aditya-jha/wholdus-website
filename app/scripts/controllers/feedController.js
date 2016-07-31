@@ -198,7 +198,9 @@
 
             function favButtonHelper(type, swiped) {
                 bpStatusApi = APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
-                    buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
+                    //buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
+                    buyerID: $scope.pageSettings.buyer.id,
+                    productID: $scope.products[$scope.pageSettings.productIndex].product.productID,
                     responded: type === 1 ? 1 : 2,
                     has_swiped: swiped
                 });
