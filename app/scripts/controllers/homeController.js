@@ -66,7 +66,7 @@
             getCategory();
 
             function getProductsByCategory() {
-                $rootScope.$broadcast('showProgressbar');
+                ngProgressBarService.showProgressbar();
                 var promises = [];
                 angular.forEach($scope.settings.categoriesToShow, function(value, key) {
                     promises.push(getProducts({categoryID:value}));
@@ -88,7 +88,7 @@
                         });
                     });
                     arrangeProductsByCategory(products);
-                    $rootScope.$broadcast('endProgressbar');
+                    ngProgressBarService.endProgressbar();
                 });
             }
             getProductsByCategory();
