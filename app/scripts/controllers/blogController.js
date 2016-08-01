@@ -14,40 +14,40 @@
 
             // function init() {
             //     if($routeParams.article && $routeParams.article == 'home') {
-                    
+
             //     }
             // }
 
             $scope.data = {
                 article: {},
                 articles : [],
-            }
+            };
 
             $scope.home = false;
 
             $scope.getBlogs = function(params){
-                        $rootScope.$broadcast('showProgressbar');
+                        ngProgressBarService.showProgressbar();
                         APIService.apiCall('GET', APIService.getAPIUrl('blogarticle'),null, params).
                         then(function(response){
-                            $rootScope.$broadcast('endProgressbar');
-                            if($scope.home == true){
+                            ngProgressBarService.endProgressbar();
+                            if($scope.home){
                                 $scope.data.articles = response.articles;
                             }
-                            else if ($scope.home == false){
+                            else if (!$scope.home){
                                 $scope.data.article = response.articles[0];
                                 $scope.articleContent = $sce.trustAsHtml($scope.data.article.content);
                             }
                             $scope.data.article.cover_image_link= 'https://media.licdn.com/mpr/mpr/jc/AAEAAQAAAAAAAAdZAAAAJDE1YmU1NDRkLWI2ZGMtNGU4MC1hN2EyLWNhNDM4MTg2YzA0OA.jpg';
                         },function(error){
-                            $rootScope.$broadcast('endProgressbar');
+                            ngProgressBarService.endProgressbar();
                             ToastService.showSimpleToast('unable to load blog content', 3000);
                         });
-                    }
+                    };
 
             $scope.selectBlog = function(slug, id, title){
                 $scope.articletitle = title;
                 $location.url('/blog/'+slug+'-'+id);
-            }
+            };
 
             // function showArticle(ID){
 
@@ -66,7 +66,8 @@
                         $scope.home = true;
                      $scope.getBlogs();
                }
-            };
+            }
+
             viewBlog();
         }
     ]);
