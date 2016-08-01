@@ -51,7 +51,6 @@
                     resetContactUsFrom();
                 }, function(error) {
                     ToastService.showActionToast("We are experiencing heavy traffic! Please try later", 0);
-                    $rootScope.$broadcast('endProgressbar');
                     $scope.settings.showLoading = false;
                 });
             };
