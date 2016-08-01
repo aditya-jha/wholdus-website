@@ -7,35 +7,30 @@
         '$timeout',
         function($rootScope, ngProgressFactory, $timeout) {
             var factory = {};
-
-            var settings = {
-                color: 'red',
-                height: '3px',
-            };
             var progressbar, element;
 
             var init = function() {
                 progressbar = ngProgressFactory.createInstance();
-                progressbar.setColor(settings.color);
-                progressbar.setHeight(settings.height);
+                progressbar.setColor('red');
+                progressbar.setHeight('3px');
                 element = document.getElementById("progressBar");
                 progressbar.setParent(element);
                 element.style.display = 'none';
             };
             init();
 
-            $rootScope.$on('showProgressbar', function(event) {
+            factory.showProgressbar = function() {
                 element.style.display = 'block';
                 progressbar.start();
-            });
+            };
 
-            $rootScope.$on('endProgressbar', function(event) {
+            factory.endProgressbar = function() {
                 progressbar.complete();
                 $timeout(function() {
                     element.style.display = 'none';
-                }, 1000);
-            });
-
+                }, 500);
+            };
+            
             return factory;
         }
     ]);
