@@ -112,7 +112,7 @@
             }
 
             function fetchProducts() {
-                $rootScope.$broadcast('showProgressbar');
+                ngProgressBarService.showProgressbar();
                 var params = {
                     page_number: $scope.pageSettings.currentPage,
                     items_per_page: 18,
@@ -126,7 +126,7 @@
 
                 APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
                 .then(function(response) {
-                    $rootScope.$broadcast('endProgressbar');
+                    ngProgressBarService.endProgressbar();
                     $scope.pageSettings.totalPages = response.total_pages;
 
                     if(response.buyer_products.length) {
@@ -153,6 +153,7 @@
                         $rootScope.$broadcast('showFeedActionButton', false);
                     }
                 }, function(error) {
+                    ngProgressBarService.endProgressbar();
                     $location.url('/');
                 });
             }
