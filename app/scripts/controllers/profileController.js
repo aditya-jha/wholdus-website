@@ -12,7 +12,7 @@
             $scope.buyer = {};
 
             function fetchBuyer(params) {
-                $rootScope.$broadcast('showProgressbar');
+                ngProgressBarService.showProgressbar();
                 APIService.apiCall("GET", APIService.getAPIUrl('buyers'), params)
                 .then(function(response) {
                     if(response.buyers && response.buyers.length) {
@@ -21,13 +21,13 @@
                         }
                         $scope.buyer = response.buyers[0];
                     }
-                    $rootScope.$broadcast('endProgressbar');
+                    ngProgressBarService.endProgressbar();
                 }, function(error) {
                     ToastService.showActionToast("Something went wrong. Please login again", 0)
                     .then(function(response) {
                         $location.url('/');
                     });
-                    $rootScope.$broadcast('endProgressbar');
+                    ngProgressBarService.endProgressbar();
                 });
             }
 
