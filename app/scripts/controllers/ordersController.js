@@ -25,7 +25,7 @@
             }
 
             function fetchOrders() {
-                $rootScope.$broadcast('showProgressbar');
+                ngProgressBarService.showProgressbar();
                 APIService.apiCall("GET", APIService.getAPIUrl('orders'))
                 .then(function(response) {
                     parseOrders(response.orders);
@@ -33,9 +33,9 @@
                     if($scope.orders.length === 0) {
                         $scope.noOrders = true;
                     }
-                    $rootScope.$broadcast('endProgressbar');
+                    ngProgressBarService.endProgressbar();
                 }, function(error) {
-                    $rootScope.$broadcast('endProgressbar');
+                    ngProgressBarService.endProgressbar();
                 });
             }
 
