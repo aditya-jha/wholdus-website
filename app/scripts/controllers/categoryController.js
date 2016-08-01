@@ -59,7 +59,7 @@
                 $scope.selectedFabrics=UtilService.selectedFabrics;
 
 
-                $rootScope.$broadcast('showProgressbar');
+                ngProgressBarService.showProgressbar();
 
                 var params = {categoryID: $scope.categoryID,
                     sellerID:$scope.sellerString,
@@ -85,7 +85,7 @@
                         }
                         $scope.minPrice=UtilService.minPrice;
                         $scope.maxPrice=UtilService.maxPrice;
-                        $rootScope.$broadcast('endProgressbar');
+                        ngProgressBarService.endProgressbar();
                         if(response.total_pages > 1) {
                             $scope.settings.enablePagination = true;
                             $rootScope.$broadcast('setPage', {
@@ -117,7 +117,7 @@
                             $scope.settings.enablePagination = false;
                         }
                     }, function(error) {
-                        $rootScope.$broadcast('endProgressbar');
+                        ngProgressBarService.endProgressbar();
                         $scope.products = [];
                         $scope.settings.noProduct = true;
                         $scope.settings.enablePagination = false;
