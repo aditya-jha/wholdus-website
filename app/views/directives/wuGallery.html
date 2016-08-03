@@ -1,0 +1,15 @@
+<div flex layout="row">
+    <div layout="column" ng-if="!isMobile && tbImage.length>1"  hide-xs layout-align="center center" class="tbImage-container">
+        <div ng-if="$index<imageLimit" ng-repeat="tbi in tbImage" layout="column" class="thumbnail-image max-width-50 {{$index==0 ? 'active' : ''}}" ng-mouseenter="setActiveImage($index)" layout-align="center center">
+            <img data-ng-src="{{::tbi}}" style="max-width:100%; max-height:100%;" />
+        </div>
+        <div class="thumbnail-image" data-ng-if="image.image_count>imageLimit">
+            <strong>+{{image.image_count - imageLimit}} </strong>more
+        </div>
+    </div>
+    <div flex layout-align="center center" layout="row">
+        <div layout="column" layout-align="center center" class="gallery-image-container" ng-click="openGallery($event)">
+            <img ng-if="$index<imageLimit" ng-repeat="mdi in mdImage" ng-src="{{::mdi}}" class="gallery-main {{$index==0 ? 'active' : ''}}" />
+        </div>
+    </div>
+</div>

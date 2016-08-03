@@ -491,13 +491,12 @@ a:active {
     max-height: 100px;
     max-width: 60px;
 }
+
 .product-page-card {
     margin: 1em;
     background-color: #fff;
     text-align: center;
 }
-
-
 
 .product-page-card table {
     width: 60%;
@@ -507,29 +506,20 @@ a:active {
     font-size: 0.9em;
 }
 
-.product-page-card .product-price {
-    margin-bottom: 0.5em;
-}
-
 .product-page-card-content {
     background: #512DA8;
     color: #fff;
     padding: 2em 0em !important;
 }
 
-.product-page-card-content-container{
-    background: #512DA8;
-}
-.product-page-card-content-container div{
-    padding: 0.5em 0.5em !important;
-}
 .product-page-card-content .feature-title, .product-price {
     font-size: 0.9em;
 }
+
 .product-page-card-content md-divider {
-    color: #fff;
     background: #fff;
-    border-top-width: 2px;
+    border-top-width: 2px solid #fff;
+    padding: 0;
 }
 
 .product-price span {
@@ -1210,6 +1200,72 @@ animation-iteration-count: infinite;
 
 .swipe-gesture-div-left div{
     animation: swipeLeft 1s ease 1s infinite;
+}
+
+.max-width-50 {
+    max-width: 50px !important;
+}
+
+.max-width-100 {
+    max-width: 100px !important;
+}
+
+.thumbnail-image {
+    cursor: pointer;
+    /*height: 50px;*/
+    margin: 0.3em 1px 0px 0.3em;
+    border: 1px solid #a2a6ac;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 3px #a2a6ac, inset 0px 0px 2px #a2a6ac;
+    -moz-box-shadow: 0px 0px 3px #a2a6ac, inset 0px 0px 2px #a2a6ac;
+    box-shadow: 0px 0px 3px #a2a6ac, inset 0px 0px 2px #a2a6ac;
+}
+
+.thumbnail-image:hover, .thumbnail-image.active {
+    border-color: #FF5722;
+    -webkit-box-shadow: 0px 0px 3px #FF5722, inset 0px 0px 2px #FF5722;
+    -moz-box-shadow: 0px 0px 3px #FF5722, inset 0px 0px 2px #FF5722;
+    box-shadow: 0px 0px 3px #FF5722, inset 0px 0px 2px #FF5722;
+}
+
+.gallery-image-container {
+    overflow: hidden;
+    height: 410px;
+}
+
+.gallery-main {
+    max-width:100%;
+    max-height:100%;
+    cursor: pointer;
+    display: none;
+}
+
+.gallery-main.active {
+    display: block;
+}
+
+.gallery-popup-main {
+    width: 100%;
+    height: 100%;
+    overflow: scroll
+}
+
+.hide-scrollbar::-webkit-scrollbar { width: 0 !important }
+.hide-scrollbar { -ms-overflow-style: none; }
+.hide-scrollbar { overflow: -moz-scrollbars-none; }
+
+md-dialog.fullscreen-dialog {
+    max-width: 90%;
+    max-height: 90%;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    background-color: #eee;
+}
+
+.gallery-popup-container {
+    background-color:#fff;
+    margin:0.3em;
 }
 
 @keyframes swipeRight {

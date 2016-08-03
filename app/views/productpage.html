@@ -9,145 +9,103 @@
         <span>&nbsp;&gt;&nbsp;</span>
         <a data-ng-href="{{::product.category.url}}">{{::product.category.display_name}}</a>
         <span>&nbsp;&gt;&nbsp;</span>
-        <span>{{:: product.display_name }}</span>
+        <span>{{::product.display_name }}</span>
     </div>
-    <h1 id="category-title" class="no-bottom-margin"> {{:: product.display_name }}</h1>
+    <h1 id="category-title" class="no-bottom-margin"> {{::product.display_name }}</h1>
 </div>
 
-<div layout="row" class="product-page-card" layout-wrap ng-cloak>
-
-    <div layout="column" flex-xs="100" flex-sm="40" flex-gt-sm="45" class="image-wrap" layout-padding layout-align="center center" flex>
-        <div layout-gt-xs="row" layout="column" layout-align="center centre">
-            <div layout="row" layout-align="center center" class="image-block">
-                <img data-ng-if="image.showImage" data-ng-src="{{image.url}}" class="md-card-image display-image" image-on-load="imageLoaded()" ng-style="displayImageStyle" />
-            </div>
-                 <div layout-align="center" data-ng-if="image.showImage && product.images.length >= 1">
-                 <md-button  class="md-fab md-mini md-warn zoom-btn" data-ng-click="zoomImage()" data-ng-disabled="displayImageLoading" aria-label="image-zoom">
-                    <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                    <path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/>
-                    </svg>
-                </md-button>
-                </div>
+<div layout="row" class="product-page-card" layout-wrap data-ng-if="product">
+    <div flex-xs="100" flex-sm="50" flex-gt-sm="45" wu-gallery image='product.image' layout="row"></div>
+    <div layout="column" flex-xs="100" flex-sm="50" flex-gt-sm="55" class="product-page-card-content" layout-padding>
+        <div class="product-price">
+            <span class="feature-title">Minimum Price:</span> <span>Rs. {{::product.min_price_per_unit}}</span>
+        </div>
+        <md-divider></md-divider>
+        <div>
+            <span class="feature-title">Retail Price:</span> Rs. {{::product.price_per_unit}}
+        </div>
+        <div>
+            <span class="feature-title">Margin upto: </span>{{::product.margin |  number:0}}%
+        </div>
+        <md-divider></md-divider>
+        <div>
+            <span class="feature-title">Manufactured By:</span> {{::product.seller.company_name}}
+        </div>
+        <div>
+            <span class="feature-title">Catalog Number:</span> {{::product.details.seller_catalog_number}}
+        </div>
+        <div>
+            <span class="feature-title">Lot Size:</span> {{::product.lot_size}}
+        </div>
+        <md-divider></md-divider>
+        <div>
+            Wholesale Pricing
+        </div>
+        <div layout="row" layout-align="center center">
+            <table>
+                <thead class="lot-pricing-head">
+                    <td>
+                        no. of lots
+                    </td>
+                    <td>
+                        price/unit
+                    </td>
+                    <td>
+                        your margin(upto)
+                    </td>
+                    <td>
+                        lot price
+                    </td>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="pl in product.product_lot">
+                        <td>
+                            {{::pl.lot_size_from}}+
+                        </td>
+                        <td>
+                            {{::pl.price_per_unit | number:0}}
+                        </td>
+                        <td>
+                            {{::((product.price_per_unit-pl.price_per_unit)*100/product.price_per_unit | number:0)}}%
+                        </td>
+                        <td>
+                            {{::pl.price_per_unit*product.lot_size | number:0}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div layout-align="center centre" layout="row" class="progress-bar-container">
-            <md-progress-linear md-mode="indeterminate"  ng-show="displayImageLoading" class="progress-bar md-warn md-hue-5"></md-progress-linear>
-        </div>
-        <div layout="row" layout-align="center center" data-ng-if="allImages.length>1" class="multiple-images-container">
-             <div layout="row" layout-align="center center"  data-ng-click="sliderPrevious()" class="control_prev" data-ng-if="allImages.length>6"  data-ng-disabled="!start>0" md-whiteframe="2">
-                 <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#fff"/>
-                     <path d="M0 0h24v24H0z" fill="none"/>
-                 </svg>
-             </div>
-             <div layout="row" data-ng-repeat="i in allImages.slice(start, start+6)">
-                <div layout="column" class="multiple-images slider-images" data-ng-click="changeDisplayImage($index+start)">
-                    <img src="{{i}}" />
-                    <span data-ng-class="{'active-image': $index+start==image.index}"></span>
-                </div>
-            </div>
-
-            <div layout="row" layout-align="center center"  ng-click="sliderNext()" class="control_next" ng-if="allImages.length>6" ng-disabled="!(start<allImages.length-6)" md-whiteframe="2">
-                <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#fff"/>
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                </svg>
-            </div>
-        </div>
-     </div>
-    <div layout="column" flex-xs="100" flex-sm="60" flex-gt-sm="55" flex class="product-page-card-content-container">
-        <div layout="column" class="product-page-card-content" style="background: #512DA8;">
-            <div class="product-price" style="margin-top:2.5vw;">
-                <span class="feature-title">Minimum Price:</span> <span>Rs. {{product.min_price_per_unit}}</span>
-            </div>
-            <md-divider></md-divider>
-            <div>
-                <span class="feature-title">Retail Price:</span> Rs. {{product.price_per_unit}}
-            </div>
-            <div>
-                <span class="feature-title">Margin upto: </span>{{(product.price_per_unit - product.min_price_per_unit)*100/product.price_per_unit |  number:0}}%
-            </div>
-            <md-divider></md-divider>
-            <div>
-                <span class="feature-title">Manufactured By:</span> {{product.seller.company_name}}
-            </div>
-            <div>
-                <span class="feature-title">Catalog Number:</span> {{product.details.seller_catalog_number}}
-            </div>
-            <div>
-                <span class="feature-title">Lot Size:</span> {{product.lot_size}}
-            </div>
-            <md-divider></md-divider>
-            <div>
-                Wholesale Pricing
-            </div>
-            <div layout="row" layout-align="center center">
-                <table>
-                    <thead class="lot-pricing-head">
-                        <td>
-                            no. of lots
-                        </td>
-                        <td>
-                            price/unit
-                        </td>
-                        <td>
-                            your margin(upto)
-                        </td>
-                        <td>
-                            lot price
-                        </td>
-                    </thead>
-                    <tbody>
-                        <tr data-ng-repeat="pl in product.product_lot">
-                            <td>
-                                {{pl.lot_size_from}}+
-                            </td>
-                            <td>
-                                {{pl.price_per_unit | number:0}}
-                            </td>
-                            <td>
-                                {{(product.price_per_unit-pl.price_per_unit)*100/product.price_per_unit | number:0}}%
-                            </td>
-                            <td>
-                                {{pl.price_per_unit*product.lot_size | number:0}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div layout="row">
-                <span flex></span>
-                <md-button class="md-raised md-warn" data-ng-click="buyNow($event, product.productID)">
-                    <span style="padding: 0.5em;" aria-label="buy-now">Buy Now (Join Buyer Network)</span>
-                </md-button>
-                <span flex></span>
-            </div>
+        <div layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-warn" data-ng-click="buyNow($event, product.productID)">
+                <span style="padding: 0.5em;" aria-label="buy-now">Buy Now (Join Buyer Network)</span>
+            </md-button>
+            <span flex></span>
         </div>
     </div>
 </div>
-<div layout="row" layout-wrap class="product-description-container">
+
+<div layout="row" layout-wrap class="product-description-container" data-ng-if="productDetailsKeys">
     <div layout="column" class="product-details-wrap" flex="60" flex-xs="100">
         <span class="area-title">Product Details</span>
         <div layout="row" layout-wrap flex>
-            <div layout="column" flex="33" flex-xs="100">
+            <div layout="column" flex="33" flex-xs="100" flex-sm="50">
                 <div layout="column" class="feature-parent" data-ng-repeat="p in productDetailsKeys" data-ng-if="$index<4">
                     <span class="feature-title">{{p.label}}</span>
                     <span>{{p.value}}</span>
                 </div>
             </div>
-            <div layout="column" flex="33" flex-xs="100">
+            <div layout="column" flex="33" flex-xs="100" flex-sm="50">
                 <div layout="column" class="feature-parent" data-ng-repeat="p in productDetailsKeys" data-ng-if="$index>3&&$index<8">
                     <span class="feature-title">{{p.label}}</span>
                     <span>{{p.value}}</span>
                 </div>
             </div>
-            <div layout="column" flex="33" flex-xs="100">
+            <div layout="column" flex="33" flex-xs="100" flex-sm="50">
                 <div layout="column" class="feature-parent" data-ng-repeat="p in productDetailsKeys" data-ng-if="$index>8">
-                    <span class="feature-title">{{p.label}}</span>
-                    <span>{{p.value}}</span>
+                    <span class="feature-title">{{::p.label}}</span>
+                    <span>{{::p.value}}</span>
                 </div>
             </div>
         </div>
@@ -157,54 +115,18 @@
         <div layout="column" class="product-details-wrap">
             <div layout="column" class="feature-parent">
                 <span class="feature-title">Name</span>
-                <span>{{product.seller.company_name}}</span>
+                <span>{{::product.seller.company_name}}</span>
             </div>
             <div layout="column" class="feature-parent">
                 <span class="feature-title">Location</span>
-                <span>{{product.seller.address[0].city}}</span>
+                <span>{{::product.seller.address.city}}</span>
             </div>
             <div layout="column" class="feature-parent">
                 <span class="feature-title">Speciality</span>
-                <span>{{product.category.display_name}}</span>
+                <span>{{::product.category.display_name}}</span>
             </div>
         </div>
     </div>
 </div>
 
 <div data-ng-include="'views/footer.html'" flex></div>
- <div data-ng-if="largeImageDisplay" class="large-image-display-panel">
-        <div class="background-shadow">
-        </div>
-          <div layout-align="center center"  class="loading-progress-container" ng-if="largeImageLoading">
-            <md-progress-linear md-mode="indeterminate"  class="loading-progress-bar md-warn md-hue-5" md-whiteframe="24"></md-progress-linear>
-           </div>
-        <div layout="row" layout-align="center" class="large-display-image-container" ng-show="!largeImageLoading">
-             <md-button layout="row" layout-align="center center"  data-ng-click="largeSliderPrevious()" class="md-fab md-mini md-warn large-img-prev" data-ng-if="allImages.length>1"  data-ng-disabled="largeImageIndex==0" style=" z-index:2000;" aria-label="action button">
-
-                 <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="#fff"/>
-                     <path d="M0 0h24v24H0z" fill="none"/>
-                 </svg>
-             </md-button>
-
-        <img data-ng-if="image.showImage" data-ng-src="{{image.urlLarge}}" class="md-card-image large-display-image md-whiteframe-24dp" image-on-load="largeImageLoaded()" ng-style="displayImageStyle" aria-lebel="close"/>
-
-            <md-button layout="row" layout-align="center center"  ng-click="largeSliderNext()" class="md-fab md-mini md-warn large-img-next" ng-if="allImages.length>1" ng-disabled="largeImageIndex==allImages.length-1" style=" z-index:2000;" aria-label="action button">
-
-                <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#fff"/>
-                    <path d="M0 0h24v24H0z" fill="none"/>
-                </svg>
-            </md-button>
-
-
-        <md-button ng-click="closeLargeImage()" class="md-fab md-mini  md-warn  close-button" style=" z-index:2000;" aria-label="close">
-
-            <svg fill="#fff" height="36" viewBox="0 0 24 24" width="30" >
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                <path d="M0 0h24v24H0z" fill="none"/>
-            </svg>
-        </md-button>
-        </div>
-
-</div>
