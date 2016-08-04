@@ -7,11 +7,15 @@
         function($mdMedia, $mdDialog) {
         	var factory = {};
 
+            var defaultController = 'PopupController';
+
             function getLocals(data) {
                 var locals = {};
-                locals.categoryID = data ? data.categoryID : null;
-                locals.productID = data ? data.productID : null;
-                locals.likeDislikeStatus = data ? data.type : null;
+                if(data.controller == defaultController) {
+                    locals.categoryID = data ? data.categoryID : null;
+                    locals.productID = data ? data.productID : null;
+                    locals.likeDislikeStatus = data ? data.type : null;
+                }
 
                 return locals;
             }
@@ -32,7 +36,7 @@
             factory.viewDialog = function(event, data, noFullScreen) {
                 var useFullScreen = noFullScreen ? null : $mdMedia('xs');
                 return $mdDialog.show({
-                    controller: data.controller ? data.controller : 'PopupController',
+                    controller: data.controller ? data.controller : defaultController,
                     templateUrl: data.view,
                     parent: angular.element(document.body),
                     targetEvent: event,
