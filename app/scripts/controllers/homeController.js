@@ -14,6 +14,8 @@
         'DialogService',
         function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q, DialogService) {
 
+            var listeners = [];
+
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
                 categoriesToShow: [10,1,7]
@@ -105,6 +107,14 @@
                     view: 'views/partials/buyNow.html'
                 });
             };
+
+            var destroyListener = $scope.$on('$destroy', function() {
+                angular.forEach(listeners, function(value, key) {
+                    if(value) value();
+                });
+                $scope.products = undefined;
+            });
+            listeners.push(destroyListener);
         }
     ]);
 })();
