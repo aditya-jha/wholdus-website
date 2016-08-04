@@ -52,7 +52,7 @@
 
                     $scope.setActiveImage = function(index, popup) {
                         $scope.activeImage = index;
-                        
+
                         var tbDivs = document.querySelector('.tbImage-container').querySelectorAll('div.thumbnail-image'),
                             mdDivs = document.querySelector('.gallery-image-container').querySelectorAll('.gallery-main');
 
@@ -79,6 +79,10 @@
                             fullscreen: true,
                             scope: $scope,
                             preserveScope: true
+                        }).finally(function() {
+                            if($scope.activeImage >= $scope.imageLimit) {
+                                $scope.setActiveImage(0);
+                            }
                         });
                     };
 
@@ -96,16 +100,4 @@
             ]
         };
     });
-
-    webapp.controller('GalleryPopupController' , [
-        '$scope',
-        '$log',
-        '$mdDialog',
-        'UtilService',
-        function($scope, $log, $mdDialog, UtilService) {
-            $scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-        }
-    ]);
 })();
