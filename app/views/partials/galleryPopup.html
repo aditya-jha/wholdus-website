@@ -1,5 +1,5 @@
-<md-dialog aria-label="gallery" class="fullscreen-dialog">
-    <div flex class="gallery-popup-container" layout="column" layout-wrap>
+<md-dialog aria-label="gallery" class="fullscreen-dialog" flex>
+    <div flex class="gallery-popup-container hide-scrollbar" layout="column" layout-wrap>
         <div layout="row" layout-align="end start">
             <span class="space large-font cursor-pointer" ng-click="cancel()">x</span>
         </div>
@@ -9,8 +9,8 @@
                     <img data-ng-src="{{::tbi}}" style="max-width:100%; max-height:100%;" />
                 </div>
             </div>
-            <div layout="row" layout-wrap layout-align="center center" class="gallery-popup-main hide-scrollbar">
-                <div layout="row" class="gallery-main {{$index==activeImage ? 'active': ''}}" ng-repeat="lgi in lgImage">
+            <div layout="row" layout-wrap layout-align="center center" class="gallery-popup-main">
+                <div layout="row" class="gallery-main {{$index==activeImage ? 'active': ''}}" ng-repeat="lgi in lgImage" style="overflow: scroll !important;">
                     <img data-ng-src="{{::lgi}}" />
                 </div>
             </div>

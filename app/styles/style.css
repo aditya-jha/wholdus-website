@@ -1247,19 +1247,24 @@ animation-iteration-count: infinite;
 .gallery-popup-main {
     width: 100%;
     height: 100%;
-    overflow: scroll
 }
+
+.gallery-popup-main > div {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none !important;
+}
+
+.gallery-popup-main > div::-webkit-scrollbar { width: 0 !important }
 
 .hide-scrollbar::-webkit-scrollbar { width: 0 !important }
 .hide-scrollbar { -ms-overflow-style: none; }
-.hide-scrollbar { overflow: -moz-scrollbars-none; }
+.hide-scrollbar { overflow: -moz-scrollbars-none !important; }
 
 md-dialog.fullscreen-dialog {
     max-width: 90%;
     max-height: 90%;
     width: 100%;
     height: 100%;
-    border-radius: 0;
     background-color: #eee;
 }
 
