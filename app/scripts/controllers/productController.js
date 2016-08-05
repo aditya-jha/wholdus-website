@@ -11,12 +11,19 @@
         'ngProgressBarService',
         '$rootScope',
         'DialogService',
-        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService) {
+        'ToastService',
+        '$mdMedia',
+        '$mdDialog',
+        'ConstantKeyValueService',
+        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService) {
 
             var listeners = [];
 
+            $scope.atcAPICall = null;
+
             function praseProductDetails(p) {
                 var product = {
+                    productID: p.productID,
                     category: p.category,
                     display_name: p.display_name,
                     min_price_per_unit: p.min_price_per_unit,
@@ -78,12 +85,11 @@
                 $scope.productDetailsKeys = productDetailsKeys;
             }
 
-            function getProducts() {
-                var params = {
-                    productID: UtilService.getIDFromSlug($routeParams.product)
-                };
+            function getProducts(productID) {
                 ngProgressBarService.showProgressbar();
-                APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
+                APIService.apiCall("GET", APIService.getAPIUrl("products"), null, {
+                    productID: productID
+                })
                 .then(function(response) {
                     ngProgressBarService.endProgressbar();
                     if(response.products.length) {
@@ -98,8 +104,47 @@
                 });
             }
 
+            function getCartStatus(productID) {
+                APIService.apiCall("GET", APIService.getAPIUrl('cartItem'), null, {
+                    productID: productID
+                }).then(function(response) {
+                    $scope.pdInCart = true;
+                }, function(error) {});
+            }
+
+            function openLotPopup(event) {
+                return $mdDialog.show({
+                    controller: 'LotPopupController',
+                    templateUrl: 'views/partials/lotSelectPopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: event,
+                    clickOutsideToClose: true,
+                    fullscreen: $mdMedia('xs') || $mdMedia('sm'),
+                    scope: $scope
+                });
+            }
+
+            function addToCartHelper(product, lots) {
+                if($scope.atcAPICall) return;
+                var data = {
+                    productID: product.productID,
+                    lots: lots,
+                    added_from: ConstantKeyValueService.cartTrack.added_from.product_page
+                };
+                $scope.atcAPICall = APIService.apiCall("POST", APIService.getAPIUrl('cartItem'), data);
+                $scope.atcAPICall.then(function(response) {
+                    $scope.atcAPICall = null;
+                    $scope.pdInCart = true;
+                }, function(error) {
+                    $scope.atcAPICall = null;
+                    ToastService.showActionToast("Sorry! Couldn't add product to cart", 5000, "ok");
+                });
+            }
+
             function init() {
-                getProducts();
+                var productID = UtilService.getIDFromSlug($routeParams.product);
+                getProducts(productID);
+                getCartStatus(productID);
             }
             init();
 
@@ -109,7 +154,15 @@
                      view: 'views/partials/buyNow.html'
                  });
             };
-            
+
+            $scope.addToCart = function(event, product) {
+                // open lots count popup
+                // openLotPopup(event, product).then(function(lots) {
+                //     addToCartHelper(product, lots);
+                // });
+                addToCartHelper(product, 1);
+            };
+
             var destroyListener = $scope.$on('$destroy', function() {
                 angular.forEach(listeners, function(value, key) {
                     if(value) value();

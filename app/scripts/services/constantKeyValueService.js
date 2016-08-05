@@ -4,7 +4,7 @@
         function() {
             var factory = {
                 token: '',
-                apiBaseUrl: 'http://api.wholdus.com/',
+                apiBaseUrl: 'http://api-test.wholdus.com/',
                 apiUrl: {
                     login: 'admin/login',
                     internalUsers: 'users/internal-users',
@@ -26,12 +26,21 @@
                     colour_type:'products/colour_type',
                     fabric_type:'products/fabric_type',
                     instructTrack: 'users/buyer/buyerpanel/instructionstracking',
+                    cartItem: 'cart/item'
                 },
                 accessTokenKey: 'randomData',
                 buyerDetailKey: 'buyerDetails',
                 bpInstructionsPopup: 'bpInstructionsPopup',
                 favInstruct: 'favInstruct',
                 sellerSite: 'http://seller.wholdus.com',
+                cartTrack: {
+                    added_from: {
+                        category_page: 0,
+                        product_page: 1,
+                        shortlist: 2,
+                        homepage: 3
+                    }
+                }
             };
 
             return factory;

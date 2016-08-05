@@ -11,7 +11,7 @@
 
             function getLocals(data) {
                 var locals = {};
-                if(data.controller == defaultController) {
+                if(!data.controller || data.controller == defaultController) {
                     locals.categoryID = data ? data.categoryID : null;
                     locals.productID = data ? data.productID : null;
                     locals.likeDislikeStatus = data ? data.type : null;
