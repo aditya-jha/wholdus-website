@@ -17,11 +17,30 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
 
     <link href="styles/style.css" rel="stylesheet" />
+
+    <style>
+      .body {
+         margin: 0;
+         background-color: #673AB7;
+         height: 100vh;
+      }
+      .dummy {
+         position: relative;
+         top: 30%;
+         text-align: center;
+         color: #fff;
+      }
+    </style>
 </head>
-<body layout="column">
+<body layout="column" class="body">
    <noscript>
          You must enable Javascript in order to use this site.
    </noscript>
+   <div class="dummy">
+      <img src="images/wholdus-logo.svg" />
+      <h1 style="padding:0;margin:0">Wholdus.com</h1>
+   </div>
+
    <div id="progressBar"></div>
 
    <div wu-header></div>
@@ -76,5 +95,16 @@
    <script src="scripts/controllers/redirectController.js"></script>
    <script src="scripts/controllers/galleryPopupController.js"></script>
    <script src="scripts/controllers/lotPopupController.js"></script>
+
+   <script>
+      setTimeout(function() {
+         document.body.classList.remove('body');
+         var x = document.getElementsByClassName('dummy');
+         if(x && x.length) {
+            //x[0].style.setProperty('display','none');
+            x[0].remove();
+         }
+      }, 0);
+   </script>
 </body>
 </html>
