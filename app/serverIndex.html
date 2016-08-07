@@ -15,12 +15,30 @@
     <link rel="shortcut icon" href="images/wholdus-favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|PT+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.min.207a3131.css" type="text/css">
+
+    <style>
+      .body {
+         margin: 0;
+         background-color: #673AB7;
+         height: 100vh;
+      }
+      .dummy {
+         position: relative;
+         top: 30%;
+         text-align: center;
+         color: #fff;
+      }
+    </style>
 </head>
 <body layout="column">
    <noscript>
         For full functionality of this site it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com/" target="_blank" style="color:red">
  instructions how to enable JavaScript in your web browser</a>.
    </noscript>
+   <div class="dummy">
+      <img src="images/wholdus-logo.svg" />
+      <h1 style="padding:0;margin:0">Wholdus.com</h1>
+   </div>
    <div id="progressBar"></div>
 
    <div wu-header></div>
@@ -54,6 +72,16 @@
     }]);
   </script>
 -->
+<script>
+   setTimeout(function() {
+      document.body.classList.remove('body');
+      var x = document.getElementsByClassName('dummy');
+      if(x && x.length) {
+         //x[0].style.setProperty('display','none');
+         x[0].remove();
+      }
+   }, 0);
+</script>
    <script>
 	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
