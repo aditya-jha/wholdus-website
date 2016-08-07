@@ -25,6 +25,9 @@
          height: 100vh;
       }
       .dummy {
+         height: 100vh;
+      }
+      .dummy div{
          position: relative;
          top: 30%;
          text-align: center;
@@ -37,8 +40,10 @@
          You must enable Javascript in order to use this site.
    </noscript>
    <div class="dummy">
-      <img src="images/wholdus-logo.svg" />
-      <h1 style="padding:0;margin:0">Wholdus.com</h1>
+      <div>
+         <img src="images/wholdus-logo.svg" />
+         <h1 style="padding:0;margin:0">Wholdus.com</h1>
+      </div>
    </div>
 
    <div id="progressBar"></div>
@@ -54,7 +59,7 @@
    <script src="bower_components/angular-route/angular-route.min.js"></script>
    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-   <script src="bower_components/angular-material/angular-material.min.js"></script>
+   <script src="bower_components/angular-material/angular-material.js"></script>
    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
    <script src="bower_components/ngprogress/build/ngprogress.min.js"></script>
    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
@@ -97,13 +102,10 @@
    <script src="scripts/controllers/lotPopupController.js"></script>
 
    <script>
-      setTimeout(function() {
+      window.setTimeout(function() {
          document.body.classList.remove('body');
          var x = document.getElementsByClassName('dummy');
-         if(x && x.length) {
-            //x[0].style.setProperty('display','none');
-            x[0].remove();
-         }
+         if(x && x.length) x[0].style.setProperty('display','none');
       }, 0);
    </script>
 </body>
