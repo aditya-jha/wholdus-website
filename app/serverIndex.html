@@ -19,10 +19,11 @@
     <style>
       .body {
          margin: 0;
-         background-color: #673AB7;
+         background-color: #673AB7 !important;
          height: 100vh;
       }
       .dummy {
+         z-index: 1000000;
          position: relative;
          top: 30%;
          text-align: center;
@@ -30,7 +31,7 @@
       }
     </style>
 </head>
-<body layout="column">
+<body layout="column" class="body">
    <noscript>
         For full functionality of this site it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com/" target="_blank" style="color:red">
  instructions how to enable JavaScript in your web browser</a>.
@@ -77,8 +78,7 @@
       document.body.classList.remove('body');
       var x = document.getElementsByClassName('dummy');
       if(x && x.length) {
-         //x[0].style.setProperty('display','none');
-         x[0].remove();
+         x[0].style.setProperty('display','none');
       }
    }, 0);
 </script>
