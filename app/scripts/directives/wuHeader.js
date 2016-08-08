@@ -2,6 +2,7 @@
     webapp.directive('wuHeader', function() {
         return {
             restrict: 'AE',
+            replace: true,
             templateUrl: 'views/directives/wuHeader.html',
             controller: [
                 '$scope',
@@ -13,7 +14,8 @@
                 'UtilService',
                 '$window',
                 '$element',
-                function($scope, $rootScope, DialogService, LoginService, $location, ToastService, UtilService, $window, $element) {
+                '$mdInkRipple',
+                function($scope, $rootScope, DialogService, LoginService, $location, ToastService, UtilService, $window, $element, $mdInkRipple) {
 
                     var listeners = [];
                     $scope.loginStatus = false;
@@ -23,7 +25,7 @@
                         $rootScope.$broadcast('toggleSidenav');
                     };
 
-                    $scope.login = function(event) {
+                    $scope.login = function(event, redirect) {
                         if($scope.loginStatus) {
                             LoginService.logout();
                             $scope.loginStatus = false;
@@ -32,6 +34,16 @@
                         } else {
                             DialogService.viewDialog(event, {
                                 view: 'views/partials/loginPopup.html',
+                            }).finally(function() {
+                                if(LoginService.checkLoggedIn()) {
+                                    $scope.loginStatus = true;
+                                    setBuyerName();
+                                    if(redirect) {
+                                        $location.url('/account/hand-picked-products?filter=favorite');
+                                    } else {
+                                        $location.url('/account/hand-picked-products');
+                                    }
+                                }
                             });
                         }
                     };
@@ -44,11 +56,8 @@
 
                     function setBuyerName() {
                         var name = LoginService.getBuyerInfo().name;
-                        if(name && (UtilService.isMobileRequest() || name.length > 12)) {
-                            name = name.split(' ');
-                            name = name[0];
-                        }
-                        $scope.buyerName = name;
+                        name = name.split(' ');
+                        $scope.buyerName = name[0];
                     }
 
                     function loginState() {
@@ -63,17 +72,18 @@
                     }
                     loginState();
 
+                    $scope.goToFav = function(ev) {
+                        if($scope.loginStatus) {
+                            $location.url('/account/hand-picked-products?filter=favorite');
+                        } else {
+                            $scope.login(ev,true);
+                        }
+                    };
+
                     var locationChangeListener = $rootScope.$on('$locationChangeSuccess', function(event, data) {
                         loginState();
                     });
                     listeners.push(locationChangeListener);
-
-                    var loggedInListener = $rootScope.$on('loggedIn', function(event) {
-                        $scope.loginStatus = true;
-                        setBuyerName();
-                        $location.url('/account/hand-picked-products');
-                    });
-                    listeners.push(loggedInListener);
 
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value, key) {

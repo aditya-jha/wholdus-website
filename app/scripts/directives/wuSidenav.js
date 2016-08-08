@@ -47,11 +47,12 @@
                     });
                     listeners.push(toggleSidenavListener);
 
-                    $scope.$on("$destroy", function() {
+                    var destroyListener = $scope.$on("$destroy", function() {
                         angular.forEach(listeners, function(value, key) {
                             if(value) value();
                         });
                     });
+                    listeners.push(destroyListener);
                 }
             ]
         };

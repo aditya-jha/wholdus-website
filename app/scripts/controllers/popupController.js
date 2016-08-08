@@ -72,7 +72,6 @@
                         $scope.apiCall = null;
                         $mdDialog.hide();
                         ToastService.showSimpleToast("Welcome " + response.buyer.name, 2000);
-                        $rootScope.$broadcast('loggedIn');
                     }, function(error) {
                         $scope.loading.show = false;
                         $scope.apiCall = null;
@@ -93,7 +92,6 @@
                     }
                     $scope.bpInstructions.selectedIndex -= 1;
                 }
-                // $scope.bpInstructions.instructNavPattern += (', ' + $scope.bpInstructions.selectedIndex);
                 $rootScope.$broadcast('instructNavPattern', $scope.bpInstructions.selectedIndex);
             };
         }
