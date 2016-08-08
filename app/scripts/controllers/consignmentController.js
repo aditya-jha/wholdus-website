@@ -1,9 +1,9 @@
 (function() {
-    webapp.controller('CartController', [
+    webapp.controller('ConsignmentController', [
         '$scope',
         '$log',
         function($scope, $log) {
-            $log.log('CartController loaded');
+            $log.log('ConsignmentController loaded');
         }
     ]);
 })();
