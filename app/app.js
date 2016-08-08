@@ -60,6 +60,9 @@ webapp.config([
          }).when('/bp/:uniqueUrl', {
              template: '<div></div>',
              controller: 'RedirectController'
+         }).when('/cart', {
+             templateUrl: 'views/checkout/cart.html',
+             controller: 'CartController'
          }).when('/:category', {
              templateUrl: "views/categorypage.html",
              controller: "CategoryController",
