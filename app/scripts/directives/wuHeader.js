@@ -20,7 +20,8 @@
                     var listeners = [];
                     $scope.loginStatus = false;
                     $scope.buyerName = null;
-
+                    $scope.isMobile = UtilService.isMobileRequest();
+                    
                     $scope.toggleSidenav = function() {
                         $rootScope.$broadcast('toggleSidenav');
                     };

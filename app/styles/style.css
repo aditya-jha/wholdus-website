@@ -77,6 +77,11 @@ a:active {
     background-color: rgba(255,110,64,0.7);
 }
 
+.header-toolbar .username {
+    max-width:95px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
 .cursor-pointer{
     cursor: pointer;
 }
@@ -614,6 +619,12 @@ a:active {
 }
 
 @media screen and (max-width:640px) {
+    .md-toolbar-tools.header-toolbar {
+        padding: 0 8px;
+    }
+    .header-toolbar .username {
+        font-size: 0.9em;
+    }
     .product-name {
         font-size: 1.05em !important;
     }
