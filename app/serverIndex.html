@@ -17,18 +17,20 @@
     <link rel="stylesheet" href="css/styles.min.207a3131.css" type="text/css">
 
     <style>
-      .body {
-         margin: 0;
-         background-color: #673AB7 !important;
-         height: 100vh;
-      }
-      .dummy {
-         z-index: 1000000;
-         position: relative;
-         top: 30%;
-         text-align: center;
-         color: #fff;
-      }
+    .body {
+      margin: 0;
+      background-color: #673AB7;
+      height: 100vh;
+    }
+    .dummy {
+      height: 100vh;
+    }
+    .dummy div{
+      position: relative;
+      top: 30%;
+      text-align: center;
+      color: #fff;
+    }
     </style>
 </head>
 <body layout="column" class="body">
@@ -37,8 +39,10 @@
  instructions how to enable JavaScript in your web browser</a>.
    </noscript>
    <div class="dummy">
-      <img src="images/wholdus-logo.svg" />
-      <h1 style="padding:0;margin:0">Wholdus</h1>
+      <div>
+         <img src="images/wholdus-logo.svg" />
+         <h1 style="padding:0;margin:0">Wholdus</h1>
+      </div>
    </div>
    <div id="progressBar"></div>
 
