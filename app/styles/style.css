@@ -82,6 +82,7 @@ a:active {
     overflow:hidden;
     text-overflow:ellipsis;
 }
+
 .cursor-pointer{
     cursor: pointer;
 }
@@ -1258,6 +1259,96 @@ md-dialog.fullscreen-dialog {
 .gallery-popup-container {
     background-color:#fff;
     margin:0.3em;
+}
+
+/** css for consignment page **/
+.consignment {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content.radio-list {
+    padding: 0 0.5em !important;
+}
+
+.radio-list > .credit-payment-text {
+    margin: -1em 0 1em 2.3em;
+    color: #673AB7;
+    font-size: 0.8em;
+}
+
+.radio-list .cod-payment-text {
+    font-size: 0.8em;
+    color: #673AB7;
+}
+
+.radio-list > md-radio-button {
+    padding: 0.8em 0;
+}
+.consignment > .action {
+    padding: 0.5em 0 2em 0;
+}
+
+.action > .md-button {
+    font-size: 1.1em;
+}
+
+.consignment > .action-mobile {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    max-width: 900px;
+}
+
+.action-mobile > .md-button {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.consignment > .section {
+    background-color: #fff;
+    margin: 1em 0.5em 0em 0.5em;
+}
+
+.section > .header {
+    font-family: 'Comfortaa', cursive;
+    background-color: #673AB7; /*#D1C4E9;*/
+    text-transform: uppercase;
+    padding: 0.5em 0;
+    color: #fff;
+}
+
+.section > .content {
+    padding: 0.5em 0.5em;
+}
+
+.section > .content span {
+    padding: 0.1em 0;
+}
+
+.section > .content  a {
+    text-decoration: underline;
+    color: #673AB7;
+}
+
+.content.padding-up-down > span {
+    padding: 0.2em 0 !important;
+}
+
+.lot-number {
+    cursor: pointer;
+}
+
+.custom-md-icon {
+    position: relative;
+    margin: 0;
+}
+
+.lot-pricing-text {
+    font-size: 0.9em;
+    text-decoration: underline;
+    color: #01d4fb;
+    cursor: pointer;
 }
 
 @keyframes swipeRight {

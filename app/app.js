@@ -62,7 +62,8 @@ webapp.config([
              controller: 'RedirectController'
          }).when('/consignment', {
              templateUrl: 'views/checkout/consignment.html',
-             controller: 'ConsignmentController'
+             controller: 'ConsignmentController',
+             reloadOnSearch: false
          }).when('/:category', {
              templateUrl: "views/categorypage.html",
              controller: "CategoryController",

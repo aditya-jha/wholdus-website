@@ -1,0 +1,27 @@
+<div layout="row" layout-wrap flex="100" class="section md-whiteframe-6dp">
+    <div class="header" layout="row" layout-align="center center" flex="100">
+        Delivery Address
+    </div>
+    <div flex="100" layout="row" class="content" layout-align="center center">
+        <div layout="row" flex="70" layout-wrap>
+            <span flex="100" class="bold">Aditya Jha</span>
+            <span flex="100" class="bold">7417485915</span>
+            <span flex="100">454/21, lane no. 1, chanakya puri colony, satna(MP)</span>
+        </div>
+        <div flex="30" layout="column" layout-align="center center">
+            <md-button class="md-raised">edit</md-button>
+        </div>
+    </div>
+</div>
+
+<span ng-if="isMobile" flex="100" style="height:50px;"></span>
+<div class="action" flex="100" layout-align="center center" layout="row" ng-if="!isMobile">
+    <span flex hide-xs></span>
+    <md-button class="md-raised" flex hide-xs ng-href="/" ng-if="!step">continue shopping</md-button>
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)">proceed</md-button>
+    <span flex hide-xs></span>
+</div>
+
+<div class="action-mobile" flex="100" layout-align="center center" layout="row" ng-if="isMobile">
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)">proceed</md-button>
+</div>
