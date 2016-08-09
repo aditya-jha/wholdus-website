@@ -18,10 +18,14 @@
                 function($scope, $rootScope, DialogService, LoginService, $location, ToastService, UtilService, $window, $element, $mdInkRipple) {
 
                     var listeners = [];
+                    var urls = {
+                        fav: '/account/hand-picked-products?filter=favorite',
+                        consignment: 'consignment'
+                    };
                     $scope.loginStatus = false;
                     $scope.buyerName = null;
                     $scope.isMobile = UtilService.isMobileRequest();
-                    
+
                     $scope.toggleSidenav = function() {
                         $rootScope.$broadcast('toggleSidenav');
                     };
@@ -40,7 +44,7 @@
                                     $scope.loginStatus = true;
                                     setBuyerName();
                                     if(redirect) {
-                                        $location.url('/account/hand-picked-products?filter=favorite');
+                                        $location.url(redirect);
                                     } else {
                                         $location.url('/account/hand-picked-products');
                                     }
@@ -73,11 +77,14 @@
                     }
                     loginState();
 
-                    $scope.goToFav = function(ev) {
+                    $scope.goToUrl = function(ev, where) {
                         if($scope.loginStatus) {
-                            $location.url('/account/hand-picked-products?filter=favorite');
+                            $location.url(urls[where]);
+                            if(where == 'consignment') {
+                                $scope.$broadcast('consignmentIconClicked');
+                            }
                         } else {
-                            $scope.login(ev,true);
+                            $scope.login(ev, urls[where]);
                         }
                     };
 
