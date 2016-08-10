@@ -108,7 +108,9 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('cartItem'), null, {
                     productID: productID
                 }).then(function(response) {
-                    $scope.pdInCart = true;
+                    if(response.cart_items.length) {
+                        $scope.pdInCart = true;
+                    }
                 }, function(error) {});
             }
 
@@ -137,7 +139,7 @@
                     $scope.pdInCart = true;
                 }, function(error) {
                     $scope.atcAPICall = null;
-                    ToastService.showActionToast("Sorry! Couldn't add product to cart", 5000, "ok");
+                    ToastService.showActionToast("Sorry! Couldn't add product to consignment", 5000, "ok");
                 });
             }
 

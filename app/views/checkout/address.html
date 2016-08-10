@@ -9,7 +9,9 @@
             <span flex="100">454/21, lane no. 1, chanakya puri colony, satna(MP)</span>
         </div>
         <div flex="30" layout="column" layout-align="center center">
-            <md-button class="md-raised">edit</md-button>
+            <md-button class="md-raised" ng-click="addressEdit = 1" ng-if="!addressEdit">edit</md-button>
+            <md-button class="md-raised" ng-click="updateAddress() && addressEdit = 0" ng-if="addressEdit">save</md-button>
+            <md-button class="md-raised" ng-click="addressEdit = 0" ng-if="addressEdit">cancel</md-button>
         </div>
     </div>
 </div>

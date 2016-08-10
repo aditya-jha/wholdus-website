@@ -26,7 +26,8 @@
                     colour_type:'products/colour_type',
                     fabric_type:'products/fabric_type',
                     instructTrack: 'users/buyer/buyerpanel/instructionstracking',
-                    cartItem: 'cart/item'
+                    cartItem: 'cart/item',
+                    cart: 'cart'
                 },
                 accessTokenKey: 'randomData',
                 buyerDetailKey: 'buyerDetails',
@@ -38,7 +39,8 @@
                         category_page: 0,
                         product_page: 1,
                         shortlist: 2,
-                        homepage: 3
+                        homepage: 3,
+                        cart: 4
                     }
                 }
             };

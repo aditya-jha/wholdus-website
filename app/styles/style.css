@@ -59,6 +59,10 @@ a:active {
     text-decoration: none;
 }
 
+.hide {
+    display: none;
+}
+
 .header-toolbar .header-icons {
     border-radius: 50%;
     background: #fff;
@@ -1342,6 +1346,7 @@ md-dialog.fullscreen-dialog {
 .custom-md-icon {
     position: relative;
     margin: 0;
+    cursor: pointer;
 }
 
 .lot-pricing-text {
