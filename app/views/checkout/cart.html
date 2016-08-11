@@ -49,7 +49,7 @@
                 </div>
                 <div layout="column" flex="50">
                     <span>Lots</span>
-                    <span layout="row" class="lot-number" ng-click="changeLots(ci.product.productID, ci.lots)">
+                    <span layout="row" class="lot-number" ng-click="changeLots($event, ci.product, ci.lots)">
                         <span class="space">{{::ci.lots}}</span>
                         <md-icon md-ink-ripple class="custom-md-icon">
                             <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">

@@ -7,7 +7,9 @@
         'APIService',
         'ngProgressBarService',
         'ConstantKeyValueService',
-        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService) {
+        '$mdMedia',
+        '$mdDialog',
+        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog) {
 
             var listeners = [];
 
@@ -101,6 +103,21 @@
 
             $scope.remove = function(productID) {
                 updateLots(productID, 0);
+            };
+
+            $scope.changeLots = function(ev, product, lots) {
+                $mdDialog.show({
+                    controller: 'LotPopupController',
+                    templateUrl: 'views/partials/lotSelectPopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: ev,
+                    clickOutsideToClose: true,
+                    fullscreen: $mdMedia('xs') || $mdMedia('sm'),
+                    locals: {
+                        product: product,
+                        lots: lots
+                    }
+                });
             };
 
             var consignmentIconClickedListener = $scope.$on('consignmentIconClicked', function(event, data) {

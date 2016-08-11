@@ -63,6 +63,10 @@ a:active {
     display: none;
 }
 
+.header-toolbar {
+    font-family: 'Comfortaa', cursive;
+}
+
 .header-toolbar .header-icons {
     border-radius: 50%;
     background: #fff;
@@ -413,12 +417,17 @@ a:active {
     padding-right: 0.2em;
 }
 
-.product-card-content .feature-title {
-    font-size: 0.8em;
+.product-page-card-content .feature-title {
+    color: #fff !important;
+}
+
+.feature-title {
+    font-size: 0.9em;
     margin: 0px;
     padding: 0px;
     color: #727272;
 }
+
 .strike {
      text-decoration: line-through;
      padding-bottom: 0em;
@@ -560,7 +569,7 @@ a:active {
     margin: 0 auto;
 }
 
-@media screen and (max-width: 959px) {
+@media media and (max-width: 959px) {
     .account-content {
       margin-left: 0px;
     }
@@ -1354,6 +1363,55 @@ md-dialog.fullscreen-dialog {
     text-decoration: underline;
     color: #01d4fb;
     cursor: pointer;
+}
+
+.lot-popup {
+    font-family: 'PT Sans';
+    padding: 1em 0.5em;
+}
+
+.lot-popup > .details {
+    padding: 1em 0.5em;
+    background-color: rgba(238, 238, 238, 1);
+}
+
+.details > div {
+    padding: 1em 0;
+}
+
+.lots-count > div{
+    border: 1px solid #000;
+    padding: 0 0.2em;
+}
+
+.lots-count .lots {
+    font-size: 1.3em;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+}
+
+.lots-count > .md-button {
+    font-size: 2.5em;
+}
+/*@media screen and (max-width: 600px){
+
+}*/
+
+.lot-pricing-head {
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+.lot-pricing-detail {
+    text-align: center;
+    padding: 0.3em 0;
+}
+
+.lot-pricing-detail.active {
+    background-color: #673AB7;
+    color: #fff;
 }
 
 @keyframes swipeRight {
