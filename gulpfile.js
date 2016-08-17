@@ -50,6 +50,8 @@ var jsCustom = [
     'app/scripts/controllers/blogController.js',
     'app/scripts/controllers/redirectController.js',
     'app/scripts/controllers/galleryPopupController.js',
+    'app/scripts/controllers/lotPopupController.js',
+    'app/scripts/controllers/consignmentController.js'
 ];
 
 var stylesheets = [
