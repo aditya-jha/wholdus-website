@@ -145,6 +145,7 @@
 
             function init() {
                 var productID = UtilService.getIDFromSlug($routeParams.product);
+                $scope.isMobile = UtilService.isMobileRequest();
                 getProducts(productID);
                 getCartStatus(productID);
             }

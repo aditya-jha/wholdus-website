@@ -33,7 +33,7 @@
     </div>
     <div layout="row" flex="100" class="content" layout-wrap style="border-bottom:2px solid #B6B6B6" ng-repeat="ci in sc.cart_items">
         <div layout="row" flex="100" style="padding: 0.5em 0">
-            <span flex>{{::ci.product.display_name}}</span>
+            <span flex class="bold">{{::ci.product.display_name}}</span>
             <md-icon md-ink-ripple class="custom-md-icon" ng-click="remove(ci.product.productID)">
                 <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -44,11 +44,11 @@
         <div layout="row" flex="100">
             <div layout="row" flex layout-wrap>
                 <div layout="column" flex="50">
-                    <span>Total Price</span>
+                    <span class="feature-title">Total Price</span>
                     <span>Rs. {{::ci.final_price}}</span>
                 </div>
                 <div layout="column" flex="50">
-                    <span>Lots</span>
+                    <span class="feature-title">Lots</span>
                     <span layout="row" class="lot-number" ng-click="changeLots($event, ci.product, ci.lots)">
                         <span class="space">{{::ci.lots}}</span>
                         <md-icon md-ink-ripple class="custom-md-icon">
@@ -58,14 +58,14 @@
                             </svg>
                         </md-icon>
                     </span>
-                    <span class="lot-pricing-text">see lot pricing</span>
+                    <span class="lot-pricing-text" ng-click="changeLots($event, ci.product, ci.lots)">see lot pricing</span>
                 </div>
                 <div layout="column" flex="50">
-                    <span>Price Per Piece</span>
+                    <span class="feature-title">Price Per Piece</span>
                     <span>Rs. {{::ci.calculated_price_per_piece}}</span>
                 </div>
                 <div layout="column" flex="50">
-                    <span>Pieces</span>
+                    <span class="feature-title">Pieces</span>
                     <span>{{ci.pieces}}</span>
                 </div>
             </div>
@@ -100,10 +100,10 @@
 <div class="action" flex="100" layout-align="center center" layout="row" ng-if="!isMobile && cart.product_count>0">
     <span flex hide-xs></span>
     <md-button class="md-raised" flex hide-xs ng-href="/">continue shopping</md-button>
-    <md-button class="md-raised md-warn" flex ng-click="proceed(step)">proceed</md-button>
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)" ng-disabled="updateApi">proceed</md-button>
     <span flex hide-xs></span>
 </div>
 
 <div class="action-mobile" flex="100" layout-align="center center" layout="row" ng-if="isMobile && cart.product_count>0">
-    <md-button class="md-raised md-warn" flex ng-click="proceed(step)">proceed</md-button>
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)" ng-disabled="updateApi">proceed</md-button>
 </div>

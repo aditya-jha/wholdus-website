@@ -4,14 +4,66 @@
     </div>
     <div flex="100" layout="row" class="content" layout-align="center center">
         <div layout="row" flex="70" layout-wrap>
-            <span flex="100" class="bold">Aditya Jha</span>
-            <span flex="100" class="bold">7417485915</span>
-            <span flex="100">454/21, lane no. 1, chanakya puri colony, satna(MP)</span>
+            <span flex="100" class="bold">{{::cart.buyer.company_name}}</span>
+            <div layout="row" flex="100" layout-wrap ng-if="!addressEdit">
+                <span flex="100" class="bold">{{::cart.buyer.addres[0].contact_number ? cart.buyer.addres[0].contact_number : cart.buyer.mobile_number}}</span>
+                <span flex="100">
+                    {{cart.buyer.address[0].address}}
+                    <span ng-if="cart.buyer.address[0].landmark">, near {{cart.buyer.address[0].landmark}}</span>
+                    <span ng-if="cart.buyer.address[0].city">, {{cart.buyer.address[0].city}}</span>
+                    <span ng-if="cart.buyer.address[0].state">, {{cart.buyer.address[0].state}}</span>
+                    <span ng-if="cart.buyer.address[0].pincode">, {{cart.buyer.address[0].pincode}}</span>
+                </span>
+            </div>
+            <form name="addressForm" novalidate autocomplete="off" ng-submit="addressForm.$valid && updateAddress($event)" flex="100" layout="row" layout-wrap ng-if="addressEdit">
+                <md-input-container flex="100">
+                    <label>Pincode</label>
+                    <input type="number" ng-model="cart.buyer.address[0].pincode" name="pincode" ng-pattern="formValidation.pinCodeValidation" required />
+                    <div ng-messages="addressForm.pincode.$error" role="alert" ng-if="addressForm.pincode.$dirty || addressForm.$submitted" >
+                        <div ng-message="required" class="formError">This is required.</div>
+                        <div ng-message="pattern" class="formError">
+                            {{formValidation.pinErrorMessage}}
+                        </div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="100">
+                    <label>Address</label>
+                    <input type="text" ng-model="cart.buyer.address[0].address" name="address" required />
+                    <div ng-messages="addressForm.address.$error" role="alert" ng-if="addressForm.address.$dirty || addressForm.$submitted" >
+                        <div ng-message="required" class="formError">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="100">
+                    <label>Landmark</label>
+                    <input type="text" ng-model="cart.buyer.address[0].landmark" name="landmark" required />
+                    <div ng-messages="addressForm.landmark.$error" role="alert" ng-if="addressForm.landmark.$dirty || addressForm.$submitted" >
+                        <div ng-message="required" class="formError">This is required.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container flex="100">
+                    <label>Contact Number</label>
+                    <input type="number" ng-model="cart.buyer.address[0].contact_number" name="contact_number" ng-pattern="formValidation.mobileNumValidation" required />
+                    <div ng-messages="addressForm.contact_number.$error" role="alert" ng-if="addressForm.contact_number.$dirty || addressForm.$submitted" >
+                        <div ng-message="required" class="formError">This is required.</div>
+                        <div ng-message="pattern" class="formError">
+                            {{formValidation.mobileErrorMessage}}
+                        </div>
+                    </div>
+                </md-input-container>
+            </form>
         </div>
         <div flex="30" layout="column" layout-align="center center">
-            <md-button class="md-raised" ng-click="addressEdit = 1" ng-if="!addressEdit">edit</md-button>
-            <md-button class="md-raised" ng-click="updateAddress() && addressEdit = 0" ng-if="addressEdit">save</md-button>
-            <md-button class="md-raised" ng-click="addressEdit = 0" ng-if="addressEdit">cancel</md-button>
+            <md-button class="md-raised" ng-click="toggleAddressEdit(1)" ng-if="!addressEdit">edit</md-button>
+            <md-button class="md-raised md-warn" ng-click="updateAddress(cart.buyer.address[0].addressID)" ng-if="addressEdit" type="submit">save</md-button>
+            <md-button class="md-raised" ng-click="toggleAddressEdit(0)" ng-if="addressEdit">cancel</md-button>
+        </div>
+    </div>
+    <div layout="row" layout-wrap flex="100" ng-if="!addressEdit">
+        <span flex="100" layout-margin><md-divider></md-divider></span>
+        <div flex="100" layout-wrap layout-padding layout="row">
+            <span flex="100" ng-if="pincodeService.delivery">Delivery Available</span>
+            <span flex="100" ng-if="!pincodeService.delivery">Sorry! Delivery Not Available</span>
+            <span flex="100" ng-if="pincodeService.cod">COD Available</span>
         </div>
     </div>
 </div>

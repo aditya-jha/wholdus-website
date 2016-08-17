@@ -81,13 +81,16 @@
             <md-button class="md-raised md-warn" ng-click="buyNow($event, product.productID)" flex>
                 <span aria-label="buy-now">BUY NOW</span>
             </md-button>
-            <md-button class="md-raised" flex ng-click="addToCart($event, product)" ng-disabled="pdInCart">
-                <span layout="row" flex layout-align="center center" ng-show="atcAPICall">
-                    <md-progress-circular md-mode="indeterminate" class="md-warn" md-diameter="32"></md-progress-circular>
-                </span>
-                <span ng-show="!atcAPICall" flex>ADD TO CART</span>
-                <md-tooltip md-direction="top">The product is already in cart!</md-tooltip>
-            </md-button>
+            <div flex layout="row" layout-wrap>
+                <md-button class="md-raised" flex="100" ng-click="addToCart($event, product)" ng-disabled="pdInCart">
+                    <span layout="row" flex layout-align="center center" ng-show="atcAPICall">
+                        <md-progress-circular md-mode="indeterminate" class="md-warn" md-diameter="32"></md-progress-circular>
+                    </span>
+                    <span ng-show="!atcAPICall && !pdInCart" flex>ADD TO CART</span>
+                    <span ng-if="pdInCart" flex style="color:#fff">ADDED TO CART</span>
+                </md-button>
+                <md-tooltip md-direction="top" ng-if="pdInCart && !isMobile">The product is already in cart!</md-tooltip>
+            </div>
             <span flex hide-xs hide-sm></span>
         </div>
     </div>

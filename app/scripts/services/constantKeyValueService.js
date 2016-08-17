@@ -27,7 +27,8 @@
                     fabric_type:'products/fabric_type',
                     instructTrack: 'users/buyer/buyerpanel/instructionstracking',
                     cartItem: 'cart/item',
-                    cart: 'cart'
+                    cart: 'cart',
+                    pincodeserviceability: 'logistics/pincodeserviceability'
                 },
                 accessTokenKey: 'randomData',
                 buyerDetailKey: 'buyerDetails',

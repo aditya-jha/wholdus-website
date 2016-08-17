@@ -1371,7 +1371,8 @@ md-dialog.fullscreen-dialog {
 }
 
 .lot-popup > .details {
-    padding: 1em 0.5em;
+    margin: 0.5em 0;
+    padding: 0.5em 0.5em;
     background-color: rgba(238, 238, 238, 1);
 }
 

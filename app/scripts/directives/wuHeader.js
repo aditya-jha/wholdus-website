@@ -54,7 +54,8 @@
                     };
 
                     function logoutRedirect() {
-                        if($location.url().indexOf('account') > -1) {
+                        var url = $location.url();
+                        if(url.indexOf('account') > -1 || url.indexOf('consignment') > -1) {
                             $location.url('/');
                         }
                     }

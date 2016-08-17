@@ -2,9 +2,10 @@
     webapp.controller('LotPopupController', [
         '$scope',
         '$log',
+        '$mdDialog',
         'product',
         'lots',
-        function($scope, $log, product, lots) {
+        function($scope, $log, $mdDialog, product, lots) {
 
             var minLots;
 
@@ -41,6 +42,14 @@
                 lots += by;
                 if(lots < minLots) lots = minLots;
                 setDetails(lots);
+            };
+
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+
+            $scope.done = function() {
+                $mdDialog.hide(lots);
             };
 
             init();

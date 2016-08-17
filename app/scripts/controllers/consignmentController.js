@@ -9,9 +9,10 @@
         'ConstantKeyValueService',
         '$mdMedia',
         '$mdDialog',
-        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog) {
+        'FormValidationService',
+        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog, FormValidationService) {
 
-            var listeners = [];
+            var listeners = [], oldAddress;
 
             function getStep() {
                 var query = $location.search();
@@ -31,6 +32,8 @@
 
             function parseCart(item) {
                 item.final_price = Math.ceil(parseFloat(item.final_price) + parseFloat(item.shipping_charge));
+                item.buyer.address[0].pincode = parseInt(item.buyer.address[0].pincode);
+                item.buyer.address[0].contact_number = item.buyer.address[0].contact_number ? parseInt(item.buyer.address[0].contact_number) : '';
                 angular.forEach(item.sub_carts, function(value, key) {
                     value.final_price_calculated = Math.ceil(parseFloat(value.calculated_price) + parseFloat(value.shipping_charge));
                     angular.forEach(value.cart_items, function(v, k) {
@@ -53,6 +56,9 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('cart'))
                 .then(function(response) {
                     updateCart(response);
+                    if($scope.step == 1) {
+                        checkPincodeServiceAbility($scope.cart.buyer.address[0].pincode);
+                    }
                     ngProgressBarService.endProgressbar();
                 }, function(error) {
                     ngProgressBarService.endProgressbar();
@@ -62,18 +68,40 @@
 
             function updateLots(productID, lots) {
                 ngProgressBarService.showProgressbar();
-                APIService.apiCall("POST", APIService.getAPIUrl('cartItem'), {
+                $scope.updateApi = APIService.apiCall("POST", APIService.getAPIUrl('cartItem'), {
                     productID: productID,
                     lots: lots,
                     added_from: ConstantKeyValueService.cartTrack.added_from.cart
-                }).then(function(response) {
+                });
+                $scope.updateApi.then(function(response) {
                     $log.log(response);
                     $scope.cart = parseCart(response.carts);
                     ngProgressBarService.endProgressbar();
+                    $scope.updateApi = false;
                 }, function(error) {
                     $log.log(error);
                     ToastService.showActionToast("Sorry! Couldn't modify consignment", 5000, "ok");
                     ngProgressBarService.endProgressbar();
+                    $scope.updateApi = false;
+                });
+            }
+
+            function checkPincodeServiceAbility(pincode) {
+                APIService.apiCall("GET", APIService.getAPIUrl('pincodeserviceability'), null, {pincode_code:pincode})
+                .then(function(response) {
+                    if(response.serviceable_pincodes && response.serviceable_pincodes.length) {
+                        var x = {};
+                        angular.forEach(response.serviceable_pincodes, function(value, key) {
+                            if(value.regular_delivery_available) x.delivery = true;
+                            if(value.cod_available) x.cod = true;
+                        });
+                        $scope.pincodeService = x;
+                    } else {
+                        $scope.pincodeService = {};
+                    }
+                }, function(error) {
+                    $log.log(error);
+                    $scope.pincodeService = {};
                 });
             }
 
@@ -81,20 +109,36 @@
                 $scope.step = getStep();
                 $scope.isMobile = UtilService.isMobileRequest();
                 $scope.paymentMethod = 0;
-
-                if(!$scope.step) {
-                    fetchCart();
-                } else if($scope.step == 1) {
-                    $scope.toggleAddressEdit = function(status) {
-                        if(status) {
-                            $scope.addressEdit = true;
-                        } else {
-                            $scope.addressEdit = false;
-                        }
-                    };
-                }
+                $scope.formValidation = FormValidationService;
+                $scope.addressForm = 'addressForm';
+                fetchCart();
             }
             init();
+
+            $scope.updateAddress = function() {
+                APIService.apiCall("PUT", APIService.getAPIUrl('buyers'), {
+                    address: $scope.cart.buyer.address[0],
+                    buyerID: $scope.cart.buyer.buyerID
+                }).then(function(response) {
+                    $log.log(response);
+                    $scope.addressEdit = false;
+                }, function(error) {
+                    $scope.cart.buyer.address[0] = oldAddress;
+                    ToastService.showActionToast("Sorry! Couldn't update address", 5000, "ok");
+                    $log.log(error);
+                    $scope.addressEdit = false;
+                });
+                checkPincodeServiceAbility($scope.cart.buyer.address[0].pincode);
+            };
+
+            $scope.toggleAddressEdit = function(status) {
+                if(status) {
+                    $scope.addressEdit = true;
+                } else {
+                    oldAddress = angular.copy($scope.cart.buyer.address[0]);
+                    $scope.addressEdit = false;
+                }
+            };
 
             $scope.proceed = function() {
                 $scope.step += 1;
@@ -116,6 +160,10 @@
                     locals: {
                         product: product,
                         lots: lots
+                    }
+                }).then(function(updatedLots) {
+                    if(lots != updatedLots) {
+                        updateLots(product.productID, updatedLots);
                     }
                 });
             };
