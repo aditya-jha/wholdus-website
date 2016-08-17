@@ -1,4 +1,4 @@
-<div layout="row" layout-wrap flex="100" class="section md-whiteframe-6dp" ng-if="cart != 'undefined' && cart.product_count == 0">
+<div layout="row" layout-wrap flex="100" class="section md-whiteframe-6dp" ng-if="cart != 'undefined' || cart.product_count || cart.product_count == 0">
     <div flex="100" layout="row" class="content" layout-align="center center" layout-wrap>
         <span flex="100">No products added to consignment</span>
         <md-button class="md-warn md-raised" href='/' style="text-decoration:none">Continue Shopping</md-button>
