@@ -56,9 +56,7 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('cart'))
                 .then(function(response) {
                     updateCart(response);
-                    if($scope.step == 1) {
-                        checkPincodeServiceAbility($scope.cart.buyer.address[0].pincode);
-                    }
+                    checkPincodeServiceAbility($scope.cart.buyer.address[0].pincode);
                     ngProgressBarService.endProgressbar();
                 }, function(error) {
                     ngProgressBarService.endProgressbar();
