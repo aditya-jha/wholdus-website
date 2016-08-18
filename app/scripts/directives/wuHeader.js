@@ -22,13 +22,18 @@
                         fav: '/account/hand-picked-products?filter=favorite',
                         consignment: 'consignment'
                     };
-                    $scope.loginStatus = false;
-                    $scope.buyerName = null;
-                    $scope.isMobile = UtilService.isMobileRequest();
 
-                    $scope.toggleSidenav = function() {
-                        $rootScope.$broadcast('toggleSidenav');
-                    };
+                    function loginDialogCallback(redirect) {
+                        if(LoginService.checkLoggedIn()) {
+                            $scope.loginStatus = true;
+                            setBuyerName();
+                            if(redirect) {
+                                $location.url(redirect);
+                            } else {
+                                $location.url('/account/hand-picked-products');
+                            }
+                        }
+                    }
 
                     $scope.login = function(event, redirect) {
                         if($scope.loginStatus) {
@@ -40,15 +45,7 @@
                             DialogService.viewDialog(event, {
                                 view: 'views/partials/loginPopup.html',
                             }).finally(function() {
-                                if(LoginService.checkLoggedIn()) {
-                                    $scope.loginStatus = true;
-                                    setBuyerName();
-                                    if(redirect) {
-                                        $location.url(redirect);
-                                    } else {
-                                        $location.url('/account/hand-picked-products');
-                                    }
-                                }
+                                loginDialogCallback(redirect);
                             });
                         }
                     };
@@ -76,7 +73,6 @@
                             logoutRedirect();
                         }
                     }
-                    loginState();
 
                     $scope.goToUrl = function(ev, where) {
                         if($scope.loginStatus) {
@@ -88,6 +84,11 @@
                             $scope.login(ev, urls[where]);
                         }
                     };
+
+                    function init() {
+                        $scope.isMobile = UtilService.isMobileRequest();
+                        loginState();
+                    }
 
                     var locationChangeListener = $rootScope.$on('$locationChangeSuccess', function(event, data) {
                         loginState();

@@ -37,15 +37,10 @@
                         }, 500);
                     };
 
-                    function toggleSidenav() {
+                    $scope.toggleSidenav = function() {
                         closeSidenav();
                         $mdSidenav('left').toggle();
-                    }
-
-                    var toggleSidenavListener = $rootScope.$on('toggleSidenav', function(event, data) {
-                        toggleSidenav();
-                    });
-                    listeners.push(toggleSidenavListener);
+                    };
 
                     var destroyListener = $scope.$on("$destroy", function() {
                         angular.forEach(listeners, function(value, key) {
