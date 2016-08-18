@@ -1344,6 +1344,12 @@ md-dialog.fullscreen-dialog {
     color: #673AB7;
 }
 
+.section .product-link {
+    text-decoration: none !important;
+    color: #000 !important;
+    font-weight: bold;
+}
+
 .content.padding-up-down > span {
     padding: 0.2em 0 !important;
 }

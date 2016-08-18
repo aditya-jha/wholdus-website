@@ -78,11 +78,11 @@
 
         <div layout="row">
             <span flex hide-xs hide-sm></span>
-            <md-button class="md-raised md-warn" ng-click="buyNow($event, product.productID)" flex>
+            <md-button class="md-raised md-warn" ng-click="addToCart($event, product, true)" flex>
                 <span aria-label="buy-now">BUY NOW</span>
             </md-button>
             <div flex layout="row" layout-wrap>
-                <md-button class="md-raised" flex="100" ng-click="addToCart($event, product)" ng-disabled="pdInCart">
+                <md-button class="md-raised" flex="100" ng-click="addToCart($event, product, false)" ng-disabled="pdInCart">
                     <span layout="row" flex layout-align="center center" ng-show="atcAPICall">
                         <md-progress-circular md-mode="indeterminate" class="md-warn" md-diameter="32"></md-progress-circular>
                     </span>

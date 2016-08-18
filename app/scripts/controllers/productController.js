@@ -15,7 +15,10 @@
         '$mdMedia',
         '$mdDialog',
         'ConstantKeyValueService',
-        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService) {
+        'LoginService',
+        '$q',
+        '$timeout',
+        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService, LoginService, $q, $timeout) {
 
             var listeners = [];
 
@@ -114,7 +117,7 @@
                 }, function(error) {});
             }
 
-            function openLotPopup(event) {
+            function openLotPopup(event, product, lots) {
                 return $mdDialog.show({
                     controller: 'LotPopupController',
                     templateUrl: 'views/partials/lotSelectPopup.html',
@@ -122,49 +125,87 @@
                     targetEvent: event,
                     clickOutsideToClose: true,
                     fullscreen: $mdMedia('xs') || $mdMedia('sm'),
-                    scope: $scope
+                    locals: {
+                        product: product,
+                        lots: lots
+                    }
                 });
             }
 
             function addToCartHelper(product, lots) {
                 if($scope.atcAPICall) return;
-                var data = {
-                    productID: product.productID,
-                    lots: lots,
-                    added_from: ConstantKeyValueService.cartTrack.added_from.product_page
-                };
-                $scope.atcAPICall = APIService.apiCall("POST", APIService.getAPIUrl('cartItem'), data);
-                $scope.atcAPICall.then(function(response) {
-                    $scope.atcAPICall = null;
-                    $scope.pdInCart = true;
-                }, function(error) {
-                    $scope.atcAPICall = null;
-                    ToastService.showActionToast("Sorry! Couldn't add product to consignment", 5000, "ok");
-                });
+                var deferred = $q.defer();
+                if($scope.pdInCart) {
+                    $timeout(function() {
+                        deferred.resolve();
+                    }, 10);
+                } else {
+                    var data = {
+                        productID: product.productID,
+                        lots: lots,
+                        added_from: ConstantKeyValueService.cartTrack.added_from.product_page
+                    };
+                    $scope.atcAPICall = APIService.apiCall("POST", APIService.getAPIUrl('cartItem'), data);
+                    $scope.atcAPICall.then(function(response) {
+                        $scope.atcAPICall = null;
+                        $scope.pdInCart = true;
+                        deferred.resolve();
+                    }, function(error) {
+                        $scope.atcAPICall = null;
+                        ToastService.showActionToast("Sorry! Couldn't add product to consignment", 5000, "ok");
+                        deferred.reject();
+                    });
+                }
+                return deferred.promise;
             }
 
             function init() {
                 var productID = UtilService.getIDFromSlug($routeParams.product);
                 $scope.isMobile = UtilService.isMobileRequest();
                 getProducts(productID);
-                getCartStatus(productID);
+                if(LoginService.checkLoggedIn()) {
+                    getCartStatus(productID);
+                }
             }
             init();
 
-            $scope.buyNow = function(event, productID) {
-                 DialogService.viewDialog(event, {
-                     productID: productID,
-                     view: 'views/partials/buyNow.html'
-                 });
+            function addToCartAfterLogin(event, product, buyNow) {
+                if(buyNow && $scope.pdInCart) {
+                    $location.url('/consignment');
+                } else {
+                    openLotPopup(event, product, 1).then(function(lots) {
+                        addToCartHelper(product, lots).then(function() {
+                            if(buyNow) {
+                                $location.url('/consignment');
+                            }
+                        });
+                    });
+                }
+            }
+
+            $scope.addToCart = function(event, product, buyNow) {
+                if(LoginService.checkLoggedIn()) {
+                    addToCartAfterLogin(event, product, buyNow);
+                } else {
+                    DialogService.viewDialog(event, {
+                        view: 'views/partials/loginPopup.html',
+                    }).finally(function() {
+                        if(LoginService.checkLoggedIn()) {
+                            $rootScope.$broadcast('checkLoginState');
+                            addToCartAfterLogin(event, product, buyNow);
+                        }
+                    });
+                }
             };
 
-            $scope.addToCart = function(event, product) {
-                // open lots count popup
-                // openLotPopup(event, product).then(function(lots) {
-                //     addToCartHelper(product, lots);
-                // });
-                addToCartHelper(product, 1);
-            };
+            var loginStateChange = $rootScope.$on('loginStateChange', function(event, data) {
+                if(LoginService.checkLoggedIn()) {
+                    getCartStatus($scope.product.productID);
+                } else {
+                    $scope.pdInCart = null;
+                }
+            });
+            listeners.push(loginStateChange);
 
             var destroyListener = $scope.$on('$destroy', function() {
                 angular.forEach(listeners, function(value, key) {

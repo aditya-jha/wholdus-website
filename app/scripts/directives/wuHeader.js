@@ -46,6 +46,7 @@
                                 view: 'views/partials/loginPopup.html',
                             }).finally(function() {
                                 loginDialogCallback(redirect);
+                                $rootScope.$broadcast('loginStateChange');
                             });
                         }
                     };
@@ -55,6 +56,7 @@
                         if(url.indexOf('account') > -1 || url.indexOf('consignment') > -1) {
                             $location.url('/');
                         }
+                        $rootScope.$broadcast('loginStateChange');
                     }
 
                     function setBuyerName() {
@@ -91,10 +93,10 @@
                     }
                     init();
 
-                    var loginStateListener = $rootScope.$on('loginStateChange', function(event, data) {
+                    var checkLoginStateListener = $rootScope.$on('checkLoginState', function(event, data) {
                         loginState();
                     });
-                    listeners.push(loginStateListener);
+                    listeners.push(checkLoginStateListener);
 
                     var locationChangeListener = $rootScope.$on('$locationChangeSuccess', function(event, data) {
                         loginState();
