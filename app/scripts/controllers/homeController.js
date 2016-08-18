@@ -21,6 +21,7 @@
                 categoriesToShow: [10,1,7]
             };
             $scope.total = [];
+
             function arrangeProductsByCategory(products) {
                 if(!products) return;
                 var index=0;
@@ -94,19 +95,6 @@
                 });
             }
             getProductsByCategory();
-
-            $scope.goTo = function($event, index) {
-                $event.preventDefault();
-                $timeout(function() {
-                    $location.url($scope.categories[index].url);
-                },250);
-            };
-
-            $scope.buyNow = function(event){
-                DialogService.viewDialog(event, {
-                    view: 'views/partials/buyNow.html'
-                });
-            };
 
             var destroyListener = $scope.$on('$destroy', function() {
                 angular.forEach(listeners, function(value, key) {

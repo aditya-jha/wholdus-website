@@ -60,7 +60,7 @@
         <span>Categories</span>
         <md-list>
             <md-list-item flex ng-repeat="c in categories">
-                <md-button flex ng-href="{{c.url}}" ng-click="goTo($event, $index)">{{c.display_name}}</md-button>
+                <md-button flex ng-href="{{c.url}}">{{c.display_name}}</md-button>
             </md-list-item>
         </md-list>
     </div>
@@ -101,4 +101,4 @@
     </div>
 </div>
 
-<div ng-include="'views/footer.html'" flex="100" layout="row"></div>
+<div wu-footer flex="100" layout="row"></div>
