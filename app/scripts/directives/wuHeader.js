@@ -89,6 +89,12 @@
                         $scope.isMobile = UtilService.isMobileRequest();
                         loginState();
                     }
+                    init();
+
+                    var loginStateListener = $rootScope.$on('loginStateChange', function(event, data) {
+                        loginState();
+                    });
+                    listeners.push(loginStateListener);
 
                     var locationChangeListener = $rootScope.$on('$locationChangeSuccess', function(event, data) {
                         loginState();
