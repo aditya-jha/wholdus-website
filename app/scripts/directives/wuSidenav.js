@@ -3,6 +3,7 @@
          return {
             restrict: 'AE',
             templateUrl: 'views/directives/wuSidenav.html',
+            replace: true,
             controller: [
                 '$scope',
                 '$rootScope',
