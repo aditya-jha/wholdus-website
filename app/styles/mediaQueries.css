@@ -13,14 +13,6 @@
     .product-name {
         font-size: 1.05em !important;
     }
-    .product-card-wrap {
-        padding: 0;
-    }
-
-    .product-card-container {
-        padding-left: 0;
-        padding-right: 0;
-    }
 
     .product-page-card table {
         width: 100%;
@@ -40,11 +32,25 @@
         font-size: 1.1em;
     }
 
+
+}
+
+@media screen and (max-width: 600px) {
     .contactus-container {
         margin: 0;
         padding: 0;
         margin-top: -3em;
     }
+
+    .product-card-wrap {
+        padding: 0;
+    }
+
+    .product-card-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
 }
 
 @media screen and (max-width: 959px) {
