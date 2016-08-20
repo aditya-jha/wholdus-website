@@ -23,11 +23,6 @@ input[type=number]::-webkit-outer-spin-button {
     outline: none;
 }
 
-.site-width {
-    max-width: 1368px;
-    margin: 0 auto;
-}
-
 body {
     background-color: rgba(238, 238, 238, 1);
     font-family: 'PT Sans';
@@ -38,6 +33,7 @@ a {
     color: inherit;
     outline: 0;
 }
+
 a:link {
     text-decoration: none;
 }
@@ -219,12 +215,18 @@ a:active {
     font-size: 0.8em;
     color: #727272;
 }
+
 .footer {
     background: rgb(69,39,160);
     font-family: 'PT Sans';
     color: #fff;
-    margin-top: 1em;
+    margin: 1em -0.5em 0 -0.5em;
 }
+
+.footer span {
+    padding: 4px 0;
+}
+
 .content-page-title {
     font-size: 1.5em !important;
 }
@@ -283,6 +285,8 @@ a:active {
 .filler-toolbar {
     background-color: #673AB7;
     margin: 0 -0.5em;
+    color: #fff;
+    height: 7em;
 }
 
 .filler-toolbar a {

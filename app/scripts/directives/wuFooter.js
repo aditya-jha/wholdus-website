@@ -4,6 +4,7 @@
             restrict: 'A',
             templateUrl: 'views/directives/wuFooter.html',
             scope: {},
+            replace: true,
             controller: [
                 '$scope',
                 'DialogService',
