@@ -25,11 +25,11 @@
             </div>
             <span class="padding-tb">Rs. <span class="product-price">{{::product.min_price_per_unit | currency:'':0}}</span></span>
             <div layout="row" layout-wrap layout-wrap>
-                <div layout="column" class="padding-tb" flex="50">
+                <div layout="column" class="padding-tb" flex="40">
                     <span class="feature-title">retail price</span>
                     <span>{{::product.price_per_unit}}</span>
                 </div>
-                <div layout="column" class="padding-tb" flex="50">
+                <div layout="column" class="padding-tb" flex="60">
                     <span class="feature-title">your margin (upto)</span>
                     <span>{{::product.margin |  number:0}}%</span>
                 </div>
