@@ -239,6 +239,7 @@ a:active {
 .content-page-title {
     font-size: 1.5em !important;
 }
+
 .aboutus-card {
     background-color: #fff;
     margin: -3em 8em 12em 8em;
@@ -358,10 +359,6 @@ a:active {
 
 .homepage-top-left {
     padding-right: 0.5em;
-}
-
-.product-card-container {
-    /*width: 32%;*/
 }
 
 .product-card {
