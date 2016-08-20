@@ -6,6 +6,7 @@
             scope: {
                 product: '='
             },
+            replace: true,
             templateUrl: 'views/directives/wuProduct.html',
         };
     });
