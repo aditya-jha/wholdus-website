@@ -7,6 +7,7 @@ var uglifycss = require('gulp-uglifycss');
 var RevAll = require('gulp-rev-all');
 var revReplace = require('gulp-rev-replace');
 var gulpsync = require('gulp-sync')(gulp);
+var exec = require('child_process').exec;
 
 var jsVendors =  [
     'app/bower_components/angular/angular.min.js',
@@ -57,13 +58,15 @@ var jsCustom = [
 
 var stylesheets = [
     'app/bower_components/angular-material/angular-material.min.css',
-    'app/styles/style.css'
+    'app/styles/style.css',
+    'app/styles/animations.css',
 ];
 
 gulp.task('copyViews', function() {
     return gulp.src('./app/views/**/*.html')
                 .pipe(gulp.dest('./build/views'));
 });
+
 gulp.task('copyImages', function() {
     return gulp.src('./app/images/**/*.{png,jpg,svg,jpeg,ico}')
                 .pipe(gulp.dest('./build/images'));
@@ -116,10 +119,19 @@ gulp.task('buildCustomScripts', function() {
                 .pipe(gulp.dest('build/js'));
 });
 
-
+gulp.task('startServer', function() {
+    exec('http-server ./build/', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+});
 
 // Default Task
 gulp.task('default', ['vendorScripts', 'styles']);
 
 // production build
 gulp.task('build', ['buildVendorScripts', 'styles', 'buildCustomScripts', 'copyViews', 'copyImages']);
+
+// local production server
+gulp.task('serve', ['startServer']);

@@ -621,7 +621,7 @@ a:active {
         margin-bottom: 0.5em;
         padding: 0 0em;
     }
-    
+
     .md-toolbar-tools.header-toolbar {
         padding: 0 8px;
     }
@@ -914,19 +914,9 @@ a:active {
 .test-class {
     animation-name: bounce;
     animation-duration: 8s;
-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
-@keyframes bounce {
-      0% {
-          transform:translateY(0em);
-      }
-      25% {
-          transform:translateY(-0.5em);
-      }
-      75% {
-          transform:translateY(0.5em);
-      }
-}
+
 
 
 @media screen and (min-width:1260px) {
@@ -1408,36 +1398,4 @@ md-dialog.fullscreen-dialog {
 .lot-pricing-detail.active {
     background-color: #673AB7;
     color: #fff;
-}
-
-@keyframes swipeRight {
-    from { width: 10%; }
-    to { width: 90%; }
-}
-
-@keyframes swipeLeft {
-    from { width: 90%; }
-    to { width: 10%; }
-}
-
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%, 80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%,70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-   50% {
-    transform: translate3d(-8px, 0, 0);
-  }
-
-  40%, 60% {
-    transform: translate3d(6px, 0, 0);
-  }
-
 }
