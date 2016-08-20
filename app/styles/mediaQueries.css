@@ -17,12 +17,7 @@
         width: 100%;
         max-width: 610px;
     }
-    .product-card-content span {
-        font-size: 1.0em;
-    }
-    .product-card-wrap {
-        /*margin-left: 0.5em;*/
-    }
+  
     .product-page-card table {
         width: 100%;
     }
