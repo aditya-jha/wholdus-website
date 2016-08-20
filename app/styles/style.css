@@ -561,110 +561,6 @@ a:active {
     margin: 0 auto;
 }
 
-@media media and (max-width: 959px) {
-
-    .account-content {
-      margin-left: 0px;
-    }
-
-    .footer span {
-        margin-bottom: 0.3em;
-    }
-    .aboutus-card {
-        margin: -3em 1em 8em 1em;
-    }
-    .product-card-wrap {
-        margin-left: 1.0em;
-    }
-
-    .home-card-container .video {
-        height: 100%;
-        min-height: 15em;
-    }
-
-    .homepage-content-container {
-        padding-left: 0.7em;
-        padding-right: 0.7em;
-    }
-    .product-card-container {
-        width: 48%;
-
-    }
-    .product-card-container {
-        margin-right: 0.55em;
-    }
-    #category-title {
-        font-size: 1.2em;
-    }
-}
-
-@media screen and (min-width:960px) {
-    .product-card-container {
-        width: 32%;
-    }
-}
-
-@media screen and (max-width:450px) {
-    .filler-toolbar > span{
-        font-size: 1em;
-    }
-}
-
-@media screen and (min-width:600px) {
-  .feed-details-icon {
-      margin-top: -1em;
-  }
-}
-
-@media screen and (max-width:640px) {
-    .homepage-top-left {
-        margin-bottom: 0.5em;
-        padding: 0 0em;
-    }
-
-    .md-toolbar-tools.header-toolbar {
-        padding: 0 8px;
-    }
-    .header-toolbar .username {
-        font-size: 0.9em;
-    }
-    .product-name {
-        font-size: 1.05em !important;
-    }
-    .product-card-container {
-        width: 100%;
-        max-width: 610px;
-    }
-    .product-card-content span {
-        font-size: 1.0em;
-    }
-    .product-card-wrap {
-        margin-left: 0.5em;
-    }
-    .product-page-card table {
-        width: 100%;
-    }
-    .product-page-card {
-        margin: 0.5em;
-    }
-    .product-description-container {
-        margin: 0.5em;
-    }
-    .product-details-wrap {
-        background: #fff;
-        margin-right: 0em;
-    }
-    .product-seller-details-container {
-        margin-top: 1em;
-    }
-    .view-more-btn span {
-        padding: 0em 6em;
-    }
-    #category-title {
-        font-size: 1.1em;
-    }
-}
-
 /** ngProgress loader css*/
 #ngProgress {
     margin: 0;
@@ -769,12 +665,6 @@ a:active {
 .display-image{
 
 }
-@media screen and (max-width:760px){
-    .large-image-display-panel{
-        display: none;
-    }
-}
-
 
 .background-shadow{
     position: fixed;
@@ -915,14 +805,6 @@ a:active {
     animation-name: bounce;
     animation-duration: 8s;
     animation-iteration-count: infinite;
-}
-
-
-
-@media screen and (min-width:1260px) {
-    .feed-details {
-        padding-right: 0.5em;
-    }
 }
 
 .feed-footer-details {
@@ -1379,9 +1261,6 @@ md-dialog.fullscreen-dialog {
 .lots-count > .md-button {
     font-size: 2.5em;
 }
-/*@media screen and (max-width: 600px){
-
-}*/
 
 .lot-pricing-head {
     font-family: 'Comfortaa', cursive;

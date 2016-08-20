@@ -59,6 +59,7 @@ var jsCustom = [
 var stylesheets = [
     'app/bower_components/angular-material/angular-material.min.css',
     'app/styles/style.css',
+    'app/styles/mediaQueries.css',
     'app/styles/animations.css',
 ];
 
