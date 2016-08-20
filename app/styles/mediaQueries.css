@@ -17,16 +17,11 @@
         width: 100%;
         max-width: 610px;
     }
-  
+
     .product-page-card table {
         width: 100%;
     }
-    .product-page-card {
-        margin: 0.5em;
-    }
-    .product-description-container {
-        margin: 0.5em;
-    }
+  
     .product-details-wrap {
         background: #fff;
         margin-right: 0em;

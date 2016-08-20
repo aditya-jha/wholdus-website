@@ -1,17 +1,18 @@
-<div layout="row" layout-align="center start" flex="100" layout-wrap>
-    <div layout="row" layout-align="center center" layout-wrap flex="100" class="breadcrumb">
-        <a href="/" layout="row" layout-align="start center">
-            <svg style="width:20px;height:20px" viewBox="0 0 24 24">
-                <path fill="#525050" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
-            </svg>
-            Home
-        </a>
-        <span>&nbsp;&gt;&nbsp;</span>
-        <a data-ng-href="{{::product.category.url}}">{{::product.category.display_name}}</a>
-        <span>&nbsp;&gt;&nbsp;</span>
-        <span>{{::product.display_name }}</span>
-    </div>
-    <h1 id="category-title" class="no-bottom-margin"> {{::product.display_name }}</h1>
+<div layout="row" layout-align="center center" layout-wrap class="breadcrumb">
+    <a href="/" layout="row" layout-align="start center">
+        <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+            <path fill="#525050" d="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" />
+        </svg>
+        Home
+    </a>
+    <span>&nbsp;&gt;&nbsp;</span>
+    <a data-ng-href="{{::product.category.url}}">{{::product.category.display_name}}</a>
+    <span>&nbsp;&gt;&nbsp;</span>
+    <span>{{::product.display_name }}</span>
+</div>
+
+<div layout="row" layout-align="center start" layout-wrap>
+    <h1 id="category-title">{{::product.display_name }}</h1>
 </div>
 
 <div layout="row" class="product-page-card" layout-wrap data-ng-if="product">
@@ -139,4 +140,4 @@
     </div>
 </div>
 
-<div wu-footer flex></div>
+<div wu-footer layout="row"></div>

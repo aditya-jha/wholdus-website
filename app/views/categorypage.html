@@ -12,7 +12,15 @@
 </div>
 
 <div layout="row" layout-align="center" data-ng-if="!settings.noProduct">
-    <h1 id="category-title" class="line-around"  ng-cloak flex="50" flex-sm="80" flex-xs="90"><span>{{category.display_name}}</span> </h1>
+    <div layout="row" flex="60" flex-xs="90" flex-sm="70" layout-align="center center">
+        <span layout="row" layout-align="center center" flex="45">
+            <span class="line-around"></span>
+        </span>
+        <h1 id="category-title">{{category.display_name}}</h1>
+        <span layout="row" layout-align="center center" flex="45">
+            <span class="line-around"></span>
+        </span>
+    </div>
 </div>
 
 <div ng-mouseleave="desktopFilterID=null" ng-if="!settings.isMobile">
@@ -132,7 +140,7 @@
     </div>
 </div>
 
-<div wu-footer flex></div>
+<div wu-footer layout="row"></div>
 
 <md-card layout="row" ng-if="settings.isMobile" flex="100" class="md-primary mobile-filter"  layout-align="center center" data-ng-click="showFilterDialog()">
     <svg style="width:24px;height:24px" viewBox="0 0 485.008 485.008">
