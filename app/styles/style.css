@@ -297,7 +297,7 @@ a:active {
 
 .categories-list-container {
     background-color: #fff;
-    min-width: 180px;
+    margin-right: 0.5em;
 }
 
 .categories-list-container md-list {
@@ -354,10 +354,6 @@ a:active {
 
 .product-card-container {
     /*width: 32%;*/
-}
-
-.product-card-container {
-    /*margin-right: 0.7em;*/
 }
 
 .product-card {
@@ -427,7 +423,6 @@ a:active {
 }
 
 .product-card-wrap {
-    padding: 0;
 }
 
 .category-title {
