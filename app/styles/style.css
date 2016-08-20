@@ -323,7 +323,7 @@ a:active {
     font-family: 'Comfortaa', cursive;
     font-size: 1.4em;
     font-weight: bold;
-    padding-top: 0.4em;
+    padding: 0.5em 0;
     text-align: center;
 }
 
