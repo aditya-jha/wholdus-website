@@ -293,6 +293,10 @@ a:active {
     margin: 0 -0.5em;
 }
 
+.product-cards-container {
+    margin: 0 -0.5em;
+}
+
 .filler-toolbar {
     background-color: #673AB7;
     margin: 0 -0.5em;

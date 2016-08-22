@@ -31,8 +31,6 @@
     #category-title {
         font-size: 1.1em;
     }
-
-
 }
 
 @media screen and (max-width: 600px) {
@@ -45,12 +43,6 @@
     .product-card-wrap {
         padding: 0;
     }
-
-    .product-card-container {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
-
 }
 
 @media screen and (max-width: 959px) {
