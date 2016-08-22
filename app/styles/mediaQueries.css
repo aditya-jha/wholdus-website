@@ -48,7 +48,7 @@
 @media screen and (max-width: 959px) {
 
     .account-content {
-      margin-left: 0px;
+        margin-left: -0.5em;
     }
 
     .footer span {

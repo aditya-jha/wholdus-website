@@ -268,7 +268,8 @@ a:active {
     text-align: left;
 }
 .account-content {
-    margin-left: 260px;
+    margin-left: 240px;
+    margin-right: -0.5em;
 }
 
 #md-content{

@@ -39,8 +39,8 @@
 
 <!-- like dislike page -->
 <div flex data-ng-if="pageSettings.responded == 1 || pageSettings.responded == 2">
-    <div layout="row" layout-fill wu-account-sidenav></div>
-    <div layout="row" flex="100" class="account-content" layout-wrap data-ng-if="!noProducts">
+    <div layout="row" wu-account-sidenav flex="20"></div>
+    <div layout="row" flex class="account-content" layout-wrap data-ng-if="!noProducts">
         <div layout="row" flex="100" style="margin-top:1em">
             <md-toolbar data-ng-if="pageSettings.responded==1" class="md-toolbar-tools md-warn">
                 <div>
