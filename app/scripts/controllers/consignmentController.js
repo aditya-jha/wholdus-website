@@ -31,11 +31,11 @@
             }
 
             function parseCart(item) {
-                item.final_price = Math.ceil(parseFloat(item.final_price) + parseFloat(item.shipping_charge));
+                item.final_price = Math.ceil(parseFloat(item.final_price));
                 item.buyer.address[0].pincode = parseInt(item.buyer.address[0].pincode);
                 item.buyer.address[0].contact_number = item.buyer.address[0].contact_number ? parseInt(item.buyer.address[0].contact_number) : '';
                 angular.forEach(item.sub_carts, function(value, key) {
-                    value.final_price_calculated = Math.ceil(parseFloat(value.calculated_price) + parseFloat(value.shipping_charge));
+                    // value.final_price_calculated = Math.ceil(parseFloat(value.calculated_price) + parseFloat(value.shipping_charge));
                     angular.forEach(value.cart_items, function(v, k) {
                         v.product.image.absolute_path = v.product.image.absolute_path.replace('700x700', '200x200');
                     });
@@ -56,7 +56,9 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('cart'))
                 .then(function(response) {
                     updateCart(response);
-                    checkPincodeServiceAbility($scope.cart.buyer.address[0].pincode);
+                    if($scope.cart && $scope.cart.buyer) {
+                        checkPincodeServiceAbility($scope.cart.buyer.address[0].pincode);
+                    }
                     ngProgressBarService.endProgressbar();
                 }, function(error) {
                     ngProgressBarService.endProgressbar();
@@ -103,15 +105,80 @@
                 });
             }
 
+            function getPaymentMethods() {
+                APIService.apiCall("GET", APIService.getAPIUrl('paymentMethods'))
+                .then(function(response) {
+                    $scope.paymentMethod = {
+                        options: response.payment_methods,
+                        selected: 0
+                    };
+                }, function(error) {
+                    $scope.paymentMethod = null;
+                });
+            }
+
+            function proceedHelper(method, url, data) {
+                ngProgressBarService.showProgressbar();
+                APIService.apiCall(method, APIService.getAPIUrl(url), data)
+                .then(function(response) {
+                    $scope.checkout = response.checkout;
+                    if(data.status == 1) {
+                        data.status = 2;
+                        proceedHelper(method, url, data);
+                    } else {
+                        $scope.step += 1;
+                        setStep($scope.step);
+                        ngProgressBarService.endProgressbar();
+                    }
+                }, function(error) {
+                    ngProgressBarService.endProgressbar();
+                    ToastService.showActionToast("Sorry! something went wrong. Please refresh!", 0, "ok");
+                });
+            }
+
             function init() {
                 $scope.step = getStep();
                 $scope.isMobile = UtilService.isMobileRequest();
-                $scope.paymentMethod = 0;
                 $scope.formValidation = FormValidationService;
                 $scope.addressForm = 'addressForm';
-                fetchCart();
+                if($scope.step == 3) {
+                    $location.url('/consignment');
+                } else {
+                    fetchCart();
+                    getPaymentMethods();
+                    if($scope.step > 1) {
+                        APIService.apiCall("GET", APIService.getAPIUrl('checkout'))
+                        .then(function(response) {
+                            $scope.checkout = response.checkout;
+                            $scope.step += 1;
+                            setStep($scope.step);
+                        }, function(error) {
+                            ToastService.showActionToast("Sorry! something went wrong. Please refresh!", 0, "ok");
+                        });
+                    }
+                }
             }
             init();
+
+            $scope.getCODAmount = function() {
+                if($scope.paymentMethod && $scope.cart) {
+                    var amount = ($scope.paymentMethod.options[0].cod_rate_percent*$scope.cart.final_price)/100;
+                    return Math.ceil(amount);
+                } else {
+                    return 0;
+                }
+            };
+
+            $scope.checkCODAvailable = function() {
+                if($scope.pincodeService) {
+                    if($scope.pincodeService.delivery && $scope.pincodeService.cod) {
+                        return true;
+                    } else {
+                        $scope.paymentMethod.selected = 1;
+                        return false;
+                    }
+                }
+            };
 
             $scope.updateAddress = function() {
                 APIService.apiCall("PUT", APIService.getAPIUrl('buyers'), {
@@ -139,8 +206,18 @@
             };
 
             $scope.proceed = function() {
-                $scope.step += 1;
-                setStep($scope.step);
+                var method = "PUT", url = 'checkout', data = {};
+                if($scope.step === 0) {
+                    method = "POST";
+                } else if($scope.step == 1) {
+                    data.checkoutID = $scope.checkout.checkoutID;
+                    data.status = 1;
+                } else if($scope.step == 2) {
+                    data.checkoutID = $scope.checkout.checkoutID;
+                    data.status = 3;
+                    data.payment_method = $scope.paymentMethod.selected;
+                }
+                proceedHelper(method, url, data);
             };
 
             $scope.remove = function(productID) {

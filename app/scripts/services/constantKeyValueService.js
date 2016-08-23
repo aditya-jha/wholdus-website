@@ -28,7 +28,9 @@
                     instructTrack: 'users/buyer/buyerpanel/instructionstracking',
                     cartItem: 'cart/item',
                     cart: 'cart',
-                    pincodeserviceability: 'logistics/pincodeserviceability'
+                    pincodeserviceability: 'logistics/pincodeserviceability',
+                    checkout: 'checkout',
+                    paymentMethods: 'checkout/paymentmethod'
                 },
                 accessTokenKey: 'randomData',
                 buyerDetailKey: 'buyerDetails',
