@@ -72,10 +72,10 @@
 <div class="action" flex="100" layout-align="center center" layout="row" ng-if="!isMobile">
     <span flex hide-xs></span>
     <md-button class="md-raised" flex hide-xs ng-href="/" ng-if="!step">continue shopping</md-button>
-    <md-button class="md-raised md-warn" flex ng-click="proceed(step)">proceed</md-button>
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)" ng-disabled="!pincodeService.delivery">proceed</md-button>
     <span flex hide-xs></span>
 </div>
 
 <div class="action-mobile" flex="100" layout-align="center center" layout="row" ng-if="isMobile">
-    <md-button class="md-raised md-warn" flex ng-click="proceed(step)">proceed</md-button>
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)" ng-disabled="!pincodeService.delivery">proceed</md-button>
 </div>

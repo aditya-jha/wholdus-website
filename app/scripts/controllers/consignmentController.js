@@ -141,22 +141,25 @@
                 $scope.isMobile = UtilService.isMobileRequest();
                 $scope.formValidation = FormValidationService;
                 $scope.addressForm = 'addressForm';
-                if($scope.step == 3) {
+                if($scope.step > 0) {
+                    $scope.step = 0;
                     $location.url('/consignment');
                 } else {
-                    fetchCart();
-                    getPaymentMethods();
-                    if($scope.step > 1) {
-                        APIService.apiCall("GET", APIService.getAPIUrl('checkout'))
-                        .then(function(response) {
-                            $scope.checkout = response.checkout;
-                            $scope.step += 1;
-                            setStep($scope.step);
-                        }, function(error) {
-                            ToastService.showActionToast("Sorry! something went wrong. Please refresh!", 0, "ok");
-                        });
-                    }
+                    // fetchCart();
+                    // getPaymentMethods();
+                    // if($scope.step > 0) {
+                    //     APIService.apiCall("GET", APIService.getAPIUrl('checkout'))
+                    //     .then(function(response) {
+                    //         $scope.checkout = response.checkout;
+                    //         $scope.step += 1;
+                    //         setStep($scope.step);
+                    //     }, function(error) {
+                    //         ToastService.showActionToast("Sorry! something went wrong. Please refresh!", 0, "ok");
+                    //     });
+                    // }
                 }
+                fetchCart();
+                getPaymentMethods();
             }
             init();
 
