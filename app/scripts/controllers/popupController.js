@@ -11,10 +11,11 @@
         'ConstantKeyValueService',
         'LoginService',
         '$log',
+        'DialogService',
         'productID',
         'categoryID',
         'likeDislikeStatus',
-        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, FormValidationService, ConstantKeyValueService, LoginService, $log, productID, categoryID, likeDislikeStatus) {
+        function($scope, $mdDialog, APIService, ToastService, ngProgressBarService, $rootScope, FormValidationService, ConstantKeyValueService, LoginService, $log, DialogService, productID, categoryID, likeDislikeStatus) {
 
             $scope.apiCall = null;
             $scope.loading = {
@@ -31,6 +32,7 @@
             $scope.password = '';
             $scope.favButtonFeeback = likeDislikeStatus;
             $scope.errorMessage = false;
+            $scope.signup = true;
             $scope.buyNowForm = 'buyNowForm';
 
             $scope.formValidation = FormValidationService;
@@ -40,6 +42,12 @@
                 $mdDialog.cancel();
             };
 
+            $scope.buyNowPopup = function(ev) {
+                DialogService.viewDialog(ev, {
+                    view: 'views/partials/buyNow.html'
+                });
+            };
+
             $scope.buyNow = function() {
                 if($scope.name && $scope.mobile_number && !$scope.apiCall) {
                     var data = {
@@ -47,7 +55,8 @@
                         mobile_number: $scope.mobile_number,
                         name: $scope.name,
                         productID: productID,
-                        categoryID: categoryID
+                        categoryID: categoryID,
+                        signup: $scope.signup
                     };
                     $scope.apiCall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLeads'), data);
                     $scope.apiCall.then(function(response) {

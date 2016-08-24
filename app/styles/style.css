@@ -419,13 +419,10 @@ a:active {
     margin-right: 1em;
 }
 
-/*.product-card-content span{
-    text-overflow: ellipsis;
-    padding-top: 0em;
-    margin-top: 0em;
-    margin-bottom: 0.5em;
-    padding-right: 0.2em;
-}*/
+.singup-text {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 .product-page-card-content .feature-title {
     color: #fff !important;
