@@ -17,7 +17,7 @@
             </div> -->
             <div class="md-dialog-content">
                 <div layout="column" ng-show="!apiCall">
-                    <div layout="row">
+                    <!-- <div layout="row"> -->
                         <md-input-container layout-fill>
                             <label>Mobile Number</label>
                             <input type="number" data-ng-model="mobile_number" name="mobNum"  ng-pattern="formValidation.mobileNumValidation" required />
@@ -35,7 +35,7 @@
                                 <div ng-message="required" class="formError">This is required.</div>
                             </div>
                         </md-input-container>
-                    </div>
+                    <!-- </div> -->
                     <md-input-container layout-fill>
                         <label>Email</label>
                         <input type="email" data-ng-model="email" name="email" ng-pattern="formValidation.emailValidation" />
@@ -57,7 +57,7 @@
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <md-button type="submit" class="md-raised md-warn" style="margin-right:20px;" ng-disabled="apiCall">
-                Get Callback
+                Join Wholdus
             </md-button>
         </md-dialog-actions>
     </form>
