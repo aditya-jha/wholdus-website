@@ -62,7 +62,6 @@
                     ngProgressBarService.endProgressbar();
                 }, function(error) {
                     ngProgressBarService.endProgressbar();
-                    $log.log(error);
                 });
             }
 
@@ -74,12 +73,10 @@
                     added_from: ConstantKeyValueService.cartTrack.added_from.cart
                 });
                 $scope.updateApi.then(function(response) {
-                    $log.log(response);
                     $scope.cart = parseCart(response.carts);
                     ngProgressBarService.endProgressbar();
                     $scope.updateApi = false;
                 }, function(error) {
-                    $log.log(error);
                     ToastService.showActionToast("Sorry! Couldn't modify consignment", 5000, "ok");
                     ngProgressBarService.endProgressbar();
                     $scope.updateApi = false;
@@ -100,7 +97,6 @@
                         $scope.pincodeService = {};
                     }
                 }, function(error) {
-                    $log.log(error);
                     $scope.pincodeService = {};
                 });
             }
@@ -188,12 +184,10 @@
                     address: $scope.cart.buyer.address[0],
                     buyerID: $scope.cart.buyer.buyerID
                 }).then(function(response) {
-                    $log.log(response);
                     $scope.addressEdit = false;
                 }, function(error) {
                     $scope.cart.buyer.address[0] = oldAddress;
                     ToastService.showActionToast("Sorry! Couldn't update address", 5000, "ok");
-                    $log.log(error);
                     $scope.addressEdit = false;
                 });
                 checkPincodeServiceAbility($scope.cart.buyer.address[0].pincode);

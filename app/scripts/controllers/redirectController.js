@@ -18,7 +18,6 @@
                     //var url = '/account/hand-picked-products?buyerproductID=' + buyerProductID;
                     $location.path('/account/hand-picked-products').search('buyerproductID', buyerProductID).replace();
                 }, function(error) {
-                    $log.log(error);
                     $location.url('/');
                 });
             }
