@@ -39,11 +39,12 @@
                 sellerSite: 'http://seller.wholdus.com',
                 cartTrack: {
                     added_from: {
-                        category_page: 0,
-                        product_page: 1,
-                        shortlist: 2,
-                        homepage: 3,
-                        cart: 4
+                        tinder: 0,
+                        category_page: 1,
+                        product_page: 2,
+                        shortlist: 3,
+                        homepage: 4,
+                        dislike: 5
                     }
                 }
             };

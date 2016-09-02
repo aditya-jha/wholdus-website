@@ -6,7 +6,7 @@
         <div layout="column" class="product-card-content" flex>
             <div layout="row">
                 <span class="product-name" flex="85">{{::product.name}}</span>
-                <div flex ng-mouseover="showShortlist(1)" ng-mouseleave="showShortlist(-1)" ng-click="toggleShortlist($event)" layout="row">
+                <div flex ng-click="toggleShortlist($event)" layout="row">
                     <div layout="row">
                         <md-icon ng-if="!shortlisted">
                             <svg fill="#FF5722" class="svg-30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

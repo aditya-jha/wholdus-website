@@ -16,6 +16,8 @@
         'DialogService',
         function ($scope, $routeParams,$route, $http,$window,$mdDialog,$location, $log, UtilService, APIService, ngProgressBarService, $rootScope, DialogService) {
 
+            var listeners = [];
+
             $scope.categoryID = UtilService.getIDFromSlug($routeParams.category);
             $scope.settings = {
                 isMobile: UtilService.isMobileRequest(),
@@ -266,6 +268,22 @@
             });
         };
 
+            var checkLoginStateListener = $rootScope.$on('checkLoginState', function() {
+                getProducts();
+            });
+            listeners.push(checkLoginStateListener);
+
+            var loginStateChangeListener = $rootScope.$on('loginStateChange', function() {
+                getProducts();
+            });
+            listeners.push(loginStateChangeListener);
+
+            var destroyListener = $scope.$on('$destroy', function() {
+                angular.forEach(listeners, function(value, key) {
+                    if(value) value();
+                });
+            });
+            listeners.push(destroyListener);
         }
     ]);
 })();
