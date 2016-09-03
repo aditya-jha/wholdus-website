@@ -777,6 +777,7 @@ a:active {
 .feed-details {
     font-family: 'Comfortaa', cursive;
     bottom: 0;
+    left: 0;
     position:absolute;
     width:100%;
     color: #fff;
