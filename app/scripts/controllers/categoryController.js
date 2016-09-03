@@ -26,7 +26,7 @@
                 noProduct: false,
                 displayName: UtilService.getNameFromSlug($routeParams.category)
             };
-            $scope.settings.itemsPerPage = $scope.settings.isMobile ? 16 : 21;
+            $scope.settings.itemsPerPage = $scope.settings.isMobile ? 18 : 24;
             $scope.sellers=[];
             $scope.selectedSellers=[];
             $scope.isShow=[];
@@ -103,7 +103,7 @@
                        angular.forEach(response.products, function(value, key) {
                         value.images = UtilService.getImages(value);
                         if(value.images.length){
-                            value.imageUrl = UtilService.getImageUrl(value.images[0], '200x200');
+                            value.imageUrl = UtilService.getImageUrl(value.images[0], '300x300');
                         }
                         else{
                             value.imageUrl = 'images/200.png';

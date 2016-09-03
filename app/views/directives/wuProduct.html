@@ -1,43 +1,54 @@
-<div layout="row" class="product-card md-whiteframe-4dp" layout-wrap md-ink-ripple>
-    <a layout="row" flex="100" ng-href="{{::product.url}}">
-        <div layout="column" layout-align="center center" flex="33">
-            <img src="{{::product.imageUrl}}" />
-        </div>
-        <div layout="column" class="product-card-content" flex>
-            <div layout="row">
-                <span class="product-name" flex="85">{{::product.name}}</span>
-                <div flex ng-click="toggleShortlist($event)" layout="row">
-                    <div layout="row">
-                        <md-icon ng-if="!shortlisted">
-                            <svg fill="#FF5722" class="svg-30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0 0h24v24H0z" fill="none"/>
-                                <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/>
-                            </svg>
-                        </md-icon>
-                        <md-icon ng-if="shortlisted">
-                            <svg fill="#FF5722" class="svg-30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0 0h24v24H0z" fill="none"/>
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                        </md-icon>
-                    </div>
-                </div>
-            </div>
-            <span class="padding-tb">Rs. <span class="product-price">{{::product.min_price_per_unit | currency:'':0}}</span></span>
-            <div layout="row" layout-wrap layout-wrap>
-                <div layout="column" class="padding-tb" flex="40">
-                    <span class="feature-title">retail price</span>
-                    <span>{{::product.price_per_unit}}</span>
-                </div>
-                <div layout="column" class="padding-tb" flex="60">
-                    <span class="feature-title">your margin (upto)</span>
-                    <span>{{::product.margin |  number:0}}%</span>
-                </div>
-                <div layout="column" class="padding-tb" flex="100">
-                    <span class="feature-title">manufacturer</span>
-                    <span>{{::product.seller.company_name}}</span>
-                </div>
-            </div>
-        </div>
+<div layout="row" class="product-card md-whiteframe-4dp" layout-wrap flex md-ink-ripple>
+    <a ng-href="{{::product.url}}" layout="row" layout-align="center center" flex="100" class="img-box">
+        <img src="{{::product.imageUrl}}" />
     </a>
+    <div layout="row" flex="100" layout-wrap layout-align="start start">
+        <div layout="row" flex="100" style="padding-bottom:0.5em">
+            <div flex ng-click="toggleShortlist($event)" layout="row" layout-align="center center">
+                <div layout="row">
+                    <md-icon ng-if="!shortlisted">
+                        <svg fill="#FF5722" class="svg-30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/>
+                        </svg>
+                    </md-icon>
+                    <md-icon ng-if="shortlisted">
+                        <svg fill="#FF5722" class="svg-30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </md-icon>
+                </div>
+            </div>
+            <div flex layout="row" layout-align="center center">
+                <div layout="row">
+                    <md-icon ng-if="!shortlisted">
+                        <svg fill="#FF5722" class="svg-30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/>
+                        </svg>
+                    </md-icon>
+                    <md-icon ng-if="shortlisted">
+                        <svg fill="#FF5722" class="svg-30" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </md-icon>
+                </div>
+            </div>
+        </div>
+        <a layout="row" flex="100" layout-wrap class="product-card-details" ng-href="{{::product.url}}">
+            <span flex="100" class="product-name">{{::product.name}}</span>
+            <span flex="100" class="small-font padding-tb">{{::product.details.fabric_gsm}}</span>
+            <div layout="row" flex="100" layout-align="start center" layout-wrap>
+                <div flex flex-xs="100" ng-if="loggedIn">
+                    <span class="product-price" flex="100">Rs. {{::product.min_price_per_unit | currency:'':0}}</span>
+                </div>
+                <div flex layout="row" flex-xs="100">
+                    <span class="feature-title space" style="padding-top: 0.1em;">Lot Size</span>
+                    <span class="bold">{{::product.lot_size}}</span>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>

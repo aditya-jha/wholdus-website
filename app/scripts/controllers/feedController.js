@@ -106,7 +106,7 @@
                 angular.forEach(obj, function(value, key) {
                     value.product.images = UtilService.getImages(value.product);
                     if(value.product.images.length) {
-                        value.product.imageUrl = UtilService.getImageUrl(value.product.images[0], '200x200');
+                        value.product.imageUrl = UtilService.getImageUrl(value.product.images[0], '300x300');
                     }
                 });
             }

@@ -64,11 +64,13 @@
                 <span>Dislikes</span>
             </md-toolbar>
         </div>
-        <div layout="row" layout-wrap class="product-card-wrap" layout-padding data-ng-if="!noProducts">
-            <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="100" flex-sm="100" flex-gt-sm="50">
+
+        <div layout="row" layout-wrap class="product-card-wrap" layout-align="space-around center" data-ng-if="!noProducts">
+            <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="45" flex-sm="30" flex-gt-sm="30">
                 <div layout="row" wu-product product="p.product" flex></div>
             </div>
         </div>
+
         <div layout="row" data-ng-show="pageSettings.enablePagination" wu-pagination flex="100"></div>
     </div>
     <div layout="column" flex class="account-content" data-ng-if="noProducts" layout-align="center center">

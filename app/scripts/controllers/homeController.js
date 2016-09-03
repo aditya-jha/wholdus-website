@@ -52,9 +52,9 @@
                 var deferred = $q.defer();
                 if(!params) { params = {}; }
                 if($scope.settings.isMobile) {
-                    UtilService.setPaginationParams(params, 1, 4);
-                } else {
                     UtilService.setPaginationParams(params, 1, 6);
+                } else {
+                    UtilService.setPaginationParams(params, 1, 8);
                 }
 
                 APIService.apiCall("GET", APIService.getAPIUrl('products'), null, params)
@@ -82,7 +82,7 @@
                         angular.forEach(value, function(v,k) {
                             v.images = UtilService.getImages(v);
                             if(v.images.length){
-                            v.imageUrl = UtilService.getImageUrl(v.images[0], '200x200');
+                            v.imageUrl = UtilService.getImageUrl(v.images[0], '300x300');
                             }
                             else{
                                 v.imageUrl = 'images/200.png';

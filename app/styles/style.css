@@ -382,6 +382,11 @@ a:active {
     background-color: #fff;
     cursor: pointer;
     position: relative;
+    border-radius: 3px;
+}
+
+.product-card .img-box {
+    height: 300px;
 }
 
 /*.product-card img {
@@ -402,9 +407,24 @@ a:active {
     margin: 0;
 }
 
+.product-card-container {
+    margin: 0.1em;
+    margin-top: 1.5em !important;
+}
+
 .product-name {
-    font-weight: bold;
     font-family: 'Comfortaa', cursive;
+    color: #333;
+    font-size: 0.95em;
+    text-overflow: ellipsis;
+    font-weight: 700;
+}
+
+.product-card-details {
+    margin: 0 0.6em;
+    padding: 0.6em 0;
+    font-family: 'Comfortaa', cursive;
+    border-top: 1px solid rgb(224,224,224);
 }
 
 .product-price {
@@ -777,6 +797,7 @@ a:active {
 .feed-details {
     font-family: 'Comfortaa', cursive;
     bottom: 0;
+    left: 0;
     position:absolute;
     width:100%;
     color: #fff;

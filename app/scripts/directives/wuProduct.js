@@ -54,8 +54,10 @@
                     function init() {
                         if(LoginService.checkLoggedIn()) {
                             $scope.shortlisted = $scope.product.response.response_code == 1;
+                            $scope.loggedIn = true;
                         } else {
                             $scope.shortlisted = false;
+                            $scope.loggedIn = false;
                         }
                     }
                     init();
