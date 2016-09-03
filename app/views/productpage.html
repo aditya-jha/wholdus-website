@@ -101,22 +101,10 @@
     <div layout="column" class="product-details-wrap" flex="60" flex-xs="100">
         <span class="area-title">Product Details</span>
         <div layout="row" layout-wrap flex>
-            <div layout="column" flex="33" flex-xs="100" flex-sm="50">
-                <div layout="column" class="feature-parent" data-ng-repeat="p in productDetailsKeys" data-ng-if="$index<4">
+            <div layout="column" flex="33" flex-xs="100" flex-sm="50" data-ng-repeat="p in productDetailsKeys" ng-if="p.value!='None'">
+                <div layout="column" class="feature-parent">
                     <span class="feature-title">{{p.label}}</span>
                     <span>{{p.value}}</span>
-                </div>
-            </div>
-            <div layout="column" flex="33" flex-xs="100" flex-sm="50">
-                <div layout="column" class="feature-parent" data-ng-repeat="p in productDetailsKeys" data-ng-if="$index>3&&$index<8">
-                    <span class="feature-title">{{p.label}}</span>
-                    <span>{{p.value}}</span>
-                </div>
-            </div>
-            <div layout="column" flex="33" flex-xs="100" flex-sm="50">
-                <div layout="column" class="feature-parent" data-ng-repeat="p in productDetailsKeys" data-ng-if="$index>8">
-                    <span class="feature-title">{{::p.label}}</span>
-                    <span>{{::p.value}}</span>
                 </div>
             </div>
         </div>
