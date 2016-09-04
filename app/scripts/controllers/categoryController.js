@@ -14,7 +14,9 @@
         'ngProgressBarService',
         '$rootScope',
         'DialogService',
-        function ($scope, $routeParams,$route, $http,$window,$mdDialog,$location, $log, UtilService, APIService, ngProgressBarService, $rootScope, DialogService) {
+        '$q',
+        'LoginService',
+        function ($scope, $routeParams,$route, $http,$window,$mdDialog,$location, $log, UtilService, APIService, ngProgressBarService, $rootScope, DialogService, $q, LoginService) {
 
             var listeners = [];
 
@@ -43,101 +45,148 @@
                 'background-color': '#D8D8D8',
             };
 
+        function getProductsInCart() {
+            var deferred = $q.defer();
+            APIService.apiCall("GET", APIService.getAPIUrl('cartItem')).then(function(response) {
+                deferred.resolve(response.cart_items);
+            }, function(error) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        }
+
+        function parseCartItems(items) {
+            var cartItems = {};
+            angular.forEach(items, function(value, key) {
+                cartItems[value.product.productID] = value.lots;
+            });
+            return cartItems;
+        }
 
         function getProducts() {
-                $scope.filterChange=false;
-                if(UtilService.currentCategoryID){
-                    if(UtilService.currentCategoryID!=$scope.categoryID){
-                        UtilService.setFilterParams(null);
-                        UtilService.resetFilterParams();
+            var deferred = $q.defer();
+            $scope.filterChange=false;
+
+            if(UtilService.currentCategoryID){
+                if(UtilService.currentCategoryID!=$scope.categoryID){
+                    UtilService.setFilterParams(null);
+                    UtilService.resetFilterParams();
+                }
+            }
+
+            UtilService.setCategory($scope.categoryID);
+            $scope.sellerString=UtilService.sellerString;
+            $scope.colours=UtilService.colours;
+            $scope.fabrics=UtilService.fabrics;
+            $scope.priceRanges=UtilService.priceRanges;
+            $scope.selectedColours=UtilService.selectedColours;
+            $scope.selectedFabrics=UtilService.selectedFabrics;
+
+            ngProgressBarService.showProgressbar();
+
+            var params = {
+                categoryID: $scope.categoryID,
+                sellerID: $scope.sellerString,
+                min_price_per_unit:UtilService.minPrice,
+                max_price_per_unit:UtilService.maxPrice,
+                colour: $scope.selectedColours,
+                fabric: $scope.selectedFabrics
+            };
+
+            UtilService.setPaginationParams(params, $scope.settings.page, $scope.settings.itemsPerPage);
+            APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
+            .then(function(response) {
+
+                if(UtilService.priceRangeIndex){
+                    var pos=UtilService.priceRangeIndex;
+                    if($scope.priceRanges[pos].min_value == UtilService.minPrice &&
+                        $scope.priceRanges[pos].max_value == UtilService.maxPrice){
+                        $scope.priceRanges[pos].active=true;
+                    }
+                    else {
+                        $scope.priceRanges[pos].active=false;
                     }
                 }
-                UtilService.setCategory($scope.categoryID);
-                $scope.sellerString=UtilService.sellerString;
-                $scope.colours=UtilService.colours;
-                $scope.fabrics=UtilService.fabrics;
-                $scope.priceRanges=UtilService.priceRanges;
-                $scope.selectedColours=UtilService.selectedColours;
-                $scope.selectedFabrics=UtilService.selectedFabrics;
 
+                $scope.minPrice = UtilService.minPrice;
+                $scope.maxPrice = UtilService.maxPrice;
 
-                ngProgressBarService.showProgressbar();
+                $scope.settings.noProduct = false;
 
-                var params = {categoryID: $scope.categoryID,
-                    sellerID:$scope.sellerString,
-                    min_price_per_unit:UtilService.minPrice,
-                    max_price_per_unit:UtilService.maxPrice,
-                    colour:$scope.selectedColours,
-                    fabric:$scope.selectedFabrics};
+                ngProgressBarService.endProgressbar();
 
-                UtilService.setPaginationParams(params, $scope.settings.page, $scope.settings.itemsPerPage);
-                APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
-                    .then(function(response) {
-                        $scope.settings.noProduct = false;
+                deferred.resolve(response);
 
-                        if(UtilService.priceRangeIndex){
-                            var pos=UtilService.priceRangeIndex;
-                            if($scope.priceRanges[pos].min_value == UtilService.minPrice &&
-                                $scope.priceRanges[pos].max_value == UtilService.maxPrice){
-                                $scope.priceRanges[pos].active=true;
-                            }
-                            else{
-                                $scope.priceRanges[pos].active=false;
-                            }
-                        }
-                        $scope.minPrice=UtilService.minPrice;
-                        $scope.maxPrice=UtilService.maxPrice;
-                        ngProgressBarService.endProgressbar();
-                        if(response.total_pages > 1) {
-                            $scope.settings.enablePagination = true;
-                            $rootScope.$broadcast('setPage', {
-                                page: $scope.settings.page,
-                                totalPages: Math.ceil(response.total_products/$scope.settings.itemsPerPage)
-                            });
-                        }
-                        else{
-                           $scope.settings.noProduct = false;
-                           $scope.settings.enablePagination = false;
-                       }
+            }, function(error) {
+                ngProgressBarService.endProgressbar();
+                $scope.products = [];
+                $scope.settings.noProduct = true;
+                $scope.settings.enablePagination = false;
+                deferred.reject(error);
+            });
 
-                       angular.forEach(response.products, function(value, key) {
-                        value.images = UtilService.getImages(value);
-                        if(value.images.length){
-                            value.imageUrl = UtilService.getImageUrl(value.images[0], '300x300');
-                        }
-                        else{
-                            value.imageUrl = 'images/200.png';
-                        }
-                        });
-
-                       $scope.products = response.products;
-                        if($scope.products.length) {
-                            $scope.category = response.products[0].category;
-                        }
-                        else {
-                            $scope.settings.noProduct = true;
-                            $scope.settings.enablePagination = false;
-                        }
-                    }, function(error) {
-                        ngProgressBarService.endProgressbar();
-                        $scope.products = [];
-                        $scope.settings.noProduct = true;
-                        $scope.settings.enablePagination = false;
-                    });
-                }
+            return deferred.promise;
+        }
 
         function getSellers() {
-                $http.get('http://api.wholdus.com/users/seller/?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaW50ZXJuYWx1c2VyIiwiaW50ZXJuYWx1c2VySUQiOjR9.3BOmXTwSrXJ_kT998Id5AC81OxrY1Aay79Orpxsw5L8')
-                    .then(function (response) {
-                        $scope.sellers = response.data.body.sellers;
-                        checkSelectedSellers();
-                    });
-         }
-
+            $http.get('http://api.wholdus.com/users/seller/?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiaW50ZXJuYWx1c2VyIiwiaW50ZXJuYWx1c2VySUQiOjR9.3BOmXTwSrXJ_kT998Id5AC81OxrY1Aay79Orpxsw5L8')
+            .then(function (response) {
+                $scope.sellers = response.data.body.sellers;
+                checkSelectedSellers();
+            });
+        }
 
         function init(){
+            var promises = [], cartItems = {}, loggedIn = false;
             getSellers();
-            getProducts();
+
+            if(LoginService.checkLoggedIn()) {
+                loggedIn = true;
+                promises.push(getProductsInCart());
+            }
+            promises.push(getProducts());
+
+            $q.all(promises).then(function(response) {
+                if(loggedIn) {
+                    cartItems = parseCartItems(response[0]);
+                    response = response[1];
+                } else {
+                    response = response[0];
+                }
+
+                if(response.total_pages > 1) {
+                    $scope.settings.enablePagination = true;
+                    $rootScope.$broadcast('setPage', {
+                        page: $scope.settings.page,
+                        totalPages: Math.ceil(response.total_products/$scope.settings.itemsPerPage)
+                    });
+                }
+                else {
+                    $scope.settings.noProduct = false;
+                    $scope.settings.enablePagination = false;
+                }
+
+                angular.forEach(response.products, function(value, key) {
+                    value.lotsInCart = cartItems[value.productID] ? cartItems[value.productID] : 0;
+                    value.images = UtilService.getImages(value);
+
+                    if(value.images.length){
+                        value.imageUrl = UtilService.getImageUrl(value.images[0], '300x300');
+                    } else {
+                        value.imageUrl = 'images/200.png';
+                    }
+                });
+
+                $scope.products = response.products;
+
+                if($scope.products.length) {
+                    $scope.category = response.products[0].category;
+                }
+                else {
+                    $scope.settings.noProduct = true;
+                    $scope.settings.enablePagination = false;
+                }
+            });
         }
 
         init();
