@@ -193,6 +193,7 @@
                     if(LoginService.checkLoggedIn()) {
                         $scope.loggedIn = true;
                         $rootScope.$broadcast('checkLoginState');
+                        getCartStatus(UtilService.getIDFromSlug($routeParams.product));
                     }
                 });
             };
