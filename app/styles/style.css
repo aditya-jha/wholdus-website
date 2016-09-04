@@ -73,6 +73,10 @@ a:active {
     display: none;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
 .background-page {
     background-color: rgba(238, 238, 238, 1);
     width: 100%;
@@ -412,6 +416,14 @@ a:active {
     margin-top: 1.5em !important;
 }
 
+.product-display-name {
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 8px 8px;
+}
+
 .product-name {
     font-family: 'Comfortaa', cursive;
     color: #333;
@@ -442,10 +454,6 @@ a:active {
 .singup-text {
     text-decoration: underline;
     cursor: pointer;
-}
-
-.product-page-card-content .feature-title {
-    color: #fff !important;
 }
 
 .feature-title {
@@ -517,22 +525,15 @@ a:active {
 }
 
 .product-page-card {
-    background-color: #fff;
-    text-align: center;
+    margin-top: 1em;
 }
 
 .product-page-card table {
-    width: 60%;
-}
-
-.lot-pricing-head td {
-    font-size: 0.9em;
+    width: 100%;
 }
 
 .product-page-card-content {
-    background: #512DA8;
-    color: #fff;
-    padding: 2em 0em !important;
+    background: #fff;
 }
 
 .product-page-card-content md-divider {
@@ -871,19 +872,20 @@ a:active {
 
 }
 
-.mobile-filter{
-  width:100%;
-  background-color: #FF5722;
-  font-family:'Comfortaa';
-  font-size:1.2em;
-  margin:0;
-  bottom:0px;
-  height:40px;
-  padding:10px;
-  color: #fff;
-   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-   position: fixed;
-   cursor: pointer;
+.mobile-filter {
+    width:100%;
+    background-color: #512DA8;
+    font-family:'Comfortaa';
+    font-size: 1.2em;
+    margin: 0;
+    margin-left: -0.5em;
+    bottom: 0px;
+    height: 40px;
+    padding: 10px;
+    color: #fff;
+  /*font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
+    position: fixed;
+    cursor: pointer;
 }
 
 .mobile-filter-panel{
@@ -1121,6 +1123,11 @@ a:active {
     box-shadow: 0px 0px 3px #FF5722, inset 0px 0px 2px #FF5722;
 }
 
+.gallery-wrap {
+    background-color: #fff;
+    margin-right: 0.5em;
+}
+
 .gallery-image-container {
     overflow: hidden;
     height: 410px;
@@ -1295,15 +1302,12 @@ md-dialog.fullscreen-dialog {
 }
 
 .lot-pricing-head {
-    font-family: 'Comfortaa', cursive;
     font-weight: bold;
     text-align: center;
-    padding-bottom: 0.5em;
 }
 
 .lot-pricing-detail {
     text-align: center;
-    padding: 0.3em 0;
 }
 
 .lot-pricing-detail.active {

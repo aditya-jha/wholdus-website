@@ -10,10 +10,6 @@
     .header-toolbar .username {
         font-size: 0.9em;
     }
-    
-    .product-page-card table {
-        width: 100%;
-    }
 
     .product-details-wrap {
         background: #fff;
@@ -39,6 +35,11 @@
 
     .product-card-wrap {
         padding: 0;
+    }
+
+    .gallery-wrap {
+      margin-right: 0;
+      margin-bottom: 0.5em;
     }
 }
 

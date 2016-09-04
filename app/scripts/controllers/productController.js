@@ -23,6 +23,7 @@
             var listeners = [];
 
             $scope.atcAPICall = null;
+            $scope.loggedIn = false;
 
             function praseProductDetails(p) {
                 var product = {
@@ -32,6 +33,10 @@
                     min_price_per_unit: p.min_price_per_unit,
                     price_per_unit: p.price_per_unit,
                     margin: p.margin,
+                    brand: p.details.brand,
+                    fabric_gsm: p.details.fabric_gsm,
+                    colors: p.details.colours,
+                    sizes: p.details.sizes,
                     lot_size: p.lot_size,
                     seller: {
                         company_name: p.seller.company_name,
@@ -161,6 +166,7 @@
                 $scope.isMobile = UtilService.isMobileRequest();
                 getProducts(productID);
                 if(LoginService.checkLoggedIn()) {
+                    $scope.loggedIn = true;
                     getCartStatus(productID);
                 }
             }
@@ -180,6 +186,17 @@
                 }
             }
 
+            $scope.openLoginPopup = function(event) {
+                DialogService.viewDialog(event, {
+                    view: 'views/partials/loginPopup.html',
+                }).finally(function() {
+                    if(LoginService.checkLoggedIn()) {
+                        $scope.loggedIn = true;
+                        $rootScope.$broadcast('checkLoginState');
+                    }
+                });
+            };
+
             $scope.addToCart = function(event, product, buyNow) {
                 if(LoginService.checkLoggedIn()) {
                     addToCartAfterLogin(event, product, buyNow);
@@ -188,6 +205,7 @@
                         view: 'views/partials/loginPopup.html',
                     }).finally(function() {
                         if(LoginService.checkLoggedIn()) {
+                            $scope.loggedIn = true;
                             $rootScope.$broadcast('checkLoginState');
                             addToCartAfterLogin(event, product, buyNow);
                         }
@@ -197,8 +215,10 @@
 
             var loginStateChange = $rootScope.$on('loginStateChange', function(event, data) {
                 if(LoginService.checkLoggedIn()) {
+                    $scope.loggedIn = true;
                     getCartStatus($scope.product.productID);
                 } else {
+                    $scope.loggedIn = false;
                     $scope.pdInCart = null;
                 }
             });

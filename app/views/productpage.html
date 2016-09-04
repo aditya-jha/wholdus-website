@@ -12,72 +12,95 @@
 </div>
 
 <div layout="row" layout-align="center start" layout-wrap>
-    <h1 id="category-title">{{::product.display_name }}</h1>
+
 </div>
 
-<div layout="row" class="product-page-card" layout-wrap data-ng-if="product">
-    <div flex-xs="100" flex-sm="50" flex-gt-sm="45" wu-gallery image='product.image' layout="row"></div>
-    <div layout="column" flex-xs="100" flex-sm="50" flex-gt-sm="55" class="product-page-card-content" layout-padding>
-        <div class="product-price">
-            <span class="feature-title">Minimum Price:</span> <span>Rs. {{::product.min_price_per_unit}}</span>
+<div layout="row" flex ng-if="product" layout-wrap class="product-page-card">
+    <div flex-xs="100" flex-sm="45" flex-gt-sm="45" wu-gallery image='product.image' layout="row" class="gallery-wrap"></div>
+    <div layout="column" flex-xs="100" flex class="product-page-card-content">
+        <div layout="row" layout-padding>
+            <h1 class="product-display-name">{{::product.display_name }}</h1>
         </div>
-        <md-divider></md-divider>
-        <div>
-            <span class="feature-title">Retail Price:</span> Rs. {{::product.price_per_unit}}
+        <div layout="row" ng-if="!loggedIn" layout-padding>
+            <span class="bold"><span class="underline cursor-pointer" ng-click="openLoginPopup($event)">Login</span> to view prices</span>
         </div>
-        <div>
-            <span class="feature-title">Margin upto: </span>{{::product.margin |  number:0}}%
+        <div layout="row" layout-wrap layout-padding ng-if="loggedIn">
+            <div flex flex-xs="50" layout="column">
+                <span class="feature-title">Min Price</span>
+                <span class="product-price">Rs. {{::product.min_price_per_unit}}</span>
+            </div>
+            <div flex flex-xs="50" layout="column">
+                <span class="feature-title">Retail Price</span>
+                <span>Rs. {{::product.price_per_unit}}</span>
+            </div>
+            <div flex flex-xs="50" layout="column">
+                <span class="feature-title">Your Margin</span>
+                <span>{{::product.margin |  number:0}}%</span>
+            </div>
         </div>
-        <md-divider></md-divider>
-        <div>
-            <span class="feature-title">Manufactured By:</span> {{::product.seller.company_name}}
+        <div layout="row" layout-wrap layout-padding>
+            <div flex="33" flex-xs="50" layout="column">
+                <span class="feature-title">Fabric</span>
+                <span>{{::product.fabric_gsm}}</span>
+            </div>
+            <div flex="33" flex-xs="50" layout="column">
+                <span class="feature-title">Sizes</span>
+                <span>{{::product.sizes}}</span>
+            </div>
+            <div flex="33" flex-xs="50" layout="column">
+                <span class="feature-title">Color</span>
+                <span>{{::product.colors}}</span>
+            </div>
+            <div flex="33" flex-xs="50" layout="column">
+                <span class="feature-title">Brand</span>
+                <span>{{::product.brand}}</span>
+            </div>
+            <div flex="33" flex-xs="50" layout="column">
+                <span class="feature-title">Lot Size</span>
+                <span>{{::product.lot_size}}</span>
+            </div>
         </div>
-        <div>
-            <span class="feature-title">Catalog Number:</span> {{::product.details.seller_catalog_number}}
-        </div>
-        <div>
-            <span class="feature-title">Lot Size:</span> {{::product.lot_size}}
-        </div>
-        <md-divider></md-divider>
-        <div>
-            Wholesale Pricing
-        </div>
-        <div layout="row" layout-align="center center">
-            <table>
-                <thead class="lot-pricing-head">
-                    <td>
-                        no. of lots
-                    </td>
-                    <td>
-                        price/unit
-                    </td>
-                    <td>
-                        your margin(upto)
-                    </td>
-                    <td>
-                        lot price
-                    </td>
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="pl in product.product_lot">
+        <div layout="row" layout-wrap>
+            <span flex="100" class="text-center">Wholesale Pricing</span>
+            <div layout="row" ng-if="!loggedIn" layout-padding flex="100">
+                <span class="bold"><span class="underline cursor-pointer" ng-click="openLoginPopup($event)">Login</span> to view prices</span>
+            </div>
+            <div layout="row" layout-align="center center" flex="100" ng-if="loggedIn">
+                <table>
+                    <thead class="lot-pricing-head">
                         <td>
-                            {{::pl.lot_size_from}}+
+                            no. of lots
                         </td>
                         <td>
-                            {{::pl.price_per_unit | number:0}}
+                            price/unit
                         </td>
                         <td>
-                            {{::((product.price_per_unit-pl.price_per_unit)*100/product.price_per_unit | number:0)}}%
+                            your margin(upto)
                         </td>
                         <td>
-                            {{::pl.price_per_unit*product.lot_size | number:0}}
+                            lot price
                         </td>
-                    </tr>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="lot-pricing-detail">
+                        <tr data-ng-repeat="pl in product.product_lot">
+                            <td>
+                                {{::pl.lot_size_from}}+
+                            </td>
+                            <td>
+                                {{::pl.price_per_unit | number:0}}
+                            </td>
+                            <td>
+                                {{::((product.price_per_unit-pl.price_per_unit)*100/product.price_per_unit | number:0)}}%
+                            </td>
+                            <td>
+                                {{::pl.price_per_unit*product.lot_size | number:0}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <div layout="row">
+        <div layout="row" class="padding-tb">
             <span flex hide-xs hide-sm></span>
             <md-button class="md-raised md-warn" ng-click="addToCart($event, product, true)" flex>
                 <span aria-label="buy-now">BUY NOW</span>
