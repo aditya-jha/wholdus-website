@@ -128,7 +128,7 @@ a:active {
 }
 
 .breadcrumb {
-    margin-top: 5px;
+    margin-top: 0.5em;
     font-size: 0.9em;
 }
 
@@ -416,12 +416,17 @@ a:active {
     margin-top: 1.5em !important;
 }
 
+.product-display-name-container {
+    margin: 0 1em;
+    border-bottom: 1px solid #d2d2d2;
+}
+
 .product-display-name {
     font-family: 'Comfortaa', cursive;
     font-weight: bold;
     font-size: 1.2em;
     margin: 0;
-    padding: 8px 8px;
+    padding: 8px 0;
 }
 
 .product-name {
@@ -439,10 +444,15 @@ a:active {
     border-top: 1px solid rgb(224,224,224);
 }
 
-.product-price {
-    font-weight: bold;
-    font-size: 1.1em;
+.divider {
+    border-bottom: 1px solid #d2d2d2;
+    margin: 0 1em;
 }
+
+.product-price {
+    font-size: 1.5em;
+}
+
 .product-margin {
     color: #FF5722 !important;
 }
@@ -525,22 +535,23 @@ a:active {
 }
 
 .product-page-card {
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 .product-page-card table {
-    width: 100%;
+    border-collapse: collapse;
+    width: calc(100% - 2em);
+    margin: 0 1em;
+}
+
+.product-page-card table, .product-page-card td, .product-page-card th {
+    border: 1px solid #d6d6d6;
 }
 
 .product-page-card-content {
     background: #fff;
 }
 
-.product-page-card-content md-divider {
-    background: #fff;
-    border-top-width: 2px solid #fff;
-    padding: 0;
-}
 
 .product-price .feature-title {
     font-size: 0.9em;
@@ -1302,8 +1313,9 @@ md-dialog.fullscreen-dialog {
 }
 
 .lot-pricing-head {
-    font-weight: bold;
     text-align: center;
+    color: #000;
+    background-color: #d8d8d8;
 }
 
 .lot-pricing-detail {
