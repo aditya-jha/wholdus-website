@@ -26,7 +26,7 @@
                     function loginDialogCallback(redirect) {
                         if(LoginService.checkLoggedIn()) {
                             $scope.loginStatus = true;
-                            setBuyerName();
+                            setBuyerDetails();
                             if(redirect) {
                                 $location.url(redirect);
                             } else {
@@ -59,21 +59,30 @@
                         $rootScope.$broadcast('loginStateChange');
                     }
 
-                    function setBuyerName() {
-                        var name = LoginService.getBuyerInfo().name;
-                        name = name.split(' ');
+                    function setBuyerDetails() {
+                        var buyer = LoginService.getBuyerInfo();
+                        var name = buyer.name.split(' ');
                         $scope.buyerName = name[0];
+                        $scope.store_url = buyer.store_url;
                     }
 
                     function loginState() {
                         if(LoginService.checkLoggedIn()) {
                             $scope.loginStatus = true;
-                            setBuyerName();
+                            setBuyerDetails();
                         } else {
                             $scope.loginStatus = false;
                             $scope.buyerName = null;
                             logoutRedirect();
                         }
+                    }
+
+                    function checkStorePage() {
+                        var url = $location.url();
+                        if(url.indexOf('/store/') >= 0) {
+                            return true;
+                        }
+                        return false;
                     }
 
                     $scope.goToUrl = function(ev, where) {
@@ -89,6 +98,7 @@
 
                     function init() {
                         $scope.isMobile = UtilService.isMobileRequest();
+                        $scope.isStorePage = checkStorePage();
                         loginState();
                     }
                     init();
@@ -102,6 +112,12 @@
                         loginState();
                     });
                     listeners.push(locationChangeListener);
+
+                    var storeListener = $rootScope.$on('store', function(event, data) {
+                        $scope.store = data;
+                        $scope.isStorePage = true;
+                    });
+                    listeners.push(storeListener);
 
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value, key) {

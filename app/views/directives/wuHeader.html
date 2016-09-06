@@ -1,5 +1,5 @@
 <md-toolbar class="md-medium md-hue-2">
-    <div class="md-toolbar-tools header-toolbar">
+    <div class="md-toolbar-tools header-toolbar" ng-if="!isStorePage">
         <md-button class="md-icon-button menu-button" aria-label="Menu" ng-click="toggleSidenav()" style="margin-right:0;">
             <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0h24v24H0z" fill="none"/>
@@ -24,13 +24,23 @@
             </div>
             <md-menu-content width="4">
                 <md-menu-item>
-                    <md-button data-ng-href="account/hand-picked-products" class="md-button-icon">
+                    <md-button ng-href="account/hand-picked-products" class="md-button-icon">
                         <md-icon>
                             <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                                 <path fill="#FF5722" d="M16,21H8A1,1 0 0,1 7,20V12.07L5.7,13.12C5.31,13.5 4.68,13.5 4.29,13.12L1.46,10.29C1.07,9.9 1.07,9.27 1.46,8.88L7.34,3H9C9,4.1 10.34,5 12,5C13.66,5 15,4.1 15,3H16.66L22.54,8.88C22.93,9.27 22.93,9.9 22.54,10.29L19.71,13.12C19.32,13.5 18.69,13.5 18.3,13.12L17,12.07V20A1,1 0 0,1 16,21M20.42,9.58L16.11,5.28C15.8,5.63 15.43,5.94 15,6.2C14.16,6.7 13.13,7 12,7C10.3,7 8.79,6.32 7.89,5.28L3.58,9.58L5,11L8,9H9V19H15V9H16L19,11L20.42,9.58Z" />
                             </svg>
                         </md-icon>
                         Hand Picked For You
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-href="store/{{store_url}}" class="md-button-icon" target="_blank">
+                        <md-icon>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="#FF5722" d="M16,21H8A1,1 0 0,1 7,20V12.07L5.7,13.12C5.31,13.5 4.68,13.5 4.29,13.12L1.46,10.29C1.07,9.9 1.07,9.27 1.46,8.88L7.34,3H9C9,4.1 10.34,5 12,5C13.66,5 15,4.1 15,3H16.66L22.54,8.88C22.93,9.27 22.93,9.9 22.54,10.29L19.71,13.12C19.32,13.5 18.69,13.5 18.3,13.12L17,12.07V20A1,1 0 0,1 16,21M20.42,9.58L16.11,5.28C15.8,5.63 15.43,5.94 15,6.2C14.16,6.7 13.13,7 12,7C10.3,7 8.79,6.32 7.89,5.28L3.58,9.58L5,11L8,9H9V19H15V9H16L19,11L20.42,9.58Z" />
+                            </svg>
+                        </md-icon>
+                        My Store
                     </md-button>
                 </md-menu-item>
                 <md-menu-item>
@@ -113,5 +123,21 @@
                 </svg>
             </md-icon>
         </div>
+    </div>
+    <div class="md-toolbar-tools header-toolbar" ng-if="isStorePage">
+        <a ng-href="{{::store.store_url}}" class="space">
+            <md-icon md-svg-icon="images/wholdus-logo.svg" style="height:100%;min-width:50px;"></md-icon>
+        </a>
+        <h1 style="font-size:1.1em;"><a ng-href="{{::store.store_url}}">{{::store.company_name}}</a></h1>
+        <span flex></span>
+        <a class="header-icons space" md-ink-ripple ng-href="{{::store.mobileUrl}}">
+            <md-icon>
+                <svg fill="#FF5722" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+            </md-icon>
+        </a>
+        <span ng-if="!isMobile" class="small-font" style="margin-left:5px">{{::store.mobile_number}}</span>
     </div>
 </md-toolbar>

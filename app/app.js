@@ -48,6 +48,9 @@ webapp.config([
              templateUrl: 'views/account/feed.html',
              controller: 'FeedController',
              reloadOnSearch: false
+         }).when('/store/:storeUrl', {
+             templateUrl: 'views/store/homepage.html',
+             controller: 'StoreHomeController'
          }).when('/blog', {
              template: '<div></div>',
              controller: 'RedirectController'
