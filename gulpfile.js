@@ -41,6 +41,7 @@ var jsCustom = [
     'app/scripts/directives/wuFeedDetail.js',
     'app/scripts/directives/wuGallery.js',
     'app/scripts/directives/wuFooter.js',
+    'app/scripts/directives/wuStoreFooter.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
