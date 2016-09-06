@@ -4,7 +4,8 @@
         return {
             restrict: 'AE',
             scope: {
-                product: '='
+                product: '=',
+                store: '='
             },
             replace: true,
             templateUrl: 'views/directives/wuProduct.html',
@@ -112,6 +113,20 @@
                                 });
                             }
                         }
+                    };
+
+                    $scope.placeOrder = function(event, product) {
+                        return $mdDialog.show({
+                            controller: 'PlaceOrderPopupController',
+                            templateUrl: 'views/store/placeOrder.html',
+                            parent: angular.element(document.body),
+                            targetEvent: event,
+                            clickOutsideToClose: true,
+                            fullscreen: $mdMedia('xs'),
+                            locals: {
+                                product: product,
+                            }
+                        });
                     };
 
                     function init() {

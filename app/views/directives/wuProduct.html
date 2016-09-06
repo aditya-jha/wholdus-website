@@ -3,7 +3,7 @@
         <img src="{{::product.imageUrl}}" />
     </a>
     <div layout="row" flex="100" layout-wrap layout-align="start start">
-        <div layout="row" flex="100" style="padding-bottom:0.5em">
+        <div layout="row" flex="100" style="padding-bottom:0.5em" ng-if="!store">
             <div flex ng-click="toggleShortlist($event)" layout="row" layout-align="center center">
                 <div layout="row">
                     <md-icon ng-if="!shortlisted">
@@ -36,6 +36,9 @@
                     </md-icon>
                 </div>
             </div>
+        </div>
+        <div layout="row" flex="100" style="padding-bottom:0.5em" ng-if="store">
+            <span flex="100" class="text-center" ng-click="placeOrder($event, product)">PLACE ORDER</span>
         </div>
         <a layout="row" flex="100" layout-wrap class="product-card-details" ng-href="{{::product.url}}">
             <span flex="100" class="product-name">{{::product.name}}</span>
