@@ -51,6 +51,9 @@ webapp.config([
          }).when('/store/:storeUrl', {
              templateUrl: 'views/store/homepage.html',
              controller: 'StoreHomeController'
+         }).when('/store/:store_url/products', {
+             templateUrl: 'views/store/allProducts.html',
+             controller: 'StoreHomeController'
          }).when('/blog', {
              template: '<div></div>',
              controller: 'RedirectController'

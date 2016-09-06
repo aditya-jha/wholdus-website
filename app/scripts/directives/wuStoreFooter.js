@@ -8,7 +8,6 @@
                 '$scope',
                 '$log',
                 function($scope, $log) {
-                    $log.log($scope);
                 }
             ]
         };

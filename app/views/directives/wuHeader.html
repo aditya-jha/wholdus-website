@@ -125,10 +125,10 @@
         </div>
     </div>
     <div class="md-toolbar-tools header-toolbar" ng-if="isStorePage">
-        <a ng-href="{{::store.store_url}}" class="space">
+        <a ng-href="/store/{{::store.store_url}}" class="space">
             <md-icon md-svg-icon="images/wholdus-logo.svg" style="height:100%;min-width:50px;"></md-icon>
         </a>
-        <h1 style="font-size:1.1em;"><a ng-href="{{::store.store_url}}">{{::store.company_name}}</a></h1>
+        <h1 style="font-size:1.1em;"><a ng-href="/store/{{::store.store_url}}">{{::store.company_name}}</a></h1>
         <span flex></span>
         <a class="header-icons space" md-ink-ripple ng-href="{{::store.mobileUrl}}">
             <md-icon>
