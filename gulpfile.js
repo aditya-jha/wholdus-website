@@ -55,7 +55,8 @@ var jsCustom = [
     'app/scripts/controllers/galleryPopupController.js',
     'app/scripts/controllers/lotPopupController.js',
     'app/scripts/controllers/consignmentController.js',
-    'app/scripts/controllers/storeHomeController.js'
+    'app/scripts/controllers/storeHomeController.js',
+    'app/scripts/controllers/placeOrderPopupController.js'
 ];
 
 var stylesheets = [
