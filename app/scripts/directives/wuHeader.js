@@ -109,6 +109,7 @@
                     listeners.push(checkLoginStateListener);
 
                     var locationChangeListener = $rootScope.$on('$locationChangeSuccess', function(event, data) {
+                        $scope.isStorePage = checkStorePage();
                         loginState();
                     });
                     listeners.push(locationChangeListener);
