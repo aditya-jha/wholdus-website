@@ -1326,3 +1326,9 @@ md-dialog.fullscreen-dialog {
     background-color: #673AB7;
     color: #fff;
 }
+
+.store-home-card {
+    margin: 1em 0;
+    background-color: #fff;
+
+}

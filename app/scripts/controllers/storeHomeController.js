@@ -9,8 +9,8 @@
         'ngProgressBarService',
         function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService) {
 
-            function setMobileUrl() {
-                var url = $scope.isMobile ? "tel:+91" + response.buyers[0].mobile_number : null;
+            function setMobileUrl(mobile_number) {
+                var url = $scope.isMobile ? "tel:+91" + mobile_number : null;
                 return url;
             }
 
@@ -31,7 +31,7 @@
                 APIService.apiCall('GET', APIService.getAPIUrl('buyers'), null, params)
                 .then(function(response) {
                     if(response && response.buyers && response.buyers.length) {
-                        response.buyers[0].mobileUrl = setMobileUrl();
+                        response.buyers[0].mobileUrl = setMobileUrl(response.buyers[0].mobile_number);
                         response.buyers[0].complete_address = setCompleteAddress(response.buyers[0].address);
                         $scope.store = response.buyers[0];
                         $rootScope.$broadcast('store', $scope.store);
