@@ -10,7 +10,8 @@
         '$location',
         '$mdDialog',
         '$mdMedia',
-        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia) {
+        '$q',
+        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia, $q) {
 
             $scope.pageSettings = {
                 totalPages: 0,
@@ -138,9 +139,12 @@
                 });
             }
 
-            function parseProducts(obj) {
+            function parseProducts(obj, cartItems) {
                 angular.forEach(obj, function(value, key) {
                     value.product.images = UtilService.getImages(value.product);
+                    if(cartItems) {
+                        value.product.lotsInCart = cartItems[value.product.productID] ? cartItems[value.product.productID] : 0;
+                    }
                     if(value.product.images.length) {
                         value.product.imageUrl = UtilService.getImageUrl(value.product.images[0], '300x300');
                     }
@@ -148,6 +152,7 @@
             }
 
             function fetchProducts() {
+                var deferred = $q.defer();
                 ngProgressBarService.showProgressbar();
                 var params = {
                     page_number: $scope.pageSettings.currentPage,
@@ -159,32 +164,58 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
                 .then(function(response) {
                     ngProgressBarService.endProgressbar();
-                    $scope.pageSettings.totalPages = response.total_pages;
-
-                    if(response.buyer_products.length) {
-                        $scope.noProducts = false;
-                        if(response.total_pages > 1) {
-                            $scope.pageSettings.enablePagination = true;
-                            $rootScope.$broadcast('setPage', {
-                                page: $scope.pageSettings.currentPage,
-                                totalPages: response.total_pages
-                            });
-                        } else {
-                            $scope.pageSettings.enablePagination = false;
-                        }
-                        parseProducts(response.buyer_products);
-                        $scope.products = response.buyer_products;
-                    } else {
-                        $scope.pageSettings.enablePagination = false;
-                        $scope.noProducts = true;
-                    }
+                    deferred.resolve(response);
                 }, function(error) {
                     ngProgressBarService.endProgressbar();
+                    deferred.reject(error);
                     $location.url('/');
                 });
+
+                return deferred.promise;
+            }
+
+            function getProductsInCart() {
+                var deferred = $q.defer();
+                APIService.apiCall("GET", APIService.getAPIUrl('cartItem')).then(function(response) {
+                    deferred.resolve(response.cart_items);
+                }, function(error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            }
+
+            function parseCartItems(items) {
+                var cartItems = {};
+                angular.forEach(items, function(value, key) {
+                    cartItems[value.product.productID] = value.lots;
+                });
+                return cartItems;
+            }
+
+            function fetchProductsParser(response, cartItems) {
+                $scope.pageSettings.totalPages = response.total_pages;
+
+                if(response.buyer_products.length) {
+                    $scope.noProducts = false;
+                    if(response.total_pages > 1) {
+                        $scope.pageSettings.enablePagination = true;
+                        $rootScope.$broadcast('setPage', {
+                            page: $scope.pageSettings.currentPage,
+                            totalPages: response.total_pages
+                        });
+                    } else {
+                        $scope.pageSettings.enablePagination = false;
+                    }
+                    parseProducts(response.buyer_products, cartItems);
+                    $scope.products = response.buyer_products;
+                } else {
+                    $scope.pageSettings.enablePagination = false;
+                    $scope.noProducts = true;
+                }
             }
 
             function init() {
+                var promises = [], cartItems = {};
                 $scope.isMobile = UtilService.isMobileRequest();
                 getStoreDetails($routeParams.storeUrl);
 
@@ -195,7 +226,20 @@
                     fetchProductByID(productID);
                 } else if(url.indexOf('/products') >= 0) {
                     $scope.pageSettings.currentPage = UtilService.getPageNumber();
-                    fetchProducts();
+                    promises.push(fetchProducts());
+
+                    $q.all(promises).then(function(response) {
+                        fetchProductsParser(response[0]);
+                    });
+                } else if(url.indexOf('/account/my-store') >= 0) {
+                    $scope.pageSettings.currentPage = UtilService.getPageNumber();
+                    promises.push(getProductsInCart());
+                    promises.push(fetchProducts());
+
+                    $q.all(promises).then(function(response) {
+                        cartItems = parseCartItems(response[0]);
+                        fetchProductsParser(response[1], cartItems);
+                    });
                 }
             }
             init();

@@ -116,7 +116,7 @@
 
                     var storeListener = $rootScope.$on('store', function(event, data) {
                         $scope.store = data;
-                        $scope.isStorePage = true;
+                        $scope.isStorePage = checkStorePage();
                     });
                     listeners.push(storeListener);
 

@@ -149,7 +149,6 @@
                 .then(function(response) {
                     ngProgressBarService.endProgressbar();
                     deferred.resolve(response);
-
                 }, function(error) {
                     ngProgressBarService.endProgressbar();
                     deferred.reject(error);
@@ -311,8 +310,8 @@
                 }
             };
 
-             $scope.imageLoaded= function(){
-                    $scope.productLikeStatus = 0;
+             $scope.imageLoaded = function(){
+                $scope.productLikeStatus = 0;
             };
 
             $scope.$on('$destroy', function() {

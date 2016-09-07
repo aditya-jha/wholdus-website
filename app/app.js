@@ -44,6 +44,9 @@ webapp.config([
          }).when('/account/profile', {
              templateUrl: 'views/account/profile.html',
              controller: 'ProfileController'
+         }).when('/account/my-store', {
+             templateUrl: 'views/account/store.html',
+             controller: 'StoreHomeController'
          }).when('/account/hand-picked-products', {
              templateUrl: 'views/account/feed.html',
              controller: 'FeedController',
