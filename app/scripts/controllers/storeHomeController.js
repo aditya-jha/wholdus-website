@@ -8,8 +8,9 @@
         '$rootScope',
         'ngProgressBarService',
         '$location',
-        '$rootScope',
-        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $rootScope) {
+        '$mdDialog',
+        '$mdMedia',
+        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia) {
 
             $scope.pageSettings = {
                 totalPages: 0,
@@ -29,6 +30,89 @@
                     address += add.address + ', near ' + add.landmark + ", " + add.city + ', ' + add.state + ', ' + add.pincode;
                 }
                 return address;
+            }
+
+            function praseProductDetails(p) {
+                var product = {
+                    productID: p.productID,
+                    category: p.category,
+                    display_name: p.display_name,
+                    min_price_per_unit: p.min_price_per_unit,
+                    price_per_unit: p.price_per_unit,
+                    margin: p.margin,
+                    brand: p.details.brand,
+                    fabric_gsm: p.details.fabric_gsm,
+                    colors: p.details.colours,
+                    sizes: p.details.sizes,
+                    lot_size: p.lot_size,
+                    seller: {
+                        company_name: p.seller.company_name,
+                        address: p.seller.address[0]
+                    },
+                    details: {
+                        seller_catalog_number: p.details.seller_catalog_number,
+                    },
+                    product_lot: p.product_lot,
+                    image: p.image
+                };
+
+                var productDetailsKeys = [{
+                    label: 'Brand',
+                    value: p.details.brand
+                }, {
+                    label: 'Pattern',
+                    value: p.details.pattern
+                }, {
+                    label: 'Style',
+                    value: p.details.style
+                }, {
+                    label: 'Fabric/GSM',
+                    value: p.details.fabric_gsm
+                }, {
+                    label: 'Sleeve',
+                    value: p.details.sleeve
+                }, {
+                    label: 'Neck/Collar',
+                    value: p.details.neck_collar_type
+                }, {
+                    label: 'Length',
+                    value: p.details.length
+                }, {
+                    label: 'Work/Decor',
+                    value: p.details.work_decoration_type
+                }, {
+                    label: 'Colors',
+                    value: p.details.colours
+                }, {
+                    label: 'Sizes',
+                    value: p.details.sizes
+                }, {
+                    label: 'Features',
+                    value: p.details.special_feature
+                },{
+                    label: 'Lot Description',
+                    value: p.details.lot_description.length>0?p.details.lot_description:'None'
+                }];
+                $scope.product = product;
+                $scope.productDetailsKeys = productDetailsKeys;
+            }
+
+            function fetchProductByID(productID) {
+                ngProgressBarService.showProgressbar();
+                APIService.apiCall("GET", APIService.getAPIUrl("products"), null, {
+                    productID: productID
+                }).then(function(response) {
+                    ngProgressBarService.endProgressbar();
+                    if(response.products.length) {
+                        praseProductDetails(response.products[0]);
+                    }
+                    else{
+                        $location.url('/404');
+                    }
+                }, function(error) {
+                    ngProgressBarService.endProgressbar();
+                    $location.url('/404');
+                });
             }
 
             function getStoreDetails(storeUrl) {
@@ -105,12 +189,30 @@
                 getStoreDetails($routeParams.storeUrl);
 
                 var url = $location.url();
-                if(url.indexOf('/products') >= 0) {
+                if($routeParams.productUrl) {
+                    $scope.storePage = true;
+                    var productID = UtilService.getIDFromSlug($routeParams.productUrl);
+                    fetchProductByID(productID);
+                } else if(url.indexOf('/products') >= 0) {
                     $scope.pageSettings.currentPage = UtilService.getPageNumber();
                     fetchProducts();
                 }
             }
             init();
+
+            $scope.placeOrder = function(event, product) {
+                return $mdDialog.show({
+                    controller: 'PlaceOrderPopupController',
+                    templateUrl: 'views/store/placeOrder.html',
+                    parent: angular.element(document.body),
+                    targetEvent: event,
+                    clickOutsideToClose: true,
+                    fullscreen: $mdMedia('xs'),
+                    locals: {
+                        product: product,
+                    }
+                });
+            };
         }
     ]);
 })();

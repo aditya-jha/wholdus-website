@@ -20,7 +20,8 @@
                 '$mdMedia',
                 '$q',
                 'ConstantKeyValueService',
-                function($scope, $log, APIService, LoginService, $rootScope, DialogService, $mdDialog, $mdMedia, $q, ConstantKeyValueService) {
+                '$routeParams',
+                function($scope, $log, APIService, LoginService, $rootScope, DialogService, $mdDialog, $mdMedia, $q, ConstantKeyValueService, $routeParams) {
 
                     $scope.shortlistApiCall = null;
 
@@ -130,6 +131,9 @@
                     };
 
                     function init() {
+                        if($scope.store) {
+                            $scope.product.url = "/store/" + $routeParams.storeUrl + '/' + $scope.product.slug + '-' + $scope.product.productID;
+                        }
                         if(LoginService.checkLoggedIn()) {
                             $scope.shortlisted = $scope.product.response.response_code == 1;
                             $scope.loggedIn = true;

@@ -51,8 +51,11 @@ webapp.config([
          }).when('/store/:storeUrl', {
              templateUrl: 'views/store/homepage.html',
              controller: 'StoreHomeController'
-         }).when('/store/:store_url/products', {
+         }).when('/store/:storeUrl/products', {
              templateUrl: 'views/store/allProducts.html',
+             controller: 'StoreHomeController'
+         }).when('/store/:storeUrl/:productUrl', {
+             templateUrl: 'views/productpage.html',
              controller: 'StoreHomeController'
          }).when('/blog', {
              template: '<div></div>',

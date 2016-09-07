@@ -16,7 +16,7 @@
                 <div layout="column" ng-show="!apiCall">
                     <md-input-container layout-fill>
                         <label>Mobile Number</label>
-                        <input type="number" data-ng-model="mobile_number" name="mobNum"  ng-pattern="formValidation.mobileNumValidation" required />
+                        <input type="number" ng-model="mobile_number" name="mobNum"  ng-pattern="formValidation.mobileNumValidation" required />
                         <div ng-messages="placeOrderForm.mobNum.$error" role="alert" ng-if="placeOrderForm.mobNum.$dirty || placeOrderForm.$submitted" >
                             <div ng-message="required" class="formError">This is required.</div>
                             <div ng-message="pattern" class="formError">
@@ -26,14 +26,14 @@
                     </md-input-container>
                     <md-input-container layout-fill>
                         <label>Name</label>
-                        <input type="text" data-ng-model="name" name="name" required />
+                        <input type="text" ng-model="name" name="name" required />
                         <div ng-messages="placeOrderForm.name.$error" role="alert" ng-if="placeOrderForm.name.$dirty || placeOrderForm.$submitted" >
                             <div ng-message="required" class="formError">This is required.</div>
                         </div>
                     </md-input-container>
                     <md-input-container layout-fill>
                         <label>Email</label>
-                        <input type="email" data-ng-model="email" name="email" ng-pattern="formValidation.emailValidation" />
+                        <input type="email" ng-model="email" name="email" ng-pattern="formValidation.emailValidation" />
                         <div ng-messages="placeOrderForm.email.$error" role="alert" ng-if="placeOrderForm.email.$dirty || placeOrderForm.$submitted" >
                             <!-- <div ng-message="required" class="formError">This is required.</div> -->
                             <div ng-message="pattern" class="formError">
@@ -43,12 +43,8 @@
                     </md-input-container>
                     <md-input-container>
                         <label>Size</label>
-                        <md-select ng-model="size">
-                            <md-option ng-value="S">S</md-option>
-                            <md-option ng-value="M">M</md-option>
-                            <md-option ng-value="L">L</md-option>
-                            <md-option ng-value="XL">XL</md-option>
-                            <md-option ng-value="XXL">XXL</md-option>
+                        <md-select ng-model="selectedSize">
+                            <md-option ng-value="val" ng-repeat="val in allSizes">{{val}}</md-option>
                         </md-select>
                     </md-input-container>
                 </div>

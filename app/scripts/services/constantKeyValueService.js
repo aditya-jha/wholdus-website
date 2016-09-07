@@ -30,7 +30,8 @@
                     cart: 'cart',
                     pincodeserviceability: 'logistics/pincodeserviceability',
                     checkout: 'checkout',
-                    paymentMethods: 'checkout/paymentmethod'
+                    paymentMethods: 'checkout/paymentmethod',
+                    storeLead: 'users/buyer/store/lead/'
                 },
                 accessTokenKey: 'randomData',
                 buyerDetailKey: 'buyerDetails',
