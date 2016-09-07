@@ -16,7 +16,7 @@ webapp.config([
      function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $compileProvider) {
 
          $compileProvider.debugInfoEnabled(false);
-         $compileProvider.aHrefSanitizationWhitelist('^whatsapp')
+         $compileProvider.aHrefSanitizationWhitelist(/^\s*(http?|https?|local|data|chrome-extension|whatsapp):/)
          $routeProvider.when('/', {
              templateUrl: "views/homepage.html",
              controller: "HomeController"
