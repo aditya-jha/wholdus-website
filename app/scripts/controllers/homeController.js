@@ -134,10 +134,13 @@
             listeners.push(checkLoginStateListener);
 
             var loginStateChangeListener = $rootScope.$on('loginStateChange', function() {
-                getProductsByCategory();
+                var url = $location.url();
+                if(url === '/') {
+                    getProductsByCategory();
+                }
             });
             listeners.push(loginStateChangeListener);
-
+            
             var destroyListener = $scope.$on('$destroy', function() {
                 angular.forEach(listeners, function(value, key) {
                     if(value) value();

@@ -136,6 +136,41 @@
             });
         }
 
+        function getProductsHelper(response, cartItems) {
+            if(response.total_pages > 1) {
+                $scope.settings.enablePagination = true;
+                $rootScope.$broadcast('setPage', {
+                    page: $scope.settings.page,
+                    totalPages: Math.ceil(response.total_products/$scope.settings.itemsPerPage)
+                });
+            }
+            else {
+                $scope.settings.noProduct = false;
+                $scope.settings.enablePagination = false;
+            }
+
+            angular.forEach(response.products, function(value, key) {
+                value.lotsInCart = cartItems[value.productID] ? cartItems[value.productID] : 0;
+                value.images = UtilService.getImages(value);
+
+                if(value.images.length){
+                    value.imageUrl = UtilService.getImageUrl(value.images[0], '300x300');
+                } else {
+                    value.imageUrl = 'images/200.png';
+                }
+            });
+
+            $scope.products = response.products;
+
+            if($scope.products.length) {
+                $scope.category = response.products[0].category;
+            }
+            else {
+                $scope.settings.noProduct = true;
+                $scope.settings.enablePagination = false;
+            }
+        }
+
         function init(){
             var promises = [], cartItems = {}, loggedIn = false;
             getSellers();
@@ -154,38 +189,7 @@
                     response = response[0];
                 }
 
-                if(response.total_pages > 1) {
-                    $scope.settings.enablePagination = true;
-                    $rootScope.$broadcast('setPage', {
-                        page: $scope.settings.page,
-                        totalPages: Math.ceil(response.total_products/$scope.settings.itemsPerPage)
-                    });
-                }
-                else {
-                    $scope.settings.noProduct = false;
-                    $scope.settings.enablePagination = false;
-                }
-
-                angular.forEach(response.products, function(value, key) {
-                    value.lotsInCart = cartItems[value.productID] ? cartItems[value.productID] : 0;
-                    value.images = UtilService.getImages(value);
-
-                    if(value.images.length){
-                        value.imageUrl = UtilService.getImageUrl(value.images[0], '300x300');
-                    } else {
-                        value.imageUrl = 'images/200.png';
-                    }
-                });
-
-                $scope.products = response.products;
-
-                if($scope.products.length) {
-                    $scope.category = response.products[0].category;
-                }
-                else {
-                    $scope.settings.noProduct = true;
-                    $scope.settings.enablePagination = false;
-                }
+                getProductsHelper(response, cartItems);
             });
         }
 
@@ -318,12 +322,17 @@
         };
 
             var checkLoginStateListener = $rootScope.$on('checkLoginState', function() {
-                getProducts();
+                getProducts().then(function(response) {
+                    getProductsHelper(response, {});
+                });
             });
             listeners.push(checkLoginStateListener);
 
             var loginStateChangeListener = $rootScope.$on('loginStateChange', function() {
-                getProducts();
+                $log.log($routeParams);
+                getProducts().then(function(response) {
+                    getProductsHelper(response, {});
+                });
             });
             listeners.push(loginStateChangeListener);
 
