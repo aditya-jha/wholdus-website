@@ -23,7 +23,9 @@
                     mobile_number: $scope.mobile_number,
                     email: $scope.email
                 };
-                $scope.apiCall = APIService.apiCall("POST", APIService.getAPIUrl('storeLead'), data);
+                $scope.apiCall = APIService.apiCall("POST", APIService.getAPIUrl('storeLead'), data, {
+                    store_url: $routeParams.storeUrl
+                });
                 $scope.apiCall.then(function(response) {
                     $scope.apiCall = null;
                     $scope.cancel();
