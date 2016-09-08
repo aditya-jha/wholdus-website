@@ -159,6 +159,7 @@
                     items_per_page: $scope.isMobile ? 18 : 24,
                     is_active: 1,
                     responded: 1,
+                    store_url: $routeParams.storeUrl
                 };
 
                 APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
