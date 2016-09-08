@@ -4,7 +4,7 @@
             <span class="space large-font cursor-pointer" ng-click="cancel()">X</span>
         </div>
         <div layout="row" flex layout-padding>
-            <div ng-if="tbImage.length>1" layout="row" layout-wrap flex="20" hide-xs style="border:1px solid #B6B6B6; overflow-y: scroll; min-width: 60px;" class="hide-scrollbar" layout-align="start start" ng-if="!isMobile">
+            <div ng-if="tbImage.length>1 && !isMobile" layout="row" layout-wrap flex="20" hide-xs style="border:1px solid #B6B6B6; overflow-y: scroll; min-width: 60px;" class="hide-scrollbar" layout-align="start start">
                 <div ng-repeat="tbi in tbImage" layout="column" class="thumbnail-image max-width-100 {{$index==activeImage ? 'active' : ''}}" ng-mouseenter="setActiveImage($index, true)" layout-align="center center">
                     <img data-ng-src="{{::tbi}}" style="max-width:100%; max-height:100%;" />
                 </div>
@@ -13,6 +13,11 @@
                 <div layout="row" class="gallery-main {{$index==activeImage ? 'active': ''}}" ng-repeat="lgi in lgImage" style="overflow: scroll !important;">
                     <img data-ng-src="{{::lgi}}" />
                 </div>
+            </div>
+        </div>
+        <div ng-if="tbImage.length>1 && isMobile" layout="row" style="border:1px solid #B6B6B6; overflow-x: scroll; min-height: 60px;" class="hide-scrollbar" layout-align="start start">
+            <div ng-repeat="tbi in tbImage" layout="row" class="thumbnail-image max-width-100 {{$index==activeImage ? 'active' : ''}}" ng-mouseenter="setActiveImage($index, true)" layout-align="center center">
+                <img data-ng-src="{{::tbi}}" style="max-width:100%; max-height:100%;" />
             </div>
         </div>
     </div>

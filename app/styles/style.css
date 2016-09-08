@@ -1120,6 +1120,7 @@ a:active {
     cursor: pointer;
     /*height: 50px;*/
     width: 50px;
+    min-width: 50px;
     margin: 0.3em 2px 0px 0.3em;
     border: 1px solid #a2a6ac;
     border-radius: 2px;
