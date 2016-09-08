@@ -132,7 +132,7 @@
             }
 
             function fetchProducts() {
-                var deferred = $q.defer();
+                var deferred = $q.defer(), url = 'buyerProducts';
                 ngProgressBarService.showProgressbar();
                 var params = {
                     page_number: $scope.pageSettings.currentPage,
@@ -144,8 +144,10 @@
                     params.buyerproductID = $scope.buyerproductID;
                     params.landing = 1;
                 }
-
-                APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
+                if($scope.pageSettings.responded === 0) {
+                    url = 'allBuyerProducts';
+                }
+                APIService.apiCall("GET", APIService.getAPIUrl(url), null, params)
                 .then(function(response) {
                     ngProgressBarService.endProgressbar();
                     deferred.resolve(response);
