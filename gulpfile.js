@@ -42,6 +42,7 @@ var jsCustom = [
     'app/scripts/directives/wuGallery.js',
     'app/scripts/directives/wuFooter.js',
     'app/scripts/directives/wuStoreFooter.js',
+    'app/scripts/directives/wuPurchaseRequestStatus.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
@@ -56,7 +57,8 @@ var jsCustom = [
     'app/scripts/controllers/lotPopupController.js',
     'app/scripts/controllers/consignmentController.js',
     'app/scripts/controllers/storeHomeController.js',
-    'app/scripts/controllers/placeOrderPopupController.js'
+    'app/scripts/controllers/placeOrderPopupController.js',
+    'app/scripts/controllers/purchaseRequestsController.js',
 ];
 
 var stylesheets = [

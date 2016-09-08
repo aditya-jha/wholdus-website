@@ -1,0 +1,33 @@
+<div layout="row" flex="100" layout-wrap layout-align="space-around center" ng-if="purchaseRequests && purchaseRequests.length>0">
+    <div layout="row" flex="45" flex-xs="100" ng-repeat="preq in purchaseRequests" layout-wrap class="purchase-requests-wrap md-whiteframe-4dp">
+        <div layout="column" flex="50" flex-xs="100" class="md-padding">
+            <div layout="row" layout-align="center center" style="height:150px;">
+                <img ng-src="{{::preq.product.imageUrl}}" style="max-width:100%; max-height:100%;" />
+            </div>
+            <span class="product-name">{{::preq.product.name}}</span>
+            <span class="small-font padding-tb">{{::preq.product.details.fabric_gsm}}</span>
+            <span class="product-price">Rs. {{::preq.product.price_per_unit | currency:'':0}}</span>
+        </div>
+        <div layout="column" flex="50" flex-xs="100" class="md-padding">
+            <span class="text-center md-padding">REQUEST</span>
+            <div class="divider"></div>
+            <div layout="column" class="padding-tb">
+                <span class="feature-title">Name</span>
+                <span>{{::preq.name}}</span>
+            </div>
+            <div layout="column" class="padding-tb">
+                <span class="feature-title">Mobile Number</span>
+                <span>{{::preq.mobile_number}}</span>
+            </div>
+            <div layout="column" ng-if="preq.email" class="padding-tb">
+                <span class="feature-title">Email</span>
+                <span>{{::preq.email}}</span>
+            </div>
+            <div class="divider"></div>
+            <div wu-purchase-request-status lead='preq'></div>
+        </div>
+    </div>
+</div>
+<div layout="row" flex="100" layout-wrap layout-align="space-around center" ng-if="purchaseRequests && purchaseRequests.length==0">
+    <span flex="100" class="product-name" layout-margin>No Requests</span>
+</div>

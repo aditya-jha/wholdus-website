@@ -1330,5 +1330,8 @@ md-dialog.fullscreen-dialog {
 .store-home-card {
     margin: 1em 0;
     background-color: #fff;
+}
 
+.purchase-requests-wrap {
+    margin: 1em 0.5em;
 }

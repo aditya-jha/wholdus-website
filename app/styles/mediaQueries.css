@@ -41,6 +41,11 @@
       margin-right: 0;
       margin-bottom: 0.5em;
     }
+
+    .purchase-requests-wrap {
+        margin: 0.5em 0.1em;
+    }
+
 }
 
 @media screen and (max-width: 959px) {

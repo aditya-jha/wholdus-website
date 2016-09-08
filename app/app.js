@@ -16,7 +16,8 @@ webapp.config([
      function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $compileProvider) {
 
          $compileProvider.debugInfoEnabled(false);
-         $compileProvider.aHrefSanitizationWhitelist(/^\s*(http?|https?|local|data|chrome-extension|whatsapp|mailto|tel):/)
+         $compileProvider.aHrefSanitizationWhitelist(/^\s*(http?|https?|local|data|chrome-extension|whatsapp|mailto|tel):/);
+
          $routeProvider.when('/', {
              templateUrl: "views/homepage.html",
              controller: "HomeController"
@@ -47,6 +48,9 @@ webapp.config([
          }).when('/account/my-store', {
              templateUrl: 'views/account/store.html',
              controller: 'StoreHomeController'
+         }).when('/account/purchase-requests', {
+             templateUrl: 'views/account/purchaseRequests.html',
+             controller: 'PurchaseRequestsController'
          }).when('/account/hand-picked-products', {
              templateUrl: 'views/account/feed.html',
              controller: 'FeedController',

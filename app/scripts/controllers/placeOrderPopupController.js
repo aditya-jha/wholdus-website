@@ -17,10 +17,11 @@
 
             $scope.placeOrder = function() {
                 var data = {
-                    "buyerID": UtilService.getIDFromSlug($routeParams.storeUrl),
-                    "productID":$scope.product.productID,
-                    "name": $scope.name,
-                    "mobile_number": $scope.mobile_number
+                    buyerID: UtilService.getIDFromSlug($routeParams.storeUrl),
+                    productID:$scope.product.productID,
+                    name: $scope.name,
+                    mobile_number: $scope.mobile_number,
+                    email: $scope.email
                 };
                 $scope.apiCall = APIService.apiCall("POST", APIService.getAPIUrl('storeLead'), data);
                 $scope.apiCall.then(function(response) {
