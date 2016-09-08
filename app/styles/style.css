@@ -1119,7 +1119,8 @@ a:active {
 .thumbnail-image {
     cursor: pointer;
     /*height: 50px;*/
-    margin: 0.3em 1px 0px 0.3em;
+    width: 50px;
+    margin: 0.3em 2px 0px 0.3em;
     border: 1px solid #a2a6ac;
     border-radius: 2px;
     -webkit-box-shadow: 0px 0px 3px #a2a6ac, inset 0px 0px 2px #a2a6ac;
