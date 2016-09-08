@@ -49,6 +49,7 @@
             }
 
             function init() {
+                $scope.isMobile = UtilService.isMobileRequest();
                 $scope.selectedIndex = 0;
                 // fetchPurchaseRequests($scope.selectedIndex);
             }

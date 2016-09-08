@@ -17,7 +17,8 @@
             </div>
             <div layout="column" class="padding-tb">
                 <span class="feature-title">Mobile Number</span>
-                <span>{{::preq.mobile_number}}</span>
+                <a ng-href="tel:+91{{::preq.mobile_number}}" ng-if="isMobile">{{::preq.mobile_number}}</a>
+                <span ng-if="!isMobile">{{::preq.mobile_number}}</span>
             </div>
             <div layout="column" ng-if="preq.email" class="padding-tb">
                 <span class="feature-title">Email</span>
