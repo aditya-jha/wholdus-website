@@ -1,32 +1,60 @@
+
 <div class="filler-toolbar" layout="row" layout-align="center start">
     <span class="content-page-title">Contact Us</span>
 </div>
 
-<div layout="row" layout-xs="column" class="contactus-container" layout-padding layout-margin layout-align="center start">
-    <div flex="25" flex-sm="45" flex-xs="100" layout="row" layout-wrap layout-padding md-whiteframe="4dp">
-        <md-input-container flex="100">
-            <label>Email</label>
-            <input type="email" data-ng-model="contactus.email" data-ng-required="true" />
-        </md-input-container>
-        <md-input-container flex="100">
-            <label>Contact Number</label>
-            <input type="number" data-ng-model="contactus.mobile_number" data-ng-required="true" />
-        </md-input-container>
-        <md-input-container flex="100">
-            <label>Whats on your mind?</label>
-            <input type="text" data-ng-model="contactus.remarks" data-ng-required="false" />
-        </md-input-container flex="100">
-        <md-button class="md-raised md-warn" md-no-ink data-ng-click="contactUs()">
-            <span>Contact Us</span>
-        </md-button>
+<div layout="row" class="contactus-container" layout-padding layout-margin layout-align="center start" layout-wrap>
+    <div flex="25" flex-sm="45" flex-xs="100" layout="row" layout-wrap layout-padding md-whiteframe="4">
+        <form name="contactusForm" novalidate flex="100" layout="row" layout-wrap data-ng-submit="contactusForm.$valid && contactUs()">
+            <md-input-container flex="100">
+                <label>Email</label>
+                <input type="email" name="email" data-ng-model="contactus.email" data-ng-required="true" ng-pattern="formValidation.emailValidation" />
+                <div ng-messages="contactusForm.email.$error" role="alert" ng-if="contactusForm.email.$dirty || contactusForm.$submitted" >
+                    <div ng-message="required" class="formError">This is required.</div>
+                    <div ng-message="pattern" class="formError">
+                        {{formValidation.emailErrorMessage}}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="100">
+                <label>Contact Number</label>
+                <input type="number" data-ng-model="contactus.mobile_number" name="mobNum" min="0" data-ng-required="true" ng-pattern="formValidation.mobileNumValidation"/>
+                 <div ng-messages="contactusForm.mobNum.$error" role="alert" ng-if="contactusForm.mobNum.$dirty || contactusForm.$submitted" >
+                    <div ng-message="required" class="formError">This is required.</div>
+                    <div ng-message="pattern" class="formError">
+                        {{formValidation.mobileErrorMessage}}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container flex="100">
+                <label>Whats on your mind?</label>
+                <input type="text" data-ng-model="contactus.remarks" name="remarks" data-ng-required="true" />
+                <div ng-messages="contactusForm.remarks.$error" role="alert" ng-if="contactusForm.remarks.$dirty || contactusForm.$submitted" >
+                   <div ng-message="required" class="formError">This is required.</div>
+               </div>
+            </md-input-container>
+
+            <div flex="100" layout="row" style="height: 10px" data-ng-show="settings.showLoading">
+                <md-progress-linear class="md-warn" md-mode="indeterminate" flex></md-progress-linear>
+            </div>
+            <md-button type="submit" class="md-raised md-warn" md-no-ink ng-disabled="settings.showLoading">
+                <span>Contact Us</span>
+            </md-button>
+        </form>
     </div>
-    <div flex="25" flex-sm="45" flex-xs="100" layout="row" layout-wrap layout-padding  md-whiteframe="4dp">
+    <div flex="25" flex-sm="45" flex-xs="100" layout="row" layout-wrap layout-padding  md-whiteframe="4">
         <span flex="100">call us @ +91-7895161705</span>
         <hr />
         <span flex="100">OR</span>
         <span flex="100">Leave a text!</span>
-        <span flex="100">Gaurenteed Reply with an hour</span>
+        <span flex="100">Guaranteed Reply within an hour</span>
     </div>
 </div>
-
-<div data-ng-include="'views/footer.html'" flex></div>
+<div class="map-address" layout="row" data-ng-if="!settings.isMobile">
+    <!-- <div flex> -->
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=28.5186012,77.1815751&zoom=15&size=700x350&maptype=roadmap
+                    &markers=color:red%7Clabel:W%7C28.5186012,77.1815751
+                    &key=AIzaSyAcLoOEv_1Otg-W-jE7fs9YIIs4dEJaslE"></div>
+    <!-- </div> -->
+</div>
+<div wu-footer layout="row"></div>

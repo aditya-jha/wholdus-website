@@ -1,0 +1,8 @@
+<div layout="row" layout-wrap class="consignment" flex="100" ng-if="step==0" ng-include="'views/checkout/cart.html'">
+</div>
+<div layout="row" layout-wrap flex="100" class="consignment" ng-if="step==1" ng-include="'views/checkout/address.html'">
+</div>
+<div layout="row" layout-wrap flex="100" class="consignment" ng-if="step==2" ng-include="'views/checkout/payment.html'">
+</div>
+<div layout="row" layout-wrap flex="100" class="consignment" ng-if="step==3" ng-include="'views/checkout/confirmation.html'">
+</div>

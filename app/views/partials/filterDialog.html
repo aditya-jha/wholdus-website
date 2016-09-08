@@ -1,0 +1,108 @@
+<md-dialog aria-label="Buy Now" ng-cloak>
+ <md-toolbar>
+ <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
+        <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+    </md-button>
+   
+        <h2 class="popup-title">FILTER</h2>
+    <div flex></div>    
+    </div>
+</md-toolbar>
+<div layout="row" flex="100">
+
+    <div layout="column" flex="40"  class="filter-property-container">
+        <div class="filter-property" data-ng-click="filterID=1" ng-style="filterID==1 && activeFilterStyle">
+            &nbsp;Manufacturer
+        </div>
+        <div class="filter-property" data-ng-click="filterID=2" ng-style="filterID==2 && activeFilterStyle">
+            &nbsp;Price
+        </div>
+        <div class="filter-property" data-ng-click="filterID=3" ng-style="filterID==3 && activeFilterStyle">
+            &nbsp;Color
+        </div>
+        <div class="filter-property" data-ng-click="filterID=4" ng-style="filterID==4 && activeFilterStyle">
+            &nbsp;Fabric
+        </div>
+        
+    </div>
+    <div layout="row" flex="60">
+     
+        <div  ng-show="filterID==1" layout="column" ng-cloak class="mobile-filter-panel">
+
+          <div data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" 
+          style="padding-left:2px;" class="small-label">
+          <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string" style="margin:2px" ng-click="filterChanged=true" >
+              <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
+          </md-checkbox>
+           
+             
+          </div>        
+      </div> 
+
+         <div  ng-show="filterID==2" layout="column"   ng-cloak class="mobile-filter-panel" style="margin:5px"> 
+         <div layout="column" >
+             <div  data-ng-repeat="p in priceRanges" layout-align="start start" 
+             style="padding:5px;" class="small-label" >
+                  <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string"
+                  style="margin:0px;" ng-click="updatePrice($index)">
+                   <label class="grey-label">
+                    <span ng-if="$first">Below Rs.{{p.max_value}}</span>
+                    <span ng-if="$last">Above Rs.{{p.min_value}}</span>
+                    <span ng-if="!$last && !$first">Rs. {{p.min_value}} to Rs.{{p.max_value}}</span>
+                     
+                  </label>
+                  </md-checkbox>
+               
+            </div> 
+           <!--  <div layout-margin>
+            <div layout="row" flex="100"  ng-cloak layout-align="space-between">
+                    <span class="custum-input-label" flex="55">Min Price</span>
+                   Rs.&nbsp;&nbsp;<div flex="35">
+                    <input type="number" data-ng-model="minPrice" aria-label="minPrice" style="width:60px"/>
+                     </div>              
+            </div>
+            <div layout="row" flex="100"  ng-cloak layout-align="space-between">
+                    <span class="custum-input-label" flex="55">Max Price</span>
+                   Rs.&nbsp;&nbsp;<div flex="35">
+                    <input type="number" data-ng-model="maxPrice" aria-label="maxPrice" style="width:60px"/>
+                    </div>
+            </div>
+           </div> -->
+            </div>        
+        </div>
+
+         <div  ng-show="filterID==3" layout="row" layout-wrap class="mobile-filter-panel" layout-align="space-between start">
+          <div data-ng-repeat="c in colours" flex="45" layout-align="start start" ng-click="updateColour($index)">
+             <div class="color-box-container" layout="row">
+             <div style="background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.1)), {{c.colourCode}}" 
+         class="color-box" ng-class={'color-box-selected':c.active}
+         layout="row" layout-align="center center">
+                <span></span>       
+            </div> 
+              <span style="font-size:0.9em; color:grey">&nbsp;{{c.name}}</span>
+            </div>
+        </div>           
+      </div> 
+
+       <div  ng-show="filterID==4" layout="row" layout-wrap class="mobile-filter-panel" layout-align="center start">
+            <div  data-ng-repeat="f in fabrics" flex="90" layout-align="start start" 
+                style="padding:2px;" class="small-label" >
+                  <md-checkbox  class="md-primary" name="string" ng-model="f.active"  aria-label="string"
+                  style="margin:0px;">
+                  <label class="grey-label">{{f.name }}</label>
+                  </md-checkbox>
+            </div>    
+      </div> 
+       
+  </div>
+</div>
+<div layout="row" flex="100" class="mobile-filter-footer" md-whiteframe="4" >
+    <md-button class="md-raised md-warn" aria-label="clear" data-ng-click="clear()" flex>Clear</md-button>
+    <md-button class="md-raised md-warn" aria-label="apply" data-ng-click="applyFilters('mobile')"  flex>Apply</md-button>
+
+</div>
+</md-dialog>

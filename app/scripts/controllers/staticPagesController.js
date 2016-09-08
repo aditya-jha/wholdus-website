@@ -5,33 +5,54 @@
         '$log',
         'APIService',
         'ToastService',
-        function($scope, $log, APIService, ToastService) {
+        '$rootScope',
+        'ngProgressBarService',
+        'DialogService',
+        'FormValidationService',
+        'UtilService',
+        function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService,
+            DialogService,FormValidationService, UtilService) {
+
+            $scope.formValidation=FormValidationService;
+            $scope.contactusForm = "contactusForm";
+            $scope.settings = {
+                isMobile: UtilService.isMobileRequest(),
+                showLoading: false
+            };
 
             $scope.contactus = {
                 email: "",
                 mobile_number: "",
-                remarks: ""
+                remarks: "",
             };
 
-            function resetContactUs() {
+            function resetContactUsFrom() {
+                $scope.contactusForm.$setPristine();
+                $scope.contactusForm.$setUntouched();
                 $scope.contactus = {
                     email: "",
                     mobile_number: "",
-                    remarks: ""
+                    remarks: "",
                 };
             }
 
+            $scope.buyNow = function(event){
+                DialogService.viewDialog(event, {
+                    view: 'views/partials/buyNow.html'
+                });
+            };
+
             $scope.contactUs = function() {
-                if($scope.contactus.email && $scope.contactus.mobile_number) {
-                    APIService.apiCall("POST", APIService.getAPIUrl('contactus'), $scope.contactus).then(function(response) {
-                        ToastService.showActionToast("Thank you for reaching out to us. We will get back to you soon!", 0);
-                        resetContactUs();
-                    }, function(error) {
-                        ToastService.showActionToast("We are experiencing heavy traffic! Please try later", 0);
-                    });
-                } else {
-                    ToastService.showActionToast("Please fill required details", 0);
-                }
+                $scope.settings.showLoading = true;
+                APIService.apiCall("POST", APIService.getAPIUrl('contactus'), $scope.contactus)
+                .then(function(response) {
+                    ToastService.showActionToast("Thank you for reaching out to us. We will get back to you soon!", 0);
+                    $scope.settings.showLoading = false;
+                    resetContactUsFrom();
+                }, function(error) {
+                    ToastService.showActionToast("We are experiencing heavy traffic! Please try later", 0);
+                    $scope.settings.showLoading = false;
+                });
             };
         }
     ]);

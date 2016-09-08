@@ -5,26 +5,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/">
+
+    <meta name="theme-color" content="#512DA8" />
+    <meta name="msapplication-navbutton-color" content="#512DA8">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#512DA8">
+
     <title>Buy kurti sarees suits in bulk at manufacturer wholesale rates india @ wholdus.com</title>
 
     <link rel="shortcut icon" href="images/wholdus-favicon.ico" />
-    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa:400,700|PT+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+
     <link href="styles/style.css" rel="stylesheet" />
+    <link href="styles/animations.css" rel="stylesheet" />
+    <link href="styles/mediaQueries.css" rel="stylesheet" />
+    <style>
+      .body {
+         margin: 0;
+         background-color: #673AB7;
+         height: 100vh;
+      }
+      .dummy {
+         height: 100vh;
+      }
+      .dummy div{
+         position: relative;
+         top: 30%;
+         text-align: center;
+         color: #fff;
+      }
+    </style>
 </head>
-<body layout="column">
+<body class="body" layout="column" layout-align="start center">
+   <noscript>
+         You must enable Javascript in order to use this site.
+   </noscript>
+   <div class="dummy">
+      <div>
+         <img src="images/wholdus-logo.svg" />
+         <h1 style="padding:0;margin:0">Wholdus</h1>
+      </div>
+   </div>
+
    <div id="progressBar"></div>
 
    <div wu-header></div>
+   <div wu-sidenav></div>
 
    <md-content ng-view class="background-page" flex ng-cloak></md-content>
+   <div wu-feed-detail flex-gt-sm="100" flex-xs="100" flex-sm="100" class="feed-details text-center md-whiteframe-12dp"></div>
 
    <script src="bower_components/angular/angular.min.js"></script>
    <script src="bower_components/angular-route/angular-route.min.js"></script>
    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-   <script src="bower_components/angular-material/angular-material.min.js"></script>
+   <script src="bower_components/angular-material/angular-material.js"></script>
    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
    <script src="bower_components/ngprogress/build/ngprogress.min.js"></script>
    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
@@ -38,16 +73,42 @@
    <script src="scripts/services/ngProgressbarService.js"></script>
    <script src="scripts/services/loginService.js"></script>
    <script src="scripts/services/orderService.js"></script>
+   <script src="scripts/services/dialogService.js"></script>
+   <script src="scripts/services/formValidationService.js"></script>
 
    <script src="scripts/directives/wuHeader.js"></script>
    <script src="scripts/directives/wuProduct.js"></script>
    <script src="scripts/directives/wuPagination.js"></script>
+   <script src="scripts/directives/wuSidenav.js"></script>
+   <script src="scripts/directives/imageOnLoad.js"></script>
+   <script src="scripts/directives/wuScript.js"></script>
+   <script src="scripts/directives/wuAccountSidenav.js"></script>
+   <script src="scripts/directives/wuShortlistButton.js"></script>
+   <script src="scripts/directives/wuFeedDetail.js"></script>
+   <script src="scripts/directives/wuBlognav.js"></script>
+   <script src="scripts/directives/wuGallery.js"></script>
+   <script src="scripts/directives/wuFooter.js"></script>
 
    <script src="scripts/controllers/homeController.js"></script>
    <script src="scripts/controllers/categoryController.js"></script>
    <script src="scripts/controllers/productController.js"></script>
-   <script src="scripts/controllers/buyNowController.js"></script>
+   <script src="scripts/controllers/popupController.js"></script>
    <script src="scripts/controllers/staticPagesController.js"></script>
+   <script src="scripts/controllers/ordersController.js"></script>
+   <script src="scripts/controllers/profileController.js"></script>
+   <script src="scripts/controllers/feedController.js"></script>
+   <script src="scripts/controllers/blogController.js"></script>
+   <script src="scripts/controllers/redirectController.js"></script>
+   <script src="scripts/controllers/galleryPopupController.js"></script>
+   <script src="scripts/controllers/lotPopupController.js"></script>
+   <script src="scripts/controllers/consignmentController.js"></script>
 
+   <script>
+      window.setTimeout(function() {
+         document.body.classList.remove('body');
+         var x = document.getElementsByClassName('dummy');
+         if(x && x.length) x[0].style.setProperty('display','none');
+      }, 0);
+   </script>
 </body>
 </html>

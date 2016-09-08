@@ -7,6 +7,7 @@ var uglifycss = require('gulp-uglifycss');
 var RevAll = require('gulp-rev-all');
 var revReplace = require('gulp-rev-replace');
 var gulpsync = require('gulp-sync')(gulp);
+var exec = require('child_process').exec;
 
 var jsVendors =  [
     'app/bower_components/angular/angular.min.js',
@@ -28,25 +29,45 @@ var jsCustom = [
     'app/scripts/services/ngProgressbarService.js',
     'app/scripts/services/loginService.js',
     'app/scripts/services/orderService.js',
+    'app/scripts/services/dialogService.js',
+    'app/scripts/services/formValidationService.js',
     'app/scripts/directives/wuHeader.js',
     'app/scripts/directives/wuProduct.js',
     'app/scripts/directives/wuPagination.js',
+    'app/scripts/directives/wuSidenav.js',
+    'app/scripts/directives/imageOnLoad.js',
+    'app/scripts/directives/wuScript.js',
+    'app/scripts/directives/wuAccountSidenav.js',
+    'app/scripts/directives/wuFeedDetail.js',
+    'app/scripts/directives/wuGallery.js',
+    'app/scripts/directives/wuFooter.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
-    'app/scripts/controllers/buyNowController.js',
-    'app/scripts/controllers/errorPageController.js'
+    'app/scripts/controllers/popupController.js',
+    'app/scripts/controllers/staticPagesController.js',
+    'app/scripts/controllers/ordersController.js',
+    'app/scripts/controllers/profileController.js',
+    'app/scripts/controllers/feedController.js',
+    'app/scripts/controllers/blogController.js',
+    'app/scripts/controllers/redirectController.js',
+    'app/scripts/controllers/galleryPopupController.js',
+    'app/scripts/controllers/lotPopupController.js',
+    'app/scripts/controllers/consignmentController.js'
 ];
 
 var stylesheets = [
     'app/bower_components/angular-material/angular-material.min.css',
-    'app/styles/style.css'
+    'app/styles/style.css',
+    'app/styles/mediaQueries.css',
+    'app/styles/animations.css',
 ];
 
 gulp.task('copyViews', function() {
     return gulp.src('./app/views/**/*.html')
                 .pipe(gulp.dest('./build/views'));
 });
+
 gulp.task('copyImages', function() {
     return gulp.src('./app/images/**/*.{png,jpg,svg,jpeg,ico}')
                 .pipe(gulp.dest('./build/images'));
@@ -99,8 +120,19 @@ gulp.task('buildCustomScripts', function() {
                 .pipe(gulp.dest('build/js'));
 });
 
+gulp.task('startServer', function() {
+    exec('http-server ./build/', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        cb(err);
+    });
+});
+
 // Default Task
 gulp.task('default', ['vendorScripts', 'styles']);
 
 // production build
 gulp.task('build', ['buildVendorScripts', 'styles', 'buildCustomScripts', 'copyViews', 'copyImages']);
+
+// local production server
+gulp.task('serve', ['startServer']);

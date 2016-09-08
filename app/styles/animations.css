@@ -1,0 +1,43 @@
+@keyframes bounce {
+      0% {
+          transform:translateY(0em);
+      }
+      25% {
+          transform:translateY(-0.5em);
+      }
+      75% {
+          transform:translateY(0.5em);
+      }
+}
+
+@keyframes swipeRight {
+    from { width: 10%; }
+    to { width: 90%; }
+}
+
+@keyframes swipeLeft {
+    from { width: 90%; }
+    to { width: 10%; }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+   50% {
+    transform: translate3d(-8px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(6px, 0, 0);
+  }
+
+}

@@ -4,28 +4,47 @@
         '$scope',
         '$routeParams',
         '$log',
+        '$window',
+        '$location',
         'APIService',
         'UtilService',
         'ngProgressBarService',
         '$rootScope',
+        'DialogService',
+        'ToastService',
         '$mdMedia',
         '$mdDialog',
-        function($scope, $routeParams, $log, APIService, UtilService, ngProgressBarService, $rootScope, $mdMedia, $mdDialog) {
+        'ConstantKeyValueService',
+        'LoginService',
+        '$q',
+        '$timeout',
+        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService, LoginService, $q, $timeout) {
+
+            var listeners = [];
+
+            $scope.atcAPICall = null;
 
             function praseProductDetails(p) {
-                p.images = UtilService.getImages(p);
-                if(p.images.length) {
-                    $scope.image = {
-                        url: UtilService.getImageUrl(p.images[0], '400x400'),
-                        index: 0,
-                        showImage: true
-                    };
-                    $scope.allImages = [];
-                    for(var i=0; i<p.images.length && i<10; i++) {
-                        $scope.allImages.push(UtilService.getImageUrl(p.images[i], '200x200'));
-                    }
-                }
-                $scope.productDetailsKeys = [{
+                var product = {
+                    productID: p.productID,
+                    category: p.category,
+                    display_name: p.display_name,
+                    min_price_per_unit: p.min_price_per_unit,
+                    price_per_unit: p.price_per_unit,
+                    margin: p.margin,
+                    lot_size: p.lot_size,
+                    seller: {
+                        company_name: p.seller.company_name,
+                        address: p.seller.address[0]
+                    },
+                    details: {
+                        seller_catalog_number: p.details.seller_catalog_number,
+                    },
+                    product_lot: p.product_lot,
+                    image: p.image
+                };
+
+                var productDetailsKeys = [{
                     label: 'Brand',
                     value: p.details.brand
                 }, {
@@ -58,52 +77,139 @@
                 }, {
                     label: 'Features',
                     value: p.details.special_feature
+                },{
+                    label: 'Lot Description',
+                    value: p.details.lot_description.length>0?p.details.lot_description:'None'
                 }];
+                $scope.product = product;
+                $scope.productDetailsKeys = productDetailsKeys;
             }
 
-            function getProducts() {
-                var params = {
-                    productID: UtilService.getIDFromSlug($routeParams.product)
-                };
-                $rootScope.$broadcast('showProgressbar');
-                APIService.apiCall("GET", APIService.getAPIUrl("products"), null, params)
+            function getProducts(productID) {
+                ngProgressBarService.showProgressbar();
+                APIService.apiCall("GET", APIService.getAPIUrl("products"), null, {
+                    productID: productID
+                })
                 .then(function(response) {
+                    ngProgressBarService.endProgressbar();
                     if(response.products.length) {
-                        $scope.product = response.products[0];
-                        praseProductDetails($scope.product);
+                        praseProductDetails(response.products[0]);
                     }
-                    $rootScope.$broadcast('endProgressbar');
+                    else{
+                        $location.url('/404');
+                    }
                 }, function(error) {
-                    $scope.product = [];
-                    $rootScope.$broadcast('endProgressbar');
+                    ngProgressBarService.endProgressbar();
+                    $location.url('/404');
                 });
             }
-            getProducts();
 
-            $scope.buyNow = function(event) {
-                var useFullScreen = $mdMedia('xs');
-                $mdDialog.show({
-                    controller: 'buyNowController',
-                    templateUrl: 'views/partials/buyNow.html',
+            function getCartStatus(productID) {
+                APIService.apiCall("GET", APIService.getAPIUrl('cartItem'), null, {
+                    productID: productID
+                }).then(function(response) {
+                    if(response.cart_items.length) {
+                        $scope.pdInCart = true;
+                    }
+                }, function(error) {});
+            }
+
+            function openLotPopup(event, product, lots) {
+                return $mdDialog.show({
+                    controller: 'LotPopupController',
+                    templateUrl: 'views/partials/lotSelectPopup.html',
                     parent: angular.element(document.body),
                     targetEvent: event,
-                    clickOutsideToClose:true,
-                    fullscreen: useFullScreen,
+                    clickOutsideToClose: true,
+                    fullscreen: $mdMedia('xs') || $mdMedia('sm'),
                     locals: {
-                        productID: $scope.product.productID
+                        product: product,
+                        lots: lots
                     }
                 });
-            };
+            }
 
-            $scope.changeDisplayImage = function(index) {
-                if($scope.image.index != index) {
-                    $scope.image.showImage = false;
-                    $scope.image.index = index;
-                    $scope.image.url = UtilService.getImageUrl($scope.product.images[index], '400x400');
+            function addToCartHelper(product, lots) {
+                if($scope.atcAPICall) return;
+                var deferred = $q.defer();
+                if($scope.pdInCart) {
+                    $timeout(function() {
+                        deferred.resolve();
+                    }, 10);
+                } else {
+                    var data = {
+                        productID: product.productID,
+                        lots: lots,
+                        added_from: ConstantKeyValueService.cartTrack.added_from.product_page
+                    };
+                    $scope.atcAPICall = APIService.apiCall("POST", APIService.getAPIUrl('cartItem'), data);
+                    $scope.atcAPICall.then(function(response) {
+                        $scope.atcAPICall = null;
+                        $scope.pdInCart = true;
+                        deferred.resolve();
+                    }, function(error) {
+                        $scope.atcAPICall = null;
+                        ToastService.showActionToast("Sorry! Couldn't add product to consignment", 5000, "ok");
+                        deferred.reject();
+                    });
+                }
+                return deferred.promise;
+            }
 
-                    $scope.image.showImage = true;
+            function init() {
+                var productID = UtilService.getIDFromSlug($routeParams.product);
+                $scope.isMobile = UtilService.isMobileRequest();
+                getProducts(productID);
+                if(LoginService.checkLoggedIn()) {
+                    getCartStatus(productID);
+                }
+            }
+            init();
+
+            function addToCartAfterLogin(event, product, buyNow) {
+                if(buyNow && $scope.pdInCart) {
+                    $location.url('/consignment');
+                } else {
+                    openLotPopup(event, product, 1).then(function(lots) {
+                        addToCartHelper(product, lots).then(function() {
+                            if(buyNow) {
+                                $location.url('/consignment');
+                            }
+                        });
+                    });
+                }
+            }
+
+            $scope.addToCart = function(event, product, buyNow) {
+                if(LoginService.checkLoggedIn()) {
+                    addToCartAfterLogin(event, product, buyNow);
+                } else {
+                    DialogService.viewDialog(event, {
+                        view: 'views/partials/loginPopup.html',
+                    }).finally(function() {
+                        if(LoginService.checkLoggedIn()) {
+                            $rootScope.$broadcast('checkLoginState');
+                            addToCartAfterLogin(event, product, buyNow);
+                        }
+                    });
                 }
             };
+
+            var loginStateChange = $rootScope.$on('loginStateChange', function(event, data) {
+                if(LoginService.checkLoggedIn()) {
+                    getCartStatus($scope.product.productID);
+                } else {
+                    $scope.pdInCart = null;
+                }
+            });
+            listeners.push(loginStateChange);
+
+            var destroyListener = $scope.$on('$destroy', function() {
+                angular.forEach(listeners, function(value, key) {
+                    if(value) value();
+                });
+            });
+            listeners.push(destroyListener);
         }
     ]);
 })();

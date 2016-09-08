@@ -1,0 +1,70 @@
+<md-dialog aria-label="lot-selection-popup">
+    <md-toolbar class="md-medium md-hue-2">
+        <div class="md-toolbar-tools header-toolbar">
+            <h1 flex class="text-center">{{::product.display_name}}</h1>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="lot-popup" layout="row" layout-wrap>
+        <div layout="row" flex="100" layout-wrap>
+            <div layout="row" class="lot-pricing-head" flex="100">
+                <span flex="33">No. of Lots</span>
+                <span flex="33">Price/Unit</span>
+                <span flex="33">Lot Price</span>
+            </div>
+            <div flex="100" layout-wrap layout="row" ng-repeat="pl in ::product.product_lot" class="lot-pricing-detail {{$index==details.activeLot ? 'active': ''}}">
+                <span flex="33">{{::pl.lot_size_from}}-{{::pl.lot_size_to}}</span>
+                <span flex="33">{{::pl.price_per_unit | number:0}}</span>
+                <span flex="33">{{::pl.price_per_unit*product.lot_size | number:0}}</span>
+            </div>
+        </div>
+
+        <div layout="row" flex="100" class="details" layout-wrap layout-align="center center">
+            <div flex-xs="100" flex-sm="100" flex-gt-sm="80" layout="row">
+                <div flex="40" layout="column">
+                    <span class="feature-title">Price per Peice</span>
+                    <span class="large-font">Rs. {{details.ppp}}</span>
+                </div>
+                <div flex="60" layout="row" layout-align="center center">
+                    <div layout="row" flex layout-align="center center">
+                        <div layout="column">
+                            <span class="feature-title">Lot Size</span>
+                            <span class="large-font">{{::product.lot_size}}</span>
+                        </div>
+                    </div>
+                    <div layout="row" flex layout-align="center center">
+                        <div layout="column">
+                            <span class="feature-title">Peices</span>
+                            <span class="large-font">{{details.pieces}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div flex-xs="100" flex-sm="100" flex-gt-sm="80" layout="row">
+                <div flex="40" layout="column">
+                    <div layout="column" flex layout-align="center start">
+                        <span class="feature-title">Total Price</span>
+                        <span class="large-font">Rs. {{details.tp}}</span>
+                    </div>
+                </div>
+                <div flex="60" layout="column" layout-align="center center">
+                    <span class="feature-title">Lots</span>
+                    <div layout="row" class="lots-count">
+                        <md-button class="md-fab md-mini md-primary" ng-click="modifyLots(-1)">-</md-button>
+                        <div layout="column" flex layout-align="center center" layout-margin>
+                            <span class="lots">{{details.lots}}</span>
+                        </div>
+                        <md-button class="md-fab md-mini md-primary" ng-click="modifyLots(1)">+</md-button>
+                    </div>
+                </div>
+            </div>
+            <div flex="100" layout="row">
+                <span flex hide-xs></span>
+                <span flex layout="row" layout-align="center center">
+                    <md-button class="md-raised" ng-click="cancel()">cancel</md-button>
+                </span>
+                <md-button class="md-raised md-warn" ng-click="done()" flex>done</md-button>
+                <span flex hide-xs></span>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>

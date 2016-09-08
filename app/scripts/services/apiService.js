@@ -23,6 +23,10 @@
                     data = JSON.stringify(data);
                 }
 
+                if(!params) {
+                    params = {};
+                }
+                params.access_token = ConstantKeyValueService.token;
                 var apiPromise = $http({
                     method: method,
                     params: params,
@@ -39,24 +43,9 @@
                         deferred.reject(response.data.body);
                     }
                 }, function(error) {
-                    //$location.url('/404');
                     deferred.reject(error);
                 });
 
-                return deferred.promise;
-            };
-
-            factory.promiseReturnHelper = function(promiseObj, deferred) {
-                promiseObj.then(function(response) {
-                    if(response.data.statusCode === '2XX') {
-                        deferred.resolve(response.data.body);
-                    } else {
-                        deferred.reject(response.data.body);
-                    }
-                }, function(error) {
-                    $location.url('/404');
-                    deferred.reject(error);
-                });
                 return deferred.promise;
             };
 

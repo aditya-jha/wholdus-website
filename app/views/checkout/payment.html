@@ -1,0 +1,55 @@
+<div layout="row" layout-wrap flex="100" class="section md-whiteframe-6dp">
+    <div class="header" layout="row" layout-align="center center" flex="100">
+        Select Payment Method
+    </div>
+
+    <p flex="100" class="bold" ng-if="!pincodeService.delivery">
+        Sorry! Delivery no available at your locaiton currently
+    </p>
+    <md-radio-group ng-model="paymentMethod.selected" class="content radio-list" layout="row" flex="100" layout-wrap ng-if="checkCODAvailable()">
+        <md-radio-button value="0" class="md-warn" flex="100" ng-if="pincodeService.cod">
+            Cash On Delivery
+        </md-radio-button>
+        <span class="credit-payment-text">Rs. {{getCODAmount()}} COD Charge</span>
+        <span flex="100"><md-divider></md-divider></span>
+        <md-radio-button value="1" class="md-warn"  flex="100">NEFT Bank Transfer</md-radio-button>
+        <span flex="100"><md-divider></md-divider></span>
+        <md-radio-button value="9" class="md-warn" flex="100">Credit</md-radio-button>
+        <span class="credit-payment-text">{{::paymentMethod.options[2].left_orders}} more transactions to avail credit</span>
+    </md-radio-group>
+</div>
+
+<div layout="row" flex="100" class="section md-whiteframe-6dp" ng-if="paymentMethod.selected==0">
+    <div layout="row" class="content padding-up-down" layout-wrap flex="100">
+        <span flex="30" flex-xs="50">Amount to pay</span><span flex="70" flex-xs="50" class="bold">Rs. {{cart.final_price + getCODAmount()}}</span>
+    </div>
+</div>
+<div layout="row" flex="100" layout-wrap class="section md-whiteframe-6dp" ng-if="paymentMethod.selected==1">
+    <div layout="row" class="content padding-up-down" layout-wrap>
+        <span flex="100" class="bold">{{::paymentMethod.options[1].company_name}}</span>
+        <span flex="30">AC NO.</span><span flex="70" class="bold">{{::paymentMethod.options[1].account_number}}</span>
+        <span flex="30">IFSC</span><span flex="70" class="bold">{{::paymentMethod.options[1].ifsc}}</span>
+        <span flex="30">ACCOUNT</span><span flex="70" class="bold">{{::paymentMethod.options[1].account_type}}</span>
+        <span flex="30">BRANCH</span><span flex="70" class="bold">{{::paymentMethod.options[1].branch}}</span>
+    </div>
+    <span flex="100"><md-divider></md-divider></span>
+    <div layout="row" class="content padding-up-down" layout-wrap>
+        <span>
+            Please transfer <span class="bold">amount of Rs. {{::cart.final_price}}</span> into above mentioned account and update the details on &nbsp;
+            <a href="/account/orders" target="_blank">orders page</a>
+        </span>
+        <span class="bold">We will process the order once payment has been recieved</span>
+    </div>
+</div>
+
+<span ng-if="isMobile" flex="100" style="height:50px;"></span>
+<div class="action" flex="100" layout-align="center center" layout="row" ng-if="!isMobile">
+    <span flex hide-xs></span>
+    <md-button class="md-raised" flex hide-xs ng-href="/" ng-if="!step">continue shopping</md-button>
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)" ng-disabled="paymentMethod.selected==9">proceed</md-button>
+    <span flex hide-xs></span>
+</div>
+
+<div class="action-mobile" flex="100" layout-align="center center" layout="row" ng-if="isMobile">
+    <md-button class="md-raised md-warn" flex ng-click="proceed(step)" ng-disabled="paymentMethod.selected==9 && !pincodeService.delivery">proceed</md-button>
+</div>

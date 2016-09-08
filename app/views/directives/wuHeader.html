@@ -1,19 +1,117 @@
-<md-toolbar class="md-medium-tall md-hue-2" id="header-toolbar">
-      <div layout="row" layout-fill>
-            <md-button data-ng-href="/" md-no-ink aria-label="Settings" flex-xs="20" flex-gt-xs="5" flex-md="5" flex-gt-md="5" flex-sm="10">
-               <md-icon md-svg-icon="images/wholdus-logo.svg"></md-icon>
-            </md-button>
-            <h1 hide-xs show-gt-xs>
-                  <a href="/">Wholdus</a>
-            </h1>
-            <span flex></span>
-            <div layout="row" layout-align="center center" style="max-height=50px">
-                  <md-button class="md-raised md-warn" data-ng-href="http://seller.wholdus.com/distribute-on-wholdus" target="_blank" aria-label="distribute-on-wholdus">
-                      <span>Distribute</span>
-                  </md-button>
-                  <md-button hide-xs show-gt-xs aria-label="customer_support">
-                      <span>+91-7895161705</span>
-                  </md-button>
+<md-toolbar class="md-medium md-hue-2">
+    <div class="md-toolbar-tools header-toolbar">
+        <md-button class="md-icon-button menu-button" aria-label="Menu" ng-click="toggleSidenav()" style="margin-right:0;">
+            <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h24v24H0z" fill="none"/>
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+        </md-button>
+        <a href="/" class="space">
+            <md-icon md-svg-icon="images/wholdus-logo.svg" style="height:100%;min-width:50px;"></md-icon>
+        </a>
+        <h1 hide-xs hide-sm style="font-size:1.5em;"><a href="/">Wholdus</a></h1>
+        <span hide-xs hide-gt-xs show-gt-sm flex style="margin-bottom:-0.7em;font-size:0.8em;text-align:center;"><i>&ldquo;</i> wholesale distribution with us<i>&rdquo;</i></span>
+        <span flex hide-gt-sm></span>
+
+        <md-menu md-offset="0 40" class="cursor-pointer" ng-if="loginStatus">
+            <div layout="row" ng-click="$mdOpenMenu($event)">
+                <span class="username">{{buyerName}}</span>
+                <md-icon>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#FFFFFF" d="M7,10L12,15L17,10H7Z" />
+                    </svg>
+                </md-icon>
             </div>
-      </div>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button data-ng-href="account/hand-picked-products" class="md-button-icon">
+                        <md-icon>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="#FF5722" d="M16,21H8A1,1 0 0,1 7,20V12.07L5.7,13.12C5.31,13.5 4.68,13.5 4.29,13.12L1.46,10.29C1.07,9.9 1.07,9.27 1.46,8.88L7.34,3H9C9,4.1 10.34,5 12,5C13.66,5 15,4.1 15,3H16.66L22.54,8.88C22.93,9.27 22.93,9.9 22.54,10.29L19.71,13.12C19.32,13.5 18.69,13.5 18.3,13.12L17,12.07V20A1,1 0 0,1 16,21M20.42,9.58L16.11,5.28C15.8,5.63 15.43,5.94 15,6.2C14.16,6.7 13.13,7 12,7C10.3,7 8.79,6.32 7.89,5.28L3.58,9.58L5,11L8,9H9V19H15V9H16L19,11L20.42,9.58Z" />
+                            </svg>
+                        </md-icon>
+                        Hand Picked For You
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button data-ng-href="account/hand-picked-products?filter=favorite" class="md-button-icon">
+                        <md-icon>
+                            <svg fill="#FF5722" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </md-icon>
+                        Favorites
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button data-ng-href="account/hand-picked-products?filter=dislikes" class="md-button-icon">
+                        <md-icon>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="#FF5722" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+                            </svg>
+                        </md-icon>
+                        Dislikes
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button data-ng-href="account/orders" class="md-button-icon">
+                        <md-icon>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="#FF5722" d="M18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5M19.5,9.5L21.46,12H17V9.5M6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5M20,8H17V4H3C1.89,4 1,4.89 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8Z" />
+                            </svg>
+                        </md-icon>
+                        Orders
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button data-ng-href="account/profile" class="md-button-icon">
+                        <md-icon>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="#FF5722" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                            </svg>
+                        </md-icon>
+                        My Profile
+                    </md-button>
+                </md-menu-item>
+                <md-menu-item>
+                    <md-button ng-click="login()" class="md-button-icon">
+                        <md-icon>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                <path fill="#FF5722" d="M17,17.25V14H10V10H17V6.75L22.25,12L17,17.25M13,2A2,2 0 0,1 15,4V8H13V4H4V20H13V16H15V20A2,2 0 0,1 13,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2H13Z" />
+                            </svg>
+                        </md-icon>
+                        logout
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+
+        <span class="space cursor-pointer" ng-if="!loginStatus && !isMobile" ng-click="login($event)">login</span>
+        <div class="header-icons" md-ink-ripple ng-click="login($event)" ng-if="!loginStatus">
+            <md-icon>
+                <svg fill="#FF5722" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+            </md-icon>
+        </div>
+        <div class="header-icons" md-ink-ripple ng-click="goToUrl($event, 'fav')">
+            <md-icon>
+                <svg fill="#FF5722" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </md-icon>
+        </div>
+
+        <div class="header-icons" md-ink-ripple ng-click="goToUrl($event, 'consignment')">
+            <md-icon>
+                <svg fill="#FF5722" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                    <path d="M0 0h24v24H0z" fill="none"/>
+                </svg>
+            </md-icon>
+        </div>
+    </div>
 </md-toolbar>
