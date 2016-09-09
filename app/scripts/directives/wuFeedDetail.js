@@ -40,7 +40,7 @@
                     };
 
                     $scope.feedActionButton = function(type) {
-                        $scope.$broadcast('feedActionButtonClicked', type);
+                        $rootScope.$broadcast('feedActionButtonClicked', type);
                     };
 
                     var productToShowListener = $rootScope.$on('showFeedActionButton', function(event, data) {

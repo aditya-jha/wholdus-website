@@ -226,7 +226,7 @@
             });
             listeners.push(locationChangeListener);
 
-            var feedActionButtonClickedListener = $scope.$on('feedActionButtonClicked', function(event, data) {
+            var feedActionButtonClickedListener = $rootScope.$on('feedActionButtonClicked', function(event, data) {
                 $scope.favButton(event, data);
             });
             listeners.push(feedActionButtonClickedListener);
@@ -242,7 +242,7 @@
             };
 
             function favButtonHelper(type, swiped) {
-                bpStatusApi = APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
+                bpStatusApi = APIService.apiCall("PUT", APIService.getAPIUrl("allBuyerProducts"), {
                     //buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
                     buyerID: $scope.pageSettings.buyer.id,
                     productID: $scope.products[$scope.pageSettings.productIndex].product.productID,
