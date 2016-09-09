@@ -1100,6 +1100,11 @@ a:active {
     display: none;
 }
 
+.bp-instructions-popup-content {
+    background-color: rgba(238,238,238,1);
+    font-family: 'Comfortaa', cursive;
+}
+
 .swipe-gesture-div-right div{
     animation: swipeRight 1s ease 1s infinite forwards;
 }
