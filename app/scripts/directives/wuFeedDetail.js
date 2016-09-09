@@ -19,13 +19,6 @@
                     $scope.showDetailsCard = false;
                     $scope.product = null;
 
-                    function init() {
-                        var url = $location.url();
-                        if(url.indexOf('hand-picked') == -1) {
-                            $scope.showFeedActionButton = false;
-                        }
-                    }
-
                     function isSmallScreen() {
                         if($window.screen.height <= 570) {
                             $scope.smallScreen = true;
@@ -60,13 +53,6 @@
                         }
                     });
                     listeners.push(productToShowListener);
-
-                    var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
-                        init();
-                    });
-                    listeners.push(locationChangeListener);
-
-                    init();
 
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value) {
