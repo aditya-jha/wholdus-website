@@ -28,7 +28,7 @@
                     function toggleShortlistHelper() {
                         $scope.shortlisted = !$scope.shortlisted;
                         if(!$scope.shortlistApiCall) {
-                            $scope.shortlistApiCall = APIService.apiCall('PUT', APIService.getAPIUrl('buyerProducts'), {
+                            $scope.shortlistApiCall = APIService.apiCall('PUT', APIService.getAPIUrl('allBuyerProducts'), {
                                 productID: $scope.product.productID,
                                 responded: $scope.shortlisted ? 1 : 2
                             });
