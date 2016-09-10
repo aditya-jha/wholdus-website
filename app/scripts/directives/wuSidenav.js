@@ -26,7 +26,7 @@
                         display_name: 'Purchase Requests',
                         url: '/account/purchase-requests'
                     }, {
-                        display_name: 'Favourites',
+                        display_name: 'Shortlist',
                         url: '/account/hand-picked-products?filter=favorite'
                     }, {
                         display_name: 'Orders',
