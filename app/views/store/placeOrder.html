@@ -2,7 +2,7 @@
     <form name="placeOrderForm" novalidate data-ng-submit="placeOrderForm.$valid && placeOrder($event)">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2 flex class="popup-title">Place Order</h2>
+                <h2 flex class="popup-title">Purchase Request</h2>
                 <md-button class="md-icon-button" ng-click="cancel()" aria-label="cancel">
                     <svg fill="#fff" height="36" viewBox="0 0 24 24" width="30" >
                         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
@@ -55,7 +55,7 @@
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <md-button type="submit" class="md-raised md-warn" style="margin-right:20px;" ng-disabled="apiCall">
-                Place Order
+                Get Callback
             </md-button>
         </md-dialog-actions>
     </form>
