@@ -33,6 +33,11 @@
                 return address;
             }
 
+            function setStoreText(buyer) {
+                var storeText = "Hey!+Check+out+" + buyer.name + "'s+online+store+" + buyer.company_name + "+on:+" + $location.protocol() + "://" + $location.host() + "/store/" + buyer.store_url;
+                return storeText;
+            }
+
             function praseProductDetails(p) {
                 var product = {
                     productID: p.productID,
@@ -126,6 +131,7 @@
                     if(response && response.buyers && response.buyers.length) {
                         response.buyers[0].mobileUrl = setMobileUrl(response.buyers[0].mobile_number);
                         response.buyers[0].complete_address = setCompleteAddress(response.buyers[0].address);
+                        response.buyers[0].storeText = setStoreText(response.buyers[0]);
                         $scope.store = response.buyers[0];
                         $rootScope.$broadcast('store', $scope.store);
                         ngProgressBarService.endProgressbar();
