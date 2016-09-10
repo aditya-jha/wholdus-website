@@ -20,7 +20,8 @@
                     var listeners = [];
                     var urls = {
                         fav: '/account/hand-picked-products?filter=favorite',
-                        consignment: 'consignment'
+                        consignment: 'consignment',
+                        store: '/account/my-store'
                     };
 
                     function loginDialogCallback(redirect) {

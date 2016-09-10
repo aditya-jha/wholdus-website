@@ -75,7 +75,7 @@
                         $rootScope.$broadcast('showFeedActionButton', false);
                         $scope.pageSettings.responded = 1;
                     }
-                    else if(search.filter == 'dislikes') {
+                    else if(search.filter == 'rejected') {
                         $rootScope.$broadcast('showFeedActionButton', false);
                         $scope.pageSettings.responded = 2;
                     }

@@ -76,6 +76,10 @@
     .filler-toolbar > span{
         font-size: 1em;
     }
+
+    .like-dislike-card div {
+        max-width: 65%;
+    }
 }
 
 @media screen and (min-width:600px) {
