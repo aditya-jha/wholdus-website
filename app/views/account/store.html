@@ -14,7 +14,7 @@
             </div>
             <div layout="row" flex="100" layout-align="center center">
                 <span flex hide-xs></span>
-                <md-button class="md-warn md-raised" flex>Discount</md-button>
+                <md-button class="md-warn md-raised" flex ng-click="openDiscountPopup($event)">Discount ({{store.store_global_discount}}%)</md-button>
                 <span flex hide-xs></span>
             </div>
         </div>

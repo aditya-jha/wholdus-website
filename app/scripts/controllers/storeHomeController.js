@@ -11,7 +11,8 @@
         '$mdDialog',
         '$mdMedia',
         '$q',
-        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia, $q) {
+        'DialogService',
+        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia, $q, DialogService) {
 
             $scope.pageSettings = {
                 totalPages: 0,
@@ -262,6 +263,22 @@
                     locals: {
                         product: product,
                     }
+                });
+            };
+
+            $scope.openDiscountPopup = function(event) {
+                return $mdDialog.show({
+                    controller: 'StoreDiscountPopupController',
+                    templateUrl: 'views/partials/storeDiscountPopup.html',
+                    parent: angular.element(document.body),
+                    targetEvent: event,
+                    clickOutsideToClose: true,
+                    fullscreen: $mdMedia('xs'),
+                    locals: {
+                        store: $scope.store,
+                    }
+                }).then(function(discount) {
+                    $scope.store.store_global_discount = discount;
                 });
             };
         }
