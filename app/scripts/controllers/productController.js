@@ -38,6 +38,7 @@
                     colors: p.details.colours,
                     sizes: p.details.sizes,
                     lot_size: p.lot_size,
+                    shortlisted: $scope.loggedIn ? (p.response.response_code == 1 ? true : false) : false,
                     seller: {
                         company_name: p.seller.company_name,
                         address: p.seller.address[0]
@@ -164,6 +165,7 @@
             function init() {
                 var productID = UtilService.getIDFromSlug($routeParams.product);
                 $scope.isMobile = UtilService.isMobileRequest();
+                $scope.shortlistApiCall = null;
                 getProducts(productID);
                 if(LoginService.checkLoggedIn()) {
                     $scope.loggedIn = true;
@@ -209,6 +211,36 @@
                             $scope.loggedIn = true;
                             $rootScope.$broadcast('checkLoginState');
                             addToCartAfterLogin(event, product, buyNow);
+                        }
+                    });
+                }
+            };
+
+            function toggleShortlistHelper() {
+                $scope.product.shortlisted = !$scope.product.shortlisted;
+                if(!$scope.shortlistApiCall) {
+                    $scope.shortlistApiCall = APIService.apiCall('PUT', APIService.getAPIUrl('allBuyerProducts'), {
+                        productID: $scope.product.productID,
+                        responded: $scope.product.shortlisted ? 1 : 2
+                    });
+                    $scope.shortlistApiCall.then(function(response) {
+                        $scope.shortlistApiCall = null;
+                    }, function(error) {
+                        $scope.shortlistApiCall = null;
+                    });
+                }
+            }
+
+            $scope.toggleShortlist = function(ev) {
+                if($scope.loggedIn) {
+                    toggleShortlistHelper();
+                } else {
+                    DialogService.viewDialog(ev, {
+                        view: 'views/partials/loginPopup.html',
+                    }).finally(function() {
+                        if(LoginService.checkLoggedIn()) {
+                            $scope.loggedIn = true;
+                            $rootScope.$broadcast('checkLoginState');
                         }
                     });
                 }
