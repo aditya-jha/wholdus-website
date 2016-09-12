@@ -886,15 +886,13 @@ a:active {
 .mobile-filter {
     width:100%;
     background-color: #512DA8;
-    font-family:'Comfortaa';
+    font-family:'Comfortaa', cursive;
     font-size: 1.2em;
     margin: 0;
-    margin-left: -0.5em;
+    left: 0;
     bottom: 0px;
-    height: 40px;
-    padding: 10px;
+    padding: 0.4em;
     color: #fff;
-  /*font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
     position: fixed;
     cursor: pointer;
 }
