@@ -22,12 +22,9 @@
                     }, {
                         display_name: 'My Store',
                         url: '/account/my-store'
-                    },{
+                    }, {
                         display_name: 'Purchase Requests',
                         url: '/account/purchase-requests'
-                    }, {
-                        display_name: 'Shortlist',
-                        url: '/account/hand-picked-products?filter=favorite'
                     }, {
                         display_name: 'Orders',
                         url: '/account/orders'
