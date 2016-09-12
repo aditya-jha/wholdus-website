@@ -1,5 +1,5 @@
 <md-dialog aria-label="Place Order" ng-cloak>
-    <form name="placeOrderForm" novalidate data-ng-submit="placeOrderForm.$valid && placeOrder($event)">
+    <form name="placeOrderForm" novalidate ng-submit="placeOrderForm.$valid && placeOrder($event)">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2 flex class="popup-title">Purchase Request</h2>
@@ -41,12 +41,12 @@
                             </div>
                         </div>
                     </md-input-container>
-                    <md-input-container>
+                    <!-- <md-input-container>
                         <label>Size</label>
                         <md-select ng-model="selectedSize">
                             <md-option ng-value="val" ng-repeat="val in allSizes">{{val}}</md-option>
                         </md-select>
-                    </md-input-container>
+                    </md-input-container> -->
                 </div>
                 <div layout="row" flex="100" ng-show="apiCall" layout-align="center center">
                     <md-progress-circular class="md-warn" md-mode="indeterminate" md-diameter="100"></md-progress-circular>

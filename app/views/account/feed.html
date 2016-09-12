@@ -1,10 +1,10 @@
-<!-- <div flex data-ng-if="pageSettings.responded == 0" data-ng-include="'views/partials/feedProducts.html'" layout="column">
+<!-- <div flex ng-if="pageSettings.responded == 0" ng-include="'views/partials/feedProducts.html'" layout="column">
 </div>
-<div flex data-ng-if="pageSettings.responded == 1 || pageSettings.responded == 2" data-ng-include="'views/partials/feedFavorite.html'">
+<div flex ng-if="pageSettings.responded == 1 || pageSettings.responded == 2" ng-include="'views/partials/feedFavorite.html'">
 </div> -->
-<div flex data-ng-if="pageSettings.responded == 0" layout="column">
+<div flex ng-if="pageSettings.responded == 0" layout="column">
     <div layout="row" layout-fill wu-account-sidenav></div>
-    <div layout="row" flex="100" class="account-content" data-ng-if="!noProducts" layout-wrap md-swipe-left="favButton($event, -1, 1)" md-swipe-right="favButton($event, 1, 1)">
+    <div layout="row" flex="100" class="account-content" ng-if="!noProducts" layout-wrap md-swipe-left="favButton($event, -1, 1)" md-swipe-right="favButton($event, 1, 1)">
         <div flex="100" layout="column" layout-align="center center">
             <div flex layout-align="center center" layout="column" style="padding-top:0.3em">
                 <div style="height:64vh; width:90vw" layout="row" layout-align="center center">
@@ -39,11 +39,11 @@
 </div>
 
 <!-- like dislike page -->
-<div flex data-ng-if="pageSettings.responded == 1 || pageSettings.responded == 2">
+<div flex ng-if="pageSettings.responded == 1 || pageSettings.responded == 2">
     <div layout="row" wu-account-sidenav flex="20"></div>
-    <div layout="row" flex class="account-content" layout-wrap data-ng-if="!noProducts">
+    <div layout="row" flex class="account-content" layout-wrap ng-if="!noProducts">
         <div layout="row" flex="100" style="margin-top:1em">
-            <md-toolbar data-ng-if="pageSettings.responded==1" class="md-toolbar-tools md-warn">
+            <md-toolbar ng-if="pageSettings.responded==1" class="md-toolbar-tools md-warn">
                 <div>
                     <md-icon class="space">
                         <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@
                 </div>
                 <span>Shortlist</span>
             </md-toolbar>
-            <md-toolbar data-ng-if="pageSettings.responded==2" class="md-toolbar-tools md-warn">
+            <md-toolbar ng-if="pageSettings.responded==2" class="md-toolbar-tools md-warn">
                 <div>
                     <md-icon class="space">
                         <svg style="width:24;height:24" viewBox="0 0 24 24">
@@ -66,16 +66,16 @@
             </md-toolbar>
         </div>
 
-        <div layout="row" layout-wrap class="product-card-wrap" layout-align="space-around center" data-ng-if="!noProducts">
+        <div layout="row" layout-wrap class="product-card-wrap" layout-align="space-around center" ng-if="!noProducts">
             <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="45" flex-sm="30" flex-gt-sm="30">
                 <div layout="row" wu-product product="p.product" flex></div>
             </div>
         </div>
 
-        <div layout="row" data-ng-show="pageSettings.enablePagination" wu-pagination flex="100"></div>
+        <div layout="row" ng-show="pageSettings.enablePagination" wu-pagination flex="100"></div>
     </div>
-    <div layout="column" flex class="account-content" data-ng-if="noProducts" layout-align="center center">
+    <div layout="column" flex class="account-content" ng-if="noProducts" layout-align="center center">
         <h2>Start discovering latest products at factory prices and get it delivered at your door step</h2>
-        <md-button class="md-raised md-warn" data-ng-href="account/hand-picked-products">Show products</md-button>
+        <md-button class="md-raised md-warn" ng-href="account/hand-picked-products">Show products</md-button>
     </div>
 </div>
