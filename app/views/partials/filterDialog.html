@@ -15,16 +15,16 @@
     <div layout="row" flex="100">
 
         <div layout="column" flex="40" class="filter-property-container">
-            <div class="filter-property" data-ng-click="filterID=1" ng-style="filterID==1 && activeFilterStyle">
+            <div class="filter-property" ng-click="filterID=1" ng-style="filterID==1 && activeFilterStyle">
                 &nbsp;Manufacturer
             </div>
-            <div class="filter-property" data-ng-click="filterID=2" ng-style="filterID==2 && activeFilterStyle">
+            <div class="filter-property" ng-click="filterID=2" ng-style="filterID==2 && activeFilterStyle">
                 &nbsp;Price
             </div>
-            <div class="filter-property" data-ng-click="filterID=3" ng-style="filterID==3 && activeFilterStyle">
+            <div class="filter-property" ng-click="filterID=3" ng-style="filterID==3 && activeFilterStyle">
                 &nbsp;Color
             </div>
-            <div class="filter-property" data-ng-click="filterID=4" ng-style="filterID==4 && activeFilterStyle">
+            <div class="filter-property" ng-click="filterID=4" ng-style="filterID==4 && activeFilterStyle">
                 &nbsp;Fabric
             </div>
 
@@ -40,7 +40,7 @@
 
             <div ng-show="filterID==2" layout="column" ng-cloak class="mobile-filter-panel" style="margin:5px">
                 <div layout="column">
-                    <div data-ng-repeat="p in priceRanges" layout-align="start start" style="padding:5px;" class="small-label">
+                    <div ng-repeat="p in priceRanges" layout-align="start start" style="padding:5px;" class="small-label">
                         <md-checkbox class="md-primary" name="string" ng-model="p.active" aria-label="string" style="margin:0px;" ng-click="updatePrice($index)">
                             <label class="grey-label">
                                 <span ng-if="$first">Below Rs.{{p.max_value}}</span>
@@ -57,13 +57,13 @@
             <div layout="row" flex="100"  ng-cloak layout-align="space-between">
                     <span class="custum-input-label" flex="55">Min Price</span>
                    Rs.&nbsp;&nbsp;<div flex="35">
-                    <input type="number" data-ng-model="minPrice" aria-label="minPrice" style="width:60px"/>
+                    <input type="number" ng-model="minPrice" aria-label="minPrice" style="width:60px"/>
                      </div>
             </div>
             <div layout="row" flex="100"  ng-cloak layout-align="space-between">
                     <span class="custum-input-label" flex="55">Max Price</span>
                    Rs.&nbsp;&nbsp;<div flex="35">
-                    <input type="number" data-ng-model="maxPrice" aria-label="maxPrice" style="width:60px"/>
+                    <input type="number" ng-model="maxPrice" aria-label="maxPrice" style="width:60px"/>
                     </div>
             </div>
            </div> -->
@@ -82,7 +82,7 @@
             </div>
 
             <div ng-show="filterID==4" layout="row" layout-wrap class="mobile-filter-panel" layout-align="center start">
-                <div data-ng-repeat="f in fabrics" flex="90" layout-align="start start" style="padding:2px;" class="small-label">
+                <div ng-repeat="f in fabrics" flex="90" layout-align="start start" style="padding:2px;" class="small-label">
                     <md-checkbox class="md-primary" name="string" ng-model="f.active" aria-label="string" style="margin:0px;">
                         <label class="grey-label">{{f.name }}</label>
                     </md-checkbox>
@@ -92,8 +92,8 @@
         </div>
     </div>
     <div layout="row" flex="100" class="mobile-filter-footer" md-whiteframe="4">
-        <md-button class="md-raised md-warn" aria-label="clear" data-ng-click="clear()" flex>Clear</md-button>
-        <md-button class="md-raised md-warn" aria-label="apply" data-ng-click="applyFilters('mobile')" flex>Apply</md-button>
+        <md-button class="md-raised md-warn" aria-label="clear" ng-click="clear()" flex>Clear</md-button>
+        <md-button class="md-raised md-warn" aria-label="apply" ng-click="applyFilters('mobile')" flex>Apply</md-button>
 
     </div>
 </md-dialog>
