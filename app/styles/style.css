@@ -900,7 +900,7 @@ a:active {
 .mobile-filter-panel{
   max-height:90%;
   overflow:auto;
-  margin:10px;
+  margin-top:10px;
 }
 .mobile-filter-footer{
   position:fixed;
