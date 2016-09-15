@@ -97,10 +97,5 @@ webapp.config([
 
          localStorageServiceProvider.setPrefix('probzip-webapp');
 
-         window.addEventListener('orientationchange', function () {
-             if(window.innerHeight > window.innerWidth) {
-                 document.getElementsByTagName('body').style.transform = "rotate(90deg)";
-             }
-         });
     }
 ]);
