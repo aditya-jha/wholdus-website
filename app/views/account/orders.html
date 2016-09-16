@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div layout="row" flex="100" layout-padding layout-wrap>
-                <div layout="row" flex="100" data-ng-repeat="so in o.sub_orders" layout-wrap>
+                <div layout="row" flex="100" ng-repeat="so in o.sub_orders" layout-wrap>
                     <div layout="row" layout-wrap flex="100">
                         <div layout="row" flex-xs="100">
                             <span class="small-font secondary-text-color space">Seller Name</span>
@@ -46,10 +46,10 @@
                         </div>
                     </div>
                     <div layout="row" flex="100" class="hr-rule"></div>
-                    <div layout="row" flex="100" data-ng-repeat="oi in so.order_items" md-whiteframe="2" layout-margin layout-wrap>
+                    <div layout="row" flex="100" ng-repeat="oi in so.order_items" md-whiteframe="2" layout-margin layout-wrap>
                         <div layout="row" flex="100" layout-wrap>
                             <div layout="row" flex="30" flex-xs="100" style="max-height:200px;" layout-align="center start">
-                                <img data-ng-src="{{::oi.product.imageUrl}}"/>
+                                <img ng-src="{{::oi.product.imageUrl}}"/>
                             </div>
                             <div flex="70" flex-xs="100" layout-wrap layout="row">
                                 <span flex="100" class="bold">{{::oi.product.display_name}}</span>
@@ -77,8 +77,8 @@
                                     <span class="bold">{{::oi.order_item_status.display_value}}</span>
                                 </div>
                                 <div flex></div>
-                                <div flex-xs="100" layout="row" data-ng-if="oi.tracking_url && oi.tracking_url.length>0">
-                                    <md-button class="md-raised md-primary" data-ng-href="{{::oi.tracking_url}}" target="_blank">track</md-button>
+                                <div flex-xs="100" layout="row" ng-if="oi.tracking_url && oi.tracking_url.length>0">
+                                    <md-button class="md-raised md-primary" ng-href="{{::oi.tracking_url}}" target="_blank">track</md-button>
                                 </div>
                             </div>
                         </div>

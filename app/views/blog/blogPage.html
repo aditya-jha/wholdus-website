@@ -12,9 +12,9 @@
 <div class="blog-page" layout="row">
     <div ng-if = "home == false" wu-blognav layout="row" flex="30" hide-xs hide-sm show-gt-sm></div>
     <div flex="70" flex-xs="100" flex-sm="100" class="blog-content" layout="row" layout-wrap>
-        <div flex="100" md-whiteframe="4" layout="column" data-ng-repeat = "art in data.articles" ng-if="home == true">
-        	<div flex="100" class="cursor-pointer" data-ng-click="selectBlog(art.slug, art.articleID, art.title)">
-	        	<img data-ng-src="{{data.article.cover_image_link}}" width="100%" height="100%"/>
+        <div flex="100" md-whiteframe="4" layout="column" ng-repeat = "art in data.articles" ng-if="home == true">
+        	<div flex="100" class="cursor-pointer" ng-click="selectBlog(art.slug, art.articleID, art.title)">
+	        	<img ng-src="{{data.article.cover_image_link}}" width="100%" height="100%"/>
 	        	<div flex="100" layout="row" layout-align="start center">
 		        	<div flex="100" class="padding-left-1em" layout="column">
 		        		<span flex="50" class="bold padding-1em" style="font-size:1.2em">
@@ -33,7 +33,7 @@
 	        </div>
 	      <div flex="100" md-whiteframe="4" layout="column" ng-if="home == false">
         	<div flex="100">
-			    <img data-ng-src="{{data.article.cover_image_link}}" width="100%" height="100%"/>
+			    <img ng-src="{{data.article.cover_image_link}}" width="100%" height="100%"/>
 			    <div>
 			        <div flex="100" class="padding-1em">
 			            <span>{{data.article.author.name}}</span>
@@ -56,4 +56,4 @@
     </div>
 </div>
 
-<div data-ng-include="'views/footer.html'" flex></div>
+<div ng-include="'views/footer.html'" flex></div>

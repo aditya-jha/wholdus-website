@@ -58,7 +58,6 @@
             $scope.tabSelected = function(type) {
                 $scope.purchaseRequests = undefined;
                 fetchPurchaseRequests(type).then(function(response) {
-                    $log.log(response);
                     fetchPurchaseRequestsHelper(response);
                 }, function(error) {
                     $log.log(error);

@@ -329,7 +329,6 @@
             listeners.push(checkLoginStateListener);
 
             var loginStateChangeListener = $rootScope.$on('loginStateChange', function() {
-                $log.log($routeParams);
                 getProducts().then(function(response) {
                     getProductsHelper(response, {});
                 });
