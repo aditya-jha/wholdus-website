@@ -25,7 +25,7 @@
             </md-toolbar>
         </div>
 
-        <div layout="row" layout-wrap class="product-card-wrap" layout-align="space-around center" data-ng-if="!noProducts">
+        <div layout="row" layout-wrap class="product-card-wrap" layout-align="space-around center" style="width:100%;" ng-if="!noProducts">
             <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="45" flex-sm="30" flex-gt-sm="30">
                 <div layout="row" wu-product product="p.product" flex></div>
             </div>

@@ -47,13 +47,20 @@
                 <div flex flex-xs="100" ng-if="loggedIn && !store">
                     <span class="product-price" flex="100">Rs. {{::product.min_price_per_unit | currency:'':0}}</span>
                 </div>
-                <div flex flex-xs="100" ng-if="store">
+                <div flex flex-xs="100" ng-if="store && !product.buyerstore.buyer_store_discounted_price">
                     <span class="product-price" flex="100">Rs. {{::product.price_per_unit | currency:'':0}}</span>
+                </div>
+                <div layout="row" layout-wrap flex flex-xs="100" layout-align="start center" ng-if="store && product.buyerstore.buyer_store_discounted_price">
+                    <span class="product-price" flex="50" flex-xs="100">Rs. {{::product.buyerstore.buyer_store_discounted_price | currency:'':0}}</span>
+                    <span class="non-discount-price" flex="50" flex-xs="100">Rs. {{::product.price_per_unit | currency:'':0}}</span>
                 </div>
                 <div flex layout="row" flex-xs="100" ng-if="!store">
                     <span class="feature-title space" style="padding-top: 0.1em;">Lot Size</span>
                     <span class="bold">{{::product.lot_size}}</span>
                 </div>
+            </div>
+            <div layout="row" ng-if="store && product.buyerstore.buyer_store_discounted_price" flex="100">
+                <span class="discount-number" flex>{{::product.buyerstore.buyer_store_discount}}% Discount</span>
             </div>
         </a>
     </div>

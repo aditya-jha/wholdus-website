@@ -46,6 +46,9 @@
         margin: 0.5em 0.1em;
     }
 
+    .non-discount-price {
+        text-align: left;
+    }
 }
 
 @media screen and (max-width: 959px) {

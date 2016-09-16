@@ -450,7 +450,18 @@ a:active {
 }
 
 .product-price {
-    font-size: 1.5em;
+    font-size: 1.25em;
+}
+
+.non-discount-price {
+    text-align: right;
+    color: rgba(0,0,0,0.82);
+    text-decoration: line-through;
+}
+
+.discount-number {
+    color: rgba(2, 128, 2, 0.89);
+    font-size: 0.9em;
 }
 
 .product-margin {
