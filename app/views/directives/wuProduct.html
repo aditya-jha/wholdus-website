@@ -56,9 +56,12 @@
                 </div>
             </div>
         </div>
-        <div layout="row" flex="100" style="padding-bottom:0.5em" ng-if="store">
+        <md-button class="md-raised md-warn" flex="100" ng-if="store" ng-click="placeOrder($event, product)">
+            PURCHASE
+        </md-button>
+        <!-- <div layout="row" flex="100" style="padding-bottom:0.5em" ng-if="store">
             <span flex="100" class="text-center small-font" ng-click="placeOrder($event, product)">PURCHASE REQUEST</span>
-        </div>
+        </div> -->
         <a layout="row" flex="100" layout-wrap class="product-card-details" ng-href="{{::product.url}}">
             <span flex="100" class="product-name">{{::product.name}}</span>
             <span flex="100" class="small-font padding-tb">{{::product.details.fabric_gsm}}</span>

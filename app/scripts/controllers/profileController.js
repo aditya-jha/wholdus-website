@@ -17,7 +17,7 @@
                 .then(function(response) {
                     if(response.buyers && response.buyers.length) {
                         if(response.buyers[0].address.length === 0) {
-                            $response.buyers[0].address = [];
+                            response.buyers[0].address = [];
                         }
                         $scope.buyer = response.buyers[0];
                     }
