@@ -277,6 +277,10 @@ a:active {
     text-align: left;
 }
 
+.sidenav-header {
+    padding-left:0.6em;
+    margin-bottom:0
+}
 .sidenav-list a {
     text-align: left;
 }
