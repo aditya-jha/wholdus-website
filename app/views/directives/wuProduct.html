@@ -36,7 +36,7 @@
                     </md-icon>
                 </div>
             </div>
-            <a flex="50" style="padding-top:0.5em" layout="row" layout-align="center center" ng-if="product.storeUrl" ng-href="{{::product.productShareText}}">
+            <a flex="50" style="padding-top: 1em;" layout="row" layout-align="center center" ng-if="product.storeUrl" ng-href="{{::product.productShareText}}">
                 <div layout="row">
                     <md-icon>
                         <svg class="svg-30" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@
                     </md-icon>
                 </div>
             </a>
-            <div flex="50" style="padding-top:0.5em" layout="row" layout-align="center center" ng-click="productEditPopup($event)" ng-if="product.storeUrl">
+            <div flex="50" style="padding-top: 1em;" layout="row" layout-align="center center" ng-click="productEditPopup($event)" ng-if="product.storeUrl">
                 <div layout="row">
                     <md-icon>
                         <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -86,11 +86,11 @@
         <a layout="row" flex="100" layout-wrap class="product-card-details" ng-href="{{::product.url}}" ng-if="product.buyerstore.buyer_store_discounted_price">
             <span flex="100" class="text-center small-font">Retail Details</span>
             <div layout="row" layout-wrap flex="100" layout-align="start center">
-                <span class="product-price" flex="50" flex-xs="100">Rs. {{::product.buyerstore.buyer_store_discounted_price | currency:'':0}}</span>
+                <span class="product-price" flex="50" flex-xs="100">Rs. {{product.buyerstore.buyer_store_discounted_price | currency:'':0}}</span>
                 <span class="non-discount-price" flex="50" flex-xs="100">Rs. {{::product.price_per_unit | currency:'':0}}</span>
             </div>
             <div layout="row" ng-if="product.buyerstore.buyer_store_discounted_price" flex="100">
-                <span class="discount-number" flex>{{::product.buyerstore.buyer_store_discount}}% Discount</span>
+                <span class="discount-number" flex>{{product.buyerstore.buyer_store_discount}}% Discount</span>
             </div>
         </a>
     </div>
