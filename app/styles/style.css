@@ -276,6 +276,10 @@ a:active {
 .account-sidenav a {
     text-align: left;
 }
+
+.sidenav-list a {
+    text-align: left;
+}
 .account-content {
     margin-left: 240px;
     margin-right: -0.5em;

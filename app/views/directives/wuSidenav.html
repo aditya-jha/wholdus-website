@@ -1,12 +1,12 @@
 <md-sidenav md-component-id="left" layout="column" flex md-whiteframe="4">
-    <h2 style="text-align:center" ng-if="loginStatus">Account</h2>
-    <md-list ng-if="loginStatus">
+    <h2 style="padding-left:0.6em" ng-if="loginStatus">Account</h2>
+    <md-list ng-if="loginStatus" class="sidenav-list">
         <md-list-item flex ng-repeat="link in links">
             <md-button class="menu" flex ng-href="{{c.url}}" ng-click="goTo($event, link.url)">{{link.display_name}}</md-button>
         </md-list-item>
     </md-list>
-    <h2 style="text-align:center">Categories</h2>
-    <md-list>
+    <h2 style="padding-left:0.6em">Categories</h2>
+    <md-list class="sidenav-list">
         <md-list-item flex ng-repeat="c in categories">
             <md-button class="menu" flex ng-href="{{c.url}}" ng-click="goTo($event, c.url)">{{c.display_name}}</md-button>
         </md-list-item>
