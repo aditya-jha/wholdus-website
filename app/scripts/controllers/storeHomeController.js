@@ -142,6 +142,7 @@
                         response.buyers[0].mobileUrl = setMobileUrl(response.buyers[0].mobile_number);
                         response.buyers[0].complete_address = setCompleteAddress(response.buyers[0].address);
                         response.buyers[0].storeText = setStoreText(response.buyers[0]);
+                        $scope.storeUrl = response.buyers[0].store_url;
                         $scope.store = response.buyers[0];
                         $rootScope.$broadcast('store', $scope.store);
                         ngProgressBarService.endProgressbar();
@@ -240,7 +241,6 @@
             function init() {
                 var promises = [], cartItems = {};
                 $scope.isMobile = UtilService.isMobileRequest();
-                $scope.storeUrl = $routeParams.storeUrl;
                 promises.push(getStoreDetails($routeParams.storeUrl));
 
                 var url = $location.url();
