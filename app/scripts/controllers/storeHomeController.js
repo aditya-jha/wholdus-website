@@ -42,7 +42,7 @@
             }
 
             function setProductShareText(product) {
-                var productText = "whatsapp://send?text=Hey!+Buy+" + product.name + "+on+my+online+store+" + $location.protocol() + "://" + $location.host() + "/store/" + $scope.store.store_url + '/' + product.slug + '-' + product.productID;
+                var productText = "whatsapp://send?text=Hey!+Buy+" + product.name + "+on+my+online+store+" + $location.protocol() + "://" + $location.host() + "/store/" + $scope.storeUrl + '/' + product.slug + '-' + product.productID;
                 return productText;
             }
 
@@ -240,6 +240,7 @@
             function init() {
                 var promises = [], cartItems = {};
                 $scope.isMobile = UtilService.isMobileRequest();
+                $scope.storeUrl = $routeParams.storeUrl;
                 promises.push(getStoreDetails($routeParams.storeUrl));
 
                 var url = $location.url();
