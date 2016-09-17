@@ -5,7 +5,7 @@
             restrict: 'AE',
             scope: {
                 product: '=',
-                store: '='
+                store: '=',
             },
             replace: true,
             templateUrl: 'views/directives/wuProduct.html',
@@ -21,7 +21,8 @@
                 '$q',
                 'ConstantKeyValueService',
                 '$routeParams',
-                function($scope, $log, APIService, LoginService, $rootScope, DialogService, $mdDialog, $mdMedia, $q, ConstantKeyValueService, $routeParams) {
+                '$window',
+                function($scope, $log, APIService, LoginService, $rootScope, DialogService, $mdDialog, $mdMedia, $q, ConstantKeyValueService, $routeParams, $window) {
 
                     $scope.shortlistApiCall = null;
 
@@ -92,6 +93,22 @@
 
                         return deferred.promise;
                     }
+
+                    $scope.productEditPopup = function(event) {
+                        return $mdDialog.show({
+                            controller: 'ProductDiscountPopupController',
+                            templateUrl: 'views/partials/productDiscountPopup.html',
+                            parent: angular.element(document.body),
+                            targetEvent: event,
+                            clickOutsideToClose: true,
+                            fullscreen: $mdMedia('xs'),
+                            locals: {
+                                product: $scope.product,
+                            }
+                        }).then(function(details) {
+                            $scope.product.buyerstore = details.product.buyerstore;
+                        });
+                    };
 
                     $scope.toggleCartStatus = function(event) {
                         if($scope.product.lotsInCart > 0) {

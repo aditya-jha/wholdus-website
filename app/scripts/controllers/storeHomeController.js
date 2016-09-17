@@ -12,12 +12,14 @@
         '$mdMedia',
         '$q',
         'DialogService',
-        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia, $q, DialogService) {
+        '$route',
+        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia, $q, DialogService, $route) {
 
             $scope.pageSettings = {
                 totalPages: 0,
                 currentPage: UtilService.getPageNumber(),
-                enablePagination: false
+                enablePagination: false,
+                myStoreUrl: false
             };
 
             function setMobileUrl(mobile_number) {
@@ -35,8 +37,13 @@
             }
 
             function setStoreText(buyer) {
-                var storeText = "Hey!+Check+out+" + buyer.name + "'s+online+store+" + buyer.company_name + "+on:+" + $location.protocol() + "://" + $location.host() + "/store/" + buyer.store_url;
+                var storeText = "whatsapp://send?text=Hey!+Check+out+" + buyer.name + "'s+online+store+" + buyer.company_name + "+on:+" + $location.protocol() + "://" + $location.host() + "/store/" + buyer.store_url;
                 return storeText;
+            }
+
+            function setProductShareText(product) {
+                var productText = "whatsapp://send?text=Hey!+Buy+" + product.name + "on+my+online+store+" + $location.protocol() + "://" + $location.host() + "/store/" + $routeParams.storeUrl + '/' + product.slug + '-' + product.productID;
+                return productText;
             }
 
             function praseProductDetails(p) {
@@ -60,7 +67,8 @@
                         seller_catalog_number: p.details.seller_catalog_number,
                     },
                     product_lot: p.product_lot,
-                    image: p.image
+                    image: p.image,
+                    productShareText: setProductShareText(p)
                 };
 
                 var productDetailsKeys = [{
@@ -123,6 +131,7 @@
             }
 
             function getStoreDetails(storeUrl) {
+                var deferred = $q.defer();
                 ngProgressBarService.showProgressbar();
                 var params = {
                     store_url: storeUrl
@@ -136,25 +145,31 @@
                         $scope.store = response.buyers[0];
                         $rootScope.$broadcast('store', $scope.store);
                         ngProgressBarService.endProgressbar();
+                        deferred.resolve(response);
                     } else {
                         $location.url('/');
+                        deferred.reject();
                     }
                 }, function(error) {
                     ngProgressBarService.endProgressbar();
                     $log.log(error);
                     $location.url('/');
+                    deferred.reject();
                 });
+                return deferred.promise;
             }
 
-            function parseProducts(obj, cartItems) {
+            function parseProducts(obj, cartItems, storeUrl) {
                 angular.forEach(obj, function(value, key) {
                     value.product.images = UtilService.getImages(value.product);
+                    value.product.storeUrl = storeUrl;
                     if(cartItems) {
                         value.product.lotsInCart = cartItems[value.product.productID] ? cartItems[value.product.productID] : 0;
                     }
                     if(value.product.images.length) {
                         value.product.imageUrl = UtilService.getImageUrl(value.product.images[0], '300x300');
                     }
+                    value.product.productShareText = setProductShareText(value.product);
                 });
             }
 
@@ -200,7 +215,7 @@
                 return cartItems;
             }
 
-            function fetchProductsParser(response, cartItems) {
+            function fetchProductsParser(response, cartItems, storeUrl) {
                 $scope.pageSettings.totalPages = response.total_pages;
 
                 if(response.buyer_products.length) {
@@ -214,7 +229,7 @@
                     } else {
                         $scope.pageSettings.enablePagination = false;
                     }
-                    parseProducts(response.buyer_products, cartItems);
+                    parseProducts(response.buyer_products, cartItems, storeUrl);
                     $scope.products = response.buyer_products;
                 } else {
                     $scope.pageSettings.enablePagination = false;
@@ -225,19 +240,20 @@
             function init() {
                 var promises = [], cartItems = {};
                 $scope.isMobile = UtilService.isMobileRequest();
-                getStoreDetails($routeParams.storeUrl);
+                promises.push(getStoreDetails($routeParams.storeUrl));
 
                 var url = $location.url();
+
                 if($routeParams.productUrl) {
                     $scope.storePage = true;
                     var productID = UtilService.getIDFromSlug($routeParams.productUrl);
-                    fetchProductByID(productID);
+                    promises.push(fetchProductByID(productID));
                 } else if(url.indexOf('/products') >= 0) {
                     $scope.pageSettings.currentPage = UtilService.getPageNumber();
                     promises.push(fetchProducts());
 
                     $q.all(promises).then(function(response) {
-                        fetchProductsParser(response[0]);
+                        fetchProductsParser(response[1]);
                     });
                 } else if(url.indexOf('/account/my-store') >= 0) {
                     $scope.pageSettings.currentPage = UtilService.getPageNumber();
@@ -245,8 +261,8 @@
                     promises.push(fetchProducts());
 
                     $q.all(promises).then(function(response) {
-                        cartItems = parseCartItems(response[0]);
-                        fetchProductsParser(response[1], cartItems);
+                        cartItems = parseCartItems(response[1]);
+                        fetchProductsParser(response[2], cartItems, true);
                     });
                 }
             }
@@ -279,6 +295,7 @@
                     }
                 }).then(function(discount) {
                     $scope.store.store_global_discount = discount;
+                    $route.reload();
                 });
             };
         }
