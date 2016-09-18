@@ -61,6 +61,7 @@ var jsCustom = [
     'app/scripts/controllers/purchaseRequestsController.js',
     'app/scripts/controllers/storeDiscountPopupController.js',
     'app/scripts/controllers/productDiscountPopupController.js',
+    'app/scripts/controllers/filterDialogController.js',
 ];
 
 var stylesheets = [

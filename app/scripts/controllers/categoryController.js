@@ -245,39 +245,54 @@
                     $scope.priceRangeIndex, $scope.minPrice, $scope.maxPrice);
                 UtilService.setActiveFilterParams($scope.colours, $scope.fabrics, $scope.selectedColours, $scope.selectedFabrics);
 
+                checkSelectedSellers();
+
+                var loggedIn = false,
+                    promises = [],
+                    cartItems = {};
+
+                if (LoginService.checkLoggedIn()) {
+                    loggedIn = true;
+                    promises.push(getProductsInCart());
+                }
+                promises.push(getProducts());
+
+                $q.all(promises).then(function(response) {
+                    if (loggedIn) {
+                        cartItems = parseCartItems(response[0]);
+                        response = response[1];
+                    } else {
+                        response = response[0];
+                    }
+                    getProductsHelper(response, cartItems);
+                });
+                
                 if (type == 'desktop') {
                     $scope.desktopFilterID = null;
-                    checkSelectedSellers();
-
-                    var loggedIn = false,
-                        promises = [],
-                        cartItems = {};
-
-                    if (LoginService.checkLoggedIn()) {
-                        loggedIn = true;
-                        promises.push(getProductsInCart());
-                    }
-                    promises.push(getProducts());
-
-                    $q.all(promises).then(function(response) {
-                        if (loggedIn) {
-                            cartItems = parseCartItems(response[0]);
-                            response = response[1];
-                        } else {
-                            response = response[0];
-                        }
-                        getProductsHelper(response, cartItems);
-                    });
                 } else if (type == 'mobile') {
-                    $route.reload();
+                    // $route.reload();
                     $mdDialog.cancel();
                 }
             };
 
             $scope.showFilterDialog = function() {
-                DialogService.viewDialog(event, {
-                    view: 'views/partials/filterDialog.html',
-                    controller: 'CategoryController'
+                // DialogService.viewDialog(event, {
+                //     view: 'views/partials/filterDialog.html',
+                //     controller: 'CategoryController'
+                // });
+                $mdDialog.show({
+                    controller: 'FilterDialogController',
+                    templateUrl: 'views/partials/filterDialog.html',
+                    parent: angular.element(document.body),
+                    targetEvent: event,
+                    clickOutsideToClose: true,
+                    fullscreen: true,
+                    scope: $scope,
+                    preserveScope: true
+                }).finally(function() {
+                    if($scope.activeImage >= $scope.imageLimit) {
+                        $scope.setActiveImage(0);
+                    }
                 });
             };
 
@@ -326,6 +341,8 @@
             listeners.push(loginStateChangeListener);
 
             var destroyListener = $scope.$on('$destroy', function() {
+                UtilService.resetFilterParams();
+                UtilService.setFilterParams(null);
                 angular.forEach(listeners, function(value, key) {
                     if (value) value();
                 });
