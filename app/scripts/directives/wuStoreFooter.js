@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuStoreFooter', function() {
         return {
             restrict: 'AE',

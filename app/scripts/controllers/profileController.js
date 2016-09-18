@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.controller('ProfileController', [
         '$scope',
         '$log',

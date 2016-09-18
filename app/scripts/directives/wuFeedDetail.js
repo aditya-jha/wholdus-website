@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuFeedDetail', function() {
         return {
             restrict: 'AE',

@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuAccountSidenav', function() {
         return {
             restrict: 'AE',
@@ -7,7 +8,7 @@
                 '$scope',
                 '$log',
                 function($scope, $log) {
-                    
+
                 }
             ]
         };

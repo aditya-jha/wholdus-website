@@ -1,7 +1,7 @@
 <md-dialog aria-label="lot-selection-popup">
     <md-toolbar class="md-medium md-hue-2">
         <div class="md-toolbar-tools header-toolbar">
-            <h1 flex class="text-center">{{::product.display_name}}</h1>
+            <h1 flex class="text-center">{{::product.name}}</h1>
         </div>
     </md-toolbar>
     <md-dialog-content class="lot-popup" layout="row" layout-wrap>
@@ -22,7 +22,7 @@
             <div flex-xs="100" flex-sm="100" flex-gt-sm="80" layout="row">
                 <div flex="40" layout="column">
                     <span class="feature-title">Price per Piece</span>
-                    <span class="large-font">Rs. {{details.ppp}}</span>
+                    <span class="large-font">Rs. {{details.ppp | currency:'':0}}</span>
                 </div>
                 <div flex="60" layout="row" layout-align="center center">
                     <div layout="row" flex layout-align="center center">
@@ -43,7 +43,7 @@
                 <div flex="40" layout="column">
                     <div layout="column" flex layout-align="center start">
                         <span class="feature-title">Total Price</span>
-                        <span class="large-font">Rs. {{details.tp}}</span>
+                        <span class="large-font">Rs. {{details.tp | currency:'':0}}</span>
                     </div>
                 </div>
                 <div flex="60" layout="column" layout-align="center center">

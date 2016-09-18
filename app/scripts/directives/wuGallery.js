@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuGallery', function() {
         return {
             restrict: 'AE',

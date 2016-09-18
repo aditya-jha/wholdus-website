@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuPurchaseRequestStatus', function() {
         return {
             restrict: 'AE',

@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.controller('ConsignmentController', [
         '$scope',
         '$log',

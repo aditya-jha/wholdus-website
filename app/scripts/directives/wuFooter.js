@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuFooter', function() {
         return {
             restrict: 'A',

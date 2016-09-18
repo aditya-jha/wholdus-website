@@ -1,4 +1,5 @@
     (function() {
+        'use strict';
     webapp.directive('wuSidenav', function() {
          return {
             restrict: 'AE',
