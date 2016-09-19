@@ -30,13 +30,13 @@
 
         </div>
         <div layout="row" flex="60">
-            <div ng-show="filterID==1" layout="row" class="mobile-filter-panel" layout-wrap ng-cloak flex="100">
+            <md-content ng-show="filterID==1" layout="row" class="mobile-filter-panel" layout-wrap ng-cloak flex="100">
                 <div ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" class="small-label" flex="100">
                     <md-checkbox class="md-primary" name="string" ng-model="seller.isShow" aria-label="string" ng-click="filterChanged=true" flex>
                         <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
                     </md-checkbox>
                 </div>
-            </div>
+            </md-content>
 
             <div ng-show="filterID==2" layout="column" ng-cloak class="mobile-filter-panel" style="margin:5px">
                 <div layout="column">
