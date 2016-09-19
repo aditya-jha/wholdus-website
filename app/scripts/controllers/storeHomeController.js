@@ -243,6 +243,9 @@
                     $scope.storePage = true;
                     var productID = UtilService.getIDFromSlug($routeParams.productUrl);
                     promises.push(fetchProductByID(productID));
+                    $q.all(promises).then(function(response) {
+                        ngProgressBarService.endProgressbar();
+                    });
                 } else if(url.indexOf('/products') >= 0) {
                     $scope.pageSettings.currentPage = UtilService.getPageNumber();
                     promises.push(fetchProducts());
@@ -259,6 +262,10 @@
                     $q.all(promises).then(function(response) {
                         cartItems = parseCartItems(response[1]);
                         fetchProductsParser(response[2], cartItems, true);
+                        ngProgressBarService.endProgressbar();
+                    });
+                } else {
+                    $q.all(promises).then(function(response) {
                         ngProgressBarService.endProgressbar();
                     });
                 }
