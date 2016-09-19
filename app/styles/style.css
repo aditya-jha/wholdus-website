@@ -1248,7 +1248,6 @@ md-dialog.fullscreen-dialog {
     bottom: 0;
     left: 0;
     max-width: 900px;
-    margin-left: -0.5em;
 }
 
 .action-mobile > .md-button {
