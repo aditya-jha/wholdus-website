@@ -49,11 +49,11 @@
         <div layout="row" layout-wrap layout-padding ng-if="loggedIn">
             <div flex flex-xs="100" layout="column">
                 <span class="feature-title">Min Price</span>
-                <span class="product-price">Rs. {{::product.min_price_per_unit}}</span>
+                <span class="product-price">Rs. {{::product.min_price_per_unit | currency:'':0}}</span>
             </div>
             <div flex flex-xs="50" layout="column">
                 <span class="feature-title">Retail Price</span>
-                <span>Rs. {{::product.price_per_unit}}</span>
+                <span>Rs. {{::product.price_per_unit | currency:'':0}}</span>
             </div>
             <div flex flex-xs="50" layout="column">
                 <span class="feature-title">Your Margin</span>
@@ -150,11 +150,11 @@
         <div layout="row" layout-wrap layout-padding>
             <div flex="50" flex-xs="100" layout="column">
                 <span class="feature-title">MRP</span>
-                <span class="product-price">Rs. {{::product.buyerstore.buyer_store_discounted_price}}</span>
+                <span class="product-price">Rs. {{::product.buyerstore.buyer_store_discounted_price | currency:'':0}}</span>
             </div>
             <div flex="50" flex-xs="100" layout="column">
                 <span class="feature-title">MRP</span>
-                <span class="non-discount-price" style="text-align:left">Rs. {{::product.price_per_unit}}</span>
+                <span class="non-discount-price" style="text-align:left">Rs. {{::product.price_per_unit | currency:'':0}}</span>
             </div>
             <div flex="100" style="padding-top: 0;">
                 <span class="discount-number" flex-xs="100" style="font-size:1em">{{::product.buyerstore.buyer_store_discount}}% Discount</span>
