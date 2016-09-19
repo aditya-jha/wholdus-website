@@ -115,11 +115,9 @@
             }
 
             function fetchProductByID(productID) {
-                ngProgressBarService.showProgressbar();
                 APIService.apiCall("GET", APIService.getAPIUrl("products"), null, {
                     productID: productID
                 }).then(function(response) {
-                    ngProgressBarService.endProgressbar();
                     if(response.products.length) {
                         praseProductDetails(response.products[0]);
                     }
@@ -127,14 +125,12 @@
                         $location.url('/404');
                     }
                 }, function(error) {
-                    ngProgressBarService.endProgressbar();
                     $location.url('/404');
                 });
             }
 
             function getStoreDetails(storeUrl) {
                 var deferred = $q.defer();
-                ngProgressBarService.showProgressbar();
                 var params = {
                     store_url: storeUrl
                 };
@@ -147,14 +143,12 @@
                         $scope.storeUrl = response.buyers[0].store_url;
                         $scope.store = response.buyers[0];
                         $rootScope.$broadcast('store', $scope.store);
-                        ngProgressBarService.endProgressbar();
                         deferred.resolve(response);
                     } else {
                         $location.url('/');
                         deferred.reject();
                     }
                 }, function(error) {
-                    ngProgressBarService.endProgressbar();
                     $log.log(error);
                     $location.url('/');
                     deferred.reject();
@@ -178,7 +172,6 @@
 
             function fetchProducts() {
                 var deferred = $q.defer();
-                ngProgressBarService.showProgressbar();
                 var params = {
                     page_number: $scope.pageSettings.currentPage,
                     items_per_page: $scope.isMobile ? 18 : 24,
@@ -189,10 +182,8 @@
 
                 APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
                 .then(function(response) {
-                    ngProgressBarService.endProgressbar();
                     deferred.resolve(response);
                 }, function(error) {
-                    ngProgressBarService.endProgressbar();
                     deferred.reject(error);
                     $location.url('/');
                 });
@@ -241,6 +232,7 @@
             }
 
             function init() {
+                ngProgressBarService.showProgressbar();
                 var promises = [], cartItems = {};
                 $scope.isMobile = UtilService.isMobileRequest();
                 promises.push(getStoreDetails($routeParams.storeUrl));
@@ -257,6 +249,7 @@
 
                     $q.all(promises).then(function(response) {
                         fetchProductsParser(response[1]);
+                        ngProgressBarService.endProgressbar();
                     });
                 } else if(url.indexOf('/account/my-store') >= 0) {
                     $scope.pageSettings.currentPage = UtilService.getPageNumber();
@@ -266,6 +259,7 @@
                     $q.all(promises).then(function(response) {
                         cartItems = parseCartItems(response[1]);
                         fetchProductsParser(response[2], cartItems, true);
+                        ngProgressBarService.endProgressbar();
                     });
                 }
             }
