@@ -10,13 +10,6 @@
     .header-toolbar .username {
         font-size: 0.9em;
     }
-    .product-name {
-        font-size: 1.05em !important;
-    }
-
-    .product-page-card table {
-        width: 100%;
-    }
 
     .product-details-wrap {
         background: #fff;
@@ -42,6 +35,19 @@
 
     .product-card-wrap {
         padding: 0;
+    }
+
+    .gallery-wrap {
+      margin-right: 0;
+      margin-bottom: 0.5em;
+    }
+
+    .purchase-requests-wrap {
+        margin: 0.5em 0.1em;
+    }
+
+    .non-discount-price {
+        text-align: left;
     }
 }
 
@@ -72,6 +78,10 @@
 @media screen and (max-width:450px) {
     .filler-toolbar > span{
         font-size: 1em;
+    }
+
+    .like-dislike-card div {
+        max-width: 65%;
     }
 }
 

@@ -13,7 +13,8 @@
         'ConstantKeyValueService',
         'LoginService',
         '$timeout',
-        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService, localStorageService, ConstantKeyValueService, LoginService, $timeout) {
+        '$q',
+        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService, localStorageService, ConstantKeyValueService, LoginService, $timeout, $q) {
             var listeners = [];
             var bpStatusApi = null;
             var instructionsPopup = {};
@@ -74,7 +75,7 @@
                         $rootScope.$broadcast('showFeedActionButton', false);
                         $scope.pageSettings.responded = 1;
                     }
-                    else if(search.filter == 'dislikes') {
+                    else if(search.filter == 'rejected') {
                         $rootScope.$broadcast('showFeedActionButton', false);
                         $scope.pageSettings.responded = 2;
                     }
@@ -102,16 +103,36 @@
                 }
             }
 
-            function parseImages(obj) {
+            function parseProducts(obj, cartItems) {
                 angular.forEach(obj, function(value, key) {
+                    value.product.lotsInCart = cartItems[value.product.productID] ? cartItems[value.product.productID] : 0;
                     value.product.images = UtilService.getImages(value.product);
                     if(value.product.images.length) {
-                        value.product.imageUrl = UtilService.getImageUrl(value.product.images[0], '200x200');
+                        value.product.imageUrl = UtilService.getImageUrl(value.product.images[0], '300x300');
                     }
                 });
             }
 
+            function getProductsInCart() {
+                var deferred = $q.defer();
+                APIService.apiCall("GET", APIService.getAPIUrl('cartItem')).then(function(response) {
+                    deferred.resolve(response.cart_items);
+                }, function(error) {
+                    deferred.reject(error);
+                });
+                return deferred.promise;
+            }
+
+            function parseCartItems(items) {
+                var cartItems = {};
+                angular.forEach(items, function(value, key) {
+                    cartItems[value.product.productID] = value.lots;
+                });
+                return cartItems;
+            }
+
             function fetchProducts() {
+                var deferred = $q.defer(), url = 'buyerProducts';
                 ngProgressBarService.showProgressbar();
                 var params = {
                     page_number: $scope.pageSettings.currentPage,
@@ -123,10 +144,45 @@
                     params.buyerproductID = $scope.buyerproductID;
                     params.landing = 1;
                 }
-
-                APIService.apiCall("GET", APIService.getAPIUrl('buyerProducts'), null, params)
+                if($scope.pageSettings.responded === 0) {
+                    url = 'allBuyerProducts';
+                }
+                APIService.apiCall("GET", APIService.getAPIUrl(url), null, params)
                 .then(function(response) {
                     ngProgressBarService.endProgressbar();
+                    deferred.resolve(response);
+                }, function(error) {
+                    ngProgressBarService.endProgressbar();
+                    deferred.reject(error);
+                    $location.url('/');
+                });
+
+                return deferred.promise;
+            }
+
+            function init() {
+                $scope.products = [];
+                $scope.productToShow = null;
+                $scope.productLikeStatus = 0;
+                $scope.pageSettings.currentPage = UtilService.getPageNumber();
+                parseSearchParams();
+
+                var promises = [], cartItems = {}, loggedIn = false;
+
+                if(LoginService.checkLoggedIn()) {
+                    loggedIn = true;
+                    promises.push(getProductsInCart());
+                }
+                promises.push(fetchProducts());
+
+                $q.all(promises).then(function(response) {
+                    if(loggedIn) {
+                        cartItems = parseCartItems(response[0]);
+                        response = response[1];
+                    } else {
+                        response = response[0];
+                    }
+
                     $scope.pageSettings.totalPages = response.total_pages;
 
                     if(response.buyer_products.length) {
@@ -144,7 +200,7 @@
                             } else {
                                 $scope.pageSettings.enablePagination = false;
                             }
-                            parseImages(response.buyer_products);
+                            parseProducts(response.buyer_products, cartItems);
                             $scope.products = response.buyer_products;
                         }
                     } else {
@@ -152,19 +208,7 @@
                         $scope.noProducts = true;
                         $rootScope.$broadcast('showFeedActionButton', false);
                     }
-                }, function(error) {
-                    ngProgressBarService.endProgressbar();
-                    $location.url('/');
                 });
-            }
-
-            function init() {
-                $scope.products = [];
-                $scope.productToShow = null;
-                $scope.productLikeStatus = 0;
-                $scope.pageSettings.currentPage = UtilService.getPageNumber();
-                parseSearchParams();
-                fetchProducts();
             }
             init();
 
@@ -182,7 +226,7 @@
             });
             listeners.push(locationChangeListener);
 
-            var feedActionButtonClickedListener = $scope.$on('feedActionButtonClicked', function(event, data) {
+            var feedActionButtonClickedListener = $rootScope.$on('feedActionButtonClicked', function(event, data) {
                 $scope.favButton(event, data);
             });
             listeners.push(feedActionButtonClickedListener);
@@ -198,7 +242,7 @@
             };
 
             function favButtonHelper(type, swiped) {
-                bpStatusApi = APIService.apiCall("PUT", APIService.getAPIUrl("buyerProducts"), {
+                bpStatusApi = APIService.apiCall("PUT", APIService.getAPIUrl("allBuyerProducts"), {
                     //buyerproductID: $scope.products[$scope.pageSettings.productIndex].buyerproductID,
                     buyerID: $scope.pageSettings.buyer.id,
                     productID: $scope.products[$scope.pageSettings.productIndex].product.productID,
@@ -268,8 +312,8 @@
                 }
             };
 
-             $scope.imageLoaded= function(){
-                    $scope.productLikeStatus = 0;
+             $scope.imageLoaded = function(){
+                $scope.productLikeStatus = 0;
             };
 
             $scope.$on('$destroy', function() {

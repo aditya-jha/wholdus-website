@@ -26,6 +26,8 @@ input[type=number]::-webkit-outer-spin-button {
 html {
     max-width: 100vw;
     overflow-x: hidden;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
 }
 
 body {
@@ -71,6 +73,10 @@ a:active {
 }
 .hide {
     display: none;
+}
+
+.underline {
+    text-decoration: underline;
 }
 
 .background-page {
@@ -124,7 +130,7 @@ a:active {
 }
 
 .breadcrumb {
-    margin-top: 5px;
+    margin-top: 0.5em;
     font-size: 0.9em;
 }
 
@@ -272,6 +278,14 @@ a:active {
 .account-sidenav a {
     text-align: left;
 }
+
+.sidenav-header {
+    padding-left:0.6em;
+    margin-bottom:0
+}
+.sidenav-list a {
+    text-align: left;
+}
 .account-content {
     margin-left: 240px;
     margin-right: -0.5em;
@@ -300,7 +314,7 @@ a:active {
 }
 
 .product-cards-container {
-    margin: 0 -0.5em;
+    /*margin: 0 -0.5em;*/
 }
 
 .filler-toolbar {
@@ -382,6 +396,11 @@ a:active {
     background-color: #fff;
     cursor: pointer;
     position: relative;
+    border-radius: 3px;
+}
+
+.product-card .img-box {
+    height: 300px;
 }
 
 /*.product-card img {
@@ -402,15 +421,59 @@ a:active {
     margin: 0;
 }
 
-.product-name {
-    font-weight: bold;
+.product-card-container {
+    margin: 0.1em;
+    margin-top: 1.5em !important;
+}
+
+.product-display-name-container {
+    margin: 0 1em;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+.product-display-name {
     font-family: 'Comfortaa', cursive;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.product-name {
+    font-family: 'Comfortaa', cursive;
+    color: #333;
+    font-size: 0.95em;
+    text-overflow: ellipsis;
+    font-weight: 700;
+}
+
+.product-card-details {
+    margin: 0 0.6em;
+    padding: 0.6em 0;
+    font-family: 'Comfortaa', cursive;
+    border-top: 1px solid rgb(224,224,224);
+}
+
+.divider {
+    border-bottom: 1px solid #d2d2d2;
+    margin: 0 1em;
 }
 
 .product-price {
-    font-weight: bold;
-    font-size: 1.1em;
+    font-size: 1.25em;
 }
+
+.non-discount-price {
+    text-align: right;
+    color: rgba(0,0,0,0.82);
+    text-decoration: line-through;
+}
+
+.discount-number {
+    color: rgba(2, 128, 2, 0.89);
+    font-size: 0.8em;
+}
+
 .product-margin {
     color: #FF5722 !important;
 }
@@ -422,10 +485,6 @@ a:active {
 .singup-text {
     text-decoration: underline;
     cursor: pointer;
-}
-
-.product-page-card-content .feature-title {
-    color: #fff !important;
 }
 
 .feature-title {
@@ -497,29 +556,23 @@ a:active {
 }
 
 .product-page-card {
-    background-color: #fff;
-    text-align: center;
+    margin-top: 0.5em;
 }
 
 .product-page-card table {
-    width: 60%;
+    border-collapse: collapse;
+    width: calc(100% - 2em);
+    margin: 0 1em;
 }
 
-.lot-pricing-head td {
-    font-size: 0.9em;
+.product-page-card table, .product-page-card td, .product-page-card th {
+    border: 1px solid #d6d6d6;
 }
 
 .product-page-card-content {
-    background: #512DA8;
-    color: #fff;
-    padding: 2em 0em !important;
+    background: #fff;
 }
 
-.product-page-card-content md-divider {
-    background: #fff;
-    border-top-width: 2px solid #fff;
-    padding: 0;
-}
 
 .product-price .feature-title {
     font-size: 0.9em;
@@ -851,25 +904,24 @@ a:active {
 
 }
 
-.mobile-filter{
-  width:100%;
-  background-color: #FF5722;
-  font-family:'Comfortaa';
-  font-size:1.2em;
-  margin:0;
-  bottom:0px;
-  height:40px;
-  padding:10px;
-  color: #fff;
-   font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif;
-   position: fixed;
-   cursor: pointer;
+.mobile-filter {
+    width:100%;
+    background-color: #512DA8;
+    font-family:'Comfortaa', cursive;
+    font-size: 1.2em;
+    margin: 0;
+    left: 0;
+    bottom: 0px;
+    padding: 0.4em;
+    color: #fff;
+    position: fixed;
+    cursor: pointer;
 }
 
 .mobile-filter-panel{
   max-height:90%;
   overflow:auto;
-  margin:10px;
+  margin-top:10px;
 }
 .mobile-filter-footer{
   position:fixed;
@@ -1053,7 +1105,7 @@ a:active {
     background:#fff;
     /*opacity:0.8;*/
     border:4px solid #fff;
-    max-width:50%;
+    max-width: 50%;
     border-radius: 4px;
     padding-bottom: 2px;
 }
@@ -1065,6 +1117,11 @@ a:active {
 
 .bp-instructions-popup md-tabs-canvas {
     display: none;
+}
+
+.bp-instructions-popup-content {
+    background-color: rgba(238,238,238,1);
+    font-family: 'Comfortaa', cursive;
 }
 
 .swipe-gesture-div-right div{
@@ -1085,8 +1142,10 @@ a:active {
 
 .thumbnail-image {
     cursor: pointer;
-    /*height: 50px;*/
-    margin: 0.3em 1px 0px 0.3em;
+    height: 50px;*/
+    width: 50px;
+    min-width: 50px;
+    margin: 0.3em 2px 0px 0.3em;
     border: 1px solid #a2a6ac;
     border-radius: 2px;
     -webkit-box-shadow: 0px 0px 3px #a2a6ac, inset 0px 0px 2px #a2a6ac;
@@ -1099,6 +1158,11 @@ a:active {
     -webkit-box-shadow: 0px 0px 3px #FF5722, inset 0px 0px 2px #FF5722;
     -moz-box-shadow: 0px 0px 3px #FF5722, inset 0px 0px 2px #FF5722;
     box-shadow: 0px 0px 3px #FF5722, inset 0px 0px 2px #FF5722;
+}
+
+.gallery-wrap {
+    background-color: #fff;
+    margin-right: 0.5em;
 }
 
 .gallery-image-container {
@@ -1275,18 +1339,25 @@ md-dialog.fullscreen-dialog {
 }
 
 .lot-pricing-head {
-    font-family: 'Comfortaa', cursive;
-    font-weight: bold;
     text-align: center;
-    padding-bottom: 0.5em;
+    color: #000;
+    background-color: #d8d8d8;
 }
 
 .lot-pricing-detail {
     text-align: center;
-    padding: 0.3em 0;
 }
 
 .lot-pricing-detail.active {
     background-color: #673AB7;
     color: #fff;
+}
+
+.store-home-card {
+    margin: 1em 0;
+    background-color: #fff;
+}
+
+.purchase-requests-wrap {
+    margin: 1em 0.5em;
 }

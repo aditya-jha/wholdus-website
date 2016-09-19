@@ -4,7 +4,7 @@
         function() {
             var factory = {
                 token: '',
-                apiBaseUrl: 'http://api.wholdus.com/',
+                apiBaseUrl: 'http://api-test.wholdus.com/',
                 apiUrl: {
                     login: 'admin/login',
                     internalUsers: 'users/internal-users',
@@ -19,7 +19,8 @@
                     category: 'category',
                     buyerLeads: 'leads/buyer',
                     contactus: 'leads/contactus',
-                    buyerProducts: 'users/buyer/buyerproducts',
+                    allBuyerProducts: 'users/buyer/buyerproducts',
+                    buyerProducts: 'users/buyer/buyerproducts/response',
                     buyerProductsLanding: 'users/buyer/buyerproducts/landing',
                     blogarticle: 'blog/articles',
                     uniqueAccessToken: 'users/buyer/accesstoken',
@@ -30,7 +31,8 @@
                     cart: 'cart',
                     pincodeserviceability: 'logistics/pincodeserviceability',
                     checkout: 'checkout',
-                    paymentMethods: 'checkout/paymentmethod'
+                    paymentMethods: 'checkout/paymentmethod',
+                    storeLead: 'users/buyer/store/lead/'
                 },
                 accessTokenKey: 'randomData',
                 buyerDetailKey: 'buyerDetails',

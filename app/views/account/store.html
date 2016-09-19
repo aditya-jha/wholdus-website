@@ -1,0 +1,40 @@
+<div flex layout="column">
+    <div layout="row" layout-fill wu-account-sidenav></div>
+    <div layout="row" flex="100" class="account-content" layout-wrap>
+        <div layout="row" layout-wrap flex="100" md-whiteframe="4" class="white-card" layout-margin>
+            <div layout="row" layout-align="center center" flex="100">
+                <h1 class="product-display-name text-center" flex>MY STORE</h1>
+            </div>
+            <div class="divider" flex="100"></div>
+            <div layout="row" flex="100">
+                <span flex hide-xs></span>
+                <md-button flex class="md-warn md-raised" ng-href="/store/{{::store.store_url}}" target="_blank">View</md-button>
+                <md-button flex class="md-primary md-raised" ng-href="{{::store.storeText}}" data-text="Checkout latest products!">Share</md-button>
+                <span flex hide-xs></span>
+            </div>
+            <div layout="row" flex="100" layout-align="center center">
+                <span flex hide-xs></span>
+                <md-button class="md-warn md-raised" flex ng-click="openDiscountPopup($event)">Discount ({{store.store_global_discount}}%)</md-button>
+                <span flex hide-xs></span>
+            </div>
+        </div>
+
+        <div layout="row" flex="100" style="margin-top:1em">
+            <md-toolbar class="md-toolbar-tools md-primary">
+                <span flex class="text-center">Products</span>
+            </md-toolbar>
+        </div>
+
+        <div layout="row" layout-wrap class="product-card-wrap" layout-align="space-around center" style="width:100%;" ng-if="!noProducts">
+            <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="45" flex-sm="30" flex-gt-sm="30">
+                <div layout="row" wu-product product="p.product" flex></div>
+            </div>
+        </div>
+
+        <div layout="row" ng-show="pageSettings.enablePagination" wu-pagination flex="100"></div>
+    </div>
+    <div layout="column" flex class="account-content" ng-if="noProducts" layout-align="center center">
+        <h2>Start discovering latest products at factory prices and get it delivered at your door step</h2>
+        <md-button class="md-raised md-warn" ng-href="account/hand-picked-products">Show products</md-button>
+    </div>
+</div>

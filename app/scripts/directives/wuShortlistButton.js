@@ -23,7 +23,7 @@
                         var search = $location.search();
                         if(search.filter === 'favorite') {
                             $scope.settings.page = 1;
-                        } else if(search.filter === 'dislikes') {
+                        } else if(search.filter === 'rejected') {
                             $scope.settings.page = 2;
                         } else {
                             $scope.settings.page = 0;

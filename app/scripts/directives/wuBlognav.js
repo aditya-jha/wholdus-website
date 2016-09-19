@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuBlognav', function() {
         return {
             restrict: 'AE',

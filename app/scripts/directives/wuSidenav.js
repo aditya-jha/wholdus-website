@@ -1,4 +1,5 @@
     (function() {
+        'use strict';
     webapp.directive('wuSidenav', function() {
          return {
             restrict: 'AE',
@@ -15,6 +16,20 @@
                 function($scope, $rootScope, $log, APIService, $mdSidenav, $timeout, $location) {
 
                     var listeners = [];
+
+                    $scope.links = [{
+                        display_name: 'Hand Picked For You',
+                        url: '/account/hand-picked-products'
+                    }, {
+                        display_name: 'My Store',
+                        url: '/account/my-store'
+                    }, {
+                        display_name: 'Purchase Requests',
+                        url: '/account/purchase-requests'
+                    }, {
+                        display_name: 'Orders',
+                        url: '/account/orders'
+                    }];
 
                     function getCategory(params) {
                         APIService.apiCall("GET", APIService.getAPIUrl("category"))

@@ -1,0 +1,35 @@
+<md-dialog aria-label="store discount popup"  ng-cloak>
+    <form name="storeDiscountForm" novalidate ng-submit="setStoreDiscount()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Set Store Discount</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    X
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <md-input-container layout-fill ng-show="!apiCall">
+                    <label>Discount (%)</label>
+                    <input type="text" name="storeDiscount" ng-model="storeDiscount" required />
+                    <div ng-messages="storeDiscountForm.storeDiscount.$error" role="alert" ng-if="storeDiscountForm.storeDiscount.$dirty || storeDiscountForm.$submitted">
+                        <div ng-message="required" class="formError">This is required.</div>
+                    </div>
+                </md-input-container>
+                <span class="primary-text small-font">NOTE: This will set discount for all products</span>
+                <div flex layout="row" layout-align="center center" ng-show="apiCall">
+                    <md-progress-circular class="md-warn" md-mode="indeterminate" md-diameter="98"></md-progress-circular>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button type="submit" class="md-raised md-warn" flex ng-disabled="apiCall">
+                Submit
+            </md-button>
+            <span flex></span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div layout="row" layout-align="center" data-ng-if="!settings.noProduct">
+<div layout="row" layout-align="center" ng-if="!settings.noProduct">
     <div layout="row" flex="60" flex-xs="90" flex-sm="70" layout-align="center center">
         <span layout="row" layout-align="center center" flex>
             <span class="line-around"></span>
@@ -45,7 +45,7 @@
 
     <div layout="row" flex="100"  class="desktop-filter-panel" layout-align="center">
         <div md-whiteframe="2" layout="row" layout-wrap  ng-show="desktopFilterID==1" ng-mouseleave="filterChange &&applyFilters('desktop')" flex="75"  style="max-height:400px; overflow-y: auto;">
-            <div layout="row" flex="25" flex-sm="50" flex-md="33" data-ng-repeat="seller in sellers |orderBy:'company_name'" layout-align="start start" style="padding:2px;" class="small-label" ng-click="filterChange=true">
+            <div layout="row" flex="25" flex-sm="50" flex-md="33" ng-repeat="seller in sellers | orderBy:'company_name'" layout-align="start start" style="padding:2px;" class="small-label" ng-click="filterChange=true">
                 <md-checkbox  class="md-primary" name="string" ng-model="seller.isShow"  aria-label="string" style="margin:0px;" ng-change="filterChanged()">
                     <label class="grey-label" style="text-transform:capitalize;">{{seller.company_name| lowercase  }}</label>
                 </md-checkbox>
@@ -54,7 +54,7 @@
 
         <div  layout="column" md-whiteframe="2" ng-show="desktopFilterID==2"  ng-mouseleave="filterChange && applyFilters('desktop')" flex="35" flex-sm="70" flex-md="50" style="padding:10px">
             <div layout="row" layout-wrap layout-align="space-between center">
-                <div flex="45"  data-ng-repeat="p in priceRanges" layout-align="start start" style="padding:5px;" class="small-label">
+                <div flex="45"  ng-repeat="p in priceRanges" layout-align="start start" style="padding:5px;" class="small-label">
                     <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string" style="margin:0px;" ng-click="updatePrice($index)" ng-change="filterChanged()">
                         <label class="grey-label">
                             <span ng-if="$first">Below Rs.{{p.max_value}}</span>
@@ -71,7 +71,7 @@
                         <span class="custum-input-label">Min Price</span>
                         <div > Rs.
                         <md-input-container class="price-input">
-                        <input type="number" data-ng-model="minPrice" aria-label="minPrice" ng-change="filterChanged()"/>
+                        <input type="number" ng-model="minPrice" aria-label="minPrice" ng-change="filterChanged()"/>
                         </md-input-container>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                             <span class="custum-input-label">Max Price</span>
                         <div> Rs.
                         <md-input-container class="price-input">
-                            <input type="number" data-ng-model="maxPrice" aria-label="maxPrice" ng-change="filterChanged()"/>
+                            <input type="number" ng-model="maxPrice" aria-label="maxPrice" ng-change="filterChanged()"/>
                         </md-input-container>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
 
         <div md-whiteframe="2" layout="row" layout-align="center" ng-show="desktopFilterID==3" ng-mouseleave="filterChange && applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
             <div layout="row" flex layout-wrap layout-align="start center">
-                <div data-ng-repeat="c in colours" flex="25"  layout-align="start start" ng-click="updateColour($index)">
+                <div ng-repeat="c in colours" flex="25"  layout-align="start start" ng-click="updateColour($index)">
                     <div class="color-box-container" layout="row">
                         <div style="background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(0,0,0,0.1)), {{c.colourCode}}" class="color-box" ng-class={'color-box-selected':c.active} layout="row" layout-align="center center">
                             <span></span>
@@ -104,7 +104,7 @@
         </div>
 
         <div md-whiteframe="2" layout="row" layout-wrap layout-align="start" ng-show="desktopFilterID==4" ng-mouseleave="filterChange && applyFilters('desktop')" flex="35" flex-sm="60" flex-md="50">
-            <div flex="25"  data-ng-repeat="f in fabrics" layout-align="start start" style="padding:2px;" class="small-label">
+            <div flex="25"  ng-repeat="f in fabrics" layout-align="start start" style="padding:2px;" class="small-label">
                 <md-checkbox  class="md-primary" name="string" ng-model="f.active"  aria-label="string" style="margin:0px;" ng-change="filterChanged()">
                     <label style="color:grey; cursor:pointer">{{f.name }}</label>
                 </md-checkbox>
@@ -113,15 +113,15 @@
     </div>
 </div>
 
-<div layout="row" layout-wrap class="product-card-wrap product-cards-container" layout-padding>
-    <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="100" flex-sm="50" flex-gt-sm="33">
+<div layout="row" layout-wrap class="product-card-wrap product-cards-container" layout-align="space-around center">
+    <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="45" flex-sm="30" flex-gt-sm="20">
         <div layout="row" wu-product product="p" flex></div>
     </div>
 </div>
 
-<div layout="row" data-ng-show="settings.enablePagination" wu-pagination></div>
+<div layout="row" ng-show="settings.enablePagination" wu-pagination></div>
 
-<div layout="column" data-ng-if="settings.noProduct">
+<div layout="column" ng-if="settings.noProduct">
     <div layout="column" layout-align="start center" flex>
         <h1 id="category-title">{{settings.displayName}}</h1>
     </div>
@@ -133,7 +133,7 @@
             <span>oops! our manufacturers are out of stock</span>
             <span>you are our precious customer! please let us serve you</span>
             <span>get a call from us within an hour</span>
-            <md-button class="md-raised md-warn" data-ng-click="buyNow($event, categoryID)" style="padding: 0px 8px;">
+            <md-button class="md-raised md-warn" ng-click="buyNow($event, categoryID)" style="padding: 0px 8px;">
                 <span>Join Buyer Network</span>
             </md-button>
         </div>
@@ -142,7 +142,7 @@
 
 <div wu-footer layout="row"></div>
 
-<md-card layout="row" ng-if="settings.isMobile" flex="100" class="md-primary mobile-filter"  layout-align="center center" data-ng-click="showFilterDialog()">
+<md-card layout="row" ng-if="settings.isMobile" flex="100" class="md-primary mobile-filter"  layout-align="center center" ng-click="showFilterDialog()">
     <svg style="width:24px;height:24px" viewBox="0 0 485.008 485.008">
         <path fill="#FFF" d="M171.501,464.698v-237.9l-166.3-192.6c-8.9-10.9-7.9-33.3,15.1-33.3h443.6c21.6,0,26.6,19.8,15.1,33.3l-162.3,187.5v147.2    c0,6-2,11.1-7.1,15.1l-103.8,95.8C193.801,488.698,171.501,483.898,171.501,464.698z M64.701,41.298l142.2,164.3c3,4,5,8.1,5,13.1    v200.6l64.5-58.5v-146.1c0-5,2-9.1,5-13.1l138.1-160.3L64.701,41.298L64.701,41.298z" />
     </svg>

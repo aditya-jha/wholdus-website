@@ -1,0 +1,20 @@
+<div layout="row" layout-wrap class="product-card-wrap" layout-align="space-around center" data-ng-if="!noProducts">
+    <div layout="row" ng-repeat="p in products" class="product-card-container" flex-xs="45" flex-sm="30" flex-gt-sm="20">
+        <div layout="row" wu-product product="p.product" store="true" flex></div>
+    </div>
+</div>
+
+<div layout="row" data-ng-show="pageSettings.enablePagination" wu-pagination flex="100"></div>
+
+<div layout="column" data-ng-if="settings.noProduct">
+    <div layout="row" layout-wrap class="no-product-container">
+        <div layout="column" layout-align="center center" layout-padding>
+            <img src="images/no-product-1.png" />
+        </div>
+        <div layout="column" layout-align="center center" layout-padding>
+            <span>No Products in store</span>
+        </div>
+    </div>
+</div>
+
+<div layout="row" wu-store-footer></div>
