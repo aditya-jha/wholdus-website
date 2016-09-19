@@ -148,9 +148,16 @@
             <h1 class="product-display-name">{{::product.display_name }}</h1>
         </div>
         <div layout="row" layout-wrap layout-padding>
-            <div flex flex-xs="100" layout="column">
+            <div flex="50" flex-xs="100" layout="column">
                 <span class="feature-title">MRP</span>
-                <span class="product-price">Rs. {{::product.price_per_unit}}</span>
+                <span class="product-price">Rs. {{::product.buyerstore.buyer_store_discounted_price}}</span>
+            </div>
+            <div flex="50" flex-xs="100" layout="column">
+                <span class="feature-title">MRP</span>
+                <span class="non-discount-price" style="text-align:left">Rs. {{::product.price_per_unit}}</span>
+            </div>
+            <div flex="100" style="padding-top: 0;">
+                <span class="discount-number" flex-xs="100" style="font-size:1em">{{::product.buyerstore.buyer_store_discount}}% Discount</span>
             </div>
         </div>
         <div layout="row" class="divider"></div>

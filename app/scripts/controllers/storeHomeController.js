@@ -50,6 +50,7 @@
             function praseProductDetails(p) {
                 var product = {
                     productID: p.productID,
+                    buyerstore: p.buyerstore,
                     category: p.category,
                     display_name: p.display_name,
                     min_price_per_unit: p.min_price_per_unit,
