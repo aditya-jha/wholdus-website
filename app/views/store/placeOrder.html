@@ -13,40 +13,40 @@
         </md-toolbar>
         <md-dialog-content>
             <div class="md-dialog-content">
-                <div layout="column" ng-show="!apiCall">
-                    <md-input-container layout-fill>
-                        <label>Mobile Number</label>
-                        <input type="number" ng-model="mobile_number" name="mobNum"  ng-pattern="formValidation.mobileNumValidation" required />
-                        <div ng-messages="placeOrderForm.mobNum.$error" role="alert" ng-if="placeOrderForm.mobNum.$dirty || placeOrderForm.$submitted" >
-                            <div ng-message="required" class="formError">This is required.</div>
-                            <div ng-message="pattern" class="formError">
-                                {{formValidation.mobileErrorMessage}}
+                <div layout="row" ng-show="!apiCall" layout-wrap>
+                    <div layout="row" flex="100">
+                        <md-input-container layout-fill>
+                            <label>Mobile Number</label>
+                            <input type="number" ng-model="mobile_number" name="mobNum"  ng-pattern="formValidation.mobileNumValidation" required />
+                            <div ng-messages="placeOrderForm.mobNum.$error" role="alert" ng-if="placeOrderForm.mobNum.$dirty || placeOrderForm.$submitted" >
+                                <div ng-message="required" class="formError">This is required.</div>
+                                <div ng-message="pattern" class="formError">
+                                    {{formValidation.mobileErrorMessage}}
+                                </div>
                             </div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container layout-fill>
-                        <label>Name</label>
-                        <input type="text" ng-model="name" name="name" required />
-                        <div ng-messages="placeOrderForm.name.$error" role="alert" ng-if="placeOrderForm.name.$dirty || placeOrderForm.$submitted" >
-                            <div ng-message="required" class="formError">This is required.</div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container layout-fill>
-                        <label>Email</label>
-                        <input type="email" ng-model="email" name="email" ng-pattern="formValidation.emailValidation" />
-                        <div ng-messages="placeOrderForm.email.$error" role="alert" ng-if="placeOrderForm.email.$dirty || placeOrderForm.$submitted" >
-                            <!-- <div ng-message="required" class="formError">This is required.</div> -->
-                            <div ng-message="pattern" class="formError">
-                                {{formValidation.emailErrorMessage}}
+                        </md-input-container>
+                    </div>
+                    <div layout="row" flex="100">
+                        <md-input-container layout-fill>
+                            <label>Name</label>
+                            <input type="text" ng-model="name" name="name" required />
+                            <div ng-messages="placeOrderForm.name.$error" role="alert" ng-if="placeOrderForm.name.$dirty || placeOrderForm.$submitted" >
+                                <div ng-message="required" class="formError">This is required.</div>
                             </div>
-                        </div>
-                    </md-input-container>
-                    <!-- <md-input-container>
-                        <label>Size</label>
-                        <md-select ng-model="selectedSize">
-                            <md-option ng-value="val" ng-repeat="val in allSizes">{{val}}</md-option>
-                        </md-select>
-                    </md-input-container> -->
+                        </md-input-container>
+                    </div>
+                    <div layout="row" flex="100">
+                        <md-input-container layout-fill>
+                            <label>Email</label>
+                            <input type="email" ng-model="email" name="email" ng-pattern="formValidation.emailValidation" />
+                            <div ng-messages="placeOrderForm.email.$error" role="alert" ng-if="placeOrderForm.email.$dirty || placeOrderForm.$submitted" >
+                                <!-- <div ng-message="required" class="formError">This is required.</div> -->
+                                <div ng-message="pattern" class="formError">
+                                    {{formValidation.emailErrorMessage}}
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
                 </div>
                 <div layout="row" flex="100" ng-show="apiCall" layout-align="center center">
                     <md-progress-circular class="md-warn" md-mode="indeterminate" md-diameter="100"></md-progress-circular>
