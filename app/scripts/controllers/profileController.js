@@ -28,6 +28,7 @@
                     .then(function(response) {
                         $location.url('/');
                     });
+                    LoginService.logout();
                     ngProgressBarService.endProgressbar();
                 });
             }

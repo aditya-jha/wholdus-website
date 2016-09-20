@@ -14,7 +14,9 @@
         '$q',
         'DialogService',
         '$route',
-        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia, $q, DialogService, $route) {
+        'LoginService',
+        'ToastService',
+        function($scope, $log, $routeParams, UtilService, APIService, $rootScope, ngProgressBarService, $location, $mdDialog, $mdMedia, $q, DialogService, $route, LoginService, ToastService) {
 
             $scope.pageSettings = {
                 totalPages: 0,
@@ -149,7 +151,10 @@
                         deferred.reject();
                     }
                 }, function(error) {
-                    $log.log(error);
+                    ToastService.showActionToast("Something went wrong. Please try again", 0);
+                    if(error.error && error.error == 'Authentication failure') {
+                        LoginService.logout();
+                    }
                     $location.url('/');
                     deferred.reject();
                 });
