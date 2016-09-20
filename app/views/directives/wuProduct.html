@@ -86,13 +86,13 @@
                 <span class="discount-number" flex>{{::product.buyerstore.buyer_store_discount}}% Discount</span>
             </div>
         </a>
-        <a layout="row" flex="100" layout-wrap class="product-card-details" ng-href="{{::product.url}}" ng-if="product.storeUrl && product.buyerstore.buyer_store_discounted_price">
+        <a layout="row" flex="100" layout-wrap class="product-card-details" ng-href="{{::product.url}}">
             <span flex="100" class="text-center small-font">Retail Details</span>
             <div layout="row" layout-wrap flex="100" layout-align="start center">
-                <span class="product-price" flex="50" flex-xs="100">Rs. {{product.buyerstore.buyer_store_discounted_price | currency:'':0}}</span>
-                <span class="non-discount-price" flex="50" flex-xs="100">Rs. {{::product.price_per_unit | currency:'':0}}</span>
+                <span class="product-price" flex="50" flex-xs="100">Rs. {{product.buyerstore.buyer_store_discounted_price ? product.buyerstore.buyer_store_discounted_price : product.price_per_uni | currency:'':0}}</span>
+                <span class="non-discount-price" flex="50" flex-xs="100" ng-if="product.storeUrl && product.buyerstore.buyer_store_discounted_price">Rs. {{::product.price_per_unit | currency:'':0}}</span>
             </div>
-            <div layout="row" ng-if="product.buyerstore.buyer_store_discounted_price" flex="100">
+            <div layout="row" ng-if="product.buyerstore.buyer_store_discounted_price" flex="100" ng-if="product.storeUrl && product.buyerstore.buyer_store_discounted_price">
                 <span class="discount-number" flex>{{product.buyerstore.buyer_store_discount}}% Discount</span>
             </div>
         </a>

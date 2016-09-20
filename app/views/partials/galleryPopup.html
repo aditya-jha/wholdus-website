@@ -15,10 +15,10 @@
                 </div>
             </div>
         </div>
-        <div ng-if="tbImage.length>1 && isMobile" layout="row" style="border:1px solid #B6B6B6; overflow: scroll;" class="hide-scrollbar" layout-align="start start" flex="15">
+        <md-content ng-if="tbImage.length>1 && isMobile" layout="row" style="border:1px solid #B6B6B6;" class="hide-scrollbar" layout-align="start start" flex="15">
             <div ng-repeat="tbi in tbImage" layout="column" class="thumbnail-image max-width-100 {{$index==activeImage ? 'active' : ''}}" ng-mouseenter="setActiveImage($index, true)" layout-align="center center">
                 <img data-ng-src="{{::tbi}}" style="max-width:100%; max-height:100%;" />
             </div>
-        </div>
+        </md-content>
     </div>
 </md-dialog>
