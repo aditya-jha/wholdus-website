@@ -238,8 +238,7 @@
                     }
                 });
 
-                $location.search('page', '1');
-                $scope.settings.page = UtilService.getPageNumber();
+                // $scope.settings.page = UtilService.getPageNumber();
 
                 UtilService.setFilterParams($scope.selectedSellers.toString(),
                     $scope.priceRangeIndex, $scope.minPrice, $scope.maxPrice);
@@ -247,26 +246,12 @@
 
                 checkSelectedSellers();
 
-                var loggedIn = false,
-                    promises = [],
-                    cartItems = {};
-
-                if (LoginService.checkLoggedIn()) {
-                    loggedIn = true;
-                    promises.push(getProductsInCart());
+                if(UtilService.getPageNumber() == 1) {
+                    locationChangeSuccessHelper();
+                } else {
+                    $location.search('page', '1');
                 }
-                promises.push(getProducts());
 
-                $q.all(promises).then(function(response) {
-                    if (loggedIn) {
-                        cartItems = parseCartItems(response[0]);
-                        response = response[1];
-                    } else {
-                        response = response[0];
-                    }
-                    getProductsHelper(response, cartItems);
-                });
-                
                 if (type == 'desktop') {
                     $scope.desktopFilterID = null;
                 } else if (type == 'mobile') {
@@ -276,10 +261,6 @@
             };
 
             $scope.showFilterDialog = function() {
-                // DialogService.viewDialog(event, {
-                //     view: 'views/partials/filterDialog.html',
-                //     controller: 'CategoryController'
-                // });
                 $mdDialog.show({
                     controller: 'FilterDialogController',
                     templateUrl: 'views/partials/filterDialog.html',
@@ -326,6 +307,28 @@
                 });
             };
 
+            function locationChangeSuccessHelper() {
+                var loggedIn = false,
+                    promises = [],
+                    cartItems = {};
+
+                if (LoginService.checkLoggedIn()) {
+                    loggedIn = true;
+                    promises.push(getProductsInCart());
+                }
+                promises.push(getProducts());
+
+                $q.all(promises).then(function(response) {
+                    if (loggedIn) {
+                        cartItems = parseCartItems(response[0]);
+                        response = response[1];
+                    } else {
+                        response = response[0];
+                    }
+                    getProductsHelper(response, cartItems);
+                });
+            }
+
             var checkLoginStateListener = $rootScope.$on('checkLoginState', function() {
                 getProducts().then(function(response) {
                     getProductsHelper(response, {});
@@ -339,6 +342,12 @@
                 });
             });
             listeners.push(loginStateChangeListener);
+
+            var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
+                $scope.settings.page = UtilService.getPageNumber();
+                locationChangeSuccessHelper();
+            });
+            listeners.push(locationChangeListener);
 
             var destroyListener = $scope.$on('$destroy', function() {
                 UtilService.resetFilterParams();
