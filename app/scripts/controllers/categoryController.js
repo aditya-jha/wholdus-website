@@ -186,12 +186,23 @@
             }
 
             $scope.updatePrice = function(position) {
-                angular.forEach($scope.priceRanges, function(p, index) {
-                    if (position != index) p.active = false;
-                });
-                $scope.priceRangeIndex = position;
-                $scope.minPrice = $scope.priceRanges[position].min_value;
-                $scope.maxPrice = $scope.priceRanges[position].max_value;
+                // $scope.priceRanges[position].active = !$scope.priceRanges[position].active;
+                if($scope.priceRanges[position].active) {
+                    $scope.priceRangeIndex = position;
+                    $scope.minPrice = $scope.priceRanges[position].min_value;
+                    $scope.maxPrice = $scope.priceRanges[position].max_value;
+                } else {
+                    $scope.priceRangeIndex = undefined;
+                    $scope.minPrice = undefined;
+                    $scope.maxPrice = undefined;
+                }
+                $scope.filterChange = true;
+                // angular.forEach($scope.priceRanges, function(p, index) {
+                //     if (position != index) p.active = false;
+                // });
+                // $scope.priceRangeIndex = position;
+                // $scope.minPrice = $scope.priceRanges[position].min_value;
+                // $scope.maxPrice = $scope.priceRanges[position].max_value;
             };
 
             $scope.updateColour = function(position) {

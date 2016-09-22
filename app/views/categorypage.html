@@ -55,7 +55,7 @@
         <div  layout="column" md-whiteframe="2" ng-show="desktopFilterID==2"  ng-mouseleave="filterChange && applyFilters('desktop')" flex="35" flex-sm="70" flex-md="50" style="padding:10px">
             <div layout="row" layout-wrap layout-align="space-between center">
                 <div flex="45"  ng-repeat="p in priceRanges" layout-align="start start" style="padding:5px;" class="small-label">
-                    <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string" style="margin:0px;" ng-click="updatePrice($index)" ng-change="filterChanged()">
+                    <md-checkbox  class="md-primary" name="string" ng-model="p.active"  aria-label="string" style="margin:0px;" ng-change="updatePrice($index)()">
                         <label class="grey-label">
                             <span ng-if="$first">Below Rs.{{p.max_value}}</span>
                             <span ng-if="$last">Above Rs.{{p.min_value}}</span>
