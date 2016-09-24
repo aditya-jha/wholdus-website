@@ -11,7 +11,8 @@
         '$mdMedia',
         '$mdDialog',
         'FormValidationService',
-        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog, FormValidationService) {
+        '$route',
+        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog, FormValidationService, $route) {
 
             var listeners = [], oldAddress;
 
@@ -62,6 +63,10 @@
                     }
                     ngProgressBarService.endProgressbar();
                 }, function(error) {
+                    if(error.error == "Authentication failure") {
+                        LoginService.logout();
+                        $route.reload();
+                    }
                     ngProgressBarService.endProgressbar();
                 });
             }

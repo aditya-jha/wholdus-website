@@ -18,7 +18,8 @@
         'LoginService',
         '$q',
         '$timeout',
-        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService, LoginService, $q, $timeout) {
+        '$route',
+        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService, LoginService, $q, $timeout, $route) {
 
             var listeners = [];
 
@@ -117,7 +118,12 @@
                     if(response.cart_items.length) {
                         $scope.pdInCart = true;
                     }
-                }, function(error) {});
+                }, function(error) {
+                    if(error.error == "Authentication failure") {
+                        LoginService.logout();
+                        $route.reload();
+                    }
+                });
             }
 
             function openLotPopup(event, product, lots) {

@@ -13,7 +13,8 @@
         '$q',
         'DialogService',
         'LoginService',
-        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q, DialogService, LoginService) {
+        '$route',
+        function($scope, $rootScope, $log, APIService, ConstantKeyValueService, $timeout, $location, UtilService, ngProgressBarService, $q, DialogService, LoginService, $route) {
 
             var listeners = [];
 
@@ -74,6 +75,10 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('cartItem')).then(function(response) {
                     deferred.resolve(response.cart_items);
                 }, function(error) {
+                    if(error.error == "Authentication failure") {
+                        LoginService.logout();
+                        $route.reload();
+                    }
                     deferred.reject(error);
                 });
                 return deferred.promise;
@@ -140,7 +145,7 @@
                 }
             });
             listeners.push(loginStateChangeListener);
-            
+
             var destroyListener = $scope.$on('$destroy', function() {
                 angular.forEach(listeners, function(value, key) {
                     if(value) value();

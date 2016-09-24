@@ -50,6 +50,10 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('cartItem')).then(function(response) {
                     deferred.resolve(response.cart_items);
                 }, function(error) {
+                    if(error.error == "Authentication failure") {
+                        LoginService.logout();
+                        $route.reload();
+                    }
                     deferred.reject(error);
                 });
                 return deferred.promise;
