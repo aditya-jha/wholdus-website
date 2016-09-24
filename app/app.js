@@ -39,6 +39,9 @@ webapp.config([
          }).when('/we-are-social', {
              templateUrl: "views/we-are-social.html",
              controller: "StaticPagesController",
+         }).when('/demo', {
+             templateUrl: "views/demopage.html",
+             controller: "StaticPagesController",
          }).when('/account/orders', {
              templateUrl: 'views/account/orders.html',
              controller: 'OrdersController'

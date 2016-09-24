@@ -10,21 +10,9 @@
         'DialogService',
         'FormValidationService',
         'UtilService',
+        '$mdMedia',
         function($scope, $log, APIService, ToastService, $rootScope, ngProgressBarService,
-            DialogService,FormValidationService, UtilService) {
-
-            $scope.formValidation=FormValidationService;
-            $scope.contactusForm = "contactusForm";
-            $scope.settings = {
-                isMobile: UtilService.isMobileRequest(),
-                showLoading: false
-            };
-
-            $scope.contactus = {
-                email: "",
-                mobile_number: "",
-                remarks: "",
-            };
+            DialogService,FormValidationService, UtilService, $mdMedia) {
 
             function resetContactUsFrom() {
                 $scope.contactusForm.$setPristine();
@@ -54,6 +42,29 @@
                     $scope.settings.showLoading = false;
                 });
             };
+
+            function init() {
+                $scope.settings = {
+                    isMobile: UtilService.isMobileRequest(),
+                    showLoading: false
+                };
+
+                $scope.formValidation=FormValidationService;
+                $scope.contactusForm = "contactusForm";
+
+                $scope.contactus = {
+                    email: "",
+                    mobile_number: "",
+                    remarks: "",
+                };
+
+                if($mdMedia('xs')) {
+                    $scope.settings.demoVideoHeight = '200px';
+                } else {
+                    $scope.settings.demoVideoHeight = '300px';
+                }
+            }
+            init();
         }
     ]);
 })();
