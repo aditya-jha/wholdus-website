@@ -48,7 +48,12 @@
                                 view: 'views/partials/loginPopup.html',
                             }).finally(function() {
                                 loginDialogCallback(redirect);
-                                $rootScope.$broadcast('loginStateChange');
+                                var loginCheck = LoginService.checkLoggedIn();
+                                if($scope.loginStatus && !loginCheck) {
+                                    $rootScope.$broadcast('loginStateChange');
+                                } else if(!$scope.loginStatus && loginCheck) {
+                                    $rootScope.$broadcast('loginStateChange');
+                                }
                             });
                         }
                     };
