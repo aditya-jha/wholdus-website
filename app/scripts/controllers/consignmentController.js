@@ -66,7 +66,7 @@
                 }, function(error) {
                     if(error.error == "Authentication failure") {
                         LoginService.logout();
-                        $route.reload();
+                        $location.url('/');
                     }
                     ngProgressBarService.endProgressbar();
                 });
