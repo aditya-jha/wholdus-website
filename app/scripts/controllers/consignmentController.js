@@ -12,7 +12,8 @@
         '$mdDialog',
         'FormValidationService',
         '$route',
-        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog, FormValidationService, $route) {
+        'LoginService',
+        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog, FormValidationService, $route, LoginService) {
 
             var listeners = [], oldAddress;
 
