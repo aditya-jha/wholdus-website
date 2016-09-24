@@ -6,7 +6,8 @@
         'ConstantKeyValueService',
         '$location',
         '$q',
-        function($http, ConstantKeyValueService, $location, $q) {
+        'LoginService',
+        function($http, ConstantKeyValueService, $location, $q, LoginService) {
             var factory = {};
 
             function transform(obj) {
@@ -40,6 +41,9 @@
                     if(response.data.statusCode === '2XX') {
                         deferred.resolve(response.data.body);
                     } else {
+                        if(response.data.body.error.error == 'Authentication failure') {
+                            LoginService.logout();
+                        }
                         deferred.reject(response.data.body);
                     }
                 }, function(error) {
