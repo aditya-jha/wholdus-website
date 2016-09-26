@@ -16,6 +16,7 @@ webapp.config([
      function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, localStorageServiceProvider, $compileProvider) {
 
          $compileProvider.debugInfoEnabled(false);
+         $compileProvider.aHrefSanitizationWhitelist(/^\s*(http?|https?|local|data|chrome-extension|whatsapp|mailto|tel):/);
 
          $routeProvider.when('/', {
              templateUrl: "views/homepage.html",
@@ -38,16 +39,34 @@ webapp.config([
          }).when('/we-are-social', {
              templateUrl: "views/we-are-social.html",
              controller: "StaticPagesController",
+         }).when('/demo', {
+             templateUrl: "views/demopage.html",
+             controller: "StaticPagesController",
          }).when('/account/orders', {
              templateUrl: 'views/account/orders.html',
              controller: 'OrdersController'
          }).when('/account/profile', {
              templateUrl: 'views/account/profile.html',
              controller: 'ProfileController'
+         }).when('/account/my-store', {
+             templateUrl: 'views/account/store.html',
+             controller: 'StoreHomeController'
+         }).when('/account/purchase-requests', {
+             templateUrl: 'views/account/purchaseRequests.html',
+             controller: 'PurchaseRequestsController'
          }).when('/account/hand-picked-products', {
              templateUrl: 'views/account/feed.html',
              controller: 'FeedController',
              reloadOnSearch: false
+         }).when('/store/:storeUrl', {
+             templateUrl: 'views/store/homepage.html',
+             controller: 'StoreHomeController'
+         }).when('/store/:storeUrl/products', {
+             templateUrl: 'views/store/allProducts.html',
+             controller: 'StoreHomeController'
+         }).when('/store/:storeUrl/:productUrl', {
+             templateUrl: 'views/productpage.html',
+             controller: 'StoreHomeController'
          }).when('/blog', {
              template: '<div></div>',
              controller: 'RedirectController'
@@ -67,6 +86,7 @@ webapp.config([
          }).when('/:category', {
              templateUrl: "views/categorypage.html",
              controller: "CategoryController",
+             reloadOnSearch: false
          }).when('/:category/:product', {
              templateUrl: "views/productpage.html",
              controller: "ProductController"
@@ -80,5 +100,6 @@ webapp.config([
                          .accentPalette('deep-orange');
 
          localStorageServiceProvider.setPrefix('probzip-webapp');
+
     }
 ]);

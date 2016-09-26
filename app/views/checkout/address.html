@@ -68,6 +68,23 @@
     </div>
 </div>
 
+<div layout="row" layout-wrap flex="100" class="section md-whiteframe-6dp">
+    <div class="header" layout="row" layout-align="center center" flex="100">
+        Forms Required
+    </div>
+    <div flex="100" layout="row" class="content" layout-align="center center" layout-wrap ng-if="formsRequired.length>0">
+        <div layout="row" flex="100" ng-repeat="form in formsRequired" layout-wrap>
+            <span class="space">{{::$index+1}}.</span>
+            <span flex class="bold">{{::form.name}}</span>
+        </div>
+    </div>
+    <div flex="100" layout="row" class="content" layout-align="center center" layout-wrap ng-if="noFormsRequired">
+        <div layout="row" flex="100" layout-align="center center">
+            <span>No Forms Required</span>
+        </div>
+    </div>
+</div>
+
 <span ng-if="isMobile" flex="100" style="height:50px;"></span>
 <div class="action" flex="100" layout-align="center center" layout="row" ng-if="!isMobile">
     <span flex hide-xs></span>

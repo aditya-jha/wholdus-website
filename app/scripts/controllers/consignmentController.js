@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.controller('ConsignmentController', [
         '$scope',
         '$log',
@@ -10,7 +11,9 @@
         '$mdMedia',
         '$mdDialog',
         'FormValidationService',
-        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog, FormValidationService) {
+        '$route',
+        'LoginService',
+        function($scope, $log, UtilService, $location, APIService, ngProgressBarService, ConstantKeyValueService, $mdMedia, $mdDialog, FormValidationService, $route, LoginService) {
 
             var listeners = [], oldAddress;
 
@@ -61,6 +64,10 @@
                     }
                     ngProgressBarService.endProgressbar();
                 }, function(error) {
+                    if(error.error == "Authentication failure") {
+                        LoginService.logout();
+                        $location.url('/');
+                    }
                     ngProgressBarService.endProgressbar();
                 });
             }
@@ -87,12 +94,22 @@
                 APIService.apiCall("GET", APIService.getAPIUrl('pincodeserviceability'), null, {pincode_code:pincode})
                 .then(function(response) {
                     if(response.serviceable_pincodes && response.serviceable_pincodes.length) {
-                        var x = {};
+                        var x = {}, formsRequired = [];
                         angular.forEach(response.serviceable_pincodes, function(value, key) {
                             if(value.regular_delivery_available) x.delivery = true;
                             if(value.cod_available) x.cod = true;
+                            if(value.pincode.city.state.forms.length > 0) {
+                                formsRequired.push(value.pincode.city.state.forms);
+                            }
                         });
                         $scope.pincodeService = x;
+                        if(formsRequired.length > 0) {
+                            $scope.formsRequired = formsRequired[0];
+                            $scope.noFormsRequired = false;
+                        } else {
+                            $scope.formsRequired = null;
+                            $scope.noFormsRequired = true;
+                        }
                     } else {
                         $scope.pincodeService = {};
                     }

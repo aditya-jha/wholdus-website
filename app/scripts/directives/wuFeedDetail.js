@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuFeedDetail', function() {
         return {
             restrict: 'AE',
@@ -18,13 +19,6 @@
                     $scope.smallScreen = null;
                     $scope.showDetailsCard = false;
                     $scope.product = null;
-
-                    function init() {
-                        var url = $location.url();
-                        if(url.indexOf('hand-picked') == -1) {
-                            $scope.showFeedActionButton = false;
-                        }
-                    }
 
                     function isSmallScreen() {
                         if($window.screen.height <= 570) {
@@ -47,7 +41,7 @@
                     };
 
                     $scope.feedActionButton = function(type) {
-                        $scope.$broadcast('feedActionButtonClicked', type);
+                        $rootScope.$broadcast('feedActionButtonClicked', type);
                     };
 
                     var productToShowListener = $rootScope.$on('showFeedActionButton', function(event, data) {
@@ -60,13 +54,6 @@
                         }
                     });
                     listeners.push(productToShowListener);
-
-                    var locationChangeListener = $scope.$on('$locationChangeSuccess', function() {
-                        init();
-                    });
-                    listeners.push(locationChangeListener);
-
-                    init();
 
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value) {

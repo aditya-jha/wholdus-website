@@ -41,6 +41,8 @@ var jsCustom = [
     'app/scripts/directives/wuFeedDetail.js',
     'app/scripts/directives/wuGallery.js',
     'app/scripts/directives/wuFooter.js',
+    'app/scripts/directives/wuStoreFooter.js',
+    'app/scripts/directives/wuPurchaseRequestStatus.js',
     'app/scripts/controllers/homeController.js',
     'app/scripts/controllers/categoryController.js',
     'app/scripts/controllers/productController.js',
@@ -53,7 +55,13 @@ var jsCustom = [
     'app/scripts/controllers/redirectController.js',
     'app/scripts/controllers/galleryPopupController.js',
     'app/scripts/controllers/lotPopupController.js',
-    'app/scripts/controllers/consignmentController.js'
+    'app/scripts/controllers/consignmentController.js',
+    'app/scripts/controllers/storeHomeController.js',
+    'app/scripts/controllers/placeOrderPopupController.js',
+    'app/scripts/controllers/purchaseRequestsController.js',
+    'app/scripts/controllers/storeDiscountPopupController.js',
+    'app/scripts/controllers/productDiscountPopupController.js',
+    'app/scripts/controllers/filterDialogController.js',
 ];
 
 var stylesheets = [

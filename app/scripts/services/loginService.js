@@ -19,7 +19,8 @@
                 var buyerData = {
                     mobile: response.buyer.mobile_number,
                     name: response.buyer.name,
-                    id: response.buyer.buyerID
+                    id: response.buyer.buyerID,
+                    store_url: response.buyer.store_url
                 };
                 localStorageService.set(ConstantKeyValueService.buyerDetailKey, buyerData);
             }

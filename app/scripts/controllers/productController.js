@@ -18,11 +18,13 @@
         'LoginService',
         '$q',
         '$timeout',
-        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService, LoginService, $q, $timeout) {
+        '$route',
+        function($scope, $routeParams, $log, $window,$location,APIService, UtilService, ngProgressBarService, $rootScope, DialogService, ToastService, $mdMedia, $mdDialog, ConstantKeyValueService, LoginService, $q, $timeout, $route) {
 
             var listeners = [];
 
             $scope.atcAPICall = null;
+            $scope.loggedIn = false;
 
             function praseProductDetails(p) {
                 var product = {
@@ -32,7 +34,12 @@
                     min_price_per_unit: p.min_price_per_unit,
                     price_per_unit: p.price_per_unit,
                     margin: p.margin,
+                    brand: p.details.brand,
+                    fabric_gsm: p.details.fabric_gsm,
+                    colors: p.details.colours,
+                    sizes: p.details.sizes,
                     lot_size: p.lot_size,
+                    shortlisted: $scope.loggedIn ? (p.response.response_code == 1 ? true : false) : false,
                     seller: {
                         company_name: p.seller.company_name,
                         address: p.seller.address[0]
@@ -111,7 +118,12 @@
                     if(response.cart_items.length) {
                         $scope.pdInCart = true;
                     }
-                }, function(error) {});
+                }, function(error) {
+                    if(error.error == "Authentication failure") {
+                        LoginService.logout();
+                        $location.url('/');
+                    }
+                });
             }
 
             function openLotPopup(event, product, lots) {
@@ -159,8 +171,10 @@
             function init() {
                 var productID = UtilService.getIDFromSlug($routeParams.product);
                 $scope.isMobile = UtilService.isMobileRequest();
+                $scope.shortlistApiCall = null;
                 getProducts(productID);
                 if(LoginService.checkLoggedIn()) {
+                    $scope.loggedIn = true;
                     getCartStatus(productID);
                 }
             }
@@ -180,6 +194,18 @@
                 }
             }
 
+            $scope.openLoginPopup = function(event) {
+                DialogService.viewDialog(event, {
+                    view: 'views/partials/loginPopup.html',
+                }).finally(function() {
+                    if(LoginService.checkLoggedIn()) {
+                        $scope.loggedIn = true;
+                        $rootScope.$broadcast('checkLoginState');
+                        getCartStatus(UtilService.getIDFromSlug($routeParams.product));
+                    }
+                });
+            };
+
             $scope.addToCart = function(event, product, buyNow) {
                 if(LoginService.checkLoggedIn()) {
                     addToCartAfterLogin(event, product, buyNow);
@@ -188,6 +214,7 @@
                         view: 'views/partials/loginPopup.html',
                     }).finally(function() {
                         if(LoginService.checkLoggedIn()) {
+                            $scope.loggedIn = true;
                             $rootScope.$broadcast('checkLoginState');
                             addToCartAfterLogin(event, product, buyNow);
                         }
@@ -195,10 +222,42 @@
                 }
             };
 
+            function toggleShortlistHelper() {
+                $scope.product.shortlisted = !$scope.product.shortlisted;
+                if(!$scope.shortlistApiCall) {
+                    $scope.shortlistApiCall = APIService.apiCall('PUT', APIService.getAPIUrl('allBuyerProducts'), {
+                        productID: $scope.product.productID,
+                        responded: $scope.product.shortlisted ? 1 : 2
+                    });
+                    $scope.shortlistApiCall.then(function(response) {
+                        $scope.shortlistApiCall = null;
+                    }, function(error) {
+                        $scope.shortlistApiCall = null;
+                    });
+                }
+            }
+
+            $scope.toggleShortlist = function(ev) {
+                if($scope.loggedIn) {
+                    toggleShortlistHelper();
+                } else {
+                    DialogService.viewDialog(ev, {
+                        view: 'views/partials/loginPopup.html',
+                    }).finally(function() {
+                        if(LoginService.checkLoggedIn()) {
+                            $scope.loggedIn = true;
+                            $rootScope.$broadcast('checkLoginState');
+                        }
+                    });
+                }
+            };
+
             var loginStateChange = $rootScope.$on('loginStateChange', function(event, data) {
                 if(LoginService.checkLoggedIn()) {
+                    $scope.loggedIn = true;
                     getCartStatus($scope.product.productID);
                 } else {
+                    $scope.loggedIn = false;
                     $scope.pdInCart = null;
                 }
             });

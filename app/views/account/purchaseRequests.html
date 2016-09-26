@@ -1,0 +1,26 @@
+<div flex layout="column">
+    <div layout="row" layout-fill wu-account-sidenav></div>
+    <div layout="row" flex="100" class="account-content" layout-wrap>
+        <div layout="row" layout-wrap flex="100" md-whiteframe="4" class="white-card" layout-margin>
+            <div layout="row" layout-align="center center" flex="100">
+                <h1 class="product-display-name text-center" flex>Purchase Requests</h1>
+            </div>
+            <div layout="row" flex="100">
+                <md-tabs md-dynamic-height md-border-bottom md-swipe-content md-stretch-tabs="always" flex md-selected="selectedIndex">
+                    <md-tab label="New" md-on-select="tabSelected(0)">
+                        <md-content ng-include="'views/partials/purchaseRequestsPartial.html'">
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="Resolved" md-on-select="tabSelected(1)">
+                        <md-content ng-include="'views/partials/purchaseRequestsPartial.html'">
+                        </md-content>
+                    </md-tab>
+                    <md-tab label="all" md-on-select="tabSelected(2)">
+                        <md-content ng-include="'views/partials/purchaseRequestsPartial.html'">
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </div>
+    </div>
+</div>

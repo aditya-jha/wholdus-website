@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive("wuScript", function() {
         return {
             restrict: 'AE',

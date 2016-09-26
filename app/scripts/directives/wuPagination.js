@@ -1,4 +1,5 @@
 (function() {
+    'use strict';
     webapp.directive('wuPagination', function () {
         return {
             restrict: 'AE',
@@ -17,7 +18,7 @@
                         total: 0
                     };
                     $scope.count = 0;
-                    
+
                     var setPage = $rootScope.$on('setPage', function(event, data) {
                         $scope.page.current = parseInt(data.page);
                         $scope.page.next = $scope.page.current + 1;
