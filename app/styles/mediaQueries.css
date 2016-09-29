@@ -11,13 +11,6 @@
         font-size: 0.9em;
     }
 
-    .product-details-wrap {
-        background: #fff;
-        margin-right: 0em;
-    }
-    .product-seller-details-container {
-        margin-top: 1em;
-    }
     .view-more-btn span {
         padding: 0em 6em;
     }
@@ -72,6 +65,15 @@
 
     #category-title {
         font-size: 1.2em;
+    }
+
+    .product-details-wrap {
+        background: #fff;
+        margin-right: 0em;
+    }
+
+    .product-seller-details-container {
+        margin-top: 1em;
     }
 }
 

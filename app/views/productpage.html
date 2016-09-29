@@ -191,7 +191,7 @@
 </div>
 
 <div layout="row" layout-wrap class="product-description-container" ng-if="productDetailsKeys">
-    <div layout="column" class="product-details-wrap" flex="60" flex-xs="100">
+    <div layout="column" class="product-details-wrap" flex="60" flex-xs="100" flex-sm="100">
         <span class="area-title">Product Details</span>
         <div layout="row" layout-wrap flex>
             <div layout="column" flex="33" flex-xs="100" flex-sm="50" ng-repeat="p in productDetailsKeys" ng-if="p.value!='None'">
@@ -202,7 +202,7 @@
             </div>
         </div>
     </div>
-    <div layout="column" class="product-seller-details-container" flex="38" flex-xs="100">
+    <div layout="column" class="product-seller-details-container" flex flex-xs="100" flex-sm="100">
         <span class="area-title">Manufacturer Details</span>
         <div layout="column" class="product-details-wrap" layout-wrap>
             <div layout="column" class="feature-parent">
