@@ -27,8 +27,8 @@
                 if($routeParams.uniqueUrl) {
                     var uniqueUrl = $routeParams.uniqueUrl.split('-');
                     if(uniqueUrl.length == 3) {
-                        buyerproductID = uniqueUrl[2];
-                        buyer_panel_url = uniqueUrl[0] + '-' + uniqueUrl[1];
+                        var buyerproductID = uniqueUrl[2];
+                        var buyer_panel_url = uniqueUrl[0] + '-' + uniqueUrl[1];
                         APIService.apiCall('POST', APIService.getAPIUrl('buyerProductsLanding'), {"buyerproductID":buyerproductID});
                         setCorrectPage(buyer_panel_url, buyerproductID);
                     } else {
