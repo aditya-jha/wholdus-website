@@ -27,13 +27,13 @@
                     }
                     isSmallScreen();
 
-                    $scope.getDetailDivClass = function() {
-                        if($scope.smallScreen) {
-                            return 'small-font';
-                        } else {
-                            return '';
-                        }
-                    };
+                    // $scope.getDetailDivClass = function() {
+                    //     if($scope.smallScreen) {
+                    //         return 'small-font';
+                    //     } else {
+                    //         return '';
+                    //     }
+                    // };
 
                     $scope.showDetails = function(event, type) {
                         if(type) $scope.showDetailsCard = true;
