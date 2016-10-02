@@ -1,6 +1,6 @@
 <div ng-if="showFeedActionButton" flex="100" flex-offset-gt-sm="20" layout-wrap layout="row">
     <div flex="100" layout="row" data-ng-show="!showDetailsCard" layout-wrap md-swipe-up="showDetails($event, 1)">
-        <div layout="row" layout-wrap flex="100" class="{{smallScreen ? 'small-font' : ''}}" style="padding-bottom:5px;">
+        <div layout="row" flex="100" class="layout-wrap {{smallScreen ? 'small-font' : ''}}" style="padding-bottom:5px;">
             <div layout="row" flex="50" layout-align="center center" style="margin-top:5px">
                 <span class="space small-font">Min Price:</span>
                 <span class="bold">Rs. {{product.min_price_per_unit}}</span>
