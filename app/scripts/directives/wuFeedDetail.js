@@ -48,6 +48,7 @@
                         if(data) {
                             $scope.showFeedActionButton = true;
                             $scope.product = data;
+                            $scope.product.likes = Math.floor((Math.random() * 10) + 1);
                         } else {
                             $scope.showFeedActionButton = false;
                             $scope.product = null;
