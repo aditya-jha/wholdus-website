@@ -118,7 +118,7 @@
                                 $rootScope.$broadcast('showFeedActionButton', $scope.productToShow);
                                 stopStop();
                             }
-                        }, 100);
+                        }, 50);
                     } else {
                         $rootScope.$broadcast('showFeedActionButton', $scope.productToShow);
                     }
