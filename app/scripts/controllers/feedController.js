@@ -26,7 +26,8 @@
                 currentPage: UtilService.getPageNumber(),
                 responded: 0,
                 buyer: LoginService.getBuyerInfo(),
-                enablePagination: false
+                enablePagination: false,
+                wuFeedDetailLoaded: false
             };
             $scope.instructNavPattern = 0;
 
@@ -92,6 +93,15 @@
                 }
             }
 
+            var stop;
+
+            function stopStop() {
+                if(angular.isDefined(stop)) {
+                    $interval.cancel(stop);
+                    stop = undefined;
+                }
+            }
+
             function setProductToShow(index) {
                 if(index <= $scope.products.length) {
                     $scope.products[index].product.images = UtilService.getImages($scope.products[index].product);
@@ -99,7 +109,18 @@
                         $scope.products[index].product.imageUrl = UtilService.getImageUrl($scope.products[index].product.images[0], '400x400');
                     }
                     $scope.productToShow = $scope.products[index].product;
-                    $rootScope.$broadcast('showFeedActionButton', $scope.productToShow);
+
+
+                    if(!$scope.pageSettings.wuFeedDetailLoaded) {
+                        stop = $interval(function() {
+                            if($scope.pageSettings.wuFeedDetailLoaded) {
+                                $rootScope.$broadcast('showFeedActionButton', $scope.productToShow);
+                                stopStop();
+                            }
+                        }, 100);
+                    } else {
+                        $rootScope.$broadcast('showFeedActionButton', $scope.productToShow);
+                    }
                 }
             }
 
@@ -159,6 +180,10 @@
 
                 return deferred.promise;
             }
+
+            var wuFeedDetailLoadedListener = $rootScope.$on("wuFeedDetailLoaded", function(event, data) {
+                $scope.pageSettings.wuFeedDetailLoaded = data;
+            });
 
             function init() {
                 $scope.products = [];
@@ -225,6 +250,7 @@
                 }
             });
             listeners.push(locationChangeListener);
+
 
             var feedActionButtonClickedListener = $rootScope.$on('feedActionButtonClicked', function(event, data) {
                 $scope.favButton(event, data);

@@ -56,6 +56,8 @@
                     });
                     listeners.push(productToShowListener);
 
+                    $rootScope.$broadcast("wuFeedDetailLoaded", true);
+
                     $scope.$on('$destroy', function() {
                         angular.forEach(listeners, function(value) {
                             if(value) value();
