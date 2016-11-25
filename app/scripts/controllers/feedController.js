@@ -14,7 +14,8 @@
         'LoginService',
         '$timeout',
         '$q',
-        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService, localStorageService, ConstantKeyValueService, LoginService, $timeout, $q) {
+        '$interval',
+        function($scope, $log, $location, APIService, ngProgressBarService, $rootScope, UtilService, DialogService, localStorageService, ConstantKeyValueService, LoginService, $timeout, $q, $interval) {
             var listeners = [];
             var bpStatusApi = null;
             var instructionsPopup = {};
