@@ -32,7 +32,7 @@
                     }];
 
                     function getCategory(params) {
-                        APIService.apiCall("GET", APIService.getAPIUrl("category"))
+                        APIService.apiCall("GET", APIService.getAPIUrl("category"), null, {category_show_online: 1})
                             .then(function(response) {
                                 $scope.categories = response.categories;
                             }, function(error) {
