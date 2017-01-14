@@ -37,11 +37,7 @@
                     cache: cache ? cache : false
                 });
                 apiPromise.then(function(response) {
-                    if(response.data.statusCode === '2XX') {
-                        deferred.resolve(response.data.body);
-                    } else {
-                        deferred.reject(response.data.body);
-                    }
+                    deferred.resolve(response.data);
                 }, function(error) {
                     deferred.reject(error);
                 });

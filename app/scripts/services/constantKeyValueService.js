@@ -4,7 +4,8 @@
         function() {
             var factory = {
                 token: '',
-                apiBaseUrl: 'http://api.wholdus.com/',
+                //apiBaseUrl: 'http://api.wholdus.com/',
+                apiBaseUrl: 'http://13.76.211.119:8000/',
                 apiUrl: {
                     login: 'admin/login',
                     internalUsers: 'users/internal-users',
