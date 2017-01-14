@@ -14,8 +14,8 @@
 
             function loginSuccess(response) {
                 factory.loginStatus = true;
-                ConstantKeyValueService.token = response.token;
-                localStorageService.set(ConstantKeyValueService.accessTokenKey, response.token);
+                ConstantKeyValueService.token = response.access_token;
+                localStorageService.set(ConstantKeyValueService.accessTokenKey, response.access_token);
                 var buyerData = {
                     mobile: response.buyer.mobile_number,
                     name: response.buyer.name,
@@ -58,10 +58,10 @@
                     mobile_number: mobile,
                     password: password
                 };
-                var apicall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLogin'), data, null, true, false, true);
+                var apicall = APIService.apiCall("POST", APIService.getAPIUrl('buyerLogin'), data, null, true, false, false);
                 apicall.then(function(response) {
-                    loginSuccess(response);
-                    deferred.resolve(response);
+                    loginSuccess(response.buyer_login);
+                    deferred.resolve(response.buyer_login);
                 }, function(error) {
                     deferred.reject(error);
                 });

@@ -161,6 +161,7 @@
                     items_per_page: 18,
                     is_active: 1,
                     responded: $scope.pageSettings.responded,
+                    product_show_online: 1
                 };
                 if($scope.buyerproductID) {
                     params.buyerproductID = $scope.buyerproductID;

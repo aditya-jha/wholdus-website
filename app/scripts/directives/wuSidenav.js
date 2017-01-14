@@ -21,8 +21,8 @@
                         display_name: 'Hand Picked For You',
                         url: '/account/hand-picked-products'
                     }, {
-                        display_name: 'My Store',
-                        url: '/account/my-store'
+                        display_name: 'Shortlisted Products',
+                        url: '/account/hand-picked-products?filter=favorite'
                     }, {
                         display_name: 'Purchase Requests',
                         url: '/account/purchase-requests'

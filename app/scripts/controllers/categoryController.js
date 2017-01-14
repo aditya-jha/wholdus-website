@@ -94,7 +94,8 @@
                     min_price_per_unit: UtilService.minPrice,
                     max_price_per_unit: UtilService.maxPrice,
                     colour: $scope.selectedColours,
-                    fabric: $scope.selectedFabrics
+                    fabric: $scope.selectedFabrics,
+                    product_show_online: 1
                 };
 
                 UtilService.setPaginationParams(params, $scope.settings.page, $scope.settings.itemsPerPage);

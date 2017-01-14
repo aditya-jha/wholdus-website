@@ -53,6 +53,8 @@
             function getProducts(params) {
                 var deferred = $q.defer();
                 if(!params) { params = {}; }
+                params.product_show_online = 1;
+                
                 if($scope.settings.isMobile) {
                     UtilService.setPaginationParams(params, 1, 6);
                 } else {
