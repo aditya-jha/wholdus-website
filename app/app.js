@@ -39,6 +39,9 @@ webapp.config([
          }).when('/we-are-social', {
              templateUrl: "views/we-are-social.html",
              controller: "StaticPagesController",
+         }).when('/privacy-policy', {
+             templateUrl: "views/privacy-policy.html",
+             controller: "StaticPagesController"
          }).when('/demo', {
              templateUrl: "views/demopage.html",
              controller: "StaticPagesController",
